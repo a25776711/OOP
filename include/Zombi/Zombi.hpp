@@ -1,10 +1,11 @@
 //
 // Created by a2577 on 25-3-10.
 //
-
 #ifndef ZOMBI_HPP
 #define ZOMBI_HPP
-class Zombi {
+#include "Util/GameObject.hpp"
+
+class Zombi:public Util::GameObject {
     public:
         Zombi();
         ~Zombi();
