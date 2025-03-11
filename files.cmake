@@ -5,6 +5,11 @@ set(SRC_FILES
     Zombi/armor.cpp
     Zombi/bucket.cpp
     Zombi/hat.cpp
+    Zombi/zombi.cpp
+    Zombi/normal.cpp
+    Zombi/armor.cpp
+    Zombi/bucket.cpp
+    Zombi/hat.cpp
 
     Plant/plant.cpp
     Plant/sunflower.cpp
