@@ -13,5 +13,6 @@ class Zombi:public Util::GameObject {
         int x,y;
         int HP;
         int ATK;
+        int walkspeed;
 };
 #endif //ZOMBI_HPP
