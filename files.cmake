@@ -46,9 +46,9 @@ set(INCLUDE_FILES
     Plant/iceshooter.hpp
     Plant/chomper.hpp
 
-    bullet.hpp
-    normal.hpp
-    icebullet.hpp
+    Bullet/bullet.hpp
+    Bullet/normal.hpp
+    Bullet/icebullet.hpp
 
         Background/background.hpp
 )
