@@ -7,7 +7,8 @@
 
 void App::Start() {
     LOG_TRACE("Start");
-    m_CurrentState = State::UPDATE;
+
+
 }
 
 void App::Update() {
