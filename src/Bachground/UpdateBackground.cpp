@@ -10,7 +10,7 @@ UpdateBackground::UpdateBackground() {
 
 void UpdateBackground::NextLevel() {
 
-    std::cout <<m_level<<std::endl;
+    //std::cout <<m_level<<std::endl;
     if (m_level == 6) return;
     m_Background -> NextLevel(m_level++);
 

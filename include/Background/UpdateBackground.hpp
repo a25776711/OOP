@@ -17,9 +17,8 @@ class UpdateBackground{
         [[nodiscard]] std::shared_ptr<Util::GameObject> GetChild() const {
             return m_Background;
         }
-        void SetScale(const glm::vec2& scale) {
-            m_Background ->GetScaledSize() = scale;
-        }
+
+        int GetLevel() {return m_level;}
     private:
         std::shared_ptr<BackgroundImage> m_Background;
         int m_level = 0;
