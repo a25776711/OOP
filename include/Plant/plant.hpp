@@ -10,17 +10,21 @@
 class Plant: public Util::GameObject{
     public:
 
-    Plant(const std::vector<std::string>& Path,int interval):GameObject() {
+    Plant(std::vector<std::string>& Path,int interval):GameObject() {
         m_Drawable = std::make_shared<Util::Animation>(Path, false, interval, false, 0);
     }
-    ~Plant();
+    ~Plant() {}
     [[nodiscard]] bool GetVisibility() const { return m_Visible;}
     [[nodiscard]]const std::string& GetImagePath() const { return m_ImagePath; }
-    [[nodiscard]] std::vector<int> GetPosition() const { return {x,y}; }
+    [[nodiscard]] const glm::vec2& GetPosition() const { return m_Transform.translation; }
+    void SetPosition(const glm::vec2& Position) { m_Transform.translation = Position; }
+    virtual void Hurt(std::vector<std::shared_ptr<GameObject>>& collidedWith);
+
+    protected:
+    int ATK;
 
     private:
     std::string m_ImagePath;
-    //位置
-    int x,y;
+
 };
 #endif //PLANT_HPP
