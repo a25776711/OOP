@@ -10,6 +10,7 @@ void App::Start() {
     LOG_TRACE("Start");
 
     m_PRM = std::make_shared<UpdateBackground>();
+    // m_PRM ->SetScale({2.0f, 2.0f});
     m_Root.AddChild(m_PRM->GetChild());
     m_CurrentState = State::UPDATE;
 }
@@ -26,13 +27,13 @@ void App::Update() {
         Util::Input::IfExit()) {
         m_CurrentState = State::END;
     }
-
-    if (Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
-        m_PRM ->NextLevel();
-        m_Root.AddChild(m_PRM->GetChild());
+    if (m_EnterDown) {
+        if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
+            m_PRM ->NextLevel();
+            m_Root.AddChild(m_PRM->GetChild());
+        }
     }
-
-
+    m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
     m_Root.Update();
 }
 

@@ -40,7 +40,7 @@ private:
 
     std::shared_ptr<UpdateBackground> m_PRM;
 
-
+    bool m_EnterDown = false;
 
 };
 
