@@ -27,6 +27,12 @@ void App::Update() {
         m_CurrentState = State::END;
     }
 
+    if (Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
+        m_PRM ->NextLevel();
+        m_Root.AddChild(m_PRM->GetChild());
+    }
+
+
     m_Root.Update();
 }
 

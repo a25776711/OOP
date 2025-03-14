@@ -19,7 +19,7 @@ class UpdateBackground{
         }
     private:
         std::shared_ptr<BackgroundImage> m_Background;
-        int m_level = 1;
+        int m_level = 0;
 };
 
 

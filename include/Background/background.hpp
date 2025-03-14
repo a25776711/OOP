@@ -19,8 +19,13 @@ public:
 
 	};
 	void NextLevel(const int level) {
-			auto temp = std::dynamic_pointer_cast<Util::Image>(m_Drawable);
-			temp -> SetImage(BackgroundImagePath(level));
+		int tmp;
+		if (level==0){tmp=0;}
+		else if (level==1){tmp=1;}
+		else if (level==2){tmp=3;}
+		else {tmp=5;}
+		auto temp = std::dynamic_pointer_cast<Util::Image>(m_Drawable);
+		temp -> SetImage(BackgroundImagePath(tmp));
 
 	}
 
@@ -32,7 +37,7 @@ public:
 private:
 
 	inline std::string BackgroundImagePath(int level) {
-		return RESOURCE_DIR"/Resource/Background/bg" + std::to_string(level) + ".jpg";
+		return RESOURCE_DIR"/Background/bg" + std::to_string(level) + ".jpg";
 	}
 	std::string  m_BackGround;
 
