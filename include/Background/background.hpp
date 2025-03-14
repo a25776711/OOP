@@ -13,9 +13,8 @@
 class BackgroundImage : public Util::GameObject {
 
 public:
-<<<<<<< Updated upstream
-	Background(std::string BackgroundPath);
-=======
+
+
 	BackgroundImage():GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/open.png"), -10) {
 
 	};
@@ -25,7 +24,8 @@ public:
 
 	}
 
->>>>>>> Stashed changes
+
+
 
 
 
