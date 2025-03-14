@@ -1,7 +1,11 @@
 #ifndef APP_HPP
 #define APP_HPP
 
-#include "pch.hpp" // IWYU pragma: export
+#include "pch.hpp"
+#include "/Zombi/zombi.hpp"
+#include "/Plant/plant.hpp"
+#include "/Background/background.hpp"
+// IWYU pragma: export
 
 class App {
 public:
@@ -24,6 +28,9 @@ private:
 
 private:
     State m_CurrentState = State::START;
+    std::shared_ptr<Background> m_background;
+    std::shared_ptr<Plant> m_plant;
+
 };
 
 #endif

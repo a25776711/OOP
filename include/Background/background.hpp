@@ -9,20 +9,18 @@
 #include "Util/Image.hpp"
 
 
-class BackgroundImage : public Util::GameObject {
+class Background : public Util::GameObject {
 
 public:
-    BackgroundImage() : GameObject(
-            std::make_unique<Util::Image>(GA_RESOURCE_DIR"/Resources/Background/bg0.png"), -10) {
-    };
+	Background() : GameObject(
+            std::make_unique<Util::Image>(GA_RESOURCE_DIR"/Resources//Background/open.png"), -10) {
+    }
 
 
 
 private:
 
-  inline std::string ImagePath(const int phase) {
-        return GA_RESOURCE_DIR"/Resources/Background/" + std::to_string(phase) + ".png";
-    }
+
 };
 
 
