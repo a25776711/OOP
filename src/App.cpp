@@ -8,6 +8,8 @@
 void App::Start() {
     LOG_TRACE("Start");
 
+    m_Background = std::make_shared<Util::Image>(RESOURCE_DIR"/Resources//Background/open.png");
+    m_Background ->
 }
 
 void App::Update() {
