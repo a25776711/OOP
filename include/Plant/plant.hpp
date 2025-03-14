@@ -5,19 +5,21 @@
 #ifndef PLANT_HPP
 #define PLANT_HPP
 #include "Util/GameObject.hpp"
+#include "Util/Animation.hpp"
 
 class Plant: public Util::GameObject{
     public:
-        int hp;
-        int maxhp;
+
         Plant(hp,const const std::vector<std::string>& Path,int interval):GameObject() {
-                m_Drawable = std::make_shared<Util::Animation>(AnimationPaths, false, interval, false, 0);
+                m_Drawable = std::make_shared<Util::Animation>(Path, false, interval, false, 0);
         }
         ~Plant();
     private:
         std::string m_ImagePath;
         //位置
         int x,y;
+        int hp;
+        int maxhp;
 
 };
 #endif //PLANT_HPP
