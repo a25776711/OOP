@@ -12,7 +12,9 @@
 class Background : public Util::GameObject {
 
 public:
-	Background(std::string BackgroundPath);
+	Background() : GameObject(
+            std::make_unique<Util::Image>(RESOURCE_DIR"/Resources//Background/open.png"), -10) {
+    }
 
 
 
