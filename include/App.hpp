@@ -2,9 +2,10 @@
 #define APP_HPP
 
 #include "pch.hpp"
-#include "/Zombi/zombi.hpp"
-#include "/Plant/plant.hpp"
-#include "/Background/background.hpp"
+#include "Util/Renderer.hpp"
+#include "Zombi/zombi.hpp"
+#include "Plant/plant.hpp"
+#include "Background/background.hpp"
 // IWYU pragma: export
 
 class App {
@@ -23,13 +24,23 @@ public:
 
     void End(); // NOLINT(readability-convert-member-functions-to-static)
 
-private:
-    void ValidTask();
+
 
 private:
+    //void ValidTask();
+    enum class Phase {
+            tital,
+            oneroad,
+            threeroad,
+            fiveroad
+        };
     State m_CurrentState = State::START;
-    std::shared_ptr<Background> m_background;
-    std::shared_ptr<Plant> m_plant;
+    Phase m_Phase = Phase::tital;
+    Util::Renderer m_Root;
+
+    std::shared_ptr<Background> m_Background;
+
+
 
 };
 

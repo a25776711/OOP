@@ -7,19 +7,17 @@
 
 #include "Util/GameObject.hpp"
 #include "Util/Image.hpp"
-
+#include <string>
 
 class Background : public Util::GameObject {
 
 public:
-	Background() : GameObject(
-            std::make_unique<Util::Image>(GA_RESOURCE_DIR"/Resources//Background/open.png"), -10) {
-    }
+	Background(std::string BackgroundPath);
 
 
 
 private:
-
+	std::string BackgroundPath;
 
 };
 
