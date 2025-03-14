@@ -2,9 +2,9 @@
 #define APP_HPP
 
 #include "pch.hpp"
-#include "/Zombi/zombi.hpp"
-#include "/Plant/plant.hpp"
-#include "/Background/background.hpp"
+#include "Zombi/zombi.hpp"
+#include "Plant/plant.hpp"
+#include "Background/background.hpp"
 // IWYU pragma: export
 
 class App {

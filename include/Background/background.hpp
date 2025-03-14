@@ -13,7 +13,7 @@ class Background : public Util::GameObject {
 
 public:
 	Background() : GameObject(
-            std::make_unique<Util::Image>(GA_RESOURCE_DIR"/Resources//Background/open.png"), -10) {
+            std::make_unique<Util::Image>(RESOURCE_DIR"/Resources//Background/open.png"), -10) {
     }
 
 
