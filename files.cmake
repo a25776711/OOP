@@ -26,6 +26,7 @@ set(SRC_FILES
         Bullet/icebullet.cpp
 
         Background/background.cpp
+        Background/UpdateBackground.cpp
 )
 
 set(INCLUDE_FILES
@@ -49,8 +50,8 @@ set(INCLUDE_FILES
     Bullet/bullet.hpp
     Bullet/normal.hpp
     Bullet/icebullet.hpp
-
         Background/background.hpp
+        Background/UpdateBackground.hpp
 )
 
 set(TEST_FILES
