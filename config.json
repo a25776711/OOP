@@ -1,0 +1,9 @@
+{
+  "title": "<植物大戰殭屍>",
+  "window_pos_x": <-200>,
+  "window_pos_y": <int, default is SDL_WINDOWPOS_UNDEFINED (wherever the OS places the window)>,
+  "window_width": <int, default is 1280>,
+  "window_height": <int, default is 720>,
+  "default_log_level": <int in range [0, 5], default is 2 (Util::Logger::Level::INFO)>,
+"fps_cap": <int, default is 60>
+}

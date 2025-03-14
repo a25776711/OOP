@@ -10,7 +10,7 @@
 class Plant: public Util::GameObject{
     public:
 
-    Plant(const const std::vector<std::string>& Path,int interval):GameObject() {
+    Plant(const std::vector<std::string>& Path,int interval):GameObject() {
         m_Drawable = std::make_shared<Util::Animation>(Path, false, interval, false, 0);
     }
     ~Plant();
