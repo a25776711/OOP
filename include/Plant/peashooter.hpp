@@ -4,5 +4,14 @@
 
 #ifndef PEASHOOTER_HPP
 #define PEASHOOTER_HPP
+#include "plant.hpp"
+
+class Peashooter : public Plant{
+  protected:
+    int shootspeed;
+    int hurt;
+
+  public:
+
 
 #endif //PEASHOOTER_HPP
