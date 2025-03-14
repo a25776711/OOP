@@ -5,7 +5,7 @@
 #include "Util/Renderer.hpp"
 #include "Zombi/zombi.hpp"
 #include "Plant/plant.hpp"
-#include "Background/background.hpp"
+#include "Background/UpdateBackground.hpp"
 // IWYU pragma: export
 
 class App {
@@ -38,7 +38,7 @@ private:
     Phase m_Phase = Phase::tital;
     Util::Renderer m_Root;
 
-    std::shared_ptr<Background> m_Background;
+    std::shared_ptr<UpdateBackground> m_PRM;
 
 
 

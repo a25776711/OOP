@@ -9,17 +9,33 @@
 #include "Util/Image.hpp"
 #include <string>
 
-class Background : public Util::GameObject {
+
+class BackgroundImage : public Util::GameObject {
 
 public:
-	Background() : GameObject(
-            std::make_unique<Util::Image>(RESOURCE_DIR"/Resources//Background/open.png"), -10) {
-    }
+
+
+	BackgroundImage():GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/open.png"), -10) {
+
+	};
+	void NextLevel(const int level) {
+			auto temp = std::dynamic_pointer_cast<Util::Image>(m_Drawable);
+			temp -> SetImage(BackgroundImagePath(level));
+
+	}
+
+
+
 
 
 
 private:
-	std::string BackgroundPath;
+
+	inline std::string BackgroundImagePath(int level) {
+		return RESOURCE_DIR"/Resource/Background/bg" + std::to_string(level) + ".jpg";
+	}
+	std::string  m_BackGround;
+
 
 };
 

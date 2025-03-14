@@ -1,5 +1,6 @@
 #include "App.hpp"
 
+#include "Background/UpdateBackground.hpp"
 #include "Util/Image.hpp"
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
@@ -8,8 +9,9 @@
 void App::Start() {
     LOG_TRACE("Start");
 
-    m_Background = std::make_shared<Util::Image>(RESOURCE_DIR"/Resources//Background/open.png");
-    m_Background ->
+    m_PRM = std::make_shared<UpdateBackground>();
+    m_Root.AddChild(m_PRM->GetChild());
+    m_CurrentState = State::UPDATE;
 }
 
 void App::Update() {
@@ -24,6 +26,8 @@ void App::Update() {
         Util::Input::IfExit()) {
         m_CurrentState = State::END;
     }
+
+    m_Root.Update();
 }
 
 void App::End() { // NOLINT(this method will mutate members in the future)
