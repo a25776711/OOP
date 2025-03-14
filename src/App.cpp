@@ -8,7 +8,6 @@
 void App::Start() {
     LOG_TRACE("Start");
 
-
 }
 
 void App::Update() {

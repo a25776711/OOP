@@ -5,6 +5,7 @@
 #ifndef ZOMBI_HPP
 #define ZOMBI_HPP
 #include "Util/GameObject.hpp"
+#include "Util/Animation.hpp"
 
 class Zombi:public Util::GameObject {
 public:
