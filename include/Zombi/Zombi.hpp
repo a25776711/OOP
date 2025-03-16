@@ -9,24 +9,24 @@
 
 class Zombi:public Util::GameObject {
 public:
-    explicit Zombi(const std::vector<std::string>& AnimationPaths);
-
-    [[nodiscard]] bool IsLooping() const {
-        return std::dynamic_pointer_cast<Util::Animation>(m_Drawable)->GetLooping();
+    Zombi(const std::vector<std::string>& Path,int interval):GameObject() {
+        m_Drawable = std::make_shared<Util::Animation>(Path, false, interval, false, 0);
     }
 
-    [[nodiscard]] bool IsPlaying() const {
-        return std::dynamic_pointer_cast<Util::Animation>(m_Drawable)->GetState() == Util::Animation::State::PLAY;
+    ~Zombi();
+    [[nodiscard]] bool GetVisibility() const { return m_Visible;}
+    [[nodiscard]]const std::string& GetImagePath() const { return m_ImagePath; }
+    [[nodiscard]] const glm::vec2& GetPosition() const { return m_Transform.translation; }
+
+    void SetImage(const std::string& ImagePath);
+    void SetPosition(const glm::vec2& Position) { m_Transform.translation = Position; }
+    [[nodiscard]] bool IfCollides(const std::shared_ptr<Zombi>& other) const {
+        (void) other;
+        return false;
     }
 
-    void SetLooping(bool looping) {
-        auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
-        temp->SetLooping(looping);
-    }
-
-    [[nodiscard]] bool IfAnimationEnds() const;
-
-
+private:
+    std::string m_ImagePath;
 
 
 };

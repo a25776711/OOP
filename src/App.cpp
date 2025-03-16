@@ -9,10 +9,15 @@
 void App::Start() {
     LOG_TRACE("Start");
 
+
+
     m_PRM = std::make_shared<UpdateBackground>();
     // m_PRM ->SetScale({2.0f, 2.0f});
     m_Root.AddChild(m_PRM->GetChild());
+
     m_CurrentState = State::UPDATE;
+
+
 }
 
 void App::Update() {
