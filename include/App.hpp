@@ -39,6 +39,7 @@ private:
     Util::Renderer m_Root;
 
     std::shared_ptr<UpdateBackground> m_PRM;
+    std::shared_ptr<Plant> m_button;
 
     bool m_EnterDown = false;
 
