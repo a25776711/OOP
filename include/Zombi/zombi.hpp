@@ -25,9 +25,26 @@ public:
         return false;
     }
 
+    void SetSpeed(int speed) {z_speed = speed;}
+    int GetSpeed() { return z_speed;}
+
+    void SetHP(int HP) {z_HP = HP;}
+    int GetHP() { return z_HP;}
+
+    void Setattack(int HP) {z_attack = HP;}
+    int Getattack() { return z_attack;}
+
+    void SetLooping(bool looping) {
+        auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
+        temp->SetLooping(looping);
+    }
+
+
 private:
     std::string m_ImagePath;
-
+    int z_speed;
+    int z_HP;
+    int z_attack;
 
 };
 
