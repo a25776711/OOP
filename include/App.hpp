@@ -4,6 +4,7 @@
 #include "pch.hpp"
 #include "Util/Renderer.hpp"
 #include "Zombi/zombi.hpp"
+#include "zombi/normal.hpp"
 #include "Plant/plant.hpp"
 #include "Background/UpdateBackground.hpp"
 // IWYU pragma: export
@@ -39,7 +40,7 @@ private:
     Util::Renderer m_Root;
 
     std::shared_ptr<UpdateBackground> m_PRM;
-    std::shared_ptr<Plant> m_button;
+    std::shared_ptr<normal> m_normal;
 
     bool m_EnterDown = false;
 
