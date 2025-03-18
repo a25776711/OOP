@@ -7,24 +7,28 @@
 #include "Util/GameObject.hpp"
 #include "Util/Animation.hpp"
 
-class Zombi:public Util::GameObject {
+class Zombi : public Util::GameObject {
 public:
-    Zombi(const std::vector<std::string>& Path,int interval):GameObject() {
-        m_Drawable = std::make_shared<Util::Animation>(Path, false, interval, false, 0);
-    }
+    explicit Zombi(){}
 
-    ~Zombi();
-    [[nodiscard]] bool GetVisibility() const { return m_Visible;}
-    [[nodiscard]]const std::string& GetImagePath() const { return m_ImagePath; }
+
+    [[nodiscard]] const std::string& GetImagePath() const { return m_ImagePath; }
+
     [[nodiscard]] const glm::vec2& GetPosition() const { return m_Transform.translation; }
 
+    [[nodiscard]] bool GetVisibility() const { return m_Visible; }
+
     void SetImage(const std::string& ImagePath);
+
     void SetPosition(const glm::vec2& Position) { m_Transform.translation = Position; }
+
+    // TODO: Implement the collision detection
     [[nodiscard]] bool IfCollides(const std::shared_ptr<Zombi>& other) const {
         (void) other;
         return false;
     }
 
+<<<<<<< Updated upstream
     void SetSpeed(int speed) {z_speed = speed;}
     int GetSpeed() { return z_speed;}
 
@@ -45,6 +49,11 @@ private:
     int z_speed;
     int z_HP;
     int z_attack;
+=======
+
+protected:
+    std::string m_ImagePath;
+>>>>>>> Stashed changes
 
 };
 
