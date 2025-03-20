@@ -16,17 +16,25 @@ class adventure : public Util::GameObject{
 
         }
 
-        // [[nodiscard]] void onclick(bool pause){
-        //     if (pause == true){
-        //         auto temp = std::dynamic_pointer_cast<Util::Image>(m_Drawable);
-        //         temp -> SetImage(RESOURCE_DIR"/Background/Adventure.png");
-        //     }
-        // };
+
+        void NextLevel(int level) {
+            auto temp = std::dynamic_pointer_cast<Util::Image>(m_Drawable);
+            if (level==0) {
+                temp -> SetImage(RESOURCE_DIR"/Background/Adventure_1.png");
+            }
+            else {
+                temp -> SetImage(RESOURCE_DIR"/Background/list.png");
+            }
+        }
+
+        void SetSize(float scale) {
+            auto temp = std::dynamic_pointer_cast<Util::Image>(m_Drawable);
+            temp ->GetSize() ={scale,scale};
+        }
 
 
-        // [[nodiscard]] std::shared_ptr<Util::GameObject> GetChild() const {
-        //     return m_buttom;
-        // }
+
+
     private:
         //std::shared_ptr<adventure> m_buttom;
 
