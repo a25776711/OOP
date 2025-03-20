@@ -8,7 +8,7 @@
 #include "Util/GameObject.hpp"
 #include "Util/Image.hpp"
 #include <string>
-#include <iostream>
+
 
 
 class BackgroundImage : public Util::GameObject {
@@ -19,6 +19,8 @@ public:
 	BackgroundImage():GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/open.png"), -10) {
 
 	};
+
+
 	void NextLevel(int level) {
 		int tmp;
 

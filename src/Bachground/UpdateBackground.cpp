@@ -6,6 +6,8 @@
 #include <iostream>
 UpdateBackground::UpdateBackground() {
     m_Background = std::make_shared<BackgroundImage>();
+    m_Adventure = std::make_shared<adventure>();
+    m_Adventure -> SetPivot({100,100});
 }
 
 void UpdateBackground::NextLevel() {

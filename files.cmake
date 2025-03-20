@@ -27,6 +27,7 @@ set(SRC_FILES
 
         Background/background.cpp
         Background/UpdateBackground.cpp
+
 )
 
 set(INCLUDE_FILES
@@ -52,6 +53,7 @@ set(INCLUDE_FILES
     Bullet/icebullet.hpp
         Background/background.hpp
         Background/UpdateBackground.hpp
+        Background/Adventure.hpp
 )
 
 set(TEST_FILES

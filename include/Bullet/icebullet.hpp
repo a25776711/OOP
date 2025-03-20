@@ -4,5 +4,9 @@
 
 #ifndef ICEBULLET_HPP
 #define ICEBULLET_HPP
+#include "bullet.hpp"
+class IceBullet:public Bullet {
+
+};
 
 #endif //ICEBULLET_HPP

@@ -4,5 +4,12 @@
 
 #ifndef WALLNUT_HPP
 #define WALLNUT_HPP
+#include "plant.hpp"
+class Wallnut : public Plant {
+    public:
+    Wallnut();
+    ~Wallnut();
+    private:
 
+};
 #endif //WALLNUT_HPP

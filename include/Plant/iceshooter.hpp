@@ -4,5 +4,8 @@
 
 #ifndef ICESHOOTER_HPP
 #define ICESHOOTER_HPP
+#include "peashooter.hpp"
+class Iceshooter:public Peashooter {
 
+}
 #endif //ICESHOOTER_HPP

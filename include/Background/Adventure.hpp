@@ -16,6 +16,7 @@ class adventure : public Util::GameObject{
 
         }
 
+
         void NextLevel(int level) {
             auto temp = std::dynamic_pointer_cast<Util::Image>(m_Drawable);
             if (level==0) {
@@ -30,6 +31,7 @@ class adventure : public Util::GameObject{
             auto temp = std::dynamic_pointer_cast<Util::Image>(m_Drawable);
             temp ->GetSize() ={scale,scale};
         }
+
 
 
 
