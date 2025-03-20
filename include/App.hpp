@@ -7,6 +7,8 @@
 #include "zombi/normal.hpp"
 #include "Plant/plant.hpp"
 #include "Background/UpdateBackground.hpp"
+#include "Background/Adventure.hpp"
+
 // IWYU pragma: export
 
 class App {
@@ -40,6 +42,7 @@ private:
     Util::Renderer m_Root;
 
     std::shared_ptr<UpdateBackground> m_PRM;
+
     std::shared_ptr<normal> m_normal;
 
     bool m_EnterDown = false;

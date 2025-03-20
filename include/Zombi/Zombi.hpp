@@ -6,6 +6,7 @@
 #define ZOMBI_HPP
 #include "Util/GameObject.hpp"
 #include "Util/Animation.hpp"
+#include <string>
 
 class Zombi : public Util::GameObject {
 public:
@@ -28,7 +29,7 @@ public:
         return false;
     }
 
-<<<<<<< Updated upstream
+
     void SetSpeed(int speed) {z_speed = speed;}
     int GetSpeed() { return z_speed;}
 
@@ -38,10 +39,7 @@ public:
     void Setattack(int HP) {z_attack = HP;}
     int Getattack() { return z_attack;}
 
-    void SetLooping(bool looping) {
-        auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
-        temp->SetLooping(looping);
-    }
+
 
 
 private:
@@ -49,11 +47,10 @@ private:
     int z_speed;
     int z_HP;
     int z_attack;
-=======
 
-protected:
-    std::string m_ImagePath;
->>>>>>> Stashed changes
+
+
+
 
 };
 

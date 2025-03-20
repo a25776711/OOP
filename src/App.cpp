@@ -1,16 +1,18 @@
 #include "App.hpp"
-
 #include "Background/UpdateBackground.hpp"
+#include "Background/Adventure.hpp"
 #include "Util/Image.hpp"
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
+#include <iostream>
 
 void App::Start() {
     LOG_TRACE("Start");
     m_PRM = std::make_shared<UpdateBackground>();
+
     //m_PRM ->SetScale({2.0f, 2.0f});
-    m_Root.AddChild(m_PRM->GetChild());
+    m_Root.AddChildren(m_PRM->GetChildren());
 
     m_CurrentState = State::UPDATE;
 
@@ -28,20 +30,20 @@ void App::Update() {
         Util::Input::IfExit()) {
         m_CurrentState = State::END;
     }
-    if (m_EnterDown) {
-        if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
-            m_PRM ->NextLevel();
-            m_Root.AddChild(m_PRM->GetChild());
-        }
-    }
+    // if (m_EnterDown) {
+    //     if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
+    //         m_PRM -> NextLevel();
+    //         m_Root.AddChildren(m_PRM->GetChildren()());
+    //     }
+    // }
 
-    m_normal = std::make_shared<normal>();
-    m_normal -> SetZIndex(5);
-    m_normal -> SetVisible(true);
+    // m_normal = std::make_shared<normal>();
+    // m_normal -> SetZIndex(5);
+    // m_normal -> SetVisible(true);
     // m_normal ->SetLooping(true);
     // m_normal ->SetPlaying(true);
-    m_normal ->SetPosition({m_normal->GetPosition().x+30,m_normal->GetPosition().y+30,});
-    m_Root.AddChild(m_normal);
+    // m_normal ->SetPosition({m_normal->GetPosition().x+30,m_normal->GetPosition().y+30,});
+    // m_Root.AddChild(m_normal);
 
 
 
