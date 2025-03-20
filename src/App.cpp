@@ -29,8 +29,13 @@ void App::Update() {
     }
     if (m_EnterDown) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
+<<<<<<< Updated upstream
             m_PRM ->NextLevel();
             m_Root.AddChild(m_PRM->GetChild());
+=======
+            m_PRM -> NextLevel();
+            m_Root.AddChildren(m_PRM->GetChildren());
+>>>>>>> Stashed changes
         }
     }
 
