@@ -4,5 +4,9 @@
 
 #ifndef NORMALBULLET_HPP
 #define NORMALBULLET_HPP
+#include "bullet.hpp"
+class NormalBullet : public Bullet {
+
+};
 
 #endif //NORMALBULLET_HPP

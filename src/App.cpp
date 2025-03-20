@@ -8,9 +8,6 @@
 
 void App::Start() {
     LOG_TRACE("Start");
-
-
-
     m_PRM = std::make_shared<UpdateBackground>();
     //m_PRM ->SetScale({2.0f, 2.0f});
     m_Root.AddChild(m_PRM->GetChild());
@@ -22,7 +19,11 @@ void App::Start() {
 
 void App::Update() {
     
-
+    if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
+        glm::vec2 pos=Util::Input::GetCursorPosition();
+        std::cout <<"點擊座標X:"<< Util::Input::GetCursorPosition().x << std::endl;
+        std::cout <<"點擊座標Y:"<< Util::Input::GetCursorPosition().y << std::endl;
+    }
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
         Util::Input::IfExit()) {
         m_CurrentState = State::END;

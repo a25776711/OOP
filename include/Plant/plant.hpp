@@ -11,21 +11,22 @@
 class Plant: public Util::GameObject{
     public:
 
-    Plant(std::vector<std::string>& Path,int interval):GameObject() {
+    Plant(std::vector<std::string>& Path,int interval,int atk):GameObject() {
         m_Drawable = std::make_shared<Util::Animation>(Path, false, interval, false, 0);
+        m_ATK = atk;
+        m_ImagePath=Path;
     }
-    ~Plant() {}
     [[nodiscard]] bool GetVisibility() const { return m_Visible;}
-    [[nodiscard]]const std::string& GetImagePath() const { return m_ImagePath; }
     [[nodiscard]] const glm::vec2& GetPosition() const { return m_Transform.translation; }
     void SetPosition(const glm::vec2& Position) { m_Transform.translation = Position; }
     virtual void Hurt(std::vector<std::shared_ptr<GameObject>>& collidedWith);
 
     protected:
-    int ATK;
+
 
     private:
-    std::string m_ImagePath;
+    int m_ATK;
+    std::vector<std::string> m_ImagePath;
 
 };
 #endif //PLANT_HPP
