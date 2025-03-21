@@ -19,10 +19,17 @@ public:
     [[nodiscard]] std::vector<std::shared_ptr<Util::GameObject>> GetChildren() const {
         return {m_Background,m_Adventure};
     }
-    // [[nodiscard]] std::vector<std::shared_ptr<Util::GameObject>> GetCard() const {
-    //     return m_Cards;
-    //
-    // }
+    [[nodiscard]] std::vector<std::shared_ptr<Util::GameObject>> GetCard() const {
+        std::vector<std::shared_ptr<Util::GameObject>> result;
+        for (const auto& card : m_Cards) {
+            result.push_back(std::static_pointer_cast<Util::GameObject>(card));
+        }
+        return result;
+    }
+    void GetCard() {
+        auto temp = std::make_shared<Card>();
+        m_Cards = temp -> SetCards(m_level);
+    }
 
 
     int GetLevel() {return m_level;}

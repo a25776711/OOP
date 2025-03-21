@@ -28,13 +28,6 @@ class adventure : public Util::GameObject{
         }
 
 
-
-
-
-
-    private:
-        //std::shared_ptr<adventure> m_buttom;
-
 };
 
 #endif //BUTTOM_HPP
