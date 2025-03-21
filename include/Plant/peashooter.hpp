@@ -7,6 +7,8 @@
 #include "plant.hpp"
 
 class Peashooter : public Plant{
+  public:
+  explicit Peashooter();
   protected:
     int shootspeed;
     int hurt;

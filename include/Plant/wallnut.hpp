@@ -7,8 +7,9 @@
 #include "plant.hpp"
 class Wallnut : public Plant {
     public:
-    Wallnut();
-    ~Wallnut();
+    explicit  Wallnut():Plant() {
+
+    }
     private:
 
 };

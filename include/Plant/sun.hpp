@@ -7,7 +7,7 @@
 #include  "Plant/plant.hpp"
 class Sun : public Plant {
     public:
-    Sun(std::vector<std::string>& Path,int interval=100):Plant(Path,interval) {
+    explicit  Sun(std::vector<std::string>& Path,int interval=100):Plant(Path,interval) {
 
     }
     private:

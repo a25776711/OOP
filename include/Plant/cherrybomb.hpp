@@ -8,8 +8,7 @@
 
 class Cherrybomb:public Plant {
     public:
-    Cherrybomb();
-    ~Cherrybomb();
+    explicit  Cherrybomb();
 
     private:
 };

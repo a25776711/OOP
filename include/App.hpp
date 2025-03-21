@@ -10,6 +10,12 @@
 #include "Background/Adventure.hpp"
 
 // IWYU pragma: export
+inline std::vector<std::vector<int>> blockpos={
+    {},
+    {},
+    {},
+    {},
+    {}};
 
 class App {
 public:

@@ -7,7 +7,7 @@
 #include "Plant/plant.hpp"
 class SunFlower : public Plant {
 public:
-    SunSunFlower(int hp,std::vector<std::string>& Path,int interval=100):Plant(Path,interval) {
+    SunFlower(int hp,std::vector<std::string>& Path,int interval=100):Plant(Path,interval) {
         m_hp=m_maxhp=hp;
     }
 private:

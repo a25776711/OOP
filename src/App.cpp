@@ -21,8 +21,8 @@ void App::Update() {
     
     if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
-        std::cout <<"點擊座標X:"<< Util::Input::GetCursorPosition().x << std::endl;
-        std::cout <<"點擊座標Y:"<< Util::Input::GetCursorPosition().y << std::endl;
+        std::cout <<"X:"<< pos.x << std::endl;
+        std::cout <<"Y:"<< pos.y << std::endl;
     }
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
         Util::Input::IfExit()) {
