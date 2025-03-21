@@ -7,6 +7,7 @@
 UpdateBackground::UpdateBackground() {
     m_Background = std::make_shared<BackgroundImage>();
     m_Adventure = std::make_shared<adventure>();
+    m_Adventure->G
     m_Adventure -> SetPivot({0,0});
 }
 

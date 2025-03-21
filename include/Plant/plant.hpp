@@ -23,6 +23,9 @@ class Plant: public Util::GameObject{
         auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
         temp->SetLooping(looping);
     }
+    void SetHP(int hp) {
+        m_hp=m_maxhp=hp;
+    }
     void SetATK(int atk) { m_ATK = atk; }
     void PLAY(bool play) {
         auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
@@ -33,6 +36,8 @@ class Plant: public Util::GameObject{
         }
     }
     private:
+    int m_hp;
+    int m_maxhp;
     int m_ATK=0;
     std::vector<std::string> m_ImagePath;
 

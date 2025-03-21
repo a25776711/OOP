@@ -7,8 +7,8 @@
 #include "plant.hpp"
 class Wallnut : public Plant {
     public:
-    explicit  Wallnut():Plant() {
-
+    explicit  Wallnut(int hp,std::vector<std::string>& Path,int interval=100):Plant(Path,interval) {
+        SetHP(hp);
     }
     private:
 

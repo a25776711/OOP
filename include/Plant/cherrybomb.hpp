@@ -8,7 +8,9 @@
 
 class Cherrybomb:public Plant {
     public:
-    explicit  Cherrybomb();
+    explicit  Cherrybomb(std::vector<std::string>& Path,int interval=100):Plant() {
+
+    }
 
     private:
 };
