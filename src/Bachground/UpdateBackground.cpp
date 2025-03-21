@@ -14,8 +14,8 @@ void UpdateBackground::NextLevel() {
     if (m_level == 6) return;
     m_Background -> NextLevel(m_level++);
     m_Adventure -> NextLevel(m_level++);
-    m_Adventure -> SetPivot({350,-250});
-    m_Adventure -> GetTransform().scale ={(m_Adventure -> GetTransform().scale.x)/2,(m_Adventure -> GetTransform().scale.y)/2};
+    if (m_level !=0) m_Adventure -> m_Transform.scale ={0.9,0.9};
+    m_Adventure -> SetPivot({430,-280});
 
 
 

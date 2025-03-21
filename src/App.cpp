@@ -35,7 +35,7 @@ void App::Update() {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
 
             m_PRM ->NextLevel();
-            m_Root.AddChild(m_PRM->GetChild());
+            m_Root.AddChildren(m_PRM->GetChildren());
 
         }
     }
