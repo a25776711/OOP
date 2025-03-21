@@ -20,7 +20,19 @@ class UpdateBackground{
         }
 
         int GetLevel() {return m_level;}
-    private:
+
+
+    bool Checkclck(glm::vec2 pos) {
+            if ((m_hitX.x <= pos.x && m_hitX.y >= pos.x) && (m_hitY.x <= pos.x && m_hitY.y >= pos.y)) {
+                return true;
+            }
+            else return false;
+        }
+
+    protected:
+
+        glm::vec2 m_hitX;
+        glm::vec2 m_hitY;
         std::shared_ptr<BackgroundImage> m_Background;
         std::shared_ptr<adventure> m_Adventure;
         int m_level = 0;

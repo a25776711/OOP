@@ -27,16 +27,11 @@ class adventure : public Util::GameObject{
             }
         }
 
-        // void SetSize(float scale) {
-        //     auto temp = std::dynamic_pointer_cast<Util::Image>(m_Drawable);
-        //     temp ->GetSize() ={scale,scale};
-        // }
-
 
 
 
     private:
-        //std::shared_ptr<adventure> m_buttom;
+
 
 };
 
