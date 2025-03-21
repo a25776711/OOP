@@ -9,8 +9,15 @@
 #include <string>
 
 class Card : public Util::GameObject{
-    public:
-      Card():GameObject(){};
+public:
+      Card():GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/Adventure_1.png"),0) {
+
+      };
+
+
+
+protected:
+
 };
 
 

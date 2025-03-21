@@ -27,16 +27,16 @@ public:
 
     void End(); // NOLINT(readability-convert-member-functions-to-static)
 
-
-
-private:
-    //void ValidTask();
     enum class Phase {
             tital,
             oneroad,
             threeroad,
             fiveroad
-        };
+    };
+
+private:
+    //void ValidTask();
+
     State m_CurrentState = State::START;
     Phase m_Phase = Phase::tital;
     Util::Renderer m_Root;
