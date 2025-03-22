@@ -12,17 +12,21 @@ void App::Start() {
     m_PRM = std::make_shared<UpdateBackground>();
     //m_PRM ->SetScale({2.0f, 2.0f});
     m_Root.AddChildren(m_PRM->GetChildren());
+
+    m_Root.AddChildren(m_PRM->GetCard());
+
     m_CurrentState = State::UPDATE;
 
 
 }
 
 void App::Update() {
-    
+
     if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
         std::cout <<"X:"<< pos.x << std::endl;
         std::cout <<"Y:"<< pos.y << std::endl;
+
     }
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
         Util::Input::IfExit()) {
@@ -44,10 +48,19 @@ void App::Update() {
 
         }
     }
+    if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
+        glm::vec2 pos=Util::Input::GetCursorPosition();
+        if (m_PRM ->GetLevel()==0) {
+            if (m_PRM ->CheckHit(pos)) {
+                // std::cout << "true" << std::endl;
+                m_PRM ->NextLevel();
+            }
+        }
+    }
 
-    m_normal = std::make_shared<normal>();
-    m_normal -> SetZIndex(5);
-    m_normal -> SetVisible(true);
+    // m_normal = std::make_shared<normal>();
+    // m_normal -> SetZIndex(5);
+    // m_normal -> SetVisible(true);
 
     // m_normal ->SetLooping(true);
     // m_normal ->SetPlaying(true);

@@ -16,7 +16,7 @@ class BackgroundImage : public Util::GameObject {
 public:
 
 
-	BackgroundImage():GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/open.png"), -10) {
+	BackgroundImage():GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/bg0.png"), -10) {
 
 	};
 
@@ -24,8 +24,7 @@ public:
 	void NextLevel(int level) {
 		int tmp;
 
-		if (level==0){tmp=0;}
-		else if (level==1){tmp=1;}
+		if (level==1){tmp=1;}
 		else if (level==2){tmp=3;}
 		else {tmp=5;}
 		auto temp = std::dynamic_pointer_cast<Util::Image>(m_Drawable);
