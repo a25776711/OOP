@@ -13,7 +13,7 @@ void App::Start() {
     //m_PRM ->SetScale({2.0f, 2.0f});
     m_Root.AddChildren(m_PRM->GetChildren());
 
-    m_Root.AddChildren(m_PRM->GetCard());
+    // m_Root.AddChildren(m_PRM->GetCard());
 
     m_CurrentState = State::UPDATE;
 
@@ -42,12 +42,7 @@ void App::Update() {
     }
 
 
-    if (Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
-        glm::vec2 pos=Util::Input::GetCursorPosition();
-        if (m_PRM->Checkclck(pos)) {
 
-        }
-    }
     if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
         if (m_PRM ->GetLevel()==0) {
