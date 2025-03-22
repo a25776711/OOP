@@ -13,8 +13,11 @@ void App::Start() {
     //m_PRM ->SetScale({2.0f, 2.0f});
     m_Root.AddChildren(m_PRM->GetChildren());
 
+<<<<<<< Updated upstream
     m_Root.AddChildren(m_PRM->GetCard());
 
+=======
+>>>>>>> Stashed changes
     m_CurrentState = State::UPDATE;
 
 
@@ -22,15 +25,21 @@ void App::Start() {
 
 void App::Update() {
 
+    // if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
+    //     glm::vec2 pos=Util::Input::GetCursorPosition();
+    //     std::cout <<"X:"<< pos.x << std::endl;
+    //     std::cout <<"Y:"<< pos.y << std::endl;
+    // }
+
     if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
-        std::cout <<"X:"<< pos.x << std::endl;
-        std::cout <<"Y:"<< pos.y << std::endl;
+        if (m_PRM ->GetLevel()==0) {
+            if (m_PRM ->CheckHit(pos)) {
+                // std::cout << "true" << std::endl;
+                m_PRM ->NextLevel();
+            }
+        }
 
-    }
-    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
-        Util::Input::IfExit()) {
-        m_CurrentState = State::END;
     }
 
     if (m_EnterDown) {
@@ -41,6 +50,7 @@ void App::Update() {
         }
     }
 
+<<<<<<< Updated upstream
 
     if (Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
@@ -56,7 +66,14 @@ void App::Update() {
                 m_PRM ->NextLevel();
             }
         }
+=======
+    if (m_PRM ->GetLevel() != 0) {
+        m_Root.AddChildren(m_PRM ->GetCards());
+>>>>>>> Stashed changes
     }
+
+
+
 
     // m_normal = std::make_shared<normal>();
     // m_normal -> SetZIndex(5);
@@ -67,7 +84,10 @@ void App::Update() {
     // m_normal ->SetPosition({m_normal->GetPosition().x+30,m_normal->GetPosition().y+30,});
     // m_Root.AddChild(m_normal);
 
-
+    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
+        Util::Input::IfExit()) {
+        m_CurrentState = State::END;
+    }
 
     m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
     m_Root.Update();
