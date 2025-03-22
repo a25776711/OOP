@@ -12,7 +12,7 @@ enum bullet_type {
 
 class Bullet:public Util::GameObject {
     public:
-    Bullet(std::string path,bullet_type type) {
+    explicit Bullet(std::string path,bullet_type type) {
         m_ImagePath = path;
         m_Type = type;
     }

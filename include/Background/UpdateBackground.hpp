@@ -59,6 +59,25 @@ private:
     glm::vec2 p2{372, -59};
     glm::vec2 p3{356, -131};
     glm::vec2 p4{107, -100};
+=======
+        int GetLevel() {return m_level;}
+
+
+    bool Checkclck(glm::vec2 pos) {
+            if ((m_hitX.x <= pos.x && m_hitX.y >= pos.x) && (m_hitY.x <= pos.x && m_hitY.y >= pos.y)) {
+                return true;
+            }
+            else return false;
+        }
+
+    protected:
+
+        glm::vec2 m_hitX;
+        glm::vec2 m_hitY;
+        std::shared_ptr<BackgroundImage> m_Background;
+        std::shared_ptr<adventure> m_Adventure;
+        int m_level = 0;
+
 };
 
 

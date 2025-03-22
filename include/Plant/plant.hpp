@@ -11,21 +11,34 @@
 class Plant: public Util::GameObject{
     public:
 
-    Plant(std::vector<std::string>& Path,int interval,int atk):GameObject() {
+    explicit  Plant(std::vector<std::string>& Path,int interval):GameObject() {
         m_Drawable = std::make_shared<Util::Animation>(Path, false, interval, false, 0);
-        m_ATK = atk;
         m_ImagePath=Path;
     }
     [[nodiscard]] bool GetVisibility() const { return m_Visible;}
     [[nodiscard]] const glm::vec2& GetPosition() const { return m_Transform.translation; }
     void SetPosition(const glm::vec2& Position) { m_Transform.translation = Position; }
     virtual void Hurt(std::vector<std::shared_ptr<GameObject>>& collidedWith);
-
-    protected:
-
-
+    void SetLooping(bool looping) {
+        auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
+        temp->SetLooping(looping);
+    }
+    void SetHP(int hp) {
+        m_hp=m_maxhp=hp;
+    }
+    void SetATK(int atk) { m_ATK = atk; }
+    void PLAY(bool play) {
+        auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
+        if(temp->GetState()!=Util::Animation::State::PLAY&&play) {
+            temp->Play();
+        }else if(!play) {
+            temp->Pause();
+        }
+    }
     private:
-    int m_ATK;
+    int m_hp;
+    int m_maxhp;
+    int m_ATK=0;
     std::vector<std::string> m_ImagePath;
 
 };

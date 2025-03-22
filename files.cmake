@@ -47,6 +47,7 @@ set(INCLUDE_FILES
     Plant/mine.hpp
     Plant/iceshooter.hpp
     Plant/chomper.hpp
+    Plant/PlantLoader.hpp
 
     Bullet/bullet.hpp
     Bullet/normal.hpp

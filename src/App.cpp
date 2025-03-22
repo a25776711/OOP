@@ -10,10 +10,11 @@
 void App::Start() {
     LOG_TRACE("Start");
     m_PRM = std::make_shared<UpdateBackground>();
-
     //m_PRM ->SetScale({2.0f, 2.0f});
     m_Root.AddChildren(m_PRM->GetChildren());
+
     m_Root.AddChildren(m_PRM->GetCard());
+
     m_CurrentState = State::UPDATE;
 
 
@@ -23,8 +24,9 @@ void App::Update() {
 
     if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
-        std::cout <<"X:"<< Util::Input::GetCursorPosition().x << std::endl;
-        std::cout <<"Y:"<< Util::Input::GetCursorPosition().y << std::endl;
+        std::cout <<"X:"<< pos.x << std::endl;
+        std::cout <<"Y:"<< pos.y << std::endl;
+
     }
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
         Util::Input::IfExit()) {
@@ -36,6 +38,13 @@ void App::Update() {
 
             m_PRM ->NextLevel();
             m_Root.AddChildren(m_PRM->GetChildren());
+        }
+    }
+
+
+    if (Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
+        glm::vec2 pos=Util::Input::GetCursorPosition();
+        if (m_PRM->Checkclck(pos)) {
 
         }
     }

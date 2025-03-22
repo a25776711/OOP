@@ -5,14 +5,14 @@
 #ifndef SUNFLOWER_HPP
 #define SUNFLOWER_HPP
 #include "Plant/plant.hpp"
+#include "sun.hpp"
 class SunFlower : public Plant {
 public:
-    SunSunFlower(int hp,std::vector<std::string>& Path,int interval=100):Plant(Path,interval) {
-        m_hp=m_maxhp=hp;
+    SunFlower(int hp,std::vector<std::string>& Path,int interval=100):Plant(Path,interval) {
+
     }
+    
 private:
-    int m_hp;
-    int m_maxhp;
-    int cooldown;
+    int m_Cooldown;
 };
 #endif //SUNFLOWER_HPP

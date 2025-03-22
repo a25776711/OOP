@@ -28,6 +28,12 @@ class adventure : public Util::GameObject{
         }
 
 
+
+
+    private:
+
+
+
 };
 
 #endif //BUTTOM_HPP
