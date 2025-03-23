@@ -9,8 +9,9 @@
 class SunFlower : public Plant {
 public:
     SunFlower(int hp,std::vector<std::string>& Path,int interval=100):Plant(Path,interval) {
-
+        SetHP(hp);
     }
+
     
 private:
     int m_Cooldown;
