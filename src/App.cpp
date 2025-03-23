@@ -13,11 +13,8 @@ void App::Start() {
     //m_PRM ->SetScale({2.0f, 2.0f});
     m_Root.AddChildren(m_PRM->GetChildren());
 
-<<<<<<< Updated upstream
-    m_Root.AddChildren(m_PRM->GetCard());
 
-=======
->>>>>>> Stashed changes
+    m_Root.AddChildren(m_PRM->GetCard());
     m_CurrentState = State::UPDATE;
 
 
@@ -50,14 +47,6 @@ void App::Update() {
         }
     }
 
-<<<<<<< Updated upstream
-
-    if (Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
-        glm::vec2 pos=Util::Input::GetCursorPosition();
-        if (m_PRM->Checkclck(pos)) {
-
-        }
-    }
     if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
         if (m_PRM ->GetLevel()==0) {
@@ -66,10 +55,7 @@ void App::Update() {
                 m_PRM ->NextLevel();
             }
         }
-=======
-    if (m_PRM ->GetLevel() != 0) {
-        m_Root.AddChildren(m_PRM ->GetCards());
->>>>>>> Stashed changes
+
     }
 
 

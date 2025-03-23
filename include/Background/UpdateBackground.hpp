@@ -21,27 +21,23 @@ public:
     [[nodiscard]] std::vector<std::shared_ptr<Util::GameObject>> GetChildren() const {
         return {m_Background,m_Adventure};
     }
-<<<<<<< Updated upstream
-    [[nodiscard]] std::vector<std::shared_ptr<Util::GameObject>> GetCard() const {
-        std::vector<std::shared_ptr<Util::GameObject>> result;
-=======
+
     [[nodiscard]] std::vector<std::shared_ptr<Util::GameObject>> GetCards() const {
         std::vector<std::shared_ptr<Util::GameObject>> result;
         result.reserve(m_Cards.size());
->>>>>>> Stashed changes
         for (const auto& card : m_Cards) {
             result.push_back(std::static_pointer_cast<Util::GameObject>(card));
         }
         return result;
     }
-<<<<<<< Updated upstream
+
     void GetCard() {
         auto temp = std::make_shared<Card>();
         m_Cards = temp -> SetCards(m_level);
     }
-=======
 
->>>>>>> Stashed changes
+
+
 
 
     int GetLevel() {return m_level;}
@@ -66,15 +62,15 @@ public:
 private:
     std::shared_ptr<BackgroundImage> m_Background;
     std::shared_ptr<adventure> m_Adventure;
+
     std::vector<std::shared_ptr<Card>> m_Cards;
-<<<<<<< Updated upstream
     int m_level = 0;
     glm::vec2 p1{115, -45};
     glm::vec2 p2{372, -59};
     glm::vec2 p3{356, -131};
     glm::vec2 p4{107, -100};
-=======
-        int GetLevel() {return m_level;}
+
+    int GetLevel() {return m_level;}
 
 
     bool Checkclck(glm::vec2 pos) {
@@ -91,14 +87,7 @@ private:
         std::shared_ptr<BackgroundImage> m_Background;
         std::shared_ptr<adventure> m_Adventure;
         int m_level = 0;
-=======
-    std::shared_ptr<Card> m_Card;
-    int m_level = 0;
-    glm::vec2 p1{117, 47};
-    glm::vec2 p2{367, 65};
-    glm::vec2 p3{354, 130};
-    glm::vec2 p4{110, 101};
->>>>>>> Stashed changes
+
 
 };
 
