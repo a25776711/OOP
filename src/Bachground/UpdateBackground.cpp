@@ -14,8 +14,27 @@ UpdateBackground::UpdateBackground() {
 
 void UpdateBackground::NextLevel() {
     if (m_level == 6) return;
-    m_Background -> NextLevel(++m_level);
-    m_Adventure -> NextLevel(m_level);
-    if (m_level !=0) m_Adventure -> m_Transform.scale ={0.9,0.9};
-    m_Adventure -> SetPivot({430,-280});
+
+    m_Background->NextLevel(++m_level);
+    m_Adventure->NextLevel(m_level);
+
+    if (m_level != 0)
+        m_Adventure->m_Transform.scale = {0.9, 0.9};
+
+    m_Adventure->SetPivot({430, -280});
+
+    for (const auto& card : m_Cards) {
+        card->SetCards(m_level);
+    }
+    std::cout<<"test"<<std::endl;
+    SetCardPos(); // 重設卡牌位置（可選）
+}
+
+void UpdateBackground::SetCardPos() {
+    int cou=0;
+    for (const auto card  : m_Cards) {
+        card -> SetPivot({0+cou*30,0});
+        cou++;
+    }
+
 }
