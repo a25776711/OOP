@@ -10,7 +10,7 @@
 #include "Adventure.hpp"
 #include "Background/background.hpp"
 #include "Util/GameObject.hpp"
-#include "Card.hpp"
+#include "CardManager.hpp"
 
 class UpdateBackground {
 public:
@@ -19,29 +19,25 @@ public:
     void NextLevel();
 
     [[nodiscard]] std::vector<std::shared_ptr<Util::GameObject>> GetChildren() const {
-        return {m_Background,m_Adventure};
-    }
-
-    [[nodiscard]] std::vector<std::shared_ptr<Util::GameObject>> GetCards() const {
         std::vector<std::shared_ptr<Util::GameObject>> result;
-        result.reserve(m_Cards.size());
-        for (const auto& card : m_Cards) {
-            result.push_back(std::static_pointer_cast<Util::GameObject>(card));
+        m_Background ->SetPivot({0,0,});
+        result.push_back(m_Background);
+        result.push_back(m_Adventure);
+        for (auto card : m_Cards) {
+            result.push_back(card);
         }
+
         return result;
     }
 
-    void GetCard() {
-        auto temp = std::make_shared<Card>();
-        m_Cards = temp -> SetCards(m_level);
-    }
 
+
+    void SetCardPos();
 
 
 
 
     int GetLevel() {return m_level;}
-
 
     bool CheckHit(const glm::vec2& point) {
         // 計算點與每個邊的叉積
@@ -58,6 +54,7 @@ public:
         return (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
     }
 
+<<<<<<< Updated upstream
     void SetCardPos();
 private:
     std::shared_ptr<BackgroundImage> m_Background;
@@ -69,21 +66,26 @@ private:
     glm::vec2 p2{372, -59};
     glm::vec2 p3{356, -131};
     glm::vec2 p4{107, -100};
+=======
+>>>>>>> Stashed changes
 
     int GetLevel() {return m_level;}
 
 
-    bool Checkclck(glm::vec2 pos) {
-            if ((m_hitX.x <= pos.x && m_hitX.y >= pos.x) && (m_hitY.x <= pos.x && m_hitY.y >= pos.y)) {
-                return true;
-            }
-            else return false;
-        }
-
     protected:
+<<<<<<< Updated upstream
 
         glm::vec2 m_hitX;
         glm::vec2 m_hitY;
+=======
+        glm::vec2 p1{117, 47};
+        glm::vec2 p2{367, 65};
+        glm::vec2 p3{354, 130};
+        glm::vec2 p4{110, 101};
+
+        std::vector<std::shared_ptr<Card>> m_Cards;
+        std::shared_ptr<CardManager> m_CardManager;
+>>>>>>> Stashed changes
         std::shared_ptr<BackgroundImage> m_Background;
         std::shared_ptr<adventure> m_Adventure;
         int m_level = 0;

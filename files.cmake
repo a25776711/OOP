@@ -55,6 +55,8 @@ set(INCLUDE_FILES
         Background/background.hpp
         Background/UpdateBackground.hpp
         Background/Adventure.hpp
+        Background/CardManager.hpp
+
 )
 
 set(TEST_FILES

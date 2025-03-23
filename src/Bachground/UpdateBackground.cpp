@@ -5,6 +5,8 @@
 #include "Util/Logger.hpp"
 #include <iostream>
 UpdateBackground::UpdateBackground() {
+    m_level = 0;
+    m_CardManager = std::make_shared<CardManager>();
     m_Background = std::make_shared<BackgroundImage>();
     m_Adventure = std::make_shared<adventure>();
     m_Adventure -> SetPivot({-300,100});
@@ -23,18 +25,19 @@ void UpdateBackground::NextLevel() {
 
     m_Adventure->SetPivot({430, -280});
 
-    for (const auto& card : m_Cards) {
-        card->SetCards(m_level);
-    }
-    std::cout<<"test"<<std::endl;
-    SetCardPos(); // 重設卡牌位置（可選）
+    m_Cards = m_CardManager->SetCards(m_level);
+    SetCardPos();
+
+
 }
 
 void UpdateBackground::SetCardPos() {
-    int cou=0;
-    for (const auto card  : m_Cards) {
-        card -> SetPivot({0+cou*30,0});
-        cou++;
-    }
+    float spacing = 150.0f;
+    float startX = -554.0f;
+    float y = -255.0f;
 
+    for (size_t i = 0; i < m_Cards.size(); ++i) {
+        m_Cards[i]->SetPivot({startX - spacing * i, y});
+    }
 }
+
