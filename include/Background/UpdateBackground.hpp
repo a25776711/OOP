@@ -33,10 +33,6 @@ public:
 
 
     void SetCardPos();
-
-
-
-
     int GetLevel() {return m_level;}
 
     bool CheckHit(const glm::vec2& point) {
@@ -53,7 +49,7 @@ public:
     float CrossProduct(const glm::vec2& p1, const glm::vec2& p2, const glm::vec2& p3) {
         return (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
     }
-
+    void SetCardPos();
 
 
 
@@ -61,8 +57,6 @@ public:
 
 
     protected:
-
-
         glm::vec2 m_hitX;
         glm::vec2 m_hitY;
         glm::vec2 p1{117, 47};
