@@ -10,7 +10,6 @@
 void App::Start() {
     LOG_TRACE("Start");
     m_PRM = std::make_shared<UpdateBackground>();
-    //m_PRM ->SetScale({2.0f, 2.0f});
     m_Root.AddChildren(m_PRM->GetChildren());
 
     m_Root.AddChildren(m_PRM->GetCard());
@@ -21,11 +20,11 @@ void App::Start() {
 
 void App::Update() {
 
-    // if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
-    //     glm::vec2 pos=Util::Input::GetCursorPosition();
-    //     std::cout <<"X:"<< pos.x << std::endl;
-    //     std::cout <<"Y:"<< pos.y << std::endl;
-    // }
+    if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
+        glm::vec2 pos=Util::Input::GetCursorPosition();
+        std::cout <<"X:"<< pos.x << std::endl;
+        std::cout <<"Y:"<< pos.y << std::endl;
+    }
 
     if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
@@ -33,6 +32,7 @@ void App::Update() {
             if (m_PRM ->CheckHit(pos)) {
                 // std::cout << "true" << std::endl;
                 m_PRM ->NextLevel();
+                m_Root.AddChildren(m_PRM->GetChildren());
             }
         }
 
@@ -40,7 +40,6 @@ void App::Update() {
 
     if (m_EnterDown) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
-
             m_PRM ->NextLevel();
             m_Root.AddChildren(m_PRM->GetChildren());
         }
