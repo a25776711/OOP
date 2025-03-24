@@ -23,7 +23,7 @@ void UpdateBackground::NextLevel() {
     if (m_level != 0)
         m_Adventure->m_Transform.scale = {0.9, 0.9};
 
-    m_Adventure->SetPivot({430, -280});
+    m_Adventure->SetPivot({410, -285});
 
     m_Cards = m_CardManager->SetCards(m_level);
     SetCardPos();
@@ -32,9 +32,9 @@ void UpdateBackground::NextLevel() {
 }
 
 void UpdateBackground::SetCardPos() {
-    float spacing = 150.0f;
-    float startX = -554.0f;
-    float y = -255.0f;
+    float spacing = 150;
+    float startX = 1200;
+    float y = -580;
 
     for (size_t i = 0; i < m_Cards.size(); ++i) {
         m_Cards[i]->SetPivot({startX - spacing * i, y});

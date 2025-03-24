@@ -27,7 +27,7 @@ public:
 
         for (int i = 0; i <= level && i < allCards.size(); ++i) {
             allCards[i]-> SetVisible(true);
-            allCards[i]-> m_Transform.scale ={1,1};
+            allCards[i]-> m_Transform.scale ={0.45,0.45};
 
             // std::cout << "true"<<i << std::endl;
             result.push_back(allCards[i]);

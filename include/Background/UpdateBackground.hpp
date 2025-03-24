@@ -54,30 +54,17 @@ public:
         return (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
     }
 
-<<<<<<< Updated upstream
-    void SetCardPos();
-private:
-    std::shared_ptr<BackgroundImage> m_Background;
-    std::shared_ptr<adventure> m_Adventure;
 
-    std::vector<std::shared_ptr<Card>> m_Cards;
-    int m_level = 0;
-    glm::vec2 p1{115, -45};
-    glm::vec2 p2{372, -59};
-    glm::vec2 p3{356, -131};
-    glm::vec2 p4{107, -100};
-=======
->>>>>>> Stashed changes
 
-    int GetLevel() {return m_level;}
+
+
 
 
     protected:
-<<<<<<< Updated upstream
+
 
         glm::vec2 m_hitX;
         glm::vec2 m_hitY;
-=======
         glm::vec2 p1{117, 47};
         glm::vec2 p2{367, 65};
         glm::vec2 p3{354, 130};
@@ -85,7 +72,7 @@ private:
 
         std::vector<std::shared_ptr<Card>> m_Cards;
         std::shared_ptr<CardManager> m_CardManager;
->>>>>>> Stashed changes
+
         std::shared_ptr<BackgroundImage> m_Background;
         std::shared_ptr<adventure> m_Adventure;
         int m_level = 0;

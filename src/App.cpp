@@ -33,6 +33,7 @@ void App::Update() {
             if (m_PRM ->CheckHit(pos)) {
                 // std::cout << "true" << std::endl;
                 m_PRM ->NextLevel();
+                m_Root.AddChildren(m_PRM->GetChildren());
             }
         }
 
@@ -40,7 +41,6 @@ void App::Update() {
 
     if (m_EnterDown) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
-
             m_PRM ->NextLevel();
             m_Root.AddChildren(m_PRM->GetChildren());
         }
