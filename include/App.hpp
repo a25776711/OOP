@@ -8,6 +8,7 @@
 #include "Plant/plant.hpp"
 #include "Background/UpdateBackground.hpp"
 #include "Background/Adventure.hpp"
+#include "Plant/PlantLoader.hpp"
 
 
 // IWYU pragma: export
@@ -47,7 +48,7 @@ private:
     State m_CurrentState = State::START;
     Phase m_Phase = Phase::tital;
     Util::Renderer m_Root;
-
+    PlantLoader m_PlantLoader;
     std::shared_ptr<UpdateBackground> m_PRM;
 
     std::shared_ptr<normal> m_normal;

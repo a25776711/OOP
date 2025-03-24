@@ -13,7 +13,6 @@ void App::Start() {
     //m_PRM ->SetScale({2.0f, 2.0f});
     m_Root.AddChildren(m_PRM->GetChildren());
 
-
     m_Root.AddChildren(m_PRM->GetCard());
     m_CurrentState = State::UPDATE;
 
