@@ -25,7 +25,7 @@ class PlantLoader{
   std::string peaIMG;
   std::string icepeaIMG;
   void loadPlantImages(){
-    std::string path=RESOURCE_DIR+"/plant/";
+    std::string path=RESOURCE_DIR"/plant/";
     for(int i = 0; i < 24; i++)
       sunflowerIMG.emplace_back(path+"sunflower_" + std::to_string(i) + ".png");
     for(int i = 0; i < 24; i++)

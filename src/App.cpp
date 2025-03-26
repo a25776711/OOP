@@ -11,8 +11,6 @@ void App::Start() {
     LOG_TRACE("Start");
     m_PRM = std::make_shared<UpdateBackground>();
     m_Root.AddChildren(m_PRM->GetChildren());
-
-    m_Root.AddChildren(m_PRM->GetCard());
     m_CurrentState = State::UPDATE;
 
 
