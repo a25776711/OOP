@@ -17,7 +17,6 @@ public:
     UpdateBackground ();
 
     void NextLevel();
-
     [[nodiscard]] std::vector<std::shared_ptr<Util::GameObject>> GetChildren() const {
         std::vector<std::shared_ptr<Util::GameObject>> result;
         m_Background ->SetPivot({0,0,});

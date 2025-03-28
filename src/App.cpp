@@ -12,24 +12,25 @@ void App::Start() {
     m_PRM = std::make_shared<UpdateBackground>();
     m_zombiManager = std::make_shared<ZombiManager>();
     m_Root.AddChildren(m_PRM->GetChildren());
-
-    glm::vec2 pos={9,9};
-    m_Sun->SetPosition(pos);
-    m_Root.AddChild(m_Sun);
+    m_SunNB->SetZIndex(20);
+    m_Root.AddChild(m_SunNB);;
     m_CurrentState = State::UPDATE;
 
 }
 
 void App::Update() {
-
     if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
+        pos.y=-pos.y;
         std::cout <<"X:"<< pos.x << std::endl;
         std::cout <<"Y:"<< pos.y << std::endl;
     }
 
     if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
+        pos.y=-pos.y;
+        auto checksun=CheckSun(pos);
+        if(checksun!=nullptr){m_Root.RemoveChild(checksun);}
         if (m_PRM ->GetLevel()==0) {
             if (m_PRM ->CheckHit(pos)) {
                 // std::cout << "true" << std::endl;
@@ -38,7 +39,6 @@ void App::Update() {
             }
         }
     }
-
     if (m_EnterDown) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
             m_PRM ->NextLevel();
@@ -60,22 +60,19 @@ void App::Update() {
 
 
 
+     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
+         Util::Input::IfExit()) {
+         m_CurrentState = State::END;
+     }
 
-
-
-
-
-
-    
-
-    
-
-    // if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
-    //     Util::Input::IfExit()) {
-    //     m_CurrentState = State::END;
-    // }
 
     m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
+    MoveSun();
+    SunClock++;
+    if(SunClock>480) {
+        SunClock=0;
+        MakeSun();
+    }
     m_Root.Update();
 
 }
@@ -83,3 +80,4 @@ void App::Update() {
 void App::End() { // NOLINT(this method will mutate members in the future)
     LOG_TRACE("End");
 }
+
