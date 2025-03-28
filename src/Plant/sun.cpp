@@ -41,9 +41,9 @@ void Sun::Move() {
         }
     }else if (m_click&&m_state!=MoveOver) {
         const float duration = 2.0f; // 移動的總時間，根據需要調整
-        static float t = 0.0f; // 這是控制移動進度的時間變數
+        float t = 0.0f; // 這是控制移動進度的時間變數
 
-        t += 0.005f; // 假設每一幀移動0.01秒，這樣可以平滑過渡
+        t += 0.08f;
         if (t > duration) t = duration; // 防止時間超過最大值
 
         // 使用ease-out緩動函數，這裡用t * t來模擬
@@ -51,7 +51,7 @@ void Sun::Move() {
 
         // 根據緩動插值計算新的座標
         m_Transform.translation = glm::mix(pos, m_des, easing); // 使用glm::mix插值
-        if(glm::length(m_des-m_Transform.translation)<0.1f)m_state=MoveOver;
+        if(glm::length(m_des-m_Transform.translation)<0.3f)m_state=MoveOver;
     }
     p1 = {m_Transform.translation.x + 20, m_Transform.translation.y + 20};
     p2 = {m_Transform.translation.x - 20, m_Transform.translation.y + 20};
