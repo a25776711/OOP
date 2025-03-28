@@ -10,6 +10,7 @@
 void App::Start() {
     LOG_TRACE("Start");
     m_PRM = std::make_shared<UpdateBackground>();
+    m_zombiManager = std::make_shared<ZombiManager>();
     m_Root.AddChildren(m_PRM->GetChildren());
     m_SunNB->SetZIndex(20);
     m_Root.AddChild(m_SunNB);;
@@ -37,18 +38,33 @@ void App::Update() {
                 m_Root.AddChildren(m_PRM->GetChildren());
             }
         }
-
     }
     if (m_EnterDown) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
             m_PRM ->NextLevel();
-            m_Root.AddChildren(m_PRM->GetChildren());
+            m_Root.AddChildren(m_PRM-> GetChildren());
         }
     }
+    if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
+        glm::vec2 pos=Util::Input::GetCursorPosition();
+        m_Sun->CollectAndMove(pos,{200,50});
+        if (m_PRM ->GetLevel()==0) {
+            if (m_PRM ->CheckHit(pos)) {
+                // std::cout << "true" << std::endl;
+                m_PRM ->NextLevel();
+            }
+            if (m_PRM -> GetLevel() ==11){ m_CurrentState = State::END;}
+        }
+
+        m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(1)));
+
+
+
      if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
          Util::Input::IfExit()) {
          m_CurrentState = State::END;
      }
+
 
     m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
     MoveSun();

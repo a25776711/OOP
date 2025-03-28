@@ -6,6 +6,32 @@
 #define NORMAL_HPP
 #include "Zombi/zombi.hpp"
 
+class normal : public zombi {
+public:
+    normal() {
+        SetImage();
+        normal::SetHP(100);
+        normal::SetSpeed(30);
+        normal::Setattack(10);
 
+    };
+
+    void SetImage() {
+        m_Images.reserve(reverse);
+        for (int i=0;i<reverse;i++) {
+            m_Images.push_back(RESOURCE_DIR"/zombi/normal/walk/walk_" + std::to_string(i) + ".png");
+        }
+        m_Drawable = std::make_shared<Util::Animation>(m_Images, false, 500, false, 500);
+    }
+    std::vector<std::string> GetImages() {
+        return m_Images;
+    }
+
+    void Gotice(bool ice) override {}
+
+private:
+    std::vector<std::string> m_Images;
+    int reverse = 46;
+};
 
 #endif //NORMAL_HPP

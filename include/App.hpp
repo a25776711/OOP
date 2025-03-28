@@ -3,8 +3,7 @@
 
 #include "pch.hpp"
 #include "Util/Renderer.hpp"
-#include "Zombi/zombi.hpp"
-#include "zombi/normal.hpp"
+#include "Zombi/ZombiManager.hpp"
 #include "Plant/plant.hpp"
 #include "Background/UpdateBackground.hpp"
 #include "Background/Adventure.hpp"
@@ -75,11 +74,12 @@ private:
     Phase m_Phase = Phase::tital;
     Util::Renderer m_Root;
     std::shared_ptr<UpdateBackground> m_PRM;
+
+    std::shared_ptr<ZombiManager> m_zombiManager;
+  
     std::vector<std::shared_ptr<Sun>> m_Suns;
     std::vector<std::shared_ptr<Plant>> m_Plants;
     std::shared_ptr<SunNB> m_SunNB=std::make_shared<SunNB>();
-
-
 
     bool m_EnterDown = false;
 
