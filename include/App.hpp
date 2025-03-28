@@ -50,7 +50,7 @@ private:
 
     std::shared_ptr<UpdateBackground> m_PRM;
 
-    std::shared_ptr<normal> m_normal;
+
 
     bool m_EnterDown = false;
 

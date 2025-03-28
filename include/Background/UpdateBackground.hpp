@@ -37,13 +37,15 @@ public:
 
     bool CheckHit(const glm::vec2& point) {
         // 計算點與每個邊的叉積
+        bool result = false;
         bool b1 = CrossProduct(p1, p2, point) >= 0;
         bool b2 = CrossProduct(p2, p3, point) >= 0;
         bool b3 = CrossProduct(p3, p4, point) >= 0;
         bool b4 = CrossProduct(p4, p1, point) >= 0;
         // 檢查四個叉積是否都為正或都為負，這意味著點在四邊形內
-
-        return (b1 == b2) && (b2 == b3) && (b3 == b4);
+        result = (b1 == b2) && (b2 == b3) && (b3 == b4);
+        if (result) {m_Adventure -> ChangeImage();}
+        return result;
     }
 
     float CrossProduct(const glm::vec2& p1, const glm::vec2& p2, const glm::vec2& p3) {
