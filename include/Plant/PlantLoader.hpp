@@ -9,6 +9,9 @@
 
 class PlantLoader{
   public:
+  PlantLoader() {
+    loadPlantImages();
+  }
   std::vector<std::string> sunflowerIMG;
   std::vector<std::string> sunflowerIMG_1;
   std::vector<std::string> sunIMG;
@@ -25,13 +28,13 @@ class PlantLoader{
   std::string peaIMG;
   std::string icepeaIMG;
   void loadPlantImages(){
-    std::string path=RESOURCE_DIR+"/plant/";
+    std::string path=RESOURCE_DIR"/plant/";
     for(int i = 0; i < 24; i++)
-      sunflowerIMG.emplace_back(path+"sunflower_" + std::to_string(i) + ".png");
+      sunflowerIMG.emplace_back(path+"sunflower/sunflower_" + std::to_string(i) + ".png");
     for(int i = 0; i < 24; i++)
-      sunflowerIMG_1.emplace_back(path+"sunflower_1_" + std::to_string(i) + ".png");
+      sunflowerIMG_1.emplace_back(path+"sunflower_1/sunflower_1_" + std::to_string(i) + ".png");
     for(int i = 0; i < 12; i++)
-      sunIMG.emplace_back(path+"sun_"+std::to_string(i) + ".png");
+      sunIMG.emplace_back(path+"sun/sun_"+std::to_string(i) + ".png");
     for(int i = 0; i < 8; i++)
       mineIMG.emplace_back(path+"mine_" + std::to_string(i) + ".png");
     for(int i = 0; i < 24; i++)

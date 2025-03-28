@@ -6,14 +6,16 @@
 #define PEASHOOTER_HPP
 #include "plant.hpp"
 
-class Peashooter : public Plant{
-  public:
-  explicit Peashooter();
-  protected:
-    int shootspeed;
-    int hurt;
-
-  public:
-
+class Peashooter : public Plant {
+public:
+    explicit Peashooter(int ATK,std::vector<std::string>& Path,int interval=100):Plant() {
+        SetATK(ATK);
+    }
+    bool Attack (glm::vec2) {
+        
+    }
+protected:
+    int m_cooldown;
+};
 
 #endif //PEASHOOTER_HPP

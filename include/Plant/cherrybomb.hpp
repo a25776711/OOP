@@ -8,8 +8,8 @@
 
 class Cherrybomb:public Plant {
     public:
-    explicit  Cherrybomb(std::vector<std::string>& Path,int interval=100):Plant() {
-
+    explicit  Cherrybomb(int ATK,std::vector<std::string>& Path,int interval=100):Plant(Path,interval) {
+        SetATK(ATK);
     }
 
     private:
