@@ -17,6 +17,11 @@ class adventure : public Util::GameObject{
         }
 
 
+        void ChangeImage() {
+            auto temp = std::dynamic_pointer_cast<Util::Image>(m_Drawable);
+                return temp -> SetImage(RESOURCE_DIR"/Background/Adventure.png");
+        }
+
         void NextLevel(int level) {
             auto temp = std::dynamic_pointer_cast<Util::Image>(m_Drawable);
             if (level==0) {

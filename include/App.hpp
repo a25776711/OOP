@@ -51,7 +51,7 @@ private:
     PlantLoader m_PlantLoader;
     std::shared_ptr<UpdateBackground> m_PRM;
     std::shared_ptr<Sun> m_Sun =std::make_shared<Sun>(m_PlantLoader.sunIMG);
-    std::shared_ptr<normal> m_normal;
+
 
     bool m_EnterDown = false;
 

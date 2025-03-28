@@ -53,6 +53,7 @@ void App::Update() {
                 // std::cout << "true" << std::endl;
                 m_PRM ->NextLevel();
             }
+            if (m_PRM -> GetLevel() ==11){ m_CurrentState = State::END;}
         }
 
     }
@@ -60,19 +61,16 @@ void App::Update() {
 
 
 
-    // m_normal = std::make_shared<normal>();
-    // m_normal -> SetZIndex(5);
-    // m_normal -> SetVisible(true);
 
-    // m_normal ->SetLooping(true);
-    // m_normal ->SetPlaying(true);
-    // m_normal ->SetPosition({m_normal->GetPosition().x+30,m_normal->GetPosition().y+30,});
-    // m_Root.AddChild(m_normal);
 
-    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
-        Util::Input::IfExit()) {
-        m_CurrentState = State::END;
-    }
+    
+
+    
+
+    // if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
+    //     Util::Input::IfExit()) {
+    //     m_CurrentState = State::END;
+    // }
 
     m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
     m_Root.Update();

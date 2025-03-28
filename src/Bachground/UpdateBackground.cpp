@@ -15,7 +15,7 @@ UpdateBackground::UpdateBackground() {
 }
 
 void UpdateBackground::NextLevel() {
-    if (m_level == 6) return;
+    if (m_level == 11) return;
 
     m_Background->NextLevel(++m_level);
     m_Adventure->NextLevel(m_level);
