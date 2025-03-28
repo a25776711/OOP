@@ -8,8 +8,8 @@
 
 class Peashooter : public Plant {
 public:
-    explicit Peashooter(int ATK,std::vector<std::string>& Path,int interval=100):Plant() {
-        SetATK(ATK);
+    explicit Peashooter(int interval=100):Plant(m_Loader.peashooterIMG,60) {
+        SetATK(10);
     }
     bool Attack (glm::vec2) {
         

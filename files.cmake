@@ -52,10 +52,11 @@ set(INCLUDE_FILES
     Bullet/bullet.hpp
     Bullet/normal.hpp
     Bullet/icebullet.hpp
-        Background/background.hpp
-        Background/UpdateBackground.hpp
-        Background/Adventure.hpp
-        Background/CardManager.hpp
+    Background/background.hpp
+    Background/UpdateBackground.hpp
+    Background/Adventure.hpp
+    Background/CardManager.hpp
+    Background/SunNB.hpp
 
 )
 

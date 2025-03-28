@@ -7,11 +7,13 @@
 #include "Util/GameObject.hpp"
 #include "Util/Animation.hpp"
 #include "Plant/PlantLoader.hpp"
+#include <ctime>
+#include <cstdlib>
 
 class Plant: public Util::GameObject{
     public:
     explicit Plant(std::vector<std::string>& Path,int interval){
-        m_Drawable = std::make_shared<Util::Animation>(Path, false, interval, true, 0);
+        m_Drawable = std::make_shared<Util::Animation>(Path, true, interval, true, 0);
     }
     [[nodiscard]] bool GetVisibility() const { return m_Visible;}
     [[nodiscard]] const glm::vec2& GetPosition() const { return m_Transform.translation; }
