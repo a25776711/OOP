@@ -57,7 +57,6 @@ public:
 
 
 
-
     protected:
         glm::vec2 m_hitX;
         glm::vec2 m_hitY;

@@ -7,7 +7,8 @@
 #include "Plant/plant.hpp"
 #include "Background/UpdateBackground.hpp"
 #include "Background/Adventure.hpp"
-
+#include "Plant/PlantLoader.hpp"
+#include "Plant/sun.hpp"
 
 // IWYU pragma: export
 inline std::vector<std::vector<int>> blockpos={
@@ -46,7 +47,7 @@ private:
     State m_CurrentState = State::START;
     Phase m_Phase = Phase::tital;
     Util::Renderer m_Root;
-
+    PlantLoader m_PlantLoader;
     std::shared_ptr<UpdateBackground> m_PRM;
     std::shared_ptr<ZombiManager> m_zombiManager;
 

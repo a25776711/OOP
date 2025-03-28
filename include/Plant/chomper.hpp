@@ -8,7 +8,7 @@
 
 class Chomper:public Plant {
     public:
-    Chomper(int hp,std::vector<std::string>& Path,int interval=100):Plant(path,interval) {
+    Chomper(int hp,std::vector<std::string>& Path,int interval=100):Plant() {
         SetHP(hp);
     }
     private:
