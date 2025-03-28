@@ -37,6 +37,7 @@ set(INCLUDE_FILES
     Zombi/armor.hpp
     Zombi/bucket.hpp
     Zombi/hat.hpp
+        Zombi/ZombiManager.hpp
 
     Plant/plant.hpp
     Plant/sunflower.hpp

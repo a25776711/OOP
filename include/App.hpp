@@ -3,8 +3,7 @@
 
 #include "pch.hpp"
 #include "Util/Renderer.hpp"
-#include "Zombi/zombi.hpp"
-#include "zombi/normal.hpp"
+#include "Zombi/ZombiManager.hpp"
 #include "Plant/plant.hpp"
 #include "Background/UpdateBackground.hpp"
 #include "Background/Adventure.hpp"
@@ -49,7 +48,7 @@ private:
     Util::Renderer m_Root;
 
     std::shared_ptr<UpdateBackground> m_PRM;
-
+    std::shared_ptr<ZombiManager> m_zombiManager;
 
 
     bool m_EnterDown = false;
