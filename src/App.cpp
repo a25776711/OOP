@@ -11,8 +11,11 @@ void App::Start() {
     LOG_TRACE("Start");
     m_PRM = std::make_shared<UpdateBackground>();
     m_Root.AddChildren(m_PRM->GetChildren());
-    m_CurrentState = State::UPDATE;
 
+    glm::vec2 pos={9,9};
+    m_Sun->SetPosition(pos);
+    m_Root.AddChild(m_Sun);
+    m_CurrentState = State::UPDATE;
 
 }
 
@@ -42,9 +45,9 @@ void App::Update() {
             m_Root.AddChildren(m_PRM->GetChildren());
         }
     }
-
     if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
+        m_Sun->CollectAndMove(pos,{200,50});
         if (m_PRM ->GetLevel()==0) {
             if (m_PRM ->CheckHit(pos)) {
                 // std::cout << "true" << std::endl;

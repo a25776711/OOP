@@ -6,12 +6,12 @@
 #define PLANT_HPP
 #include "Util/GameObject.hpp"
 #include "Util/Animation.hpp"
+#include "Plant/PlantLoader.hpp"
 
 class Plant: public Util::GameObject{
     public:
-    explicit  Plant(std::vector<std::string>& Path,int interval):GameObject() {
+    explicit Plant(std::vector<std::string>& Path,int interval){
         m_Drawable = std::make_shared<Util::Animation>(Path, false, interval, true, 0);
-        m_ImagePath=Path;
     }
     [[nodiscard]] bool GetVisibility() const { return m_Visible;}
     [[nodiscard]] const glm::vec2& GetPosition() const { return m_Transform.translation; }
@@ -34,11 +34,13 @@ class Plant: public Util::GameObject{
             temp->Pause();
         }
     }
+    protected:
+    PlantLoader m_Loader;
     private:
+
     int m_hp;
     int m_maxhp;
     int m_ATK=0;
-    std::vector<std::string> m_ImagePath;
 
 };
 #endif //PLANT_HPP

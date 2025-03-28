@@ -9,9 +9,9 @@
 class Sun : public Plant {
     public:
     explicit  Sun(std::vector<std::string>& Path,int interval=100):Plant(Path,interval) {
-
+        Path=m_Loader.sunIMG;
     }
-    void CollectAndMove(glm::vec2 click,glm::vec2& des);
+    void CollectAndMove(glm::vec2 click,glm::vec2 des);
     float CrossProduct(const glm::vec2& p1, const glm::vec2& p2, const glm::vec2& p3) {
         return (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
     }

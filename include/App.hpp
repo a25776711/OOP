@@ -9,7 +9,7 @@
 #include "Background/UpdateBackground.hpp"
 #include "Background/Adventure.hpp"
 #include "Plant/PlantLoader.hpp"
-
+#include "Plant/sun.hpp"
 
 // IWYU pragma: export
 inline std::vector<std::vector<int>> blockpos={
@@ -50,7 +50,7 @@ private:
     Util::Renderer m_Root;
     PlantLoader m_PlantLoader;
     std::shared_ptr<UpdateBackground> m_PRM;
-
+    std::shared_ptr<Sun> m_Sun =std::make_shared<Sun>(m_PlantLoader.sunIMG);
     std::shared_ptr<normal> m_normal;
 
     bool m_EnterDown = false;
