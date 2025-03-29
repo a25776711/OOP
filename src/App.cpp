@@ -19,12 +19,12 @@ void App::Start() {
 }
 
 void App::Update() {
-    if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
-        glm::vec2 pos=Util::Input::GetCursorPosition();
-        pos.y=-pos.y;
-        std::cout <<"X:"<< pos.x << std::endl;
-        std::cout <<"Y:"<< pos.y << std::endl;
-    }
+    // if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
+    //     glm::vec2 pos=Util::Input::GetCursorPosition();
+    //     pos.y=-pos.y;
+    //     std::cout <<"X:"<< pos.x << std::endl;
+    //     std::cout <<"Y:"<< pos.y << std::endl;
+    // }
 
     if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
@@ -43,22 +43,23 @@ void App::Update() {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
             m_PRM ->NextLevel();
             m_Root.AddChildren(m_PRM-> GetChildren());
+            m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
+            if (m_PRM -> GetLevel() ==11){ m_CurrentState = State::END;}
         }
     }
     if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
-        m_Sun->CollectAndMove(pos,{200,50});
+        // m_Sun->CollectAndMove(pos,{200,50});
         if (m_PRM ->GetLevel()==0) {
             if (m_PRM ->CheckHit(pos)) {
-                // std::cout << "true" << std::endl;
                 m_PRM ->NextLevel();
             }
-            if (m_PRM -> GetLevel() ==11){ m_CurrentState = State::END;}
+
         }
 
-        m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(1)));
-
-
+        m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
+    };
+    m_zombiManager -> move();
 
      if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
          Util::Input::IfExit()) {

@@ -21,10 +21,14 @@ public:
         for (int i=0;i<reverse;i++) {
             m_Images.push_back(RESOURCE_DIR"/zombi/normal/walk/walk_" + std::to_string(i) + ".png");
         }
-        m_Drawable = std::make_shared<Util::Animation>(m_Images, false, 500, false, 500);
+        m_Drawable = std::make_shared<Util::Animation>(m_Images, true, 100, true, 100);
     }
     std::vector<std::string> GetImages() {
         return m_Images;
+    }
+
+    void move() override {
+        m_Pivot = {m_Pivot.x+0.05, m_Pivot.y};
     }
 
     void Gotice(bool ice) override {}
