@@ -6,6 +6,9 @@
 #define ZOMBIMANGER_HPP
 #include "zombi.hpp"
 #include "normal.hpp"
+#include "hat.hpp"
+#include "bucket.hpp"
+#include "armor.hpp"
 class ZombiManager{
 public:
    ZombiManager() {
@@ -13,8 +16,8 @@ public:
    };
 
 void SetZombies(){
-  m_zombies1.push_back(std::make_shared<normal>());
-  m_zombies1.push_back(std::make_shared<normal>());
+  m_zombies1.push_back(std::make_shared<armor>());
+  m_zombies1.push_back(std::make_shared<bucket>());
 
   m_zombies2.push_back(std::make_shared<normal>());
   m_zombies2.push_back(std::make_shared<normal>());
