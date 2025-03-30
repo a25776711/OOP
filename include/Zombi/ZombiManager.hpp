@@ -18,6 +18,7 @@ void SetZombies(){
 
   m_zombies2.push_back(std::make_shared<normal>());
   m_zombies2.push_back(std::make_shared<normal>());
+
   m_zombies3.push_back(std::make_shared<normal>());
 };
 
@@ -28,6 +29,7 @@ std::vector<std::shared_ptr<zombi>> GetZombi(int level) {
       break;
     case 2:
       m_result = m_zombies2;
+
       break;
     default:
       break;
@@ -37,6 +39,12 @@ std::vector<std::shared_ptr<zombi>> GetZombi(int level) {
     zombi -> SetZIndex(51);
   }
     return m_result;
+}
+
+void Getice(bool ice) {
+  for (auto zombi : m_result) {
+    zombi -> Gotice(true);
+  }
 }
 
 std::vector<std::shared_ptr<Util::GameObject>> GetZombiesAsGameObjects(std::vector<std::shared_ptr<zombi>> m_zombies) {

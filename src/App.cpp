@@ -61,10 +61,9 @@ void App::Update() {
     };
     m_zombiManager -> move();
 
-     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
-         Util::Input::IfExit()) {
-         m_CurrentState = State::END;
-     }
+    if (Util::Input::IsKeyDown(Util::Keycode::MOUSE_RB)) {
+        m_zombiManager ->Getice(true);
+    }
 
 
     m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
@@ -73,6 +72,11 @@ void App::Update() {
     if(SunClock>480) {
         SunClock=0;
         MakeSun();
+    }
+
+    if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
+    Util::Input::IfExit()) {
+        m_CurrentState = State::END;
     }
     m_Root.Update();
 

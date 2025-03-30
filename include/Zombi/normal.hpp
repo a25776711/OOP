@@ -9,20 +9,60 @@
 class normal : public zombi {
 public:
     normal() {
-        SetImage();
         normal::SetHP(100);
-        normal::SetSpeed(30);
+        normal::SetSpeed(0.05);
         normal::Setattack(10);
 
+        m_Walk.reserve(46);
+        for (int i=0;i<46;i++) {
+            m_Walk.push_back(RESOURCE_DIR"/zombi/normal/walk/walk_" + std::to_string(i) + ".png");
+        }
+        m_iceWalk.reserve(46);
+        for (int i=0;i<46;i++) {
+            m_iceWalk.push_back(RESOURCE_DIR"/zombi/normal/walk_1/walk_1_" + std::to_string(i) + ".png");
+        }
+        m_eat.reserve(39);
+        for (int i=0;i<39;i++) {
+            m_eat.push_back(RESOURCE_DIR"/zombi/normal/eat/eat_" + std::to_string(i) + ".png");
+        }
+        m_iceeat.reserve(39);
+        for (int i=0;i<39;i++) {
+            m_iceeat.push_back(RESOURCE_DIR"/zombi/normal/eat_1/eat_1_" + std::to_string(i) + ".png");
+        }
+        SetImage(m_state);
     };
 
-    void SetImage() {
-        m_Images.reserve(reverse);
-        for (int i=0;i<reverse;i++) {
-            m_Images.push_back(RESOURCE_DIR"/zombi/normal/walk/walk_" + std::to_string(i) + ".png");
+    void Gotice(bool ice) override {
+        switch (m_state) {
+            case zombistate::walk:
+                m_state = zombistate::coldwalk; break;
+            case zombistate::eat:
+                m_state = zombistate::coldeat; break;
+            default:
+                break;
+        }
+        SetImage(m_state);
+    }
+
+    void SetImage(zombistate state) {
+
+        switch (state) {
+            case zombistate::walk:
+                m_Images = m_Walk;
+                break;
+            case zombistate::coldwalk:
+                m_Images = m_iceWalk;
+                break;
+            case zombistate::eat:
+                m_Images = m_eat;
+                break;
+            case zombistate::coldeat:
+                m_Images = m_iceeat;
+                break;
         }
         m_Drawable = std::make_shared<Util::Animation>(m_Images, true, 100, true, 100);
     }
+
     std::vector<std::string> GetImages() {
         return m_Images;
     }
@@ -31,10 +71,14 @@ public:
         m_Pivot = {m_Pivot.x+0.05, m_Pivot.y};
     }
 
-    void Gotice(bool ice) override {}
+
 
 private:
     std::vector<std::string> m_Images;
+    std::vector<std::string> m_Walk;
+    std::vector<std::string> m_iceWalk;
+    std::vector<std::string> m_eat;
+    std::vector<std::string> m_iceeat;
     int reverse = 46;
 };
 
