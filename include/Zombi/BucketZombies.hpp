@@ -4,5 +4,6 @@
 
 #ifndef BUCKETZOMBIES_HPP
 #define BUCKETZOMBIES_HPP
+#include "Zombi/zombi.hpp"
 
 #endif //BUCKETZOMBIES_HPP

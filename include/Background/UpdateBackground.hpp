@@ -59,10 +59,10 @@ public:
     protected:
         glm::vec2 m_hitX;
         glm::vec2 m_hitY;
-        glm::vec2 p1{117, 47};
-        glm::vec2 p2{367, 65};
-        glm::vec2 p3{354, 130};
-        glm::vec2 p4{110, 101};
+        glm::vec2 p1{114, -47};
+        glm::vec2 p2{367, -65};
+        glm::vec2 p3{360, -130};
+        glm::vec2 p4{110, -101};
 
         std::vector<std::shared_ptr<Card>> m_Cards;
         std::shared_ptr<CardManager> m_CardManager;
