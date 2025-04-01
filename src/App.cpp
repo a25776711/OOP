@@ -64,6 +64,7 @@ void App::Update() {
     };
     m_zombiManager -> move();
 
+
     if (Util::Input::IsKeyDown(Util::Keycode::MOUSE_RB)) {
         m_zombiManager ->Getice(true);
     }
