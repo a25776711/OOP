@@ -12,6 +12,7 @@
 
 class Plant: public Util::GameObject{
     public:
+    std::map<std::string,std::vector<glm::vec2>> block;
     explicit Plant(std::vector<std::string>& Path,int interval){
         m_Drawable = std::make_shared<Util::Animation>(Path, true, interval, true, 0);
     }
@@ -27,15 +28,13 @@ class Plant: public Util::GameObject{
     void SetHP(int hp) {
         m_hp=m_maxhp=hp;
     }
+    int GetHP(){return m_hp;}
     void SetATK(int atk) { m_ATK = atk;}
-    void PLAY(bool play) {
-        auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
-        if(temp->GetState()!=Util::Animation::State::PLAY&&play) {
-            temp->Play();
-        }else if(!play) {
-            temp->Pause();
-        }
+    void PLAY(bool play);
+    virtual void Hurt() {
+        m_hp--;
     }
+    void SetBlock();
     protected:
     PlantLoader m_Loader;
     private:

@@ -7,9 +7,10 @@
 #include "plant.hpp"
 class Wallnut : public Plant {
     public:
-    explicit  Wallnut(int hp,std::vector<std::string>& Path,int interval=100):Plant(Path,interval) {
-        SetHP(hp);
+    explicit  Wallnut():Plant(m_Loader.wallnutIMG,70) {
+        SetHP(72);
     }
+    void Hurt() override;
     private:
 
 };

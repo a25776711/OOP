@@ -13,12 +13,8 @@
 #include "Background/SunNB.hpp"
 
 // IWYU pragma: export
-inline std::vector<std::vector<int>> blockpos={
-    {},
-    {},
-    {},
-    {},
-    {}};
+inline std::map<std::string,std::vector<glm::vec2>> block;
+
 
 class App {
 public:
@@ -27,7 +23,6 @@ public:
         UPDATE,
         END,
     };
-
     State GetCurrentState() const { return m_CurrentState; }
 
     void Start();
@@ -53,7 +48,6 @@ public:
         }
         return nullptr;
     }
-
     void MoveSun() {
         m_Suns.erase(std::remove_if(m_Suns.begin(), m_Suns.end(), [&](std::shared_ptr<Sun>& sun) {
            sun->Move(); // 讓太陽移動

@@ -7,8 +7,8 @@
 #include "Plant/plant.hpp"
 class Mine : public Plant {
     public:
-    Mine(int hp,std::vector<std::string>& Path,int interval=100):Plant(path,interval) {
-
+    Mine():Plant(m_Loader.mineIMG,100) {
+        SetHP(5);
     }
     private:
     int m_Cooldown;

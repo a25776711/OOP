@@ -8,8 +8,12 @@
 #include "sun.hpp"
 class SunFlower : public Plant {
 public:
-    SunFlower(int hp,std::vector<std::string>& Path,int interval=100):Plant(Path,interval) {
-        SetHP(hp);
+    enum class Shine {
+        Ing,
+        No
+    };
+    SunFlower(int hp):Plant(m_Loader.sunflowerIMG,60) {
+        SetHP(5);
     }
 
     
