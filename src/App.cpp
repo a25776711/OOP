@@ -42,6 +42,10 @@ void App::Update() {
     if (m_EnterDown) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
             m_PRM ->NextLevel();
+            std::cout << (m_zombiManager -> GetZombies().size()) << std::endl;
+            for (auto zombi : m_zombiManager -> GetZombies()) {
+                m_Root.RemoveChild(zombi);
+            }
             m_Root.AddChildren(m_PRM-> GetChildren());
             m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
             if (m_PRM -> GetLevel() ==11){ m_CurrentState = State::END;}
@@ -56,8 +60,7 @@ void App::Update() {
             }
 
         }
-
-        m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
+       m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
     };
     m_zombiManager -> move();
 

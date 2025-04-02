@@ -17,12 +17,21 @@ public:
 
 void SetZombies(){
   m_zombies1.push_back(std::make_shared<armor>());
-  m_zombies1.push_back(std::make_shared<bucket>());
+  // m_zombies1.push_back(std::make_shared<armor>());
 
-  m_zombies2.push_back(std::make_shared<normal>());
-  m_zombies2.push_back(std::make_shared<normal>());
+  m_zombies2.push_back(std::make_shared<hat>());
+  m_zombies2.push_back(std::make_shared<hat>());
 
   m_zombies3.push_back(std::make_shared<normal>());
+  m_zombies3.push_back(std::make_shared<normal>());
+  m_zombies3.push_back(std::make_shared<normal>());
+
+  m_zombies4.push_back(std::make_shared<bucket>());
+  m_zombies4.push_back(std::make_shared<bucket>());
+  m_zombies4.push_back(std::make_shared<bucket>());
+  m_zombies4.push_back(std::make_shared<bucket>());
+
+
 };
 
 std::vector<std::shared_ptr<zombi>> GetZombi(int level) {
@@ -32,10 +41,15 @@ std::vector<std::shared_ptr<zombi>> GetZombi(int level) {
       break;
     case 2:
       m_result = m_zombies2;
-
+      break;
+    case 3:
+      m_result = m_zombies3;
+      break;
+    case 4:
+      m_result = m_zombies4;
       break;
     default:
-      break;
+      m_result.clear();
   }
   for (auto zombi : m_result) {
     zombi -> SetLoopingandPlay(true);
@@ -63,13 +77,23 @@ void move() {
     zombi -> move();
   }
 }
+std::vector<std::shared_ptr<zombi>> GetZombies() {
+  return  m_result;
+}
 
+private:
+  std::vector<std::shared_ptr<zombi>> m_result;
+  std::vector<std::shared_ptr<zombi>> m_zombies1;
+  std::vector<std::shared_ptr<zombi>> m_zombies2;
+  std::vector<std::shared_ptr<zombi>> m_zombies3;
+  std::vector<std::shared_ptr<zombi>> m_zombies4;
+  std::vector<std::shared_ptr<zombi>> m_zombies5;
+  std::vector<std::shared_ptr<zombi>> m_zombies6;
+  std::vector<std::shared_ptr<zombi>> m_zombies7;
+  std::vector<std::shared_ptr<zombi>> m_zombies8;
+  std::vector<std::shared_ptr<zombi>> m_zombies9;
+  std::vector<std::shared_ptr<zombi>> m_zombies10;
 
-  private:
-    std::vector<std::shared_ptr<zombi>> m_result;
-    std::vector<std::shared_ptr<zombi>> m_zombies1;
-    std::vector<std::shared_ptr<zombi>> m_zombies2;
-    std::vector<std::shared_ptr<zombi>> m_zombies3;
 
 
 };
