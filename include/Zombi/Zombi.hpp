@@ -30,7 +30,7 @@ public:
     }
     virtual void Gotice(bool ice) = 0;
     virtual void move() = 0;
-
+    virtual void Eating() = 0;
 
     zombistate GetState() {return m_state;}
 

@@ -71,6 +71,11 @@ public:
         m_Pivot = {m_Pivot.x+0.05, m_Pivot.y};
     }
 
+    void Eating() override {
+        m_state = zombistate::eat;
+        SetImage(zombistate::eat);
+        z_speed = 0;
+    }
 
 
 private:
