@@ -6,7 +6,7 @@
 #define ICEBULLET_HPP
 #include "bullet.hpp"
 class IceBullet:public Bullet {
-
+    IceBullet():Bullet(RESOURCE_DIR"/pee/icepea.png",Ice){}
 };
 
 #endif //ICEBULLET_HPP

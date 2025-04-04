@@ -19,7 +19,6 @@ class Plant: public Util::GameObject{
     [[nodiscard]] bool GetVisibility() const { return m_Visible;}
     [[nodiscard]] const glm::vec2& GetPosition() const { return m_Transform.translation; }
     void SetPosition(const glm::vec2& Position) { m_Transform.translation = Position; }
-    virtual void Hurt(std::vector<std::shared_ptr<GameObject>>& collidedWith);
 
     void SetLooping(bool looping) {
         auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);

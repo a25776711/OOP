@@ -13,7 +13,7 @@
 #include "Background/SunNB.hpp"
 
 // IWYU pragma: export
-inline std::map<std::string,std::vector<glm::vec2>> block;
+
 
 
 class App {
@@ -38,30 +38,14 @@ public:
             fiveroad
     };
     void MakeSun(){m_Suns.emplace_back(std::make_shared<Sun>(false));m_Root.AddChild(m_Suns.back());}
-    std::shared_ptr<Sun> CheckSun(glm::vec2 click) {
-        for(auto& sun:m_Suns) {
-            glm::vec2 pos = sun->GetPosition();
-            std::cout << pos.x << ", " << pos.y << std::endl;
-            LOG_INFO("CheckSun:pos:(x:{},y:{})", pos.x, pos.y);
-            sun->CollectAndMove(click);
-            if(sun->GetMoveState()==MoveOver)return sun;
-        }
-        return nullptr;
-    }
-    void MoveSun() {
-        m_Suns.erase(std::remove_if(m_Suns.begin(), m_Suns.end(), [&](std::shared_ptr<Sun>& sun) {
-           sun->Move(); // 讓太陽移動
-           if (sun->GetMoveState() == MoveOver) {
-               m_Root.RemoveChild(sun); // 移除畫面中的sun
-               Sunamount+=25;
-               m_SunNB->Change(Sunamount);
-               return true; // 返回true來標記這個元素為要刪除的
-           }
-           return false; // 否則不刪除
-       }), m_Suns.end());
-    }
+    std::shared_ptr<Sun> CheckSun(glm::vec2 click);
+    void MoveSun();
+    void SetPos();
+    std::shared_ptr<Plant> CheckPlant(glm::vec2 click);
 private:
     //void ValidTask();
+    std::map<std::string,std::vector<glm::vec2>> block;
+    std::map<std::string,std::vector<glm::vec2>> m_cardPos;
     int Sunamount=0;
     int SunClock=0;
     State m_CurrentState = State::START;
