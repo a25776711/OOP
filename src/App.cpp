@@ -19,12 +19,11 @@ void App::Start() {
 }
 
 void App::Update() {
-    // if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
-    //     glm::vec2 pos=Util::Input::GetCursorPosition();
-    //     pos.y=-pos.y;
-    //     std::cout <<"X:"<< pos.x << std::endl;
-    //     std::cout <<"Y:"<< pos.y << std::endl;
-    // }
+    if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
+        glm::vec2 pos=Util::Input::GetCursorPosition();
+        pos.y=-pos.y;
+        std::cout <<"("<< pos.x <<","<<pos.y<<")"<< std::endl;
+    }
 
     if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
@@ -33,14 +32,16 @@ void App::Update() {
         if(checksun!=nullptr){m_Root.RemoveChild(checksun);}
         if (m_PRM ->GetLevel()==0) {
             if (m_PRM ->CheckHit(pos)) {
-                // std::cout << "true" << std::endl;
+                // std::cout << "true" << std::end;
                 m_PRM ->NextLevel();
                 m_Root.AddChildren(m_PRM->GetChildren());
+                SetPos();
             }
         }
     }
     if (m_EnterDown) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
+
             m_PRM ->NextLevel();
             std::cout << (m_zombiManager -> GetZombies().size()) << std::endl;
             for (auto zombi : m_zombiManager -> GetZombies()) {
@@ -73,10 +74,10 @@ void App::Update() {
     m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
     MoveSun();
     SunClock++;
-    if(SunClock>480) {
-        SunClock=0;
-        MakeSun();
-    }
+    //if(SunClock>480) {
+    //    SunClock=0;
+    //    MakeSun();
+    //}
 
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
     Util::Input::IfExit()) {
@@ -115,9 +116,21 @@ std::shared_ptr<Plant> App::CheckPlant(glm::vec2 click) {
 
 }
 void App::SetPos() {
-    m_cardPos["0"]={{},{},{},{}};
-    for(int i=0;i<8;i++) {
-        m_cardPos[std::to_string(i)]={{},{},{},{}};
+    float spacing = 60;
+    float startX = -542;
+    float y = -580;
+    for(int i=7;i>=0;i--) {
+        std::cout << std::to_string(i)<<std::endl;
+        glm::vec2 pos={startX +spacing * i,-580};
+        m_cardPos[std::to_string(i+1)]={{pos.x+27.5f,pos.y+40},{pos.x+27.5f,pos.y-40},{pos.x-27.5f,pos.y+40},{pos.x-27.5f,pos.y-40}};
     }
+    std::cout << "test"<< std::endl;
+    for (int i=1;i<8;i++) {
+        std::vector<glm::vec2> temp=m_cardPos[std::to_string(i)];
+        for(auto& pos:temp) {
+            std::cout << pos.x << ", " << pos.y << std::endl;
+        }
+    }
+    std::cout << "test"<< std::endl;
 }
 
