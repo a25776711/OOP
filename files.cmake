@@ -1,5 +1,6 @@
 set(SRC_FILES
     App.cpp
+    AppFunction.cpp
     Zombi/zombi.cpp
     Zombi/normal.cpp
     Zombi/armor.cpp
