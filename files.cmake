@@ -20,6 +20,7 @@ set(SRC_FILES
     Plant/cherrybomb.cpp
     Plant/min.cpp
     Plant/iceshooter.cpp
+    Plant/fastshooter.cpp
     Plant/chomper.cpp
 
         Bullet/bullet.cpp
@@ -48,6 +49,7 @@ set(INCLUDE_FILES
     Plant/cherrybomb.hpp
     Plant/mine.hpp
     Plant/iceshooter.hpp
+    Plant/fastshooter.hpp
     Plant/chomper.hpp
     Plant/PlantLoader.hpp
 

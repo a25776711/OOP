@@ -25,6 +25,9 @@ void App::MoveSun() {
    }), m_Suns.end());
 }
 std::shared_ptr<Plant> App::CheckPlant(glm::vec2 click) {
+    for (int i=1;i<9;i++) {
+        
+    }
 
 }
 void App::SetPos() {

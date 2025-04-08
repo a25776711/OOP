@@ -30,7 +30,16 @@ public:
     void Update();
 
     void End(); // NOLINT(readability-convert-member-functions-to-static)
-
+    enum PlantType {
+        SunFlower,
+        Pea,
+        Wallnut,
+        Mine,
+        IcePea,
+        FastPea,
+        Chomper,
+        Cherry
+    };
     enum class Phase {
             tital,
             oneroad,
