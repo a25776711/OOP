@@ -40,8 +40,8 @@ class PlantLoader{
       mineIMG.emplace_back(path+"mine/mine_" + std::to_string(i) + ".png");
     for(int i = 0; i < 24; i++)
       peashooterIMG.emplace_back(path+"Peashooter/peashooter_" + std::to_string(i) + ".png");
-    for(int i = 0; i < 24; i++)
-      peashooterIMG.emplace_back(path+"fastshooter/fastshooter_" + std::to_string(i) + ".png");
+    for(int i = 1; i < 16; i++)
+      fastshooterIMG.emplace_back(path+"fastshooter/fastshooter_" + std::to_string(i) + ".png");
     for(int i = 0; i < 32; i++)
       wallnutIMG.emplace_back(path+"wallnut/wallnut_" + std::to_string(i) + ".png");
     for(int i = 0; i < 11; i++)

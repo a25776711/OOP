@@ -1,4 +1,4 @@
-/
+//
 // Created by bingho on 2025/3/11.
 //
 
@@ -7,7 +7,9 @@
 #include "Plant/plant.hpp"
 class Iceshooter:public Plant {
     public:
-    explicit Iceshooter():Plant(m_Loader.icepeashooterIMG){}
+    explicit Iceshooter():Plant(m_Loader.icepeashooterIMG,70) {
+        SetHP();
+    }
 
     private:
     int m_cooldown;

@@ -28,8 +28,12 @@ void App::Update() {
     if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
         pos.y=-pos.y;
-        auto checksun=CheckSun(pos);
-        if(checksun!=nullptr){m_Root.RemoveChild(checksun);}
+        if(CheckSun(pos)){m_Root.RemoveChild(CheckSun(pos));}
+        auto checkplant=CheckPlant(pos,m_PRM->GetLevel()+1);
+        if(checkplant!=nullptr) {
+            m_holdingPlant=checkplant;
+            m_Root.AddChild(checkplant);
+        }
         if (m_PRM ->GetLevel()==0) {
             if (m_PRM ->CheckHit(pos)) {
                 // std::cout << "true" << std::end;
@@ -41,7 +45,6 @@ void App::Update() {
     }
     if (m_EnterDown) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
-
             m_PRM ->NextLevel();
             std::cout << (m_zombiManager -> GetZombies().size()) << std::endl;
             for (auto zombi : m_zombiManager -> GetZombies()) {
@@ -78,7 +81,10 @@ void App::Update() {
     //    SunClock=0;
     //    MakeSun();
     //}
-
+    if(m_holding) {
+        glm::vec2 pos=Util::Input::GetCursorPosition();
+        m_holdingPlant->m_Transform.translation={pos.x,-pos.y};
+    }
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
     Util::Input::IfExit()) {
         m_CurrentState = State::END;

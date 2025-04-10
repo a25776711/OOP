@@ -11,7 +11,13 @@
 #include "Plant/sun.hpp"
 #include "Util/Logger.hpp"
 #include "Background/SunNB.hpp"
-
+#include "Plant/sunflower.hpp"
+#include "Plant/mine.hpp"
+#include "Plant/cherrybomb.hpp"
+#include "Plant/wallnut.hpp"
+#include "Plant/chomper.hpp"
+#include "Plant/iceshooter.hpp"
+#include "Plant/fastshooter.hpp"
 // IWYU pragma: export
 
 
@@ -31,14 +37,14 @@ public:
 
     void End(); // NOLINT(readability-convert-member-functions-to-static)
     enum PlantType {
-        SunFlower,
-        Pea,
-        Wallnut,
-        Mine,
-        IcePea,
-        FastPea,
-        Chomper,
-        Cherry
+        type_SunFlower,
+        type_Pea,
+        type_Wallnut,
+        type_Mine,
+        type_IcePea,
+        type_FastPea,
+        type_Chomper,
+        type_Cherry
     };
     enum class Phase {
             tital,
@@ -50,20 +56,28 @@ public:
     std::shared_ptr<Sun> CheckSun(glm::vec2 click);
     void MoveSun();
     void SetPos();
-    std::shared_ptr<Plant> CheckPlant(glm::vec2 click);
+    std::shared_ptr<Plant> MakePlant(int i);
+    //點擊四個點確認
+    bool CheckClick(std::vector<glm::vec2> block,glm::vec2 click);
+    float CrossProduct(const glm::vec2& p1, const glm::vec2& p2, const glm::vec2& p3);
+
+
+    std::shared_ptr<Plant> CheckPlant(glm::vec2 click,int level);
 private:
     //void ValidTask();
     std::map<std::string,std::vector<glm::vec2>> block;
     std::map<std::string,std::vector<glm::vec2>> m_cardPos;
     int Sunamount=0;
     int SunClock=0;
+    bool m_holding = false;
+    std::shared_ptr<Plant> m_holdingPlant;
     State m_CurrentState = State::START;
     Phase m_Phase = Phase::tital;
     Util::Renderer m_Root;
     std::shared_ptr<UpdateBackground> m_PRM;
 
     std::shared_ptr<ZombiManager> m_zombiManager;
-  
+
     std::vector<std::shared_ptr<Sun>> m_Suns;
     std::vector<std::shared_ptr<Plant>> m_Plants;
     std::shared_ptr<SunNB> m_SunNB=std::make_shared<SunNB>();

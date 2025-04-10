@@ -12,8 +12,8 @@ public:
         Ing,
         No
     };
-    SunFlower(int hp):Plant(m_Loader.sunflowerIMG,60) {
-        SetHP(5);
+    SunFlower():Plant(m_Loader.sunflowerIMG,60) {
+        SetHP();
     }
 
     
