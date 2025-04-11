@@ -14,7 +14,7 @@ class zombi :public Util::GameObject {
 public:
     zombi() {
         m_state = zombistate::walk;
-        SetPiov();
+        // SetPiov();
     };
 
     enum class zombistate {
@@ -24,11 +24,7 @@ public:
         coldeat
     };
 
-    void SetLoopingandPlay(bool looping) {
-        auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
-        temp->SetLooping(looping);
-        temp ->Play();
-    }
+
     virtual void Gotice(bool ice) = 0;
     virtual void move() = 0;
     virtual void Eating() = 0;
@@ -44,8 +40,11 @@ public:
     void Setattack(int HP) {z_attack = HP;}
     int Getattack() { return z_attack;}
 
-    void SetPiov() {
-        int x = rand() % 5 + 1;
+    void SetPiov(int level) {
+        int x =0;
+        if (level == 1){x=3;}
+        else if (level == 2){x = rand()%3 + 1;}
+        else (x=rand()%5 + 1);
         switch (x) {
             case 1:
                 m_Transform.translation = roll1;
@@ -67,10 +66,11 @@ public:
         }
     }
 
-    // [[nodiscard]] bool IfCollides(const std::shared_ptr<Plant>& other) const {
-    //
-    //     m_state = zombistate::eat;
-    // }
+    void SetLooping(bool looping) {
+        auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
+        temp->SetLooping(looping);
+        temp->Play();
+    }
 
 protected:
     int z_speed;

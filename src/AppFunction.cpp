@@ -74,11 +74,11 @@ void App::SetPos() {
         glm::vec2 pos={startX +spacing * i,259};
         m_cardPos[std::to_string(i+1)]={{pos.x-27.5f,pos.y+40},{pos.x+27.5f,pos.y+40},{pos.x+27.5f,pos.y-40},{pos.x-27.5f,pos.y-40}};
     }
-    for (int i=1;i<9;i++) {
-        std::vector<glm::vec2> temp= m_cardPos[std::to_string(i)];
-        for(auto& pos:temp) {
-            std::cout << pos.x << ", " << pos.y << std::endl;
-        }
-    }
-    std::cout << "test"<< std::endl;
+    // for (int i=1;i<9;i++) {
+    //     std::vector<glm::vec2> temp= m_cardPos[std::to_string(i)];
+    //     for(auto& pos:temp) {
+    //         std::cout << pos.x << ", " << pos.y << std::endl;
+    //     }
+    // }
+    // std::cout << "test"<< std::endl;
 }

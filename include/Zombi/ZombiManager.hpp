@@ -4,6 +4,8 @@
 
 #ifndef ZOMBIMANGER_HPP
 #define ZOMBIMANGER_HPP
+#include <iostream>
+
 #include "zombi.hpp"
 #include "normal.hpp"
 #include "hat.hpp"
@@ -52,10 +54,9 @@ std::vector<std::shared_ptr<zombi>> GetZombi(int level) {
       m_result.clear();
   }
   for (auto zombi : m_result) {
-    zombi -> SetLoopingandPlay(true);
-    zombi -> SetZIndex(51);
+    zombi -> SetPiov(level);
   }
-    return m_result;
+  return m_result;
 }
 
 void Getice(bool ice) {
@@ -83,7 +84,10 @@ std::vector<std::shared_ptr<zombi>> GetZombies() {
   return  m_result;
 }
 
-
+void SetLoop(int CurrtZombi) {
+  m_result[CurrtZombi] -> SetLooping(true);
+  // std::cout << CurrtZombi << std::endl;
+}
 
 private:
   std::vector<std::shared_ptr<zombi>> m_result;
