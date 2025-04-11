@@ -9,6 +9,7 @@
 
 void App::Start() {
     LOG_TRACE("Start");
+
     m_PRM = std::make_shared<UpdateBackground>();
     m_zombiManager = std::make_shared<ZombiManager>();
     m_Root.AddChildren(m_PRM->GetChildren());
@@ -46,7 +47,7 @@ void App::Update() {
     if (m_EnterDown) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
             m_PRM ->NextLevel();
-            std::cout << (m_zombiManager -> GetZombies().size()) << std::endl;
+            m_CurrentZombiIndex =0;
             for (auto zombi : m_zombiManager -> GetZombies()) {
                 m_Root.RemoveChild(zombi);
             }
@@ -55,11 +56,22 @@ void App::Update() {
             if (m_PRM -> GetLevel() ==11){ m_CurrentState = State::END;}
         }
     }
-    if (Util::Input::IsKeyPressed(Util::Keycode::L)) {
 
+    bool isKPressed = Util::Input::IsKeyPressed(Util::Keycode::K);
+
+    if (!m_KDown && isKPressed) {
+        // 按下K當下觸發一次
+        if (m_CurrentZombiIndex < m_zombiManager->GetZombies().size()) {
+            m_zombiManager->SetLoop(m_CurrentZombiIndex++);
+
+
+        }
     }
+    m_KDown = isKPressed; // 更新鍵盤狀態
 
-    m_zombiManager -> move();
+
+
+    // m_zombiManager -> move();
 
 
     if (Util::Input::IsKeyDown(Util::Keycode::MOUSE_RB)) {

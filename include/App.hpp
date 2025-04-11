@@ -76,6 +76,7 @@ private:
     Util::Renderer m_Root;
     std::shared_ptr<UpdateBackground> m_PRM;
 
+    int m_CurrentZombiIndex = 0;
     std::shared_ptr<ZombiManager> m_zombiManager;
 
     std::vector<std::shared_ptr<Sun>> m_Suns;
@@ -83,6 +84,7 @@ private:
     std::shared_ptr<SunNB> m_SunNB=std::make_shared<SunNB>();
 
     bool m_EnterDown = false;
+    bool m_KDown = false; // 初始設為 false
 
 };
 
