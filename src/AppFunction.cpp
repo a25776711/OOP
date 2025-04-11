@@ -68,7 +68,7 @@ float App::CrossProduct(const glm::vec2& p1, const glm::vec2& p2, const glm::vec
     return (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
 }
 void App::SetPos() {
-    float spacing = 57;
+    float spacing = 64;
     float startX = -542;
     for(int i=7;i>=0;i--) {
         glm::vec2 pos={startX +spacing * (i),259};
