@@ -8,8 +8,8 @@
 
 class Chomper:public Plant {
     public:
-    Chomper(int hp,std::vector<std::string>& Path,int interval=100):Plant() {
-        SetHP(hp);
+    Chomper():Plant(m_Loader.chomperIMG,70) {
+        SetHP();
     }
     private:
     int m_Cooldown;

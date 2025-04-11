@@ -8,12 +8,12 @@
 
 class Peashooter : public Plant {
 public:
-    explicit Peashooter(int interval=100):Plant(m_Loader.peashooterIMG,60) {
-        SetATK(10);
+    explicit Peashooter():Plant(m_Loader.peashooterIMG,60) {
+        SetATK(1);
+        SetHP();
     }
-    bool Attack (glm::vec2) {
-        
-    }
+    bool Attack (glm::vec2) ;
+
 protected:
     int m_cooldown;
 };

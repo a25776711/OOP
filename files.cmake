@@ -1,5 +1,6 @@
 set(SRC_FILES
     App.cpp
+    AppFunction.cpp
     Zombi/zombi.cpp
     Zombi/normal.cpp
     Zombi/armor.cpp
@@ -19,6 +20,7 @@ set(SRC_FILES
     Plant/cherrybomb.cpp
     Plant/min.cpp
     Plant/iceshooter.cpp
+    Plant/fastshooter.cpp
     Plant/chomper.cpp
 
         Bullet/bullet.cpp
@@ -47,12 +49,14 @@ set(INCLUDE_FILES
     Plant/cherrybomb.hpp
     Plant/mine.hpp
     Plant/iceshooter.hpp
+    Plant/fastshooter.hpp
     Plant/chomper.hpp
     Plant/PlantLoader.hpp
 
     Bullet/bullet.hpp
     Bullet/normal.hpp
     Bullet/icebullet.hpp
+
     Background/background.hpp
     Background/UpdateBackground.hpp
     Background/Adventure.hpp
