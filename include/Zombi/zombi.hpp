@@ -6,6 +6,7 @@
 #define ZOMBI_HPP
 #include "Util/GameObject.hpp"
 #include "Util/Animation.hpp"
+#include "Plant/plant.hpp"
 #include <random>
 #include <string>
 
@@ -47,25 +48,29 @@ public:
         int x = rand() % 5 + 1;
         switch (x) {
             case 1:
-                m_Pivot = roll1;
+                m_Transform.translation = roll1;
                 break;
             case 2:
-                m_Pivot = roll2;
+                m_Transform.translation = roll2;
                 break;
             case 3:
-                m_Pivot = roll3;
+                m_Transform.translation = roll3;
                 break;
             case 4:
-                m_Pivot = roll4;
+                m_Transform.translation = roll4;
                 break;
             case 5:
-                m_Pivot = roll5;
+                m_Transform.translation = roll5;
                 break;
             default:
                 break;
         }
     }
 
+    // [[nodiscard]] bool IfCollides(const std::shared_ptr<Plant>& other) const {
+    //
+    //     m_state = zombistate::eat;
+    // }
 
 protected:
     int z_speed;
@@ -73,11 +78,11 @@ protected:
     int z_attack;
     zombistate m_state;
 
-    glm::vec2 roll1={-549,131};
-    glm::vec2 roll2 ={-549,30};
-    glm::vec2 roll3 = {-549,-92};
-    glm::vec2 roll4 = {-549,-140};
-    glm::vec2 roll5 = {-549,-240};
+    glm::vec2 roll1={234,175};
+    glm::vec2 roll2 ={234,75};
+    glm::vec2 roll3 = {234,-25};
+    glm::vec2 roll4 = {234,-122};
+    glm::vec2 roll5 = {234,-220};
 };
 
 #endif //ZOMBI_HPP
