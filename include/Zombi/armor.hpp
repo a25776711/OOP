@@ -8,8 +8,8 @@
 class armor : public zombi {
 public:
     armor() {
-        armor::SetHP(100);
-        armor::SetSpeed(0.05);
+        armor::SetHP(190);
+        armor::SetSpeed(0.15);
         armor::Setattack(10);
 
         m_Walk.reserve(11);

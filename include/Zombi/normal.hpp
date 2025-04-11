@@ -10,7 +10,7 @@ class normal : public zombi {
 public:
     normal() {
         normal::SetHP(100);
-        normal::SetSpeed(0.05);
+        normal::SetSpeed(0.1);
         normal::Setattack(10);
 
         m_Walk.reserve(46);
@@ -60,7 +60,7 @@ public:
                 m_Images = m_iceeat;
                 break;
         }
-        m_Drawable = std::make_shared<Util::Animation>(m_Images, true, 100, true, 100);
+        m_Drawable = std::make_shared<Util::Animation>(m_Images, false, 100, false, 100);
     }
 
     std::vector<std::string> GetImages() {

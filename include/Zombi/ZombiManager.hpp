@@ -17,7 +17,7 @@ public:
 
 void SetZombies(){
   m_zombies1.push_back(std::make_shared<armor>());
-  // m_zombies1.push_back(std::make_shared<armor>());
+  m_zombies1.push_back(std::make_shared<armor>());
 
   m_zombies2.push_back(std::make_shared<hat>());
   m_zombies2.push_back(std::make_shared<hat>());
@@ -60,6 +60,8 @@ std::vector<std::shared_ptr<zombi>> GetZombi(int level) {
 
 void Getice(bool ice) {
   for (auto zombi : m_result) {
+    if ((zombi -> GetState() == zombi::zombistate::coldeat) ||(zombi -> GetState() == zombi::zombistate::coldwalk)) {
+      return;}
     zombi -> Gotice(true);
   }
 }
