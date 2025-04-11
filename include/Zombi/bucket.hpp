@@ -8,8 +8,8 @@
 class bucket : public zombi {
 public:
     bucket() {
-        bucket::SetHP(100);
-        bucket::SetSpeed(0.05);
+        bucket::SetHP(170);
+        bucket::SetSpeed(0.1);
         bucket::Setattack(10);
 
         m_Walk.reserve(46);

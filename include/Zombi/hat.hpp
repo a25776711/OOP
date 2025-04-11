@@ -15,8 +15,8 @@
 class hat : public zombi {
 public:
     hat() {
-        hat::SetHP(100);
-        hat::SetSpeed(0.05);
+        hat::SetHP(150);
+        hat::SetSpeed(0.1);
         hat::Setattack(10);
 
         m_Walk.reserve(21);

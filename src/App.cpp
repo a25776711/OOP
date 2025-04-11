@@ -57,7 +57,9 @@ void App::Update() {
             if (m_PRM -> GetLevel() ==11){ m_CurrentState = State::END;}
         }
     }
+    if (Util::Input::IsKeyPressed(Util::Keycode::L)) {
 
+    }
 
     m_zombiManager -> move();
 

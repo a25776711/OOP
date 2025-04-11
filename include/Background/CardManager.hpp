@@ -20,7 +20,8 @@ public:
         allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card5.png")); // mine
         allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card6.png")); // iceshooter
         allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card7.png")); // chomper
-        allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card8.png"));
+        allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card8.png")); // fastshooter
+ 
     }
 
     std::vector<std::shared_ptr<Card>> SetCards(int level) {
