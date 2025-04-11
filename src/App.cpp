@@ -14,16 +14,18 @@ void App::Start() {
     m_Root.AddChildren(m_PRM->GetChildren());
     m_SunNB->SetZIndex(20);
     m_Root.AddChild(m_SunNB);;
+    SetPos(); //set card and block
     m_CurrentState = State::UPDATE;
+
 
 }
 
 void App::Update() {
-    if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
-        glm::vec2 pos=Util::Input::GetCursorPosition();
-        pos.y=-pos.y;
-        std::cout <<"("<< pos.x <<","<<pos.y<<")"<< std::endl;
-    }
+    // if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
+    //     glm::vec2 pos=Util::Input::GetCursorPosition();
+    //     pos.y=-pos.y;
+    //     std::cout <<"("<< pos.x <<","<<pos.y<<")"<< std::endl;
+    // }
 
     if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
@@ -35,13 +37,13 @@ void App::Update() {
             m_Root.AddChild(checkplant);
         }
         if (m_PRM ->GetLevel()==0) {
-            if (m_PRM ->CheckHit(pos)) {
-                // std::cout << "true" << std::end;
+            if (m_PRM -> CheckHit(pos)) {
                 m_PRM ->NextLevel();
                 m_Root.AddChildren(m_PRM->GetChildren());
-                SetPos();
+                m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
             }
         }
+
     }
     if (m_EnterDown) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
@@ -55,17 +57,8 @@ void App::Update() {
             if (m_PRM -> GetLevel() ==11){ m_CurrentState = State::END;}
         }
     }
-    if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
-        glm::vec2 pos=Util::Input::GetCursorPosition();
-        // m_Sun->CollectAndMove(pos,{200,50});
-        if (m_PRM ->GetLevel()==0) {
-            if (m_PRM ->CheckHit(pos)) {
-                m_PRM ->NextLevel();
-            }
 
-        }
-       m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
-    };
+
     m_zombiManager -> move();
 
 
