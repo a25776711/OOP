@@ -14,6 +14,7 @@ public:
     };
     SunFlower():Plant(m_Loader.sunflowerIMG,60) {
         SetHP();
+        SetCost(50);
     }
 
     

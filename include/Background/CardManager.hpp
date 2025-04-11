@@ -27,7 +27,7 @@ public:
     std::vector<std::shared_ptr<Card>> SetCards(int level) {
         std::vector<std::shared_ptr<Card>> result;
 
-        for (int i = 0; i <= level && i < allCards.size(); ++i) {
+        for (int i = 0; i < level && i < allCards.size(); ++i) {
             allCards[i]-> SetVisible(true);
             allCards[i]-> m_Transform.scale ={0.45,0.45};
 

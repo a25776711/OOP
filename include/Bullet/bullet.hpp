@@ -21,6 +21,9 @@ class Bullet:public Util::GameObject {
     void SetPosition(const glm::vec2& Position) { m_Transform.translation = Position; }
     glm::vec2 GetPosition() { return m_Transform.translation; }
     bullet_type GetType() { return m_Type; }
+    void Move() {
+        m_Transform.translation.x += 3;
+    }
 
     private:
     std::string m_ImagePath;

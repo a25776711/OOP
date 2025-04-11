@@ -15,6 +15,7 @@ class Plant: public Util::GameObject{
     std::map<std::string,std::vector<glm::vec2>> block;
     explicit Plant(std::vector<std::string>& Path,int interval){
         m_Drawable = std::make_shared<Util::Animation>(Path, true, interval, true, 0);
+
     }
     [[nodiscard]] bool GetVisibility() const { return m_Visible;}
     [[nodiscard]] const glm::vec2& GetPosition() const { return m_Transform.translation; }
@@ -34,6 +35,8 @@ class Plant: public Util::GameObject{
         m_hp--;
     }
     void SetBlock();
+    void SetCost(int cost){m_cost=cost;}
+    int GetCost(){return m_cost;}
     protected:
     PlantLoader m_Loader;
     private:
@@ -41,6 +44,7 @@ class Plant: public Util::GameObject{
     int m_hp;
     int m_maxhp;
     int m_ATK=0;
+    int m_cost;
 
 };
 #endif //PLANT_HPP

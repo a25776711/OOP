@@ -62,15 +62,15 @@ public:
     float CrossProduct(const glm::vec2& p1, const glm::vec2& p2, const glm::vec2& p3);
 
 
-    std::shared_ptr<Plant> CheckPlant(glm::vec2 click,int level);
+    void CheckPlant(glm::vec2 click,int level);
+    void PutPlant(glm::vec2 click);
 private:
     //void ValidTask();
-    std::map<std::string,std::vector<glm::vec2>> block;
+    std::map<std::string,std::vector<std::vector<glm::vec2>>> block;
     std::map<std::string,std::vector<glm::vec2>> m_cardPos;
     int Sunamount=0;
     int SunClock=0;
-    bool m_holding = false;
-    std::shared_ptr<Plant> m_holdingPlant;
+    std::shared_ptr<Plant> m_holdingPlant=nullptr;
     State m_CurrentState = State::START;
     Phase m_Phase = Phase::tital;
     Util::Renderer m_Root;
@@ -79,9 +79,8 @@ private:
     int m_CurrentZombiIndex = 0;
     std::shared_ptr<ZombiManager> m_zombiManager;
 
-
     std::vector<std::shared_ptr<Sun>> m_Suns;
-    std::vector<std::shared_ptr<Plant>> m_Plants;
+    std::vector<std::vector<std::shared_ptr<Plant>>> m_Plants;
     std::shared_ptr<SunNB> m_SunNB=std::make_shared<SunNB>();
 
     bool m_EnterDown = false;
