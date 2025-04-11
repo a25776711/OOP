@@ -44,7 +44,6 @@ std::shared_ptr<Plant> App::MakePlant(int i) {
 std::shared_ptr<Plant> App::CheckPlant(glm::vec2 click,int level) {
     if(m_holding)return nullptr;
     for (int i=1;i<9&&i<level;i++) {
-        printf("%s","test");
         if(CheckClick(m_cardPos[std::to_string(i)],click)) {
             std::cout << "Plant" << std::endl;
             auto plant=MakePlant(i);
@@ -69,10 +68,10 @@ float App::CrossProduct(const glm::vec2& p1, const glm::vec2& p2, const glm::vec
     return (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
 }
 void App::SetPos() {
-    float spacing = 58;
+    float spacing = 57;
     float startX = -542;
-    for(int i=8;i>=0;i--) {
-        glm::vec2 pos={startX +spacing * i,259};
+    for(int i=7;i>=0;i--) {
+        glm::vec2 pos={startX +spacing * (i),259};
         m_cardPos[std::to_string(i+1)]={{pos.x-27.5f,pos.y+40},{pos.x+27.5f,pos.y+40},{pos.x+27.5f,pos.y-40},{pos.x-27.5f,pos.y-40}};
     }
     for (int i=1;i<9;i++) {
