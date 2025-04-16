@@ -10,7 +10,7 @@ class normal : public zombi {
 public:
     normal() {
         normal::SetHP(100);
-        normal::SetSpeed(0.1);
+        normal::SetSpeed(0.1f);
         normal::Setattack(10);
 
         m_Walk.reserve(46);
@@ -67,9 +67,7 @@ public:
         return m_Images;
     }
 
-    void move() override {
-        m_Pivot = {m_Pivot.x+0.05, m_Pivot.y};
-    }
+
 
     void Eating() override {
         m_state = zombistate::eat;

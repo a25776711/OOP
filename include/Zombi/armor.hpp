@@ -8,9 +8,10 @@
 class armor : public zombi {
 public:
     armor() {
-        armor::SetHP(190);
-        armor::SetSpeed(0.15);
-        armor::Setattack(10);
+        std::cout << "armor" << std::endl;
+        SetHP(0);
+        SetSpeed(0.1f);
+        Setattack(10);
 
         m_Walk.reserve(11);
         for (int i=0;i<11;i++) {
@@ -58,6 +59,8 @@ public:
             case zombistate::coldeat:
                 m_Images = m_iceeat;
                 break;
+            case  zombistate::stand:
+                m_Images = m_Walk;
         }
         m_Drawable = std::make_shared<Util::Animation>(m_Images, false, 100, false, 100);
     }
@@ -66,9 +69,7 @@ public:
         return m_Images;
     }
 
-    void move() override {
-        m_Pivot = {m_Pivot.x+0.05, m_Pivot.y};
-    }
+
 
     void Eating() override {
         m_state = zombistate::eat;

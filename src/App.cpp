@@ -63,15 +63,18 @@ void App::Update() {
         // 按下K當下觸發一次
         if (m_CurrentZombiIndex < m_zombiManager->GetZombies().size()) {
             m_zombiManager->SetLoop(m_CurrentZombiIndex++);
-
-
         }
     }
     m_KDown = isKPressed; // 更新鍵盤狀態
 
+    bool isDPressed = Util::Input::IsKeyPressed(Util::Keycode::D);
 
+    if (!m_KDown && isDPressed) {
+        m_zombiManager -> Die();
 
-    // m_zombiManager -> move();
+    }
+    m_KDown = isKPressed;
+    m_zombiManager -> move();
 
 
     if (Util::Input::IsKeyDown(Util::Keycode::MOUSE_RB)) {
