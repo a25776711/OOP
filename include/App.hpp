@@ -18,6 +18,7 @@
 #include "Plant/chomper.hpp"
 #include "Plant/iceshooter.hpp"
 #include "Plant/fastshooter.hpp"
+#include "Plant/peashooter.hpp"
 // IWYU pragma: export
 
 
@@ -52,22 +53,23 @@ public:
             threeroad,
             fiveroad
     };
-    void MakeSun(){m_Suns.emplace_back(std::make_shared<Sun>(false));m_Root.AddChild(m_Suns.back());}
+    void MakeSun(){m_Suns.emplace_back(std::make_shared<Sun>(false,glm::vec2(0,0)));m_Root.AddChild(m_Suns.back());}
     std::shared_ptr<Sun> CheckSun(glm::vec2 click);
     void MoveSun();
     void SetPos();
     std::shared_ptr<Plant> MakePlant(int i);
     //點擊四個點確認
-    bool CheckClick(std::vector<glm::vec2> block,glm::vec2 click);
-    float CrossProduct(const glm::vec2& p1, const glm::vec2& p2, const glm::vec2& p3);
+    bool CheckClick(std::vector<float> block,glm::vec2 click);
 
 
-    void CheckPlant(glm::vec2 click,int level);
-    void PutPlant(glm::vec2 click);
+    void TakePlant(glm::vec2 click,int level);
+    void CheckPlant();
+    void PutPlant(glm::vec2 click,int level);
+    void CheckBullet();
 private:
     //void ValidTask();
-    std::map<std::string,std::vector<std::vector<glm::vec2>>> block;
-    std::map<std::string,std::vector<glm::vec2>> m_cardPos;
+    std::map<std::string,std::vector<std::vector<float>>> block;
+    std::map<std::string,std::vector<float>> m_cardPos;
     int Sunamount=0;
     int SunClock=0;
     std::shared_ptr<Plant> m_holdingPlant=nullptr;
@@ -82,6 +84,7 @@ private:
     std::vector<std::shared_ptr<Sun>> m_Suns;
     std::vector<std::vector<std::shared_ptr<Plant>>> m_Plants;
     std::shared_ptr<SunNB> m_SunNB=std::make_shared<SunNB>();
+    std::vector<std::shared_ptr<Bullet>> m_Bullets;
 
     bool m_EnterDown = false;
     bool m_KDown = false; // 初始設為 false

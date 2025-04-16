@@ -5,7 +5,7 @@
 
 #include "Util/Logger.hpp"
 
-Sun::Sun(bool flower):Plant(m_Loader.sunIMG,60) {
+Sun::Sun(bool flower,glm::vec2 pos):Plant(m_Loader.sunIMG,60) {
     m_Transform.scale={0.8,0.8};
     m_state=Droping;
     if(!flower){
@@ -14,6 +14,8 @@ Sun::Sun(bool flower):Plant(m_Loader.sunIMG,60) {
         m_drop={X,Y};
         m_Transform.translation={X,200};
         LOG_INFO("Generated Sun at position: ({}, {})", X,200);
+    }else {
+
     }
 }
 void Sun::CollectAndMove(glm::vec2 click) {

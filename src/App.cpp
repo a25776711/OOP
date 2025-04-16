@@ -32,8 +32,8 @@ void App::Update() {
         glm::vec2 pos=Util::Input::GetCursorPosition();
         pos.y=-pos.y;
         if(CheckSun(pos)){m_Root.RemoveChild(CheckSun(pos));}
-        if(m_holdingPlant==nullptr){CheckPlant(pos,m_PRM->GetLevel()+1);}
-        if(m_holdingPlant!=nullptr){PutPlant(pos);}
+        if(m_holdingPlant==nullptr){TakePlant(pos,m_PRM->GetLevel()+1);}
+        if(m_holdingPlant!=nullptr){PutPlant(pos,m_PRM->GetLevel());}
 
         if (m_PRM ->GetLevel()==0) {
             if (m_PRM -> CheckHit(pos)) {
@@ -81,6 +81,8 @@ void App::Update() {
 
     m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
     MoveSun();
+    CheckPlant();
+    CheckBullet();
     SunClock++;
     //if(SunClock>480) {
     //    SunClock=0;
@@ -95,7 +97,6 @@ void App::Update() {
         m_CurrentState = State::END;
     }
     m_Root.Update();
-
 }
 
 void App::End() { // NOLINT(this method will mutate members in the future)

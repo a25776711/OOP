@@ -9,7 +9,7 @@
 class Fastshooter:public Plant {
     public:
     explicit Fastshooter():Plant(m_Loader.fastshooterIMG,70) {
-        SetHP();
+        SetHP();SetCost(200);SetType(Shooter);
     }
 
     private:

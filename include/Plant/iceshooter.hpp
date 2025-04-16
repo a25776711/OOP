@@ -8,7 +8,7 @@
 class Iceshooter:public Plant {
     public:
     explicit Iceshooter():Plant(m_Loader.icepeashooterIMG,70) {
-        SetHP();
+        SetHP();SetCost(175);SetType(Shooter);
     }
 
     private:

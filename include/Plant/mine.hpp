@@ -8,7 +8,7 @@
 class Mine : public Plant {
     public:
     Mine():Plant(m_Loader.mineIMG,100) {
-        SetHP();
+        SetHP();SetCost(25);SetType(Boom);
     }
     private:
     int m_Cooldown;
