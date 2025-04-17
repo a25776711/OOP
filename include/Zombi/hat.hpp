@@ -14,10 +14,11 @@
 
 class hat : public zombi {
 public:
-    hat() {
+    hat() :zombi(){
         hat::SetHP(150);
         hat::SetSpeed(0.1f);
         hat::Setattack(10);
+        this -> m_die = m_die;
 
         m_Walk.reserve(21);
         for (int i=0;i<21;i++) {
@@ -67,6 +68,12 @@ public:
                 break;
             case  zombistate::stand:
                 m_Images = m_Walk;
+                break;
+            case zombistate::die:
+                m_Images = m_die;
+                break;
+            default: std::cout << "==" << std::endl; break;
+
         }
         m_Drawable = std::make_shared<Util::Animation>(m_Images, false, 100, false, 100);
     }

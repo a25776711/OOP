@@ -9,11 +9,16 @@
 #include "Plant/plant.hpp"
 #include <random>
 #include <string>
+#include <iostream>
 
 class zombi :public Util::GameObject {
 public:
     zombi() {
         m_state = zombistate::stand;
+        m_die.reserve(9);
+        for (int i = 0; i < 9; i++) {
+            m_die.push_back(RESOURCE_DIR"/zombi/die/die/die_" + std::to_string(i) + ".png");
+        }
     };
 
     enum class zombistate {
@@ -21,7 +26,8 @@ public:
         coldwalk,
         eat,
         coldeat,
-        stand
+        stand,
+        die
     };
 
 
@@ -76,13 +82,25 @@ public:
     }
 
     void Die() {
-        m_die.reserve(9);
-
-        for (int i = 0; i < 9; i++) {
-            m_die.push_back(RESOURCE_DIR"/zombi/die/die/die_" + std::to_string(i) + ".png");
-        }
+        m_state = zombistate::die;
+        z_speed = 0;
         m_Drawable = std::make_shared<Util::Animation>(m_die, true, 100, true, 100);
     }
+    bool IfAnimationEnds() const {
+        if (!m_Drawable) {
+            std::cerr << "[ERROR] m_Drawable is null." << std::endl;
+            return false;
+        }
+
+        auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
+        if (!temp) {
+            std::cerr << "[ERROR] m_Drawable is not an Animation." << std::endl;
+            return false;
+        }
+        return temp->GetCurrentFrameIndex() == temp->GetFrameCount() - 1;
+
+    }
+
 
 protected:
     float z_speed;
@@ -92,11 +110,11 @@ protected:
 
     std::vector<std::string> m_die;
 
-    glm::vec2 roll1={234.0,175.0};
-    glm::vec2 roll2 ={234.0,75.0};
+    glm::vec2 roll1={450.0,175.0};
+    glm::vec2 roll2 ={450.0,75.0};
     glm::vec2 roll3 = {450.0,-25.0};
-    glm::vec2 roll4 = {234,-122};
-    glm::vec2 roll5 = {234,-220};
+    glm::vec2 roll4 = {450.0,-122};
+    glm::vec2 roll5 = {450.0,-220};
 };
 
 #endif //ZOMBI_HPP

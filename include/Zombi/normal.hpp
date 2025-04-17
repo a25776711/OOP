@@ -8,10 +8,11 @@
 
 class normal : public zombi {
 public:
-    normal() {
+    normal() :zombi(){
         normal::SetHP(100);
         normal::SetSpeed(0.1f);
         normal::Setattack(10);
+
 
         m_Walk.reserve(46);
         for (int i=0;i<46;i++) {
@@ -61,6 +62,12 @@ public:
                 break;
             case  zombistate::stand:
                 m_Images = m_Walk;
+                break;
+            case zombistate::die:
+                m_Images = m_die;
+                break;
+            default: std::cout << "==" << std::endl; break;
+
         }
         m_Drawable = std::make_shared<Util::Animation>(m_Images, false, 100, false, 100);
     }
