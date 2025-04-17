@@ -7,11 +7,11 @@
 #include "Zombi/zombi.hpp"
 class armor : public zombi {
 public:
-    armor() {
-        std::cout << "armor" << std::endl;
+    armor() :zombi(){
         SetHP(0);
         SetSpeed(0.1f);
         Setattack(10);
+
 
         m_Walk.reserve(11);
         for (int i=0;i<11;i++) {
@@ -61,6 +61,11 @@ public:
                 break;
             case  zombistate::stand:
                 m_Images = m_Walk;
+                break;
+            case zombistate::die:
+                m_Images = m_die;
+                break;
+            default: std::cout << "==" << std::endl; break;
         }
         m_Drawable = std::make_shared<Util::Animation>(m_Images, false, 100, false, 100);
     }

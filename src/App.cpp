@@ -57,24 +57,31 @@ void App::Update() {
         }
     }
 
-    bool isKPressed = Util::Input::IsKeyPressed(Util::Keycode::K);
+    if (m_PRM ->GetLevel() != 0) {
+        bool isKPressed = Util::Input::IsKeyPressed(Util::Keycode::K);
 
-    if (!m_KDown && isKPressed) {
-        // 按下K當下觸發一次
-        if (m_CurrentZombiIndex < m_zombiManager->GetZombies().size()) {
-            m_zombiManager->SetLoop(m_CurrentZombiIndex++);
+        if (!m_KDown && isKPressed) {
+            // 按下K當下觸發一次
+            if (m_CurrentZombiIndex < m_zombiManager->GetZombies().size()) {
+                m_zombiManager->SetLoop(m_CurrentZombiIndex++);
+            }
         }
+        m_KDown = isKPressed; // 更新鍵盤狀態
+
+        bool isDPressed = Util::Input::IsKeyPressed(Util::Keycode::D);
+
+        if (!m_KDown && isDPressed) {
+            m_zombiManager -> Die();
+        }
+        if (m_zombiManager -> IfAnimationEnds()) {
+            for (auto zombi : m_zombiManager -> GetZombies()) {
+                m_Root.RemoveChild(zombi);
+            }
+        }
+
+        m_KDown = isKPressed;
+        m_zombiManager -> move();
     }
-    m_KDown = isKPressed; // 更新鍵盤狀態
-
-    bool isDPressed = Util::Input::IsKeyPressed(Util::Keycode::D);
-
-    if (!m_KDown && isDPressed) {
-        m_zombiManager -> Die();
-
-    }
-    m_KDown = isKPressed;
-    m_zombiManager -> move();
 
 
     if (Util::Input::IsKeyDown(Util::Keycode::MOUSE_RB)) {

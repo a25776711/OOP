@@ -99,6 +99,15 @@ void Die() {
   }
 }
 
+bool IfAnimationEnds() {
+  for (auto zombi : m_result) {
+    if (zombi -> GetState() == zombi::zombistate::die && zombi -> IfAnimationEnds()) {
+      return true;
+    }
+    else return false;
+  }
+
+}
 private:
   std::vector<std::shared_ptr<zombi>> m_result;
   std::vector<std::shared_ptr<zombi>> m_zombies1;
