@@ -77,7 +77,9 @@ std::vector<std::shared_ptr<Util::GameObject>> GetZombiesAsGameObjects(std::vect
 
 void move() {
   for (auto zombi : m_result) {
-    zombi -> move();
+    if (zombi -> GetState() != zombi::zombistate::stand) {
+      zombi -> move();
+    }
   }
 }
 std::vector<std::shared_ptr<zombi>> GetZombies() {
@@ -87,6 +89,14 @@ std::vector<std::shared_ptr<zombi>> GetZombies() {
 void SetLoop(int CurrtZombi) {
   m_result[CurrtZombi] -> SetLooping(true);
   // std::cout << CurrtZombi << std::endl;
+}
+
+void Die() {
+  for (auto zombi : m_result) {
+    if (zombi) {
+      zombi -> Die();
+    }
+  }
 }
 
 private:

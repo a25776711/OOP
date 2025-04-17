@@ -13,25 +13,27 @@
 class zombi :public Util::GameObject {
 public:
     zombi() {
-        m_state = zombistate::walk;
-        // SetPiov();
+        m_state = zombistate::stand;
     };
 
     enum class zombistate {
         walk,
         coldwalk,
         eat,
-        coldeat
+        coldeat,
+        stand
     };
 
 
     virtual void Gotice(bool ice) = 0;
-    virtual void move() = 0;
+    void move() {
+        m_Transform.translation.x = m_Transform.translation.x - z_speed;
+    };
     virtual void Eating() = 0;
 
     zombistate GetState() {return m_state;}
 
-    void SetSpeed(int speed) {z_speed = speed;}
+    void SetSpeed(float speed) {z_speed = speed;}
     int GetSpeed() { return z_speed;}
 
     void SetHP(int HP) {z_HP = HP;}
@@ -67,20 +69,32 @@ public:
     }
 
     void SetLooping(bool looping) {
+        m_state = zombistate::walk;
         auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
         temp->SetLooping(looping);
         temp->Play();
     }
 
+    void Die() {
+        m_die.reserve(9);
+
+        for (int i = 0; i < 9; i++) {
+            m_die.push_back(RESOURCE_DIR"/zombi/die/die/die_" + std::to_string(i) + ".png");
+        }
+        m_Drawable = std::make_shared<Util::Animation>(m_die, true, 100, true, 100);
+    }
+
 protected:
-    int z_speed;
-    int z_HP;
-    int z_attack;
+    float z_speed;
+    float z_HP;
+    float z_attack;
     zombistate m_state;
 
-    glm::vec2 roll1={234,175};
-    glm::vec2 roll2 ={234,75};
-    glm::vec2 roll3 = {234,-25};
+    std::vector<std::string> m_die;
+
+    glm::vec2 roll1={234.0f,175.0f};
+    glm::vec2 roll2 ={234.0f,75.0f};
+    glm::vec2 roll3 = {450.0,-25.0};
     glm::vec2 roll4 = {234,-122};
     glm::vec2 roll5 = {234,-220};
 };

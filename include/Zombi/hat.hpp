@@ -16,7 +16,7 @@ class hat : public zombi {
 public:
     hat() {
         hat::SetHP(150);
-        hat::SetSpeed(0.1);
+        hat::SetSpeed(0.1f);
         hat::Setattack(10);
 
         m_Walk.reserve(21);
@@ -65,6 +65,8 @@ public:
             case zombistate::coldeat:
                 m_Images = m_iceeat;
                 break;
+            case  zombistate::stand:
+                m_Images = m_Walk;
         }
         m_Drawable = std::make_shared<Util::Animation>(m_Images, false, 100, false, 100);
     }
@@ -73,9 +75,6 @@ public:
         return m_Images;
     }
 
-    void move() override {
-        m_Pivot = {m_Pivot.x+0.05, m_Pivot.y};
-    }
 
     void Eating() override {
         m_state = zombistate::eat;
