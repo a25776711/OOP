@@ -33,6 +33,27 @@ void SetZombies(){
   m_zombies4.push_back(std::make_shared<bucket>());
   m_zombies4.push_back(std::make_shared<bucket>());
 
+  m_zombies5.push_back(std::make_shared<normal>());
+  m_zombies5.push_back(std::make_shared<armor>());
+  m_zombies5.push_back(std::make_shared<hat>());
+  m_zombies5.push_back(std::make_shared<bucket>());
+  m_zombies5.push_back(std::make_shared<normal>());
+  m_zombies5.push_back(std::make_shared<armor>());
+  m_zombies5.push_back(std::make_shared<hat>());
+  m_zombies5.push_back(std::make_shared<bucket>());
+
+  m_zombies6.push_back(std::make_shared<normal>());
+  m_zombies6.push_back(std::make_shared<armor>());
+  m_zombies6.push_back(std::make_shared<hat>());
+  m_zombies6.push_back(std::make_shared<bucket>());
+  m_zombies6.push_back(std::make_shared<normal>());
+  m_zombies6.push_back(std::make_shared<armor>());
+  m_zombies6.push_back(std::make_shared<hat>());
+  m_zombies6.push_back(std::make_shared<bucket>());
+  m_zombies6.push_back(std::make_shared<normal>());
+  m_zombies6.push_back(std::make_shared<armor>());
+  m_zombies6.push_back(std::make_shared<hat>());
+
 
 };
 
