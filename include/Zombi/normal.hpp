@@ -59,6 +59,8 @@ public:
             case zombistate::coldeat:
                 m_Images = m_iceeat;
                 break;
+            case  zombistate::stand:
+                m_Images = m_Walk;
         }
         m_Drawable = std::make_shared<Util::Animation>(m_Images, false, 100, false, 100);
     }

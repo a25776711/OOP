@@ -92,8 +92,8 @@ protected:
 
     std::vector<std::string> m_die;
 
-    glm::vec2 roll1={234.0f,175.0f};
-    glm::vec2 roll2 ={234.0f,75.0f};
+    glm::vec2 roll1={234.0,175.0};
+    glm::vec2 roll2 ={234.0,75.0};
     glm::vec2 roll3 = {450.0,-25.0};
     glm::vec2 roll4 = {234,-122};
     glm::vec2 roll5 = {234,-220};
