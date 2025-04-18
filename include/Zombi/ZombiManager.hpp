@@ -54,6 +54,53 @@ void SetZombies(){
   m_zombies6.push_back(std::make_shared<armor>());
   m_zombies6.push_back(std::make_shared<hat>());
 
+    m_zombies7.push_back(std::make_shared<normal>());
+  m_zombies7.push_back(std::make_shared<hat>());
+  m_zombies7.push_back(std::make_shared<armor>());
+  m_zombies7.push_back(std::make_shared<bucket>());
+  m_zombies7.push_back(std::make_shared<normal>());
+  m_zombies7.push_back(std::make_shared<hat>());
+  m_zombies7.push_back(std::make_shared<armor>());
+  m_zombies7.push_back(std::make_shared<bucket>());
+  m_zombies7.push_back(std::make_shared<normal>());
+  m_zombies7.push_back(std::make_shared<hat>());
+
+  m_zombies8.push_back(std::make_shared<armor>());
+  m_zombies8.push_back(std::make_shared<armor>());
+  m_zombies8.push_back(std::make_shared<hat>());
+  m_zombies8.push_back(std::make_shared<bucket>());
+  m_zombies8.push_back(std::make_shared<normal>());
+  m_zombies8.push_back(std::make_shared<normal>());
+  m_zombies8.push_back(std::make_shared<bucket>());
+  m_zombies8.push_back(std::make_shared<hat>());
+  m_zombies8.push_back(std::make_shared<armor>());
+  m_zombies8.push_back(std::make_shared<normal>());
+
+  m_zombies9.push_back(std::make_shared<bucket>());
+  m_zombies9.push_back(std::make_shared<hat>());
+  m_zombies9.push_back(std::make_shared<armor>());
+  m_zombies9.push_back(std::make_shared<normal>());
+  m_zombies9.push_back(std::make_shared<normal>());
+  m_zombies9.push_back(std::make_shared<bucket>());
+  m_zombies9.push_back(std::make_shared<hat>());
+  m_zombies9.push_back(std::make_shared<armor>());
+  m_zombies9.push_back(std::make_shared<normal>());
+  m_zombies9.push_back(std::make_shared<bucket>());
+  m_zombies9.push_back(std::make_shared<hat>());
+
+  m_zombies10.push_back(std::make_shared<normal>());
+  m_zombies10.push_back(std::make_shared<hat>());
+  m_zombies10.push_back(std::make_shared<armor>());
+  m_zombies10.push_back(std::make_shared<bucket>());
+  m_zombies10.push_back(std::make_shared<normal>());
+  m_zombies10.push_back(std::make_shared<armor>());
+  m_zombies10.push_back(std::make_shared<hat>());
+  m_zombies10.push_back(std::make_shared<bucket>());
+  m_zombies10.push_back(std::make_shared<normal>());
+  m_zombies10.push_back(std::make_shared<bucket>());
+  m_zombies10.push_back(std::make_shared<hat>());
+  m_zombies10.push_back(std::make_shared<armor>());
+  m_zombies10.push_back(std::make_shared<normal>());
 
 };
 
@@ -71,8 +118,27 @@ std::vector<std::shared_ptr<zombi>> GetZombi(int level) {
     case 4:
       m_result = m_zombies4;
       break;
+    case 5:
+      m_result = m_zombies5;
+      break;
+    case 6:
+      m_result = m_zombies6;
+      break;
+    case 7:
+      m_result = m_zombies7;
+      break;
+    case 8:
+      m_result = m_zombies8;
+      break;
+    case 9:
+      m_result = m_zombies9;
+      break;
+    case 10:
+      m_result = m_zombies10;
+      break;
     default:
       m_result.clear();
+      break;
   }
   for (auto zombi : m_result) {
     zombi -> SetPiov(level);
