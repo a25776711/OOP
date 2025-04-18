@@ -107,23 +107,26 @@ void App::CheckPlant() {
         for(int j=0;j<m_Plants[i].size();j++) {
             if(m_Plants[i][j]!=nullptr) {
                 auto check=m_Plants[i][j];
-                auto bullet=check->Attack(check->GetPosition());
+                auto bullet=check->GetType()==Plant::Shooter?check->Attack(check->GetPosition()):nullptr;
                 switch (check->GetType()) {
                     case Plant::Shooter:
                     if(bullet!=nullptr) {
-                        std::cout << "test";
                         bullet->SetZIndex(21);
                         m_Bullets.push_back(bullet);
                         m_Root.AddChild(m_Bullets.back());
                     }
                     break;
                     case Plant::Boom:
+
                         break;
                     case Plant::Closer:
+
                         break;
                     case Plant::Idle:
+
                         break;
                     default:
+
                         break;
                 }
             }

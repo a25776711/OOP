@@ -7,7 +7,7 @@
 #include "bullet.hpp"
 class NormalBullet : public Bullet {
     public:
-    NormalBullet(glm::vec2 pos):Bullet(RESOURCE_DIR"/plant/pee/pea.png",Normal,pos) {
+    explicit NormalBullet(glm::vec2 pos):Bullet(RESOURCE_DIR"/plant/pee/pea.png",Normal,pos) {
         m_Transform.translation = pos;
     }
 };

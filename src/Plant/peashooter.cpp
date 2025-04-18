@@ -9,7 +9,7 @@ bool Peashooter::AttackCheck(glm::vec2 pos) {
     return false;
 }
 std::shared_ptr<Bullet> Peashooter::Attack(glm::vec2 pos) {
-    if(m_cooldown>=30) {
+    if(m_cooldown>90) {
         //if(not AttackCheck(pos))return nullptr;
         glm::vec2 temp={m_Transform.translation.x,m_Transform.translation.y+20};
         m_cooldown=0;

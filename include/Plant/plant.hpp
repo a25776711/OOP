@@ -48,7 +48,7 @@ class Plant: public Util::GameObject{
     PlantType GetType(){return m_Type;}
 
 
-    virtual std::shared_ptr<Bullet> Attack(glm::vec2 pos){};
+    virtual std::shared_ptr<Bullet> Attack(glm::vec2 pos){return nullptr;};
     virtual void Boomer(){};
     protected:
     PlantLoader m_Loader;
