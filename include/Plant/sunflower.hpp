@@ -18,7 +18,6 @@ public:
         SetType(Idle);
     }
 
-    
 private:
     int m_Cooldown;
 };

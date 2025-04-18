@@ -47,21 +47,9 @@ void App::Update() {
     if (m_EnterDown) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
             m_PRM ->NextLevel();
-            std::cout <<"("<< m_PRM -> GetLevel()<<")"<< std::endl;
-
             m_CurrentZombiIndex =0;
             for (auto zombi : m_zombiManager -> GetZombies()) {
                 m_Root.RemoveChild(zombi);
-            m_Root.AddChildren(m_PRM-> GetChildren());
-        }
-    }
-    if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
-        glm::vec2 pos=Util::Input::GetCursorPosition();
-        // m_Sun ->CollectAndMove(pos,{200,50});
-        if (m_PRM ->GetLevel()==0) {
-            if (m_PRM ->CheckHit(pos)) {
-                // std::cout << "true" << std::endl;
-                m_PRM ->NextLevel();
             }
             m_Root.AddChildren(m_PRM-> GetChildren());
             m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
@@ -81,14 +69,10 @@ void App::Update() {
         m_KDown = isKPressed; // 更新鍵盤狀態
 
         bool isDPressed = Util::Input::IsKeyPressed(Util::Keycode::D);
-        bool isSPressed = Util::Input::IsKeyPressed(Util::Keycode::S);
+
         if (!m_KDown && isDPressed) {
             m_zombiManager -> Die(false);
         }
-        if (!m_KDown && isSPressed) {
-            m_zombiManager -> Die(true);
-        }
-
         if (m_zombiManager -> IfAnimationEnds()) {
             for (auto zombi : m_zombiManager -> GetZombies()) {
                 m_Root.RemoveChild(zombi);
@@ -104,31 +88,16 @@ void App::Update() {
         m_zombiManager ->Getice(true);
     }
 
-        if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
-            Util::Input::IfExit()) {
-            m_CurrentState = State::END;
-            }
-    };
-
-        m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
-        MoveSun();
-        SunClock++;
-        if(SunClock>480) {
-            SunClock=0;
-            MakeSun();
-        };
-        m_Root.Update();
-};
 
     m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
     MoveSun();
     CheckPlant();
     CheckBullet();
     SunClock++;
-    if(SunClock>480) {
-        SunClock=0;
-        MakeSun();
-    }
+    //if(SunClock>480) {
+    //    SunClock=0;
+    //    MakeSun();
+    //}
     if(m_holdingPlant!=nullptr){
         glm::vec2 pos=Util::Input::GetCursorPosition();
         m_holdingPlant->m_Transform.translation={pos.x,-pos.y};
@@ -138,9 +107,8 @@ void App::Update() {
         m_CurrentState = State::END;
     }
     m_Root.Update();
-
+}
 
 void App::End() { // NOLINT(this method will mutate members in the future)
     LOG_TRACE("End");
-};
-
+}
