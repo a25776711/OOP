@@ -11,14 +11,7 @@
 #include "Plant/sun.hpp"
 #include "Util/Logger.hpp"
 #include "Background/SunNB.hpp"
-#include "Plant/sunflower.hpp"
-#include "Plant/mine.hpp"
-#include "Plant/cherrybomb.hpp"
-#include "Plant/wallnut.hpp"
-#include "Plant/chomper.hpp"
-#include "Plant/iceshooter.hpp"
-#include "Plant/fastshooter.hpp"
-#include "Plant/peashooter.hpp"
+
 // IWYU pragma: export
 
 

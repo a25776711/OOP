@@ -3,6 +3,14 @@
 
 #include "Util/GameObject.hpp"
 #include "Util/Image.hpp"
+#include "Plant/sunflower.hpp"
+#include "Plant/mine.hpp"
+#include "Plant/cherrybomb.hpp"
+#include "Plant/wallnut.hpp"
+#include "Plant/chomper.hpp"
+#include "Plant/iceshooter.hpp"
+#include "Plant/fastshooter.hpp"
+#include "Plant/peashooter.hpp"
 #include <string>
 #include <memory>
 
@@ -11,7 +19,9 @@ public:
       Card(const std::string& imagePath) {
             auto image = std::make_shared<Util::Image>(imagePath);
             SetDrawable(image);
+
       }
+      std::shared_ptr<Plant> MakePlant();
 };
 
 #endif // CARD_HPP

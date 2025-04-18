@@ -19,6 +19,6 @@ public:
     }
 
 private:
-    int m_Cooldown;
+    int m_Cooldown=1440;
 };
 #endif //SUNFLOWER_HPP
