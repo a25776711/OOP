@@ -47,6 +47,8 @@ void App::Update() {
     if (m_EnterDown) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
             m_PRM ->NextLevel();
+            std::cout <<"("<< m_PRM -> GetLevel()<<")"<< std::endl;
+
             m_CurrentZombiIndex =0;
             for (auto zombi : m_zombiManager -> GetZombies()) {
                 m_Root.RemoveChild(zombi);
@@ -69,10 +71,14 @@ void App::Update() {
         m_KDown = isKPressed; // 更新鍵盤狀態
 
         bool isDPressed = Util::Input::IsKeyPressed(Util::Keycode::D);
-
+        bool isSPressed = Util::Input::IsKeyPressed(Util::Keycode::S);
         if (!m_KDown && isDPressed) {
-            m_zombiManager -> Die();
+            m_zombiManager -> Die(false);
         }
+        if (!m_KDown && isSPressed) {
+            m_zombiManager -> Die(true);
+        }
+
         if (m_zombiManager -> IfAnimationEnds()) {
             for (auto zombi : m_zombiManager -> GetZombies()) {
                 m_Root.RemoveChild(zombi);

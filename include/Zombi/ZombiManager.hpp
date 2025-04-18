@@ -54,7 +54,7 @@ void SetZombies(){
   m_zombies6.push_back(std::make_shared<armor>());
   m_zombies6.push_back(std::make_shared<hat>());
 
-    m_zombies7.push_back(std::make_shared<normal>());
+  m_zombies7.push_back(std::make_shared<normal>());
   m_zombies7.push_back(std::make_shared<hat>());
   m_zombies7.push_back(std::make_shared<armor>());
   m_zombies7.push_back(std::make_shared<bucket>());
@@ -178,10 +178,11 @@ void SetLoop(int CurrtZombi) {
   // std::cout << CurrtZombi << std::endl;
 }
 
-void Die() {
+void Die(bool ash) {
   for (auto zombi : m_result) {
     if (zombi) {
-      zombi -> Die();
+        if (ash) zombi -> Ash();
+        else zombi -> Die();
     }
   }
 }
