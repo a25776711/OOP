@@ -46,10 +46,13 @@ public:
             threeroad,
             fiveroad
     };
-    void MakeSun(){m_Suns.emplace_back(std::make_shared<Sun>(false,glm::vec2(0,0)));m_Root.AddChild(m_Suns.back());}
+    void MakeSun(bool flower,glm::vec2 pos) {
+        m_Suns.emplace_back(std::make_shared<Sun>(flower,pos));
+        m_Root.AddChild(m_Suns.back());
+    }
     std::shared_ptr<Sun> CheckSun(glm::vec2 click);
     void MoveSun();
-    void SetPos();
+    void SetBlockPos();
     std::shared_ptr<Plant> MakePlant(int i);
     //點擊四個點確認
     bool CheckClick(std::vector<float> block,glm::vec2 click);
@@ -62,7 +65,6 @@ public:
 private:
     //void ValidTask();
     std::map<std::string,std::vector<std::vector<float>>> block;
-    std::map<std::string,std::vector<float>> m_cardPos;
     int Sunamount=0;
     int SunClock=0;
     std::shared_ptr<Plant> m_holdingPlant=nullptr;

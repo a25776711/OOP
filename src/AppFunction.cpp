@@ -18,7 +18,8 @@ void App::MoveSun() {
     m_Suns.erase(std::remove_if(m_Suns.begin(), m_Suns.end(), [&](std::shared_ptr<Sun>& sun) {
        sun->Move(); // 讓太陽移動
        if (sun->GetMoveState() == MoveOver) {
-           m_Root.RemoveChild(sun); // 移除畫面中的sun
+           m_Root.RemoveChild(sun);// 移除畫面中的sun
+
            Sunamount+=25;
            m_SunNB->Change(Sunamount);
            return true; // 返回true來標記這個元素為要刪除的
@@ -27,28 +28,12 @@ void App::MoveSun() {
    }), m_Suns.end());
 }
 
-//生成植物
-std::shared_ptr<Plant> App::MakePlant(int i) {
-    std::vector<std::shared_ptr<Plant>>m_GPlants={
-    std::make_shared<Peashooter>(),
-        std::make_shared<SunFlower>(),
-        std::make_shared<Cherrybomb>(),
-        std::make_shared<Wallnut>(),
-        std::make_shared<Mine>(),
-        std::make_shared<Iceshooter>(),
-        std::make_shared<Chomper>(),
-        std::make_shared<Fastshooter>()
-    };
-    if(i>8||i<1)return nullptr;
-    m_GPlants[i-1]->SetZIndex(50);
-    return m_GPlants[i-1];
-}
 //點擊卡片判斷
 void App::TakePlant(glm::vec2 click,int level) {
-    for (int i=1;i<9&&i<level;i++) {
-        if(CheckClick(m_cardPos[std::to_string(i)],click)) {
-            std::cout << "Plant" << std::endl;
-            m_holdingPlant=MakePlant(i);
+    auto cards=m_PRM->GetCards();
+    for(auto& card:cards) {
+        if(CheckClick(card->GetFourPoints(), click)) {
+            m_holdingPlant=card->MakePlant();
             m_Root.AddChild(m_holdingPlant);
         }
     }
@@ -122,7 +107,14 @@ void App::CheckPlant() {
                     case Plant::Closer:
 
                         break;
-                    case Plant::Idle:
+                    case Plant::SunFlower:
+
+                        if(check->CoolDown()) {
+                            std::cout << "test";
+                            MakeSun(true,check->GetPosition());
+                        }
+                        break;
+                    case Plant::WallNut:
 
                         break;
                     default:
@@ -139,20 +131,10 @@ void App::CheckBullet() {
         check->Move();
     }
 }
-
-
-
-
 //設定卡片及場地碰撞格
-void App::SetPos() {
-    float spacingx = 64;
-    float startX = -568;
-    for(int i=7;i>=0;i--) {
-        glm::vec2 pos={startX +spacingx * (i),300};
-        m_cardPos[std::to_string(i+1)]={pos.x,pos.y-80,pos.x + spacingx,pos.y};
-    }
-    spacingx = 80.8f;
-    startX = -445;
+void App::SetBlockPos() {
+    float spacingx = 80.8f;
+    float startX = -445;
     float startY = -260;
     float spacingy = 99;
     for(int i=0;i<5;i++) {
@@ -162,6 +144,13 @@ void App::SetPos() {
                 pos.x,pos.y,pos.x+spacingx,pos.y+spacingy,pos.x+spacingx/2,pos.y+spacingy/2
             };
             block[std::to_string(i)].emplace_back(temp);
+        }
+        if(i==4) {
+            auto check=block[std::to_string(i)];
+            for(int j=0;j<check.size();j++) {
+                check[j][3]-=20;
+            }
+            block[std::to_string(i)]=check;
         }
     }
 

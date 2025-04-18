@@ -14,15 +14,15 @@
 class Plant: public Util::GameObject{
     public:
     enum PlantType {
-      Idle,
+      SunFlower,
+        WallNut,
         Shooter,
         Boom,
         Closer
     };
-    std::map<std::string,std::vector<glm::vec2>> block;
     explicit Plant(std::vector<std::string>& Path,int interval){
         m_Drawable = std::make_shared<Util::Animation>(Path, true, interval, true, 0);
-
+        SetZIndex(5);
     }
     [[nodiscard]] bool GetVisibility() const { return m_Visible;}
     [[nodiscard]] const glm::vec2& GetPosition() const { return m_Transform.translation; }
@@ -41,7 +41,6 @@ class Plant: public Util::GameObject{
     virtual void Hurt() {
         m_hp--;
     }
-    void SetBlock();
     void SetCost(int cost){m_cost=cost;}
     int GetCost(){return m_cost;}
     void SetType(PlantType type){m_Type=type;}
@@ -50,11 +49,12 @@ class Plant: public Util::GameObject{
 
     virtual std::shared_ptr<Bullet> Attack(glm::vec2 pos){return nullptr;};
     virtual void Boomer(){};
+    virtual bool CoolDown(){return false;};
     protected:
     PlantLoader m_Loader;
     private:
 
-    PlantType m_Type=Idle;
+    PlantType m_Type;
     int m_hp;
     int m_maxhp;
     int m_ATK=0;

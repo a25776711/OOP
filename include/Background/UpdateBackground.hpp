@@ -25,7 +25,6 @@ public:
         for (auto card : m_Cards) {
             result.push_back(card);
         }
-
         return result;
     }
 
@@ -33,7 +32,7 @@ public:
 
     void SetCardPos();
     int GetLevel() {return m_level;}
-
+    std::vector<std::shared_ptr<Card>> GetCards() {return m_Cards;}
     bool CheckHit(const glm::vec2& point) {
         // 計算點與每個邊的叉積
         bool result = false;

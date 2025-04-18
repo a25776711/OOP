@@ -16,7 +16,7 @@ void App::Start() {
     m_SunNB->SetZIndex(20);
     m_Root.AddChild(m_SunNB);
     m_Plants=std::vector<std::vector<std::shared_ptr<Plant>>>(5, std::vector<std::shared_ptr<Plant>>(9, nullptr));
-    SetPos(); //set card and block
+    SetBlockPos(); //set card and block
     m_CurrentState = State::UPDATE;
 
 }
@@ -34,7 +34,6 @@ void App::Update() {
         if(CheckSun(pos)){m_Root.RemoveChild(CheckSun(pos));}
         if(m_holdingPlant==nullptr){TakePlant(pos,m_PRM->GetLevel()+1);}
         if(m_holdingPlant!=nullptr){PutPlant(pos,m_PRM->GetLevel());}
-
         if (m_PRM ->GetLevel()==0) {
             if (m_PRM -> CheckHit(pos)) {
                 m_PRM ->NextLevel();
@@ -93,15 +92,17 @@ void App::Update() {
     MoveSun();
     CheckPlant();
     CheckBullet();
-    SunClock++;
-    //if(SunClock>480) {
-    //    SunClock=0;
-    //    MakeSun();
-    //}
+    if(m_PRM->GetLevel()>0)SunClock++;
+    if(SunClock>480&&m_PRM->GetLevel()>0) {
+        SunClock=0;
+        MakeSun(false,{0,0});
+    }
+
     if(m_holdingPlant!=nullptr){
         glm::vec2 pos=Util::Input::GetCursorPosition();
         m_holdingPlant->m_Transform.translation={pos.x,-pos.y};
     }
+
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
     Util::Input::IfExit()) {
         m_CurrentState = State::END;
