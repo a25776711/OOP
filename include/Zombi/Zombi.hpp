@@ -19,8 +19,8 @@ public:
         for (int i = 0; i < 9; i++) {
             m_die.push_back(RESOURCE_DIR"/zombi/die/die/die_" + std::to_string(i) + ".png");
         }
-        m_ash.reserve(9);
-        for (int i = 0; i < 9; i++) {
+        m_ash.reserve(20);
+        for (int i = 0; i < 20; i++) {
             m_ash.push_back(RESOURCE_DIR"/zombi/die/ash/ash_" + std::to_string(i) + ".png");
         }
 

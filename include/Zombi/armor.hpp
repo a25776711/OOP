@@ -12,6 +12,11 @@ public:
         SetSpeed(0.1f);
         Setattack(10);
 
+        m_die.clear();
+        m_die.reserve(14);
+        for (int i=0;i<14;i++) {
+            m_die.push_back(RESOURCE_DIR"/zombi/armor/die/die_" + std::to_string(i) + ".png");
+        }
 
         m_Walk.reserve(11);
         for (int i=0;i<11;i++) {
@@ -41,6 +46,7 @@ public:
             default:
                 break;
         }
+        z_speed = z_speed / 2;
         SetImage(m_state);
     }
 
