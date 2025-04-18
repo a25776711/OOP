@@ -151,6 +151,7 @@ void Getice(bool ice) {
     if ((zombi -> GetState() == zombi::zombistate::coldeat) ||(zombi -> GetState() == zombi::zombistate::coldwalk)) {
       return;}
     zombi -> Gotice(true);
+    zombi -> SetLooping(true);
   }
 }
 

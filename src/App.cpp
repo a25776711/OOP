@@ -98,10 +98,10 @@ void App::Update() {
     m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
     MoveSun();
     SunClock++;
-    //if(SunClock>480) {
-    //    SunClock=0;
-    //    MakeSun();
-    //}
+    if(SunClock>480) {
+        SunClock=0;
+        MakeSun();
+    }
     if(m_holdingPlant!=nullptr){
         glm::vec2 pos=Util::Input::GetCursorPosition();
         m_holdingPlant->m_Transform.translation={pos.x,-pos.y};
