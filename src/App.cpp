@@ -72,18 +72,36 @@ void App::Update() {
 
         bool isDPressed = Util::Input::IsKeyPressed(Util::Keycode::D);
         bool isSPressed = Util::Input::IsKeyPressed(Util::Keycode::S);
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         if (!m_KDown && isDPressed) {
             m_zombiManager -> Die(false);
         }
         if (!m_KDown && isSPressed) {
             m_zombiManager -> Die(true);
         }
+<<<<<<< Updated upstream
 
         if (m_zombiManager -> IfAnimationEnds()) {
             for (auto zombi : m_zombiManager -> GetZombies()) {
+=======
+        m_zombiManager -> CheckWall();
+
+        // if (m_zombiManager -> IfAnimationEnds()) {
+        //     for (auto zombi : m_zombiManager -> GetZombies()) {
+        //         m_Root.RemoveChild(zombi);
+        //     }
+        // }
+        for (auto zombi : m_zombiManager -> GetZombies()) {
+            if (zombi -> IfAnimationEnds()) {
+>>>>>>> Stashed changes
                 m_Root.RemoveChild(zombi);
             }
         }
+
+
 
         m_KDown = isKPressed;
         m_zombiManager -> move();

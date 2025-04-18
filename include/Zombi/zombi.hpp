@@ -97,6 +97,35 @@ public:
         z_speed = 0;
         m_Drawable = std::make_shared<Util::Animation>(m_ash, true, 100, true, 100);
     }
+
+    void CheckWall() {
+        if (m_Transform.translation.x <= -405 && m_state != zombistate::die) {
+            Die();
+        }
+    }
+
+    void StartEat() {
+        switch (m_state) {
+            case zombistate::coldwalk:
+                m_state = zombistate::coldeat;
+                break;
+            case zombistate::walk:
+                m_state = zombistate::eat;
+                break;
+            case zombistate::coldeat:
+                return;
+            case zombistate::eat:
+                return;
+            default:
+                std::cout << "warmstate" << std::endl;
+                break;
+
+        }
+        z_speed = 0;
+    }
+
+    void RestartWalk() {
+    }
     bool IfAnimationEnds() const {
         if (!m_Drawable) {
             std::cerr << "[ERROR] m_Drawable is null." << std::endl;
@@ -108,7 +137,7 @@ public:
             std::cerr << "[ERROR] m_Drawable is not an Animation." << std::endl;
             return false;
         }
-        return temp->GetCurrentFrameIndex() == temp->GetFrameCount() - 1;
+        return (temp->GetCurrentFrameIndex() == temp->GetFrameCount() - 1 && m_state == zombistate::die);
 
     }
 
