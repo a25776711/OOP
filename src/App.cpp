@@ -52,6 +52,16 @@ void App::Update() {
             m_CurrentZombiIndex =0;
             for (auto zombi : m_zombiManager -> GetZombies()) {
                 m_Root.RemoveChild(zombi);
+            m_Root.AddChildren(m_PRM-> GetChildren());
+        }
+    }
+    if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
+        glm::vec2 pos=Util::Input::GetCursorPosition();
+        // m_Sun ->CollectAndMove(pos,{200,50});
+        if (m_PRM ->GetLevel()==0) {
+            if (m_PRM ->CheckHit(pos)) {
+                // std::cout << "true" << std::endl;
+                m_PRM ->NextLevel();
             }
             m_Root.AddChildren(m_PRM-> GetChildren());
             m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
@@ -94,6 +104,21 @@ void App::Update() {
         m_zombiManager ->Getice(true);
     }
 
+        if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
+            Util::Input::IfExit()) {
+            m_CurrentState = State::END;
+            }
+    };
+
+        m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
+        MoveSun();
+        SunClock++;
+        if(SunClock>480) {
+            SunClock=0;
+            MakeSun();
+        };
+        m_Root.Update();
+};
 
     m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
     MoveSun();
@@ -113,9 +138,9 @@ void App::Update() {
         m_CurrentState = State::END;
     }
     m_Root.Update();
-}
+
 
 void App::End() { // NOLINT(this method will mutate members in the future)
     LOG_TRACE("End");
-}
+};
 
