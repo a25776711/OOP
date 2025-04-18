@@ -175,7 +175,6 @@ std::vector<std::shared_ptr<zombi>> GetZombies() {
 
 void SetLoop(int CurrtZombi) {
   m_result[CurrtZombi] -> SetLooping(true);
-  // std::cout << CurrtZombi << std::endl;
 }
 
 void Die(bool ash) {

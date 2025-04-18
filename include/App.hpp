@@ -86,6 +86,7 @@ private:
     bool m_EnterDown = false;
     bool m_KDown = false; // 初始設為 false
 
+
 };
 
 #endif
