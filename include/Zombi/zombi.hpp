@@ -19,6 +19,11 @@ public:
         for (int i = 0; i < 9; i++) {
             m_die.push_back(RESOURCE_DIR"/zombi/die/die/die_" + std::to_string(i) + ".png");
         }
+        m_ash.reserve(9);
+        for (int i = 0; i < 9; i++) {
+            m_ash.push_back(RESOURCE_DIR"/zombi/die/ash/ash_" + std::to_string(i) + ".png");
+        }
+
     };
 
     enum class zombistate {
@@ -86,6 +91,12 @@ public:
         z_speed = 0;
         m_Drawable = std::make_shared<Util::Animation>(m_die, true, 100, true, 100);
     }
+
+    void Ash() {
+        m_state = zombistate::die;
+        z_speed = 0;
+        m_Drawable = std::make_shared<Util::Animation>(m_ash, true, 100, true, 100);
+    }
     bool IfAnimationEnds() const {
         if (!m_Drawable) {
             std::cerr << "[ERROR] m_Drawable is null." << std::endl;
@@ -109,6 +120,7 @@ protected:
     zombistate m_state;
 
     std::vector<std::string> m_die;
+    std::vector<std::string> m_ash;
 
     glm::vec2 roll1={450.0,175.0};
     glm::vec2 roll2 ={450.0,75.0};
