@@ -9,7 +9,7 @@ class armor : public zombi {
 public:
     armor() :zombi(){
         SetHP(0);
-        SetSpeed(0.1f);
+        SetSpeed(1);
         Setattack(10);
 
         m_die.clear();
