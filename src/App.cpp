@@ -78,24 +78,25 @@ void App::Update() {
         }
         if (m_zombiManager -> IfAnimationEnds()) {
             for (auto zombi : m_zombiManager -> GetZombies()) {
-        m_zombiManager -> CheckWall();
+                m_zombiManager -> CheckWall();
 
-        // if (m_zombiManager -> IfAnimationEnds()) {
-        //     for (auto zombi : m_zombiManager -> GetZombies()) {
-        //         m_Root.RemoveChild(zombi);
-        //     }
-        // }
-        for (auto zombi : m_zombiManager -> GetZombies()) {
-            if (zombi -> IfAnimationEnds()) {
-                m_Root.RemoveChild(zombi);
+                // if (m_zombiManager -> IfAnimationEnds()) {
+                //     for (auto zombi : m_zombiManager -> GetZombies()) {
+                //         m_Root.RemoveChild(zombi);
+                //     }
+                // }
+                for (auto zombi : m_zombiManager -> GetZombies()) {
+                    if (zombi -> IfAnimationEnds()) {
+                        m_Root.RemoveChild(zombi);
+                    }
+                }
             }
         }
 
-
-
-        m_KDown = isKPressed;
-        m_zombiManager -> move();
+            m_KDown = isKPressed;
+            m_zombiManager -> move();
     }
+
 
 
     if (Util::Input::IsKeyDown(Util::Keycode::MOUSE_RB)) {
@@ -125,6 +126,7 @@ void App::Update() {
     m_Root.Update();
 }
 
-void App::End() { // NOLINT(this method will mutate members in the future)
+
+void App::End(){ // NOLINT(this method will mutate members in the future)
     LOG_TRACE("End");
 }
