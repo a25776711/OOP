@@ -6,7 +6,10 @@
 #define ICEBULLET_HPP
 #include "bullet.hpp"
 class IceBullet:public Bullet {
-    IceBullet():Bullet(RESOURCE_DIR"/pee/icepea.png",Ice){}
+    public:
+    explicit IceBullet(glm::vec2 pos):Bullet(RESOURCE_DIR"/plant/pee/icepea.png",Ice,pos) {
+        m_Transform.translation = pos;
+    }
 };
 
 #endif //ICEBULLET_HPP

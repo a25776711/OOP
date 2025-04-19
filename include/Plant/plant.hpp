@@ -7,15 +7,22 @@
 #include "Util/GameObject.hpp"
 #include "Util/Animation.hpp"
 #include "Plant/PlantLoader.hpp"
+#include "Bullet/bullet.hpp"
 #include <ctime>
 #include <cstdlib>
 
 class Plant: public Util::GameObject{
     public:
-    std::map<std::string,std::vector<glm::vec2>> block;
+    enum PlantType {
+      SunFlower,
+        WallNut,
+        Shooter,
+        Boom,
+        Closer
+    };
     explicit Plant(std::vector<std::string>& Path,int interval){
         m_Drawable = std::make_shared<Util::Animation>(Path, true, interval, true, 0);
-
+        SetZIndex(5);
     }
     [[nodiscard]] bool GetVisibility() const { return m_Visible;}
     [[nodiscard]] const glm::vec2& GetPosition() const { return m_Transform.translation; }
@@ -34,13 +41,20 @@ class Plant: public Util::GameObject{
     virtual void Hurt() {
         m_hp--;
     }
-    void SetBlock();
     void SetCost(int cost){m_cost=cost;}
     int GetCost(){return m_cost;}
+    void SetType(PlantType type){m_Type=type;}
+    PlantType GetType(){return m_Type;}
+
+
+    virtual std::shared_ptr<Bullet> Attack(glm::vec2 pos){return nullptr;};
+    virtual void Boomer(){};
+    virtual bool CoolDown(){return false;};
     protected:
     PlantLoader m_Loader;
     private:
 
+    PlantType m_Type;
     int m_hp;
     int m_maxhp;
     int m_ATK=0;

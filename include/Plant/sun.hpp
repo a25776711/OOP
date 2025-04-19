@@ -28,7 +28,7 @@ class Sun : public Plant {
     float CrossProduct(const glm::vec2& p1, const glm::vec2& p2, const glm::vec2& p3) {
         return (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
     }
-    explicit  Sun(bool flower);
+    explicit  Sun(bool flower,glm::vec2 pos);
     void CollectAndMove(glm::vec2 click);
     void Move();
     MoveState GetMoveState() {return m_state;}
@@ -38,8 +38,8 @@ class Sun : public Plant {
     MoveState m_state=MoveState::Collectable;
     bool m_click=false;
     glm::vec2 m_drop;
+    bool m_flower;
     glm::vec2 m_des={-600,260};
-    glm::vec2 m_Collectdes={-600,260};
     glm::vec2 p1={m_Transform.translation.x+20,m_Transform.translation.y+20};
     glm::vec2 p2={m_Transform.translation.x-20,m_Transform.translation.y+20};
     glm::vec2 p3={m_Transform.translation.x-20,m_Transform.translation.y-20};

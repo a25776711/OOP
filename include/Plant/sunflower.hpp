@@ -15,10 +15,14 @@ public:
     SunFlower():Plant(m_Loader.sunflowerIMG,60) {
         SetHP();
         SetCost(50);
+        SetType(PlantType::SunFlower);
+    }
+    bool CoolDown()override {
+        if(m_Cooldown>=1440){m_Cooldown=0;return true;}
+        m_Cooldown++;return false;
     }
 
-    
 private:
-    int m_Cooldown;
+    int m_Cooldown=0;
 };
 #endif //SUNFLOWER_HPP

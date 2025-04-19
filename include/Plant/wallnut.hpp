@@ -10,6 +10,7 @@ class Wallnut : public Plant {
     explicit  Wallnut():Plant(m_Loader.wallnutIMG,70) {
         SetHP(72);
         SetCost(50);
+        SetType(WallNut);
     }
     void Hurt() override;
     private:

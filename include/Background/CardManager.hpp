@@ -13,14 +13,14 @@
 class CardManager {
 public:
     CardManager() {
-        allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card1.png")); // peashooter
-        allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card2.png")); // sunflow
-        allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card3.png")); // cherrybomb
-        allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card4.png")); // wallnut
-        allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card5.png")); // mine
-        allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card6.png")); // iceshooter
-        allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card7.png")); // chomper
-        allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card8.png")); // fastshooter
+        allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card1.png",1)); // peashooter
+        allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card2.png",2)); // sunflow
+        allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card3.png",3)); // cherrybomb
+        allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card4.png",4)); // wallnut
+        allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card5.png",5)); // mine
+        allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card6.png",6)); // iceshooter
+        allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card7.png",7)); // chomper
+        allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card8.png",8)); // fastshooter
  
     }
 

@@ -27,17 +27,16 @@ void UpdateBackground::NextLevel() {
 
     m_Cards = m_CardManager->SetCards(m_level);
     SetCardPos();
-
-
 }
 
 void UpdateBackground::SetCardPos() {
-    float spacing = 150;
-    float startX = 1200;
-    float y = -580;
+    float spacing = 60;
+    float startX = -540;
+    float y = 260;
 
     for (size_t i = 0; i < m_Cards.size(); ++i) {
-        m_Cards[i]->SetPivot({startX - spacing * i, y});
+        m_Cards[i]->SetPos({startX + spacing * i, y});
+
     }
 }
 
