@@ -46,7 +46,8 @@ void App::Update() {
     if (m_EnterDown) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
             m_PRM ->NextLevel();
-            m_CurrentZombiIndex =0;
+            m_CurrentZombiIndex = 0;
+            zombicount = 0; 
             for (auto zombi : m_zombiManager -> GetZombies()) {
                 m_Root.RemoveChild(zombi);
             }
@@ -65,6 +66,14 @@ void App::Update() {
                 m_zombiManager->SetLoop(m_CurrentZombiIndex++);
             }
         }
+
+        if (zombicount == 480) {
+            if (m_CurrentZombiIndex < m_zombiManager->GetZombies().size()) {
+                m_zombiManager->SetLoop(m_CurrentZombiIndex++);
+            }
+            zombicount = 0;
+        }
+        else zombicount++;
         m_KDown = isKPressed; // 更新鍵盤狀態
 
         bool isDPressed = Util::Input::IsKeyPressed(Util::Keycode::D);
@@ -76,25 +85,18 @@ void App::Update() {
         if (!m_KDown && isSPressed) {
             m_zombiManager -> Die(true);
         }
-        if (m_zombiManager -> IfAnimationEnds()) {
-            for (auto zombi : m_zombiManager -> GetZombies()) {
-                m_zombiManager -> CheckWall();
 
-                // if (m_zombiManager -> IfAnimationEnds()) {
-                //     for (auto zombi : m_zombiManager -> GetZombies()) {
-                //         m_Root.RemoveChild(zombi);
-                //     }
-                // }
-                for (auto zombi : m_zombiManager -> GetZombies()) {
-                    if (zombi -> IfAnimationEnds()) {
-                        m_Root.RemoveChild(zombi);
-                    }
-                }
+        for (auto zombi : m_zombiManager -> GetZombies()) {
+            if (zombi -> IfAnimationEnds()) {
+                m_Root.RemoveChild(zombi);
             }
         }
+        m_zombiManager -> CheckWall();
 
-            m_KDown = isKPressed;
-            m_zombiManager -> move();
+
+        m_KDown = isKPressed;
+
+        m_zombiManager -> move();
     }
 
 

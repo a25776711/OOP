@@ -10,7 +10,7 @@ class normal : public zombi {
 public:
     normal() :zombi(){
         normal::SetHP(100);
-        normal::SetSpeed(0.1f);
+        normal::SetSpeed(1);
         normal::Setattack(10);
 
 
