@@ -76,25 +76,17 @@ void App::Update() {
         if (!m_KDown && isSPressed) {
             m_zombiManager -> Die(true);
         }
-        if (m_zombiManager -> IfAnimationEnds()) {
-            for (auto zombi : m_zombiManager -> GetZombies()) {
-                m_zombiManager -> CheckWall();
 
-                // if (m_zombiManager -> IfAnimationEnds()) {
-                //     for (auto zombi : m_zombiManager -> GetZombies()) {
-                //         m_Root.RemoveChild(zombi);
-                //     }
-                // }
-                for (auto zombi : m_zombiManager -> GetZombies()) {
-                    if (zombi -> IfAnimationEnds()) {
-                        m_Root.RemoveChild(zombi);
-                    }
-                }
+        for (auto zombi : m_zombiManager -> GetZombies()) {
+            if (zombi -> IfAnimationEnds()) {
+                m_Root.RemoveChild(zombi);
             }
         }
+        m_zombiManager -> CheckWall();
 
-            m_KDown = isKPressed;
-            m_zombiManager -> move();
+
+        m_KDown = isKPressed;
+        m_zombiManager -> move();
     }
 
 
