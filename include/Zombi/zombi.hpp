@@ -125,6 +125,21 @@ public:
     }
 
     void RestartWalk() {
+        switch (m_state) {
+            case zombistate::coldeat:
+                m_state = zombistate::coldwalk;
+                break;
+            case zombistate::eat:
+                m_state = zombistate::walk;
+                break;
+            case zombistate::walk:
+                return;
+            case zombistate::coldwalk:
+                return;
+            default:
+                std::cout << "warmstate" << std::endl;
+            break;
+        }
     }
     bool IfAnimationEnds() const {
         if (!m_Drawable) {
@@ -151,11 +166,11 @@ protected:
     std::vector<std::string> m_die;
     std::vector<std::string> m_ash;
 
-    glm::vec2 roll1={450.0,175.0};
-    glm::vec2 roll2 ={450.0,75.0};
-    glm::vec2 roll3 = {450.0,-25.0};
-    glm::vec2 roll4 = {450.0,-122};
-    glm::vec2 roll5 = {450.0,-220};
+    glm::vec2 roll1={450.0,170.0};
+    glm::vec2 roll2 ={450.0,90.0};
+    glm::vec2 roll3 = {450.0,10.0};
+    glm::vec2 roll4 = {450.0,-80};
+    glm::vec2 roll5 = {450.0,-170};
 };
 
 #endif //ZOMBI_HPP

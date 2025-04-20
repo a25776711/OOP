@@ -62,6 +62,7 @@ public:
     void CheckPlant();
     void PutPlant(glm::vec2 click,int level);
     void CheckBullet();
+    void ZombieMove();
 private:
     //void ValidTask();
     std::map<std::string,std::vector<std::vector<float>>> block;
@@ -74,6 +75,7 @@ private:
     std::shared_ptr<UpdateBackground> m_PRM;
 
     int m_CurrentZombiIndex = 0;
+    int zombicount = 0;
     std::shared_ptr<ZombiManager> m_zombiManager;
 
     std::vector<std::shared_ptr<Sun>> m_Suns;
