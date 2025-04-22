@@ -109,7 +109,7 @@ void App::Update() {
     m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
     MoveSun();
     CheckPlant();
-    CheckBullet();
+    auto hitzombi=CheckBullet();
     if(m_PRM->GetLevel()>0)SunClock++;
     if(SunClock>480&&m_PRM->GetLevel()>0) {
         SunClock=0;

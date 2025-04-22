@@ -27,6 +27,10 @@ class Bullet:public Util::GameObject {
     void Move() {
         m_Transform.translation.x += 5;
     }
+    bool HitCheck(glm::vec2 pos) {
+        if(pos.x>m_Transform.translation.x&&pos.x-m_Transform.translation.x<20&&abs(pos.y-m_Transform.translation.y)<30)return true;
+        return false;
+    }
 
     private:
     std::string m_ImagePath;

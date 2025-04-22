@@ -47,7 +47,9 @@ public:
             fiveroad
     };
     void MakeSun(bool flower,glm::vec2 pos) {
-        m_Suns.emplace_back(std::make_shared<Sun>(flower,pos));
+        auto temp=std::make_shared<Sun>(flower,pos);
+        temp->SetZIndex(100);
+        m_Suns.emplace_back(temp);
         m_Root.AddChild(m_Suns.back());
     }
     std::shared_ptr<Sun> CheckSun(glm::vec2 click);
@@ -58,10 +60,11 @@ public:
     bool CheckClick(std::vector<float> block,glm::vec2 click);
 
 
+    std::shared_ptr<zombi> CheckZombi();
     void TakePlant(glm::vec2 click,int level);
     void CheckPlant();
     void PutPlant(glm::vec2 click,int level);
-    void CheckBullet();
+    std::vector<std::shared_ptr<zombi>> CheckBullet();
     void ZombieMove();
 private:
     //void ValidTask();

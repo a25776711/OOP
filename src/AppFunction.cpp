@@ -8,24 +8,28 @@ std::shared_ptr<Sun> App::CheckSun(glm::vec2 click) {
     for(auto& sun:m_Suns) {
         glm::vec2 pos = sun->GetPosition();
         std::cout << pos.x << ", " << pos.y << std::endl;
-        LOG_INFO("CheckSun:pos:(x:{},y:{})", pos.x, pos.y);
+        //LOG_INFO("CheckSun:pos:(x:{},y:{})", pos.x, pos.y);
         sun->CollectAndMove(click);
         if(sun->GetMoveState()==MoveOver)return sun;
     }
     return nullptr;
 }
 void App::MoveSun() {
-    m_Suns.erase(std::remove_if(m_Suns.begin(), m_Suns.end(), [&](std::shared_ptr<Sun>& sun) {
-       sun->Move(); // 讓太陽移動
-       if (sun->GetMoveState() == MoveOver) {
-           m_Root.RemoveChild(sun);// 移除畫面中的sun
-
-           Sunamount+=25;
-           m_SunNB->Change(Sunamount);
-           return true; // 返回true來標記這個元素為要刪除的
-       }
-       return false; // 否則不刪除
-   }), m_Suns.end());
+    m_Suns.erase(
+        std::remove_if(m_Suns.begin(), m_Suns.end(), 
+            [&](std::shared_ptr<Sun>& sun) {
+                sun->Move();
+                if(sun->GetMoveState()==MoveOver) {
+                    m_Root.RemoveChild(sun);
+                    Sunamount+=25;
+                    m_SunNB->Change(Sunamount);
+                    return true;  // 標記為要刪除
+                }
+                return false;  // 保留
+            }
+        ), 
+        m_Suns.end()
+    );
 }
 
 //點擊卡片判斷
@@ -125,11 +129,25 @@ void App::CheckPlant() {
         }
     }
 }
-void App::CheckBullet() {
+std::vector<std::shared_ptr<zombi>> App::CheckBullet() {
+    std::vector<std::shared_ptr<zombi>> zom=m_zombiManager->GetZombies();
+    std::vector<std::shared_ptr<zombi>> result;
     for(int i=0;i<m_Bullets.size();i++) {
         auto check=m_Bullets[i];
         check->Move();
+        if(check->GetPosition().x>650) {
+            m_Root.RemoveChild(check);
+            m_Bullets.erase(m_Bullets.begin()+i);
+        }
+        for(auto& z:zom) {
+            if(z->GetState()!=zombi::zombistate::stand&&check->HitCheck(z->GetTransform().translation)){
+                m_Root.RemoveChild(check);
+                m_Bullets.erase(m_Bullets.begin()+i);
+                result.push_back(z);
+            }
+        }
     }
+    return result;
 }
 //設定卡片及場地碰撞格
 void App::SetBlockPos() {
