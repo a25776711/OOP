@@ -141,6 +141,9 @@ std::vector<std::shared_ptr<zombi>> App::CheckBullet() {
         }
         for(auto& z:zom) {
             if(z->GetState()!=zombi::zombistate::stand&&check->HitCheck(z->GetTransform().translation)){
+                if(check->GetType()==Ice) {
+                    z->Gotice(true);
+                }
                 m_Root.RemoveChild(check);
                 m_Bullets.erase(m_Bullets.begin()+i);
                 result.push_back(z);
