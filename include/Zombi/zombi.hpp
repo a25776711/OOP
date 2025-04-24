@@ -155,6 +155,19 @@ public:
         return (temp->GetCurrentFrameIndex() == temp->GetFrameCount() - 1 && m_state == zombistate::die);
 
     }
+    void GetHeart(bool ash,bool ice,int attack) {
+        if (ash) {
+            z_HP = 0;
+            this -> Ash();
+        }
+        else {
+            z_HP -= attack;
+            if (ice) {
+                this -> Gotice(true);
+            }
+            if (z_HP == 0){Die();}
+        }
+    }
 
 
 protected:
