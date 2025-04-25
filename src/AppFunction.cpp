@@ -7,7 +7,6 @@
 std::shared_ptr<Sun> App::CheckSun(glm::vec2 click) {
     for(auto& sun:m_Suns) {
         glm::vec2 pos = sun->GetPosition();
-        std::cout << pos.x << ", " << pos.y << std::endl;
         //LOG_INFO("CheckSun:pos:(x:{},y:{})", pos.x, pos.y);
         sun->CollectAndMove(click);
         if(sun->GetMoveState()==MoveOver)return sun;
@@ -141,9 +140,7 @@ std::vector<std::shared_ptr<zombi>> App::CheckBullet() {
         }
         for(auto& z:zom) {
             if(z->GetState()!=zombi::zombistate::stand&&check->HitCheck(z->GetTransform().translation)){
-                if(check->GetType()==Ice) {
-                    z->Gotice(true);
-                }
+                z->GetHeart(false,check->GetType()==Ice,check->GetDamage());
                 m_Root.RemoveChild(check);
                 m_Bullets.erase(m_Bullets.begin()+i);
                 result.push_back(z);

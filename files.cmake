@@ -30,6 +30,7 @@ set(SRC_FILES
         Background/background.cpp
         Background/UpdateBackground.cpp
 
+
 )
 
 set(INCLUDE_FILES
@@ -62,6 +63,7 @@ set(INCLUDE_FILES
     Background/Adventure.hpp
     Background/CardManager.hpp
     Background/SunNB.hpp
+    Background/car.hpp
 
 )
 
