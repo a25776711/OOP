@@ -31,6 +31,8 @@ public:
             m_iceeat.push_back(RESOURCE_DIR"/zombi/normal/eat_1/eat_1_" + std::to_string(i) + ".png");
         }
         SetImage(m_state);
+        z_speed /= 2;
+        SetLooping(true);
     };
 
     void Gotice(bool ice) override {

@@ -50,8 +50,9 @@ public:
             default:
                 break;
         }
-        z_speed = z_speed / 2;
         SetImage(m_state);
+        z_speed /= 2;
+        SetLooping(true);
     }
 
     void SetImage(zombistate state) {

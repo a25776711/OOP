@@ -131,22 +131,29 @@ void App::CheckPlant() {
 std::vector<std::shared_ptr<zombi>> App::CheckBullet() {
     std::vector<std::shared_ptr<zombi>> zom=m_zombiManager->GetZombies();
     std::vector<std::shared_ptr<zombi>> result;
-    for(int i=0;i<m_Bullets.size();i++) {
-        auto check=m_Bullets[i];
-        check->Move();
-        if(check->GetPosition().x>650) {
-            m_Root.RemoveChild(check);
-            m_Bullets.erase(m_Bullets.begin()+i);
-        }
-        for(auto& z:zom) {
-            if(z->GetState()!=zombi::zombistate::stand&&check->HitCheck(z->GetTransform().translation)){
-                z->GetHeart(false,check->GetType()==Ice,check->GetDamage());
-                m_Root.RemoveChild(check);
-                m_Bullets.erase(m_Bullets.begin()+i);
-                result.push_back(z);
+    m_Bullets.erase(
+        std::remove_if(m_Bullets.begin(), m_Bullets.end(),
+            [&](auto& check) {
+                check->Move();
+                if(check->GetPosition().x > 650) {
+                    m_Root.RemoveChild(check);
+                    return true;
+                }
+                for(auto& z : zom) {
+                    if(z->GetState() != zombi::zombistate::stand && 
+                       check->HitCheck(z->GetTransform().translation)) {
+                        z->GetHeart(false, check->GetType() == Ice, check->GetDamage());
+                        m_Root.RemoveChild(check);
+                        result.push_back(z);
+                        return true;
+                    }
+                }
+                return false;
             }
-        }
-    }
+        ),
+        m_Bullets.end()
+    );
+    
     return result;
 }
 //設定卡片及場地碰撞格
