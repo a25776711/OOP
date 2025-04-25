@@ -113,7 +113,6 @@ void App::CheckPlant() {
                     case Plant::SunFlower:
 
                         if(check->CoolDown()) {
-                            std::cout << "test";
                             MakeSun(true,check->GetPosition());
                         }
                         break;
@@ -140,8 +139,8 @@ std::vector<std::shared_ptr<zombi>> App::CheckBullet() {
                     return true;
                 }
                 for(auto& z : zom) {
-                    if(z->GetState() != zombi::zombistate::stand && 
-                       check->HitCheck(z->GetTransform().translation)) {
+                    z -> IfAnimationEnds();
+                    if(z->GetState() != zombi::zombistate::stand&&z->GetState() != zombi::zombistate::die&& check->HitCheck(z->GetTransform().translation)) {
                         z->GetHeart(false, check->GetType() == Ice, check->GetDamage());
                         m_Root.RemoveChild(check);
                         result.push_back(z);
@@ -180,6 +179,37 @@ void App::SetBlockPos() {
     }
 
 }
+std::vector<glm::vec2> App::GetZomdiPos() {
+    std::vector<glm::vec2> result;
+    for(auto zombi : m_zombiManager -> GetZombies()) {
+        result.push_back(zombi -> GetPosition());
+    }
+    return result;
+}
+void App::ResetSetCarPos() {
+    for(auto car : m_Cars) {
+        m_Root.RemoveChild(car);
+    }
+    m_Cars.clear();
+    float starty = -240.0f;
+    for(int i=0;i<5;i++) {
+        m_Cars.push_back(std::make_shared<Car>(glm::vec2(-450, starty),Car::CarState::Idle));
+        starty += 99.0f;
+        m_Root.AddChild(m_Cars.back());
+    }
 
+}
+void App::CarMoveCheck() {
+    for(auto car : m_Cars) {
+        if(car->GetState() == Car::CarState::Move) {
+            car->Move();
+        }else {
+            for(auto z : GetZomdiPos()) {
+                if(car->IsTouch(z)) {
+                    car->SetState(Car::CarState::Move);
 
-
+                }
+            }
+        }
+    }
+}

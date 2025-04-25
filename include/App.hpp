@@ -7,8 +7,6 @@
 #include "Plant/plant.hpp"
 #include "Background/UpdateBackground.hpp"
 #include "Background/Adventure.hpp"
-#include "Plant/peashooter.hpp"
-#include "Plant/sun.hpp"
 #include "Util/Logger.hpp"
 #include "Background/SunNB.hpp"
 
@@ -55,7 +53,8 @@ public:
     std::shared_ptr<Sun> CheckSun(glm::vec2 click);
     void MoveSun();
     void SetBlockPos();
-    std::shared_ptr<Plant> MakePlant(int i);
+    void ResetSetCarPos();
+    void CarMoveCheck();
     //點擊四個點確認
     bool CheckClick(std::vector<float> block,glm::vec2 click);
 
@@ -65,12 +64,12 @@ public:
     void CheckPlant();
     void PutPlant(glm::vec2 click,int level);
     std::vector<std::shared_ptr<zombi>> CheckBullet();
-    void ZombieMove();
+    std::vector<glm::vec2> GetZomdiPos();
+
 private:
     //void ValidTask();
     std::map<std::string,std::vector<std::vector<float>>> block;
-    int Sunamount=0;
-    int SunClock=0;
+    
     std::shared_ptr<Plant> m_holdingPlant=nullptr;
     State m_CurrentState = State::START;
     Phase m_Phase = Phase::tital;
@@ -81,10 +80,14 @@ private:
     int zombicount = 0;
     std::shared_ptr<ZombiManager> m_zombiManager;
 
+    int Sunamount=0;
+    int SunClock=0;
+    
     std::vector<std::shared_ptr<Sun>> m_Suns;
     std::vector<std::vector<std::shared_ptr<Plant>>> m_Plants;
     std::shared_ptr<SunNB> m_SunNB=std::make_shared<SunNB>();
     std::vector<std::shared_ptr<Bullet>> m_Bullets;
+    std::vector<std::shared_ptr<Car>> m_Cars;
 
     bool m_EnterDown = false;
     bool m_KDown = false; // 初始設為 false

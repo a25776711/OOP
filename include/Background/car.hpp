@@ -9,15 +9,31 @@
 
 class Car:public Util::GameObject {
     public:
-    Car(glm::vec2 pos):Util::GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/plant/car.png"),30) {
+    enum class CarState {
+        Idle,
+        Move
+    };
+    Car(glm::vec2 pos,CarState state):Util::GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/car.png"),30) {
         m_Transform.translation = pos;
+        m_State = state;
     }
     void Move() {
         m_Transform.translation.x += 6.0f;
     }
     bool IsTouch(glm::vec2 pos) {
-        return m_Transform.translation.x < pos.x && m_Transform.translation.x + 30 > pos.x;
+        return m_Transform.translation.x < pos.x && m_Transform.translation.x + 25 >= pos.x &&abs(m_Transform.translation.y - pos.y) <= 30;
     }
+    void SetPosition(glm::vec2 pos) {
+        m_Transform.translation = pos;
+    }
+    CarState GetState() {
+        return m_State;
+    }
+    void SetState(CarState state) {
+        m_State = state;
+    }
+    private:
+        CarState m_State;
 };
 
 

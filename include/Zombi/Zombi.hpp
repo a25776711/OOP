@@ -52,7 +52,7 @@ public:
 
     void Setattack(int HP) {z_attack = HP;}
     int Getattack() { return z_attack;}
-
+    glm::vec2 GetPosition() { return m_Transform.translation;}
     void SetPiov(int level) {
         int x =0;
         if (level == 1){x=3;}
@@ -98,8 +98,8 @@ public:
         m_Drawable = std::make_shared<Util::Animation>(m_ash, true, 100, true, 100);
     }
 
-    void CheckWall() {
-        if (m_Transform.translation.x <= -405 && m_state != zombistate::die) {
+    void CheckCar() {
+        if (m_state != zombistate::die) {
             Die();
         }
     }
