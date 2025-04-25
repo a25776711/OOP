@@ -8,7 +8,7 @@
 class armor : public zombi {
 public:
     armor() :zombi(){
-        SetHP(0);
+        SetHP(10);
         SetSpeed(1);
         Setattack(10);
 
@@ -48,6 +48,7 @@ public:
         }
         z_speed = z_speed / 2;
         SetImage(m_state);
+        SetLooping(true);
     }
 
     void SetImage(zombistate state) {

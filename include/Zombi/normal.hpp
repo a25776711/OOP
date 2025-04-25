@@ -9,7 +9,7 @@
 class normal : public zombi {
 public:
     normal() :zombi(){
-        normal::SetHP(100);
+        normal::SetHP(10);
         normal::SetSpeed(1);
         normal::Setattack(10);
 
@@ -44,6 +44,7 @@ public:
         }
         z_speed = z_speed / 2;
         SetImage(m_state);
+        SetLooping(true);
     }
 
     void SetImage(zombistate state) {

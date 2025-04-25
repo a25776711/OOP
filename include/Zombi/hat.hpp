@@ -15,7 +15,7 @@
 class hat : public zombi {
 public:
     hat() :zombi(){
-        hat::SetHP(150);
+        hat::SetHP(10);
         hat::SetSpeed(1);
         hat::Setattack(10);
         this -> m_die = m_die;
@@ -36,7 +36,9 @@ public:
         for (int i=0;i<11;i++) {
             m_iceeat.push_back(RESOURCE_DIR"/zombi/hat/eat_1/eat_1_" + std::to_string(i) + ".png");
         }
+        z_speed = z_speed / 2;
         SetImage(m_state);
+        SetLooping(true);
     };
 
     void Gotice(bool ice) override {
