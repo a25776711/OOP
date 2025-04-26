@@ -191,24 +191,24 @@ void App::ResetSetCarPos() {
         m_Root.RemoveChild(car);
     }
     m_Cars.clear();
-    float starty = -240.0f;
+    float starty = -235.0f;
     for(int i=0;i<5;i++) {
         m_Cars.push_back(std::make_shared<Car>(glm::vec2(-450, starty),Car::CarState::Idle));
-        starty += 99.0f;
+        starty += 100.0f;
         m_Root.AddChild(m_Cars.back());
     }
 
 }
 void App::CarMoveCheck() {
-    for(auto car : m_Cars) {
-        if(car->GetState() == Car::CarState::Move) {
-            car->Move();
-        }else {
-            for(auto z : GetZomdiPos()) {
-                if(car->IsTouch(z)) {
-                    car->SetState(Car::CarState::Move);
-
-                }
+    std::vector<glm::vec2> carpos ;
+    for(auto& car : m_Cars) {
+        carpos.push_back(car->GetPosition());
+    }
+    for(auto& z : GetZomdiPos()) {
+        for(int i=0;i<carpos.size();i++) {
+            if(m_Cars[i]->IsTouch(z,i)) {
+                m_Cars[i]->SetState(Car::CarState::Move);
+                m_Cars[i]->Move();
             }
         }
     }

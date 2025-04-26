@@ -4,8 +4,9 @@
 
 #ifndef ZOMBIMANGER_HPP
 #define ZOMBIMANGER_HPP
-#include <iostream>
 
+#include <iostream>
+#include "../Background/car.hpp"
 #include "zombi.hpp"
 #include "normal.hpp"
 #include "hat.hpp"
@@ -163,10 +164,16 @@ std::vector<std::shared_ptr<Util::GameObject>> GetZombiesAsGameObjects(std::vect
   return result;
 }
 
-void move() {
+void move(std::vector<std::shared_ptr<Car>> cars) {
+  std::vector<glm::vec2> carpos;
+  for (auto car : cars) {
+    std::cout << car->GetPosition().x << " " << car->GetPosition().y << std::endl;
+    carpos.push_back(car -> GetPosition());
+
+  }
   for (auto zombi : m_result) {
     if (zombi -> GetState() != zombi::zombistate::stand) {
-      zombi -> move();
+      zombi -> move(carpos);
     }
   }
 }

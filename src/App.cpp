@@ -22,6 +22,18 @@ void App::Start() {
 }
 
 void App::Update() {
+    ImGui_ImplSDL2_NewFrame();
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui::NewFrame();
+
+    
+    ImGui::Begin("FPS", nullptr, ImGuiWindowFlags_NoMove| ImGuiWindowFlags_NoBackground);
+    ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
+    ImGui::End();
+
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
     if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
         pos.y=-pos.y;
@@ -64,6 +76,9 @@ void App::Update() {
 
         if (!m_KDown && isKPressed) {
             // 按下K當下觸發一次
+            for(auto& z : m_zombiManager -> GetZombies()) {
+                std::cout << z->GetPosition().x<<" "<<z->GetPosition().y << std::endl;
+            }
             if (m_CurrentZombiIndex < m_zombiManager->GetZombies().size()) {
                 m_zombiManager->SetLoop(m_CurrentZombiIndex++);
             }
@@ -96,7 +111,7 @@ void App::Update() {
 
         m_KDown = isKPressed;
 
-        m_zombiManager -> move();
+        m_zombiManager -> move(m_Cars);
     }
 
 
@@ -109,6 +124,7 @@ void App::Update() {
     m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
     MoveSun();
     CheckPlant();
+    CarMoveCheck();
     auto hitzombi=CheckBullet();
     if(m_PRM->GetLevel()>0)SunClock++;
     if(SunClock>480&&m_PRM->GetLevel()>0) {

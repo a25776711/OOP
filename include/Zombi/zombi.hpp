@@ -37,8 +37,9 @@ public:
 
 
     virtual void Gotice(bool ice) = 0;
-    void move() {
+    void move(std::vector<glm::vec2> cars) {
         m_Transform.translation.x = m_Transform.translation.x - z_speed;
+        //CheckCar(cars);
     };
     virtual void Eating() = 0;
 
@@ -98,12 +99,21 @@ public:
         m_Drawable = std::make_shared<Util::Animation>(m_ash, true, 100, true, 100);
     }
 
-    void CheckCar() {
-        if (m_state != zombistate::die) {
-            Die();
+    bool CheckCar(std::vector<glm::vec2> pos) {
+        std::vector<int> rolly = {170,90,10,-80,-170};
+        int index = -1;
+        for(int i=0;i<pos.size();i++) {
+           if(m_Transform.translation.y==rolly[i]) {
+            index = i;
+           }
+        }
+        if(index != -1) {
+            if(pos[index].x<m_Transform.translation.x) {
+                Die();
+            }
         }
     }
-
+    
     void StartEat() {
         switch (m_state) {
             case zombistate::coldwalk:

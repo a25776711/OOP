@@ -18,10 +18,14 @@ class Car:public Util::GameObject {
         m_State = state;
     }
     void Move() {
-        m_Transform.translation.x += 6.0f;
+        m_Transform.translation.x += 4.0f;
     }
-    bool IsTouch(glm::vec2 pos) {
-        return m_Transform.translation.x < pos.x && m_Transform.translation.x + 25 >= pos.x &&abs(m_Transform.translation.y - pos.y) <= 30;
+    bool IsTouch(glm::vec2 pos,int index) {
+        std::vector<int> rolly = {170,90,10,-80,-170};
+        if(pos.y == rolly[index]&&pos.x <= -440) {  
+            return true;
+        }
+        return false;
     }
     void SetPosition(glm::vec2 pos) {
         m_Transform.translation = pos;
@@ -31,6 +35,9 @@ class Car:public Util::GameObject {
     }
     void SetState(CarState state) {
         m_State = state;
+    }
+    glm::vec2 GetPosition() {
+        return m_Transform.translation;
     }
     private:
         CarState m_State;
