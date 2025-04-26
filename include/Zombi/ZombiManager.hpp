@@ -167,7 +167,6 @@ std::vector<std::shared_ptr<Util::GameObject>> GetZombiesAsGameObjects(std::vect
 void move(std::vector<std::shared_ptr<Car>> cars) {
   std::vector<glm::vec2> carpos;
   for (auto car : cars) {
-    std::cout << car->GetPosition().x << " " << car->GetPosition().y << std::endl;
     carpos.push_back(car -> GetPosition());
 
   }
@@ -181,8 +180,8 @@ std::vector<std::shared_ptr<zombi>> GetZombies() {
   return  m_result;
 }
 
-void SetLoop(int CurrtZombi) {
-  m_result[CurrtZombi] -> SetLooping(true);
+void Startwalk(int CurrtZombi) {
+  m_result[CurrtZombi] -> StartWalk();
 }
 
 void Die(bool ash) {

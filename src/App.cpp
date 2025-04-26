@@ -80,13 +80,13 @@ void App::Update() {
                 std::cout << z->GetPosition().x<<" "<<z->GetPosition().y << std::endl;
             }
             if (m_CurrentZombiIndex < m_zombiManager->GetZombies().size()) {
-                m_zombiManager->SetLoop(m_CurrentZombiIndex++);
+                m_zombiManager->Startwalk(m_CurrentZombiIndex++);
             }
         }
 
         if (zombicount == 480) {
             if (m_CurrentZombiIndex < m_zombiManager->GetZombies().size()) {
-                m_zombiManager->SetLoop(m_CurrentZombiIndex++);
+                m_zombiManager->Startwalk(m_CurrentZombiIndex++);
             }
             zombicount = 0;
         }
@@ -110,8 +110,17 @@ void App::Update() {
         }
 
         m_KDown = isKPressed;
-
         m_zombiManager -> move(m_Cars);
+
+        for (auto z : m_zombiManager -> GetZombies()) {
+            for (auto plants : m_Plants) {
+                for (auto plant : plants) {
+                    if (plant) {
+                        z -> CheckHit(plant);
+                    }
+                }
+            }
+        }
     }
 
 

@@ -45,7 +45,7 @@ public:
         SetLooping(true);
     }
 
-    void SetImage(zombistate state) {
+    void SetImage(zombistate state) override{
 
         switch (state) {
             case zombistate::walk:

@@ -42,7 +42,7 @@ public:
         //CheckCar(cars);
     };
     virtual void Eating() = 0;
-
+    virtual void SetImage(zombistate state) = 0;
     zombistate GetState() {return m_state;}
 
     void SetSpeed(float speed) {z_speed = speed;}
@@ -81,7 +81,7 @@ public:
     }
 
     void SetLooping(bool looping) {
-        m_state = zombistate::walk;
+        // m_state = zombistate::walk;
         auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
         temp->SetLooping(looping);
         temp->Play();
@@ -118,23 +118,33 @@ public:
         switch (m_state) {
             case zombistate::coldwalk:
                 m_state = zombistate::coldeat;
+                z_speed = 0;
+                SetImage(m_state);
+                SetLooping(true);
                 break;
             case zombistate::walk:
                 m_state = zombistate::eat;
+                z_speed = 0;
+                SetImage(m_state);
+                SetLooping(true);
                 break;
             case zombistate::coldeat:
-                return;
+                break;
             case zombistate::eat:
-                return;
+                break;
+            case zombistate::die:
+                break;
+            case zombistate::stand:
+                break;
             default:
                 std::cout << "warmstate" << std::endl;
                 break;
-
         }
-        z_speed = 0;
+
+
     }
 
-    void RestartWalk() {
+    void StartWalk() {
         switch (m_state) {
             case zombistate::coldeat:
                 m_state = zombistate::coldwalk;
@@ -142,14 +152,23 @@ public:
             case zombistate::eat:
                 m_state = zombistate::walk;
                 break;
+            case zombistate::stand:
+                m_state = zombistate::walk;
+                break;
             case zombistate::walk:
-                return;
+                break;
             case zombistate::coldwalk:
-                return;
+                break;
+            case zombistate::die:
+                break;
             default:
                 std::cout << "warmstate" << std::endl;
-            break;
+                break;
         }
+        std::cout << "walk" << std::endl;
+        z_speed = 1;
+        SetImage(m_state);
+        SetLooping(true);
     }
     bool IfAnimationEnds() const {
         if (!m_Drawable) {
@@ -179,7 +198,14 @@ public:
         }
     }
 
+    void CheckHit(std::shared_ptr<Plant> plant) {
+        auto pos = plant->GetPosition();
+        if((m_Transform.translation.x - pos.x <= 30) && (abs(m_Transform.translation.y - pos.y) <=30) &&
+            (m_state != zombistate::eat || m_state != zombistate::coldeat)) {
+            StartEat();
+        }
 
+    }
 
 
 protected:
