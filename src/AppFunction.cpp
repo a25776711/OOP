@@ -93,6 +93,10 @@ bool App::CheckClick(std::vector<float> block,glm::vec2 click) {
 void App::CheckPlant() {
     for(int i=0;i<m_Plants.size();i++) {
         for(int j=0;j<m_Plants[i].size();j++) {
+            if(m_Plants[i][j]->GetHP()<=0) {
+                m_Root.RemoveChild(m_Plants[i][j]);
+                m_Plants[i][j]=nullptr;
+            }
             if(m_Plants[i][j]!=nullptr) {
                 auto check=m_Plants[i][j];
                 auto bullet=check->GetType()==Plant::Shooter?check->Attack(check->GetPosition()):nullptr;
@@ -139,7 +143,6 @@ std::vector<std::shared_ptr<zombi>> App::CheckBullet() {
                     return true;
                 }
                 for(auto& z : zom) {
-                    z -> IfAnimationEnds();
                     if(z->GetState() != zombi::zombistate::stand&&z->GetState() != zombi::zombistate::die&& check->HitCheck(z->GetTransform().translation)) {
                         z->GetHeart(false, check->GetType() == Ice, check->GetDamage());
                         m_Root.RemoveChild(check);
