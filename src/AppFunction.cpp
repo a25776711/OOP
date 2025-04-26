@@ -93,11 +93,12 @@ bool App::CheckClick(std::vector<float> block,glm::vec2 click) {
 void App::CheckPlant() {
     for(int i=0;i<m_Plants.size();i++) {
         for(int j=0;j<m_Plants[i].size();j++) {
-            if(m_Plants[i][j]->GetHP()<=0) {
+            if(m_Plants[i][j]!=nullptr&&m_Plants[i][j]->GetHP()<=0) {
                 m_Root.RemoveChild(m_Plants[i][j]);
                 m_Plants[i][j]=nullptr;
             }
             if(m_Plants[i][j]!=nullptr) {
+                m_Plants[i][j]->Hurt();
                 auto check=m_Plants[i][j];
                 auto bullet=check->GetType()==Plant::Shooter?check->Attack(check->GetPosition()):nullptr;
                 switch (check->GetType()) {
