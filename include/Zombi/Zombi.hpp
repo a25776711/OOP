@@ -180,6 +180,8 @@ public:
     }
 
 
+
+
 protected:
     float z_speed;
     float z_HP;
