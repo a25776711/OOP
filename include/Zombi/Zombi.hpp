@@ -6,6 +6,7 @@
 #define ZOMBI_HPP
 #include "Util/GameObject.hpp"
 #include "Util/Animation.hpp"
+#include "Background/Car.hpp"
 #include "Plant/plant.hpp"
 #include <random>
 #include <string>
@@ -37,9 +38,17 @@ public:
 
 
     virtual void Gotice(bool ice) = 0;
-    void move(std::vector<glm::vec2> cars) {
+    void move(std::vector<std::shared_ptr<Car>> cars) {
+        std::vector<float> rolls={190.0,100.0,10.0,-80.0,-200.0};
         m_Transform.translation.x = m_Transform.translation.x - z_speed;
-        //CheckCar(cars);
+        for (int i=0;i<rolls.size();i++) {
+            if (m_Transform.translation.y==rolls[i]&&m_Transform.translation.x>=-450&&m_state!=zombistate::die) {
+                if (cars[4-i]!=nullptr&&cars[4-i] -> GetPosition().x+20 > m_Transform.translation.x&&
+                cars[4-i] -> GetPosition().x-20 < m_Transform.translation.x) {
+                    Die();
+                }
+            }
+        }
     };
     virtual void Eating() = 0;
     virtual void SetImage(zombistate state) = 0;
@@ -99,19 +108,9 @@ public:
         m_Drawable = std::make_shared<Util::Animation>(m_ash, true, 100, true, 100);
     }
 
-    bool CheckCar(std::vector<glm::vec2> pos) {
+    bool CheckCar(std::vector<std::shared_ptr<Car>> cars) {
         std::vector<int> rolly = {170,90,10,-80,-170};
-        int index = -1;
-        for(int i=0;i<pos.size();i++) {
-           if(m_Transform.translation.y==rolly[i]) {
-            index = i;
-           }
-        }
-        if(index != -1) {
-            if(pos[index].x<m_Transform.translation.x) {
-                Die();
-            }
-        }
+        
     }
     
     void StartEat() {
@@ -217,11 +216,11 @@ protected:
     std::vector<std::string> m_die;
     std::vector<std::string> m_ash;
 
-    glm::vec2 roll1={450.0,170.0};
-    glm::vec2 roll2 ={450.0,90.0};
+    glm::vec2 roll1={450.0,190.0};
+    glm::vec2 roll2 ={450.0,100.0};
     glm::vec2 roll3 = {450.0,10.0};
     glm::vec2 roll4 = {450.0,-80};
-    glm::vec2 roll5 = {450.0,-170};
+    glm::vec2 roll5 = {450.0,-200};
 };
 
 #endif //ZOMBI_HPP

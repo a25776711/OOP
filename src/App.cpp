@@ -133,6 +133,7 @@ void App::Update() {
     m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
     MoveSun();
     CheckPlant();
+    
     CarMoveCheck();
     auto hitzombi=CheckBullet();
     if(m_PRM->GetLevel()>0)SunClock++;

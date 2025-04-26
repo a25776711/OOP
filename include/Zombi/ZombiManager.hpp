@@ -12,6 +12,8 @@
 #include "hat.hpp"
 #include "bucket.hpp"
 #include "armor.hpp"
+#include <glm/glm.hpp>
+
 class ZombiManager{
 public:
    ZombiManager() {
@@ -165,14 +167,10 @@ std::vector<std::shared_ptr<Util::GameObject>> GetZombiesAsGameObjects(std::vect
 }
 
 void move(std::vector<std::shared_ptr<Car>> cars) {
-  std::vector<glm::vec2> carpos;
-  for (auto car : cars) {
-    carpos.push_back(car -> GetPosition());
-
-  }
+  
   for (auto zombi : m_result) {
-    if (zombi -> GetState() != zombi::zombistate::stand) {
-      zombi -> move(carpos);
+    if(zombi -> GetState() != zombi::zombistate::stand&&zombi -> GetState() != zombi::zombistate::die) {
+      zombi -> move(cars);
     }
   }
 }

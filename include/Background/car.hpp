@@ -16,13 +16,14 @@ class Car:public Util::GameObject {
     Car(glm::vec2 pos,CarState state):Util::GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/car.png"),30) {
         m_Transform.translation = pos;
         m_State = state;
+        SetZIndex(5);
     }
     void Move() {
         m_Transform.translation.x += 4.0f;
     }
     bool IsTouch(glm::vec2 pos,int index) {
-        std::vector<int> rolly = {170,90,10,-80,-170};
-        if(pos.y == rolly[index]&&pos.x <= -440) {  
+        std::vector<int> rolly = {190,100,10,-80,-200};
+        if(pos.y == rolly[index]&&pos.x <= -430) {  
             return true;
         }
         return false;

@@ -202,13 +202,25 @@ void App::ResetSetCarPos() {
 void App::CarMoveCheck() {
     std::vector<glm::vec2> carpos ;
     for(auto& car : m_Cars) {
-        carpos.push_back(car->GetPosition());
+        if(car!=nullptr) {
+            carpos.push_back(car->GetPosition());
+        }else{
+            carpos.push_back({-999,0});
+        }
     }
     for(auto& z : GetZomdiPos()) {
-        for(int i=0;i<carpos.size();i++) {
-            if(m_Cars[i]->IsTouch(z,i)) {
-                m_Cars[i]->SetState(Car::CarState::Move);
-                m_Cars[i]->Move();
+        for(int i=0;i<5;i++) {
+            if(carpos[4-i]!=glm::vec2(-999,0)&&m_Cars[4-i]->IsTouch(z,i)) {
+                int targetIndex = 4-i;
+                if(targetIndex >= 0 && targetIndex < m_Cars.size() && m_Cars[targetIndex] != nullptr) {
+                    m_Cars[targetIndex]->SetState(Car::CarState::Move);
+                    m_Cars[targetIndex]->Move();
+                    m_Cars[targetIndex]->SetZIndex(10);
+                    if(m_Cars[targetIndex]->GetPosition().x > 650) {
+                        m_Root.RemoveChild(m_Cars[targetIndex]);
+                        m_Cars[targetIndex].reset();
+                    }
+                }
             }
         }
     }
