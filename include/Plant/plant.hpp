@@ -14,11 +14,12 @@
 class Plant: public Util::GameObject{
     public:
     enum PlantType {
-      SunFlower,
-        WallNut,
-        Shooter,
-        Boom,
-        Closer
+      T_SunFlower,
+        T_WallNut,
+        T_Shooter,
+        T_Mine,
+        T_Bomb,
+        T_Chomper
     };
     explicit Plant(std::vector<std::string>& Path,int interval){
         SetZIndex(5);

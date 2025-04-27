@@ -16,6 +16,8 @@ class PlantLoader{
   std::vector<std::string> sunflowerIMG_1;
   std::vector<std::string> sunIMG;
   std::vector<std::string> mineIMG;
+  std::vector<std::string> mineIMG_1;
+  std::vector<std::string> mineIMG_boom;
   std::vector<std::string> peashooterIMG;
   std::vector<std::string> fastshooterIMG;
   std::vector<std::string> wallnutIMG;
@@ -26,6 +28,7 @@ class PlantLoader{
   std::vector<std::string> chomperIMG_1;
   std::vector<std::string> chomperIMG_2;
   std::vector<std::string> cherryIMG;
+
   void loadPlantImages(){
     std::string path=RESOURCE_DIR"/plant/";
     for(int i = 0; i < 24; i++)
@@ -36,6 +39,8 @@ class PlantLoader{
       sunIMG.emplace_back(path+"sun/sun_"+std::to_string(i) + ".png");
     for(int i = 0; i < 8; i++)
       mineIMG.emplace_back(path+"mine/mine_" + std::to_string(i) + ".png");
+    mineIMG_1.emplace_back(path+"mine_1.png");
+    mineIMG_boom.emplace_back(path+"boom.png");
     for(int i = 0; i < 24; i++)
       peashooterIMG.emplace_back(path+"Peashooter/peashooter_" + std::to_string(i) + ".png");
     for(int i = 1; i < 16; i++)

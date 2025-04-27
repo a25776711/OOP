@@ -18,7 +18,7 @@ set(SRC_FILES
     Plant/peashooter.cpp
     Plant/wallnut.cpp
     Plant/cherrybomb.cpp
-    Plant/min.cpp
+    Plant/mine.cpp
     Plant/iceshooter.cpp
     Plant/fastshooter.cpp
     Plant/chomper.cpp

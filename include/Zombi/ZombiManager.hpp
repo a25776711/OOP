@@ -174,7 +174,8 @@ void move(std::vector<std::shared_ptr<Car>> cars) {
     }
   }
 }
-std::vector<std::shared_ptr<zombi>> GetZombies() {
+
+   std::vector<std::shared_ptr<zombi>> &GetZombies() {
   return  m_result;
 }
 

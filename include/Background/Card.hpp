@@ -38,7 +38,7 @@ public:
       }
       void SetPos(glm::vec2 pos) {
             m_Transform.translation=pos;
-            four_points={pos.x-40,pos.y-40,pos.x+40,pos.y+40};
+            four_points={pos.x-30,pos.y-40,pos.x+30,pos.y+40};
       }
       std::vector<float>GetFourPoints() {return four_points;}
       private:

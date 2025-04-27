@@ -11,7 +11,7 @@ class Chomper:public Plant {
     Chomper():Plant(m_Loader.chomperIMG,70) {
         SetHP();
         SetCost(150);
-        SetType(Closer);
+        SetType(T_Chomper);
     }
     private:
     int m_Cooldown;

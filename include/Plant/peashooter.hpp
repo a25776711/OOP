@@ -12,7 +12,7 @@ public:
     explicit Peashooter():Plant(m_Loader.peashooterIMG,60) {
         SetATK(1);
         SetHP();
-        SetType(Shooter);
+        SetType(T_Shooter);
     }
     bool AttackCheck(glm::vec2 pos);
     std::shared_ptr<Bullet> Attack(glm::vec2 pos) override;

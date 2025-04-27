@@ -98,30 +98,36 @@ void App::CheckPlant() {
                 m_Plants[i][j]=nullptr;
             }
             if(m_Plants[i][j]!=nullptr) {
-                m_Plants[i][j]->Hurt();
                 auto check=m_Plants[i][j];
-                auto bullet=check->GetType()==Plant::Shooter?check->Attack(check->GetPosition()):nullptr;
+                auto bullet=check->GetType()==Plant::T_Shooter?check->Attack(check->GetPosition()):nullptr;
+                auto m_mine=check->GetType()==Plant::T_Mine?std::dynamic_pointer_cast<Mine>(check):nullptr;
                 switch (check->GetType()) {
-                    case Plant::Shooter:
+                    case Plant::T_Shooter:
                     if(bullet!=nullptr) {
                         bullet->SetZIndex(21);
                         m_Bullets.push_back(bullet);
                         m_Root.AddChild(m_Bullets.back());
                     }
                     break;
-                    case Plant::Boom:
+                    case Plant::T_Mine:
+                        if(m_mine->Attack(m_zombiManager->GetZombies())){
+                            m_Root.RemoveChild(m_mine);
+                            m_Plants[i][j].reset();
+                        }
+                        break;
+                    case Plant::T_Bomb:
+                        
+                        break;
+                    case Plant::T_Chomper:
 
                         break;
-                    case Plant::Closer:
-
-                        break;
-                    case Plant::SunFlower:
+                    case Plant::T_SunFlower:
 
                         if(check->CoolDown()) {
                             MakeSun(true,check->GetPosition());
                         }
                         break;
-                    case Plant::WallNut:
+                    case Plant::T_WallNut:
 
                         break;
                     default:

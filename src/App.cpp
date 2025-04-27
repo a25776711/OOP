@@ -137,10 +137,10 @@ void App::Update() {
     CarMoveCheck();
     auto hitzombi=CheckBullet();
     if(m_PRM->GetLevel()>0)SunClock++;
-    if(SunClock>480&&m_PRM->GetLevel()>0) {
-        SunClock=0;
-        MakeSun(false,{0,0});
-    }
+    // if(SunClock>480&&m_PRM->GetLevel()>0) {
+    //     SunClock=0;
+    //     MakeSun(false,{0,0});
+    // }
 
     if(m_holdingPlant!=nullptr){
         glm::vec2 pos=Util::Input::GetCursorPosition();

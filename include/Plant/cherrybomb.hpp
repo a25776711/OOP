@@ -9,7 +9,7 @@
 class Cherrybomb:public Plant {
     public:
     explicit  Cherrybomb():Plant(m_Loader.cherryIMG,70) {
-        SetATK(90);SetCost(150);SetType(Boom);
+        SetATK(90);SetCost(150);SetType(T_Bomb);
     }
 
     private:
