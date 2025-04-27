@@ -28,9 +28,9 @@ class Mine : public Plant {
                 if(!m_isActive&&
                 zombie->GetState()!=zombi::zombistate::die&&
                 abs(zombie->GetPosition().y-GetPosition().y)<50&&
-                zombie->GetPosition().x<GetPosition().x+40){
+                abs(zombie->GetPosition().x-GetPosition().x)<40){
                     zombie->GetHeart(false,false,100);
-                    std::cout << "Mine" << std::endl;
+                    std::cout << "Mine Boom" << std::endl;
                     m_isActive=true;
                 }
             }

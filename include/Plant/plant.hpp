@@ -23,7 +23,7 @@ class Plant: public Util::GameObject{
     };
     explicit Plant(std::vector<std::string>& Path,int interval){
         SetZIndex(5);
-        m_Drawable = std::make_shared<Util::Animation>(Path, true, interval, true, 0);
+        m_Drawable = std::make_shared<Util::Animation>(Path, false, interval, true, 0);
         
     }
     [[nodiscard]] bool GetVisibility() const { return m_Visible;}
@@ -39,6 +39,7 @@ class Plant: public Util::GameObject{
     }
     int GetHP(){return m_hp;}
     void SetATK(int atk) { m_ATK = atk;}
+    int GetATK(){return m_ATK;}
     void PLAY(bool play);
     virtual void Hurt() {
         m_hp--;
@@ -47,9 +48,12 @@ class Plant: public Util::GameObject{
     int GetCost(){return m_cost;}
     void SetType(PlantType type){m_Type=type;}
     PlantType GetType(){return m_Type;}
-
-
-    virtual std::shared_ptr<Bullet> Attack(glm::vec2 pos){return nullptr;};
+    void Play(){
+        auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
+        temp->Play();
+    }
+    
+    virtual std::shared_ptr<Bullet> Attack(std::vector<glm::vec2> pos){return nullptr;};
     virtual void Boomer(){};
     virtual bool CoolDown(){return false;};
     protected:

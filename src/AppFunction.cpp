@@ -49,6 +49,7 @@ void App::PutPlant(glm::vec2 m_click,int level){
                     auto check=block[std::to_string(2)][j];
                     if(CheckClick(check,m_click)&&m_Plants[2][j]==nullptr){
                         m_Plants[2][j]=m_holdingPlant;
+                        m_holdingPlant->Play();
                         m_holdingPlant->SetPosition({check[4],check[5]});
                         m_holdingPlant=nullptr;
                         LOG_INFO("PutPlant on {},{}",check[4],check[5]);
@@ -61,6 +62,7 @@ void App::PutPlant(glm::vec2 m_click,int level){
                         auto check=block[std::to_string(i)][j];
                         if(CheckClick(check,m_click)&&m_Plants[i][j]==nullptr) {
                             m_Plants[i][j]=m_holdingPlant;
+                            m_holdingPlant->Play();
                             m_holdingPlant->SetPosition({check[4],check[5]});
                             m_holdingPlant=nullptr;
                             LOG_INFO("PutPlant on {},{}",check[4],check[5]);
@@ -74,6 +76,7 @@ void App::PutPlant(glm::vec2 m_click,int level){
                         auto check=block[std::to_string(i)][j];
                         if(CheckClick(check,m_click)&&m_Plants[i][j]==nullptr) {
                             m_Plants[i][j]=m_holdingPlant;
+                            m_holdingPlant->Play();
                             m_holdingPlant->SetPosition({check[4],check[5]});
                             m_holdingPlant=nullptr;
                             LOG_INFO("PutPlant on {},{}",check[4],check[5]);
@@ -98,9 +101,17 @@ void App::CheckPlant() {
                 m_Plants[i][j]=nullptr;
             }
             if(m_Plants[i][j]!=nullptr) {
+                std::vector<glm::vec2> zpos;
                 auto check=m_Plants[i][j];
-                auto bullet=check->GetType()==Plant::T_Shooter?check->Attack(check->GetPosition()):nullptr;
+                if(check->GetType()==Plant::T_Shooter) {
+                    for(auto& z : m_zombiManager->GetZombies()) {
+                        if(z->GetState() != zombi::zombistate::die&&z->GetState() != zombi::zombistate::stand) 
+                            zpos.push_back(z->GetPosition());
+                    }
+                }
+                auto bullet=check->GetType()==Plant::T_Shooter?check->Attack(zpos):nullptr;
                 auto m_mine=check->GetType()==Plant::T_Mine?std::dynamic_pointer_cast<Mine>(check):nullptr;
+                auto m_bomb=check->GetType()==Plant::T_Bomb?std::dynamic_pointer_cast<Cherrybomb>(check):nullptr;
                 switch (check->GetType()) {
                     case Plant::T_Shooter:
                     if(bullet!=nullptr) {
@@ -116,7 +127,10 @@ void App::CheckPlant() {
                         }
                         break;
                     case Plant::T_Bomb:
-                        
+                        if(m_bomb->Attack(m_zombiManager->GetZombies())){
+                            m_Root.RemoveChild(m_bomb);
+                            m_Plants[i][j].reset();
+                        }
                         break;
                     case Plant::T_Chomper:
 

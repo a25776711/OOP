@@ -7,10 +7,13 @@
 #include "Util/GameObject.hpp"
 #include "Util/Animation.hpp"
 #include "Background/Car.hpp"
-#include "Plant/plant.hpp"
 #include <random>
 #include <string>
 #include <iostream>
+#include <memory>
+
+// 前向聲明
+class Plant;
 
 class zombi :public Util::GameObject {
 public:
@@ -107,11 +110,6 @@ public:
         z_speed = 0;
         m_Drawable = std::make_shared<Util::Animation>(m_ash, true, 100, true, 100);
     }
-
-    bool CheckCar(std::vector<std::shared_ptr<Car>> cars) {
-        std::vector<int> rolly = {170,90,10,-80,-170};
-        
-    }
     
     void StartEat() {
         switch (m_state) {
@@ -197,15 +195,7 @@ public:
         }
     }
 
-    void CheckHit(std::shared_ptr<Plant> plant) {
-        auto pos = plant->GetPosition();
-        if((m_Transform.translation.x - pos.x <= 30) && (abs(m_Transform.translation.y - pos.y) <=30) &&
-            (m_state != zombistate::eat || m_state != zombistate::coldeat)) {
-            StartEat();
-        }
-
-    }
-
+    void CheckHit(std::shared_ptr<Plant> plant);
 
 protected:
     float z_speed;

@@ -11,7 +11,42 @@ class Cherrybomb:public Plant {
     explicit  Cherrybomb():Plant(m_Loader.cherryIMG,70) {
         SetATK(90);SetCost(150);SetType(T_Bomb);
     }
+    bool Attack(std::vector<std::shared_ptr<zombi>> &zombis){
+        if(!showboom&&IfAnimationEnds()){
+            m_Drawable=std::make_shared<Util::Animation>(m_Loader.cherryIMG_Boom,false,2000,false,100);
+            for(auto &zombi:zombis){
+                if(abs(zombi->GetPosition().x-GetPosition().x)<140&&abs(zombi->GetPosition().y-GetPosition().y)<150){
+                    zombi->GetHeart(true,false,GetATK());
+                }
+            }
+            showboom=true;
+            showover=0;
+        }
+        else if(showboom&&showover>=30){
+            return true;
+        }
+        else if(showboom){
+            showover++;
+        }
+        return false;
+
+    }
+    bool IfAnimationEnds() const {
+        if (!m_Drawable) {
+            std::cerr << "[ERROR] m_Drawable is null." << std::endl;
+            return false;
+        }
+
+        auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
+        if (!temp) {
+            std::cerr << "[ERROR] m_Drawable is not an Animation." << std::endl;
+            return false;
+        }
+        return (temp->GetCurrentFrameIndex() == temp->GetFrameCount() - 1 );
+    }
 
     private:
+    bool showboom=false;
+    int showover=false;
 };
 #endif //CHERRYBOMB_HPP
