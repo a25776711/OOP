@@ -196,7 +196,6 @@ public:
             if (z_HP <= 0){Die();}
         }
     }
-
     void HitCheck(std::shared_ptr<Plant> plant) {
         auto pos = plant -> GetPosition();
         if(pos.x>m_Transform.translation.x&&pos.x-m_Transform.translation.x<20&&abs(pos.y-m_Transform.translation.y)<30
@@ -213,7 +212,6 @@ protected:
 
     std::vector<std::string> m_die;
     std::vector<std::string> m_ash;
-
 
     glm::vec2 roll1={450.0,190.0};
     glm::vec2 roll2 ={450.0,100.0};
