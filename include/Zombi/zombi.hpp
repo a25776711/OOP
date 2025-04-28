@@ -6,10 +6,14 @@
 #define ZOMBI_HPP
 #include "Util/GameObject.hpp"
 #include "Util/Animation.hpp"
-#include "Plant/plant.hpp"
+#include "Background/Car.hpp"
 #include <random>
 #include <string>
 #include <iostream>
+#include <memory>
+
+// 前向聲明
+class Plant;
 
 class zombi :public Util::GameObject {
 public:
@@ -39,11 +43,20 @@ public:
 
 
     virtual void Gotice(bool ice) = 0;
-    void move() {
+    void move(std::vector<std::shared_ptr<Car>> cars) {
+        std::vector<float> rolls={190.0,100.0,10.0,-80.0,-200.0};
         m_Transform.translation.x = m_Transform.translation.x - z_speed;
+        for (int i=0;i<rolls.size();i++) {
+            if (m_Transform.translation.y==rolls[i]&&m_Transform.translation.x>=-450&&m_state!=zombistate::die) {
+                if (cars[4-i]!=nullptr&&cars[4-i]!=nullptr&&cars[4-i] -> GetPosition().x+20 > m_Transform.translation.x
+                &&cars[4-i] -> GetPosition().x-20 < m_Transform.translation.x) {
+                    Die();
+                }
+            }
+        }
     };
     virtual void Eating() = 0;
-
+    virtual void SetImage(zombistate state) = 0;
     zombistate GetState() {return m_state;}
 
     void SetSpeed(float speed) {z_speed = speed;}
@@ -54,7 +67,7 @@ public:
 
     void Setattack(int HP) {z_attack = HP;}
     int Getattack() { return z_attack;}
-
+    glm::vec2 GetPosition() { return m_Transform.translation;}
     void SetPiov(int level) {
         int x =0;
         if (level == 1){x=3;}
@@ -82,7 +95,7 @@ public:
     }
 
     void SetLooping(bool looping) {
-        m_state = zombistate::walk;
+        // m_state = zombistate::walk;
         auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
         temp->SetLooping(looping);
         temp->Play();
@@ -99,35 +112,38 @@ public:
         z_speed = 0;
         m_Drawable = std::make_shared<Util::Animation>(m_ash, true, 100, true, 100);
     }
-
-    void CheckWall() {
-        if (m_Transform.translation.x <= -405 && m_state != zombistate::die) {
-            Die();
-        }
-    }
-
+    
     void StartEat() {
         switch (m_state) {
             case zombistate::coldwalk:
                 m_state = zombistate::coldeat;
+                z_speed = 0;
+                SetImage(m_state);
+                SetLooping(true);
                 break;
             case zombistate::walk:
                 m_state = zombistate::eat;
+                z_speed = 0;
+                SetImage(m_state);
+                SetLooping(true);
                 break;
             case zombistate::coldeat:
-                return;
+                break;
             case zombistate::eat:
-                return;
+                break;
+            case zombistate::die:
+                break;
+            case zombistate::stand:
+                break;
             default:
                 break;
-
         }
         z_speed = 0;
         SetImage(m_state);
         SetLooping(true);
     }
 
-    void RestartWalk() {
+    void StartWalk() {
         switch (m_state) {
             case zombistate::coldeat:
                 m_state = zombistate::coldwalk;
@@ -135,14 +151,23 @@ public:
             case zombistate::eat:
                 m_state = zombistate::walk;
                 break;
+            case zombistate::stand:
+                m_state = zombistate::walk;
+                break;
             case zombistate::walk:
-                return;
+                break;
             case zombistate::coldwalk:
-                return;
+                break;
+            case zombistate::die:
+                break;
             default:
                 std::cout << "warmstate" << std::endl;
-            break;
+                break;
         }
+        std::cout << "walk" << std::endl;
+        z_speed = 1;
+        SetImage(m_state);
+        SetLooping(true);
     }
     bool IfAnimationEnds() const {
         if (!m_Drawable) {
@@ -168,7 +193,7 @@ public:
             if (ice) {
                 this -> Gotice(true);
             }
-            if (z_HP == 0){Die();}
+            if (z_HP <= 0){Die();}
         }
     }
 
@@ -180,8 +205,6 @@ public:
         }
     };
 
-
-
 protected:
     float z_speed;
     float z_HP;
@@ -191,11 +214,12 @@ protected:
     std::vector<std::string> m_die;
     std::vector<std::string> m_ash;
 
-    glm::vec2 roll1={450.0,190};
-    glm::vec2 roll2 ={450.0,90};
-    glm::vec2 roll3 = {450.0,10};
+
+    glm::vec2 roll1={450.0,190.0};
+    glm::vec2 roll2 ={450.0,100.0};
+    glm::vec2 roll3 = {450.0,10.0};
     glm::vec2 roll4 = {450.0,-80};
-    glm::vec2 roll5 = {450.0,-195};
+    glm::vec2 roll5 = {450.0,-200};
 };
 
 #endif //ZOMBI_HPP

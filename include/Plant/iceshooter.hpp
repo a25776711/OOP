@@ -9,14 +9,14 @@
 class Iceshooter:public Plant {
     public:
     explicit Iceshooter():Plant(m_Loader.icepeashooterIMG,70) {
-        SetHP();SetCost(175);SetType(Shooter);
+        SetHP();SetCost(175);SetType(T_Shooter);SetTakeCD(450);
 
     }
-    bool AttackCheck(glm::vec2 pos);
-    std::shared_ptr<Bullet> Attack(glm::vec2 pos) override;
+    bool AttackCheck(std::vector<glm::vec2> pos);
+    std::shared_ptr<Bullet> Attack(std::vector<glm::vec2> pos);
 
     private:
-    int m_cooldown;
+    int m_cooldown=90;
 
 };
 #endif //ICESHOOTER_HPP

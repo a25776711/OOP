@@ -18,7 +18,7 @@ set(SRC_FILES
     Plant/peashooter.cpp
     Plant/wallnut.cpp
     Plant/cherrybomb.cpp
-    Plant/min.cpp
+    Plant/mine.cpp
     Plant/iceshooter.cpp
     Plant/fastshooter.cpp
     Plant/chomper.cpp
@@ -29,6 +29,7 @@ set(SRC_FILES
 
         Background/background.cpp
         Background/UpdateBackground.cpp
+
 
 )
 
@@ -62,6 +63,7 @@ set(INCLUDE_FILES
     Background/Adventure.hpp
     Background/CardManager.hpp
     Background/SunNB.hpp
+    Background/car.hpp
 
 )
 

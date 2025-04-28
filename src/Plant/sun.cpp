@@ -15,13 +15,13 @@ Sun::Sun(bool flower,glm::vec2 pos):Plant(m_Loader.sunIMG,60) {
         int Y = rand()%(180-(-250)+1)+(-250);
         m_drop={X,Y};
         m_Transform.translation={X,300};
-        LOG_INFO("Generated Sun at position: ({}, {})", X,200);
+        //LOG_INFO("Generated Sun at position: ({}, {})", X,200);
     }else {
         m_Transform.scale={0.8,0.8};
         m_state=Droping;
         m_drop = {pos.x + (rand() % 31 - 15), pos.y - 20};
         m_Transform.translation = {pos.x,pos.y+20};
-        LOG_INFO("Generated Sun at position: ({}, {})", pos.x,pos.y);
+        //LOG_INFO("Generated Sun at position: ({}, {})", pos.x,pos.y);
     }
 }
 void Sun::CollectAndMove(glm::vec2 click) {
@@ -34,7 +34,7 @@ void Sun::CollectAndMove(glm::vec2 click) {
 void Sun::Move() {
     glm::vec2 pos = m_Transform.translation;
     if(m_flower) {
-        if(m_state==Droping&&!m_click){
+        if(m_state==Droping&&!m_click&&m_state!=MoveOver){
             glm::vec2 direction = m_drop - pos;
             float distance = glm::length(direction);
 
@@ -66,7 +66,7 @@ void Sun::Move() {
         p3 = {m_Transform.translation.x - 20, m_Transform.translation.y - 20};
         p4 = {m_Transform.translation.x + 20, m_Transform.translation.y - 20};
     }else{
-    if(m_state==Droping&&!m_click){
+    if(m_state==Droping&&!m_click&&m_state!=MoveOver){
         glm::vec2 direction = m_drop - pos;
         float distance = glm::length(direction);
 

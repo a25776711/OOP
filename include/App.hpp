@@ -7,10 +7,9 @@
 #include "Plant/plant.hpp"
 #include "Background/UpdateBackground.hpp"
 #include "Background/Adventure.hpp"
-#include "Plant/peashooter.hpp"
-#include "Plant/sun.hpp"
 #include "Util/Logger.hpp"
 #include "Background/SunNB.hpp"
+#include "Plant/PlantLoader.hpp"
 
 // IWYU pragma: export
 
@@ -47,27 +46,32 @@ public:
             fiveroad
     };
     void MakeSun(bool flower,glm::vec2 pos) {
-        m_Suns.emplace_back(std::make_shared<Sun>(flower,pos));
+        auto temp=std::make_shared<Sun>(flower,pos);
+        temp->SetZIndex(100);
+        m_Suns.emplace_back(temp);
         m_Root.AddChild(m_Suns.back());
     }
     std::shared_ptr<Sun> CheckSun(glm::vec2 click);
     void MoveSun();
     void SetBlockPos();
-    std::shared_ptr<Plant> MakePlant(int i);
+    void ResetSetCarPos(int level);
+    void ResetPlant(int level);
+    void CarMoveCheck();
     //點擊四個點確認
     bool CheckClick(std::vector<float> block,glm::vec2 click);
 
 
+    std::shared_ptr<zombi> CheckZombi();
     void TakePlant(glm::vec2 click,int level);
     void CheckPlant();
     void PutPlant(glm::vec2 click,int level);
-    void CheckBullet();
-    void ZombieMove();
+    std::vector<std::shared_ptr<zombi>> CheckBullet();
+    std::vector<glm::vec2> GetZomdiPos();
+
 private:
     //void ValidTask();
     std::map<std::string,std::vector<std::vector<float>>> block;
-    int Sunamount=0;
-    int SunClock=0;
+    
     std::shared_ptr<Plant> m_holdingPlant=nullptr;
     State m_CurrentState = State::START;
     Phase m_Phase = Phase::tital;
@@ -78,15 +82,18 @@ private:
     int zombicount = 0;
     std::shared_ptr<ZombiManager> m_zombiManager;
 
+    int Sunamount=0;
+    int SunClock=0;
+    
     std::vector<std::shared_ptr<Sun>> m_Suns;
     std::vector<std::vector<std::shared_ptr<Plant>>> m_Plants;
     std::shared_ptr<SunNB> m_SunNB=std::make_shared<SunNB>();
     std::vector<std::shared_ptr<Bullet>> m_Bullets;
+    std::vector<std::shared_ptr<Car>> m_Cars;
 
     bool m_EnterDown = false;
     bool m_KDown = false; // 初始設為 false
-
-
+    bool m_showCollisionBoxes = true;
 };
 
 #endif

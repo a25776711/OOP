@@ -15,7 +15,8 @@ public:
     SunFlower():Plant(m_Loader.sunflowerIMG,60) {
         SetHP();
         SetCost(50);
-        SetType(PlantType::SunFlower);
+        SetType(T_SunFlower);
+        SetTakeCD(450);
     }
     bool CoolDown()override {
         if(m_Cooldown>=1440){m_Cooldown=0;return true;}

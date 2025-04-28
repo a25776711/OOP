@@ -32,7 +32,6 @@ class Sun : public Plant {
     void CollectAndMove(glm::vec2 click);
     void Move();
     MoveState GetMoveState() {return m_state;}
-    void SetDropdes(glm::vec2 dropdes){m_drop=dropdes;}
 
     private:
     MoveState m_state=MoveState::Collectable;

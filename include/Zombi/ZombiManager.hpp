@@ -4,13 +4,16 @@
 
 #ifndef ZOMBIMANGER_HPP
 #define ZOMBIMANGER_HPP
-#include <iostream>
 
+#include <iostream>
+#include "../Background/car.hpp"
 #include "zombi.hpp"
 #include "normal.hpp"
 #include "hat.hpp"
 #include "bucket.hpp"
 #include "armor.hpp"
+#include <glm/glm.hpp>
+
 class ZombiManager{
 public:
    ZombiManager() {
@@ -163,19 +166,21 @@ std::vector<std::shared_ptr<Util::GameObject>> GetZombiesAsGameObjects(std::vect
   return result;
 }
 
-void move() {
+void move(std::vector<std::shared_ptr<Car>> cars) {
+  
   for (auto zombi : m_result) {
-    if (zombi -> GetState() != zombi::zombistate::stand) {
-      zombi -> move();
+    if(zombi -> GetState() != zombi::zombistate::stand&&zombi -> GetState() != zombi::zombistate::die) {
+      zombi -> move(cars);
     }
   }
 }
-std::vector<std::shared_ptr<zombi>> GetZombies() {
+
+   std::vector<std::shared_ptr<zombi>> &GetZombies() {
   return  m_result;
 }
 
-void SetLoop(int CurrtZombi) {
-  m_result[CurrtZombi] -> SetLooping(true);
+void Startwalk(int CurrtZombi) {
+  m_result[CurrtZombi] -> StartWalk();
 }
 
 void Die(bool ash) {
@@ -193,12 +198,6 @@ bool IfAnimationEnds() {
       return true;
     }
     else return false;
-  }
-};
-
-void  CheckWall() {
-  for (auto zombi : m_result) {
-    zombi -> CheckWall();
   }
 };
 private:

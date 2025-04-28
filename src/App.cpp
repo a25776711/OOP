@@ -10,6 +10,9 @@
 void App::Start() {
     LOG_TRACE("Start");
 
+    // 初始化 PlantLoader
+    PlantLoader::GetInstance();
+
     m_PRM = std::make_shared<UpdateBackground>();
     m_zombiManager = std::make_shared<ZombiManager>();
     m_Root.AddChildren(m_PRM->GetChildren());
@@ -22,23 +25,41 @@ void App::Start() {
 }
 
 void App::Update() {
+    ImGui_ImplSDL2_NewFrame();
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui::NewFrame();
+
+    
+    ImGui::Begin("FPS", nullptr, ImGuiWindowFlags_NoMove| ImGuiWindowFlags_NoBackground);
+    ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
+    ImGui::End();
+
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
     if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
         pos.y=-pos.y;
         std::cout <<"("<< pos.x <<","<<pos.y<<")"<< std::endl;
     }
-
+    if(Util::Input::IsKeyDown(Util::Keycode::J)) {
+        Sunamount+=100;
+        m_SunNB->Change(Sunamount);
+    }
     if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
         pos.y=-pos.y;
-        if(CheckSun(pos)){m_Root.RemoveChild(CheckSun(pos));}
-        if(m_holdingPlant==nullptr){TakePlant(pos,m_PRM->GetLevel()+1);}
-        if(m_holdingPlant!=nullptr){PutPlant(pos,m_PRM->GetLevel());}
+        if(m_PRM->GetLevel()!=0){
+            if(CheckSun(pos)){m_Root.RemoveChild(CheckSun(pos));}
+            if(m_holdingPlant==nullptr){TakePlant(pos,m_PRM->GetLevel()+1);}
+            if(m_holdingPlant!=nullptr){PutPlant(pos,m_PRM->GetLevel());}
+        }
         if (m_PRM ->GetLevel()==0) {
             if (m_PRM -> CheckHit(pos)) {
                 m_PRM ->NextLevel();
                 m_Root.AddChildren(m_PRM->GetChildren());
                 m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
+                ResetPlant(m_PRM -> GetLevel());
             }
         }
 
@@ -54,6 +75,7 @@ void App::Update() {
             m_Root.AddChildren(m_PRM-> GetChildren());
             m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
             if (m_PRM -> GetLevel() ==11){ m_CurrentState = State::END;}
+            ResetPlant(m_PRM -> GetLevel());
         }
     }
 
@@ -62,14 +84,17 @@ void App::Update() {
 
         if (!m_KDown && isKPressed) {
             // 按下K當下觸發一次
+            for(auto& z : m_zombiManager -> GetZombies()) {
+                std::cout << z->GetPosition().x<<" "<<z->GetPosition().y << std::endl;
+            }
             if (m_CurrentZombiIndex < m_zombiManager->GetZombies().size()) {
-                m_zombiManager->SetLoop(m_CurrentZombiIndex++);
+                m_zombiManager->Startwalk(m_CurrentZombiIndex++);
             }
         }
 
         if (zombicount == 480) {
             if (m_CurrentZombiIndex < m_zombiManager->GetZombies().size()) {
-                m_zombiManager->SetLoop(m_CurrentZombiIndex++);
+                m_zombiManager->Startwalk(m_CurrentZombiIndex++);
             }
             zombicount = 0;
         }
@@ -91,20 +116,18 @@ void App::Update() {
                 m_Root.RemoveChild(zombi);
             }
         }
-        m_zombiManager -> CheckWall();
 
-
-        for (auto zombi : m_zombiManager -> GetZombies()) {
+        for (auto z : m_zombiManager -> GetZombies()) {
             for (auto plants : m_Plants) {
                 for (auto plant : plants) {
-                    if (plant) zombi -> HitCheck(plant);
+                    if (plant) {
+                        z -> CheckHit(plant);
+                    }
                 }
             }
         }
-
         m_KDown = isKPressed;
-        m_zombiManager -> move();
-
+        m_zombiManager -> move(m_Cars);
     }
 
 
@@ -117,12 +140,14 @@ void App::Update() {
     m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
     MoveSun();
     CheckPlant();
-    CheckBullet();
+    
+    CarMoveCheck();
+    auto hitzombi=CheckBullet();
     if(m_PRM->GetLevel()>0)SunClock++;
-    if(SunClock>480&&m_PRM->GetLevel()>0) {
-        SunClock=0;
-        MakeSun(false,{0,0});
-    }
+    // if(SunClock>480&&m_PRM->GetLevel()>0) {
+    //     SunClock=0;
+    //     MakeSun(false,{0,0});
+    // }
 
     if(m_holdingPlant!=nullptr){
         glm::vec2 pos=Util::Input::GetCursorPosition();

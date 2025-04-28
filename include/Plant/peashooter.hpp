@@ -12,12 +12,14 @@ public:
     explicit Peashooter():Plant(m_Loader.peashooterIMG,60) {
         SetATK(1);
         SetHP();
-        SetType(Shooter);
+        SetCost(100);
+        SetTakeCD(450);
+        SetType(T_Shooter);
     }
-    bool AttackCheck(glm::vec2 pos);
-    std::shared_ptr<Bullet> Attack(glm::vec2 pos) override;
+    bool AttackCheck(std::vector<glm::vec2> pos);
+    std::shared_ptr<Bullet> Attack(std::vector<glm::vec2> pos);
 protected:
-    int m_cooldown=0;
+    int m_cooldown=90;
 };
 
 #endif //PEASHOOTER_HPP

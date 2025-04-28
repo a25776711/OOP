@@ -11,6 +11,7 @@
 #include "Background/background.hpp"
 #include "Util/GameObject.hpp"
 #include "CardManager.hpp"
+#include "Background/car.hpp"
 
 class UpdateBackground {
 public:
@@ -51,10 +52,6 @@ public:
     }
 
 
-
-
-
-
     protected:
         glm::vec2 m_hitX;
         glm::vec2 m_hitY;
@@ -65,7 +62,6 @@ public:
 
         std::vector<std::shared_ptr<Card>> m_Cards;
         std::shared_ptr<CardManager> m_CardManager;
-
         std::shared_ptr<BackgroundImage> m_Background;
         std::shared_ptr<adventure> m_Adventure;
         int m_level = 0;

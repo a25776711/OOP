@@ -11,7 +11,6 @@ UpdateBackground::UpdateBackground() {
     m_Adventure = std::make_shared<adventure>();
     m_Adventure -> SetPivot({-300,100});
     m_Adventure -> m_Transform.scale ={0.8,0.8};
-
 }
 
 void UpdateBackground::NextLevel() {
@@ -30,7 +29,7 @@ void UpdateBackground::NextLevel() {
 }
 
 void UpdateBackground::SetCardPos() {
-    float spacing = 60;
+    float spacing = 65;
     float startX = -540;
     float y = 260;
 
