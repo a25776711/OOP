@@ -121,7 +121,7 @@ void App::Update() {
             for (auto plants : m_Plants) {
                 for (auto plant : plants) {
                     if (plant) {
-                        z -> CheckHit(plant);
+                        z -> HitCheck(plant);
                     }
                 }
             }

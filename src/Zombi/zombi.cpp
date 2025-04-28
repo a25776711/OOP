@@ -4,7 +4,7 @@
 #include "Zombi/zombi.hpp"
 #include "Plant/plant.hpp"
 
-void zombi::CheckHit(std::shared_ptr<Plant> plant) {
+void zombi::HitCheck(std::shared_ptr<Plant> plant) {
     auto pos = plant->GetPosition();
     if((m_Transform.translation.x - pos.x <= 30) && 
        (abs(m_Transform.translation.y - pos.y) <= 30) &&

@@ -56,7 +56,6 @@ public:
         }
     };
     virtual void Eating() = 0;
-    virtual void SetImage(zombistate state) = 0;
     zombistate GetState() {return m_state;}
 
     void SetSpeed(float speed) {z_speed = speed;}
@@ -196,13 +195,7 @@ public:
             if (z_HP <= 0){Die();}
         }
     }
-    void HitCheck(std::shared_ptr<Plant> plant) {
-        auto pos = plant -> GetPosition();
-        if(pos.x>m_Transform.translation.x&&pos.x-m_Transform.translation.x<20&&abs(pos.y-m_Transform.translation.y)<30
-            && (m_state != zombistate::eat  || m_state != zombistate::coldeat )) {
-            StartEat();
-        }
-    };
+    void HitCheck(std::shared_ptr<Plant> plant);
 
 protected:
     float z_speed;
