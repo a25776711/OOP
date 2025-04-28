@@ -9,7 +9,7 @@
 class Mine : public Plant {
     public:
     Mine():Plant(m_Loader.mineIMG_1,100) {
-        SetHP();SetCost(25);SetType(T_Mine);
+        SetHP();SetCost(25);SetType(T_Mine);SetTakeCD(1800);
     }
     bool CoolDown()override {
         if(m_Cooldown>=600){

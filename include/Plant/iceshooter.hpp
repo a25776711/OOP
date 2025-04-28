@@ -9,7 +9,7 @@
 class Iceshooter:public Plant {
     public:
     explicit Iceshooter():Plant(m_Loader.icepeashooterIMG,70) {
-        SetHP();SetCost(175);SetType(T_Shooter);
+        SetHP();SetCost(175);SetType(T_Shooter);SetTakeCD(450);
 
     }
     bool AttackCheck(std::vector<glm::vec2> pos);

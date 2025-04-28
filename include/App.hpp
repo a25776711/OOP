@@ -9,6 +9,7 @@
 #include "Background/Adventure.hpp"
 #include "Util/Logger.hpp"
 #include "Background/SunNB.hpp"
+#include "Plant/PlantLoader.hpp"
 
 // IWYU pragma: export
 
@@ -53,7 +54,8 @@ public:
     std::shared_ptr<Sun> CheckSun(glm::vec2 click);
     void MoveSun();
     void SetBlockPos();
-    void ResetSetCarPos();
+    void ResetSetCarPos(int level);
+    void ResetPlant(int level);
     void CarMoveCheck();
     //點擊四個點確認
     bool CheckClick(std::vector<float> block,glm::vec2 click);
@@ -92,7 +94,6 @@ private:
     bool m_EnterDown = false;
     bool m_KDown = false; // 初始設為 false
     bool m_showCollisionBoxes = true;
-
 };
 
 #endif

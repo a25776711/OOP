@@ -9,6 +9,11 @@
 
 class PlantLoader{
   public:
+  static PlantLoader& GetInstance() {
+    static PlantLoader instance;
+    return instance;
+  }
+  
   PlantLoader() {
     loadPlantImages();
   }
@@ -64,5 +69,9 @@ class PlantLoader{
       cherryIMG.emplace_back(path+"cherrybomb/cherrybomb_" + std::to_string(i) + ".png");
     cherryIMG_Boom.emplace_back(path+"explosion.png");
   }
+
+  private:
+  PlantLoader(const PlantLoader&) = delete;
+  PlantLoader& operator=(const PlantLoader&) = delete;
 };
 #endif //PLANTLOADER_HPP

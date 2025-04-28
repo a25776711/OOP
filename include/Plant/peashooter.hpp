@@ -12,6 +12,8 @@ public:
     explicit Peashooter():Plant(m_Loader.peashooterIMG,60) {
         SetATK(1);
         SetHP();
+        SetCost(100);
+        SetTakeCD(450);
         SetType(T_Shooter);
     }
     bool AttackCheck(std::vector<glm::vec2> pos);

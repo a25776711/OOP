@@ -46,8 +46,8 @@ public:
         m_Transform.translation.x = m_Transform.translation.x - z_speed;
         for (int i=0;i<rolls.size();i++) {
             if (m_Transform.translation.y==rolls[i]&&m_Transform.translation.x>=-450&&m_state!=zombistate::die) {
-                if (cars[4-i]!=nullptr&&cars[4-i] -> GetPosition().x+20 > m_Transform.translation.x&&
-                cars[4-i] -> GetPosition().x-20 < m_Transform.translation.x) {
+                if (cars[4-i]!=nullptr&&cars[4-i]!=nullptr&&cars[4-i] -> GetPosition().x+20 > m_Transform.translation.x
+                &&cars[4-i] -> GetPosition().x-20 < m_Transform.translation.x) {
                     Die();
                 }
             }

@@ -10,6 +10,9 @@
 void App::Start() {
     LOG_TRACE("Start");
 
+    // 初始化 PlantLoader
+    PlantLoader::GetInstance();
+
     m_PRM = std::make_shared<UpdateBackground>();
     m_zombiManager = std::make_shared<ZombiManager>();
     m_Root.AddChildren(m_PRM->GetChildren());
@@ -39,26 +42,30 @@ void App::Update() {
         pos.y=-pos.y;
         std::cout <<"("<< pos.x <<","<<pos.y<<")"<< std::endl;
     }
-
+    if(Util::Input::IsKeyDown(Util::Keycode::J)) {
+        Sunamount+=100;
+        m_SunNB->Change(Sunamount);
+    }
     if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
         pos.y=-pos.y;
-        if(CheckSun(pos)){m_Root.RemoveChild(CheckSun(pos));}
-        if(m_holdingPlant==nullptr){TakePlant(pos,m_PRM->GetLevel()+1);}
-        if(m_holdingPlant!=nullptr){PutPlant(pos,m_PRM->GetLevel());}
+        if(m_PRM->GetLevel()!=0){
+            if(CheckSun(pos)){m_Root.RemoveChild(CheckSun(pos));}
+            if(m_holdingPlant==nullptr){TakePlant(pos,m_PRM->GetLevel()+1);}
+            if(m_holdingPlant!=nullptr){PutPlant(pos,m_PRM->GetLevel());}
+        }
         if (m_PRM ->GetLevel()==0) {
             if (m_PRM -> CheckHit(pos)) {
-                ResetSetCarPos();
                 m_PRM ->NextLevel();
                 m_Root.AddChildren(m_PRM->GetChildren());
                 m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
+                ResetPlant(m_PRM -> GetLevel());
             }
         }
 
     }
     if (m_EnterDown) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
-            ResetSetCarPos();
             m_PRM ->NextLevel();
             m_CurrentZombiIndex = 0;
             zombicount = 0; 
@@ -68,6 +75,7 @@ void App::Update() {
             m_Root.AddChildren(m_PRM-> GetChildren());
             m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
             if (m_PRM -> GetLevel() ==11){ m_CurrentState = State::END;}
+            ResetPlant(m_PRM -> GetLevel());
         }
     }
 

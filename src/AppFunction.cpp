@@ -3,7 +3,7 @@
 //
 #include "App.hpp"
 
-
+//太陽收集
 std::shared_ptr<Sun> App::CheckSun(glm::vec2 click) {
     for(auto& sun:m_Suns) {
         glm::vec2 pos = sun->GetPosition();
@@ -13,6 +13,7 @@ std::shared_ptr<Sun> App::CheckSun(glm::vec2 click) {
     }
     return nullptr;
 }
+//太陽動作
 void App::MoveSun() {
     m_Suns.erase(
         std::remove_if(m_Suns.begin(), m_Suns.end(), 
@@ -35,7 +36,7 @@ void App::MoveSun() {
 void App::TakePlant(glm::vec2 click,int level) {
     auto cards=m_PRM->GetCards();
     for(auto& card:cards) {
-        if(CheckClick(card->GetFourPoints(), click)) {
+        if(CheckClick(card->GetFourPoints(), click)&&m_holdingPlant==nullptr&&Sunamount>=card->MakePlant()->GetCost()) {
             m_holdingPlant=card->MakePlant();
             m_Root.AddChild(m_holdingPlant);
         }
@@ -48,6 +49,8 @@ void App::PutPlant(glm::vec2 m_click,int level){
                 for (int j=0;j<block[std::to_string(2)].size();j++) {
                     auto check=block[std::to_string(2)][j];
                     if(CheckClick(check,m_click)&&m_Plants[2][j]==nullptr){
+                        Sunamount-=m_holdingPlant->GetCost();
+                        m_SunNB->Change(Sunamount);
                         m_Plants[2][j]=m_holdingPlant;
                         m_holdingPlant->Play();
                         m_holdingPlant->SetPosition({check[4],check[5]});
@@ -61,6 +64,8 @@ void App::PutPlant(glm::vec2 m_click,int level){
                     for (int j=0;j<block[std::to_string(i)].size();j++) {
                         auto check=block[std::to_string(i)][j];
                         if(CheckClick(check,m_click)&&m_Plants[i][j]==nullptr) {
+                            Sunamount-=m_holdingPlant->GetCost();
+                            m_SunNB->Change(Sunamount);
                             m_Plants[i][j]=m_holdingPlant;
                             m_holdingPlant->Play();
                             m_holdingPlant->SetPosition({check[4],check[5]});
@@ -75,6 +80,8 @@ void App::PutPlant(glm::vec2 m_click,int level){
                     for (int j=0;j<block[std::to_string(i)].size();j++) {
                         auto check=block[std::to_string(i)][j];
                         if(CheckClick(check,m_click)&&m_Plants[i][j]==nullptr) {
+                            Sunamount-=m_holdingPlant->GetCost();
+                            m_SunNB->Change(Sunamount);
                             m_Plants[i][j]=m_holdingPlant;
                             m_holdingPlant->Play();
                             m_holdingPlant->SetPosition({check[4],check[5]});
@@ -93,6 +100,7 @@ bool App::CheckClick(std::vector<float> block,glm::vec2 click) {
     //小x,小y,大x,大y
     return (click.x>block[0])&&(click.y>block[1])&&(click.x<block[2])&&(click.y<block[3]);
 }
+//植物動作血量確認
 void App::CheckPlant() {
     for(int i=0;i<m_Plants.size();i++) {
         for(int j=0;j<m_Plants[i].size();j++) {
@@ -133,7 +141,14 @@ void App::CheckPlant() {
                         }
                         break;
                     case Plant::T_Chomper:
-
+                        if(check!=nullptr){
+                            auto m_chomper=std::dynamic_pointer_cast<Chomper>(check);
+                            std::shared_ptr<zombi> z=m_chomper->Attack(m_zombiManager->GetZombies());
+                            if(z!=nullptr){
+                                m_Root.RemoveChild(z);
+                                z->GetHeart(false,false,100);
+                            }
+                        }
                         break;
                     case Plant::T_SunFlower:
 
@@ -152,6 +167,7 @@ void App::CheckPlant() {
         }
     }
 }
+//子彈動作
 std::vector<std::shared_ptr<zombi>> App::CheckBullet() {
     std::vector<std::shared_ptr<zombi>> zom=m_zombiManager->GetZombies();
     std::vector<std::shared_ptr<zombi>> result;
@@ -184,7 +200,7 @@ void App::SetBlockPos() {
     float spacingx = 80.8f;
     float startX = -445;
     float startY = -260;
-    float spacingy = 99;
+    float spacingy = 100;
     for(int i=0;i<5;i++) {
         for (int j=0;j<9;j++) {
             glm::vec2 pos={startX +spacingx * j,startY +spacingy *i};
@@ -203,6 +219,7 @@ void App::SetBlockPos() {
     }
 
 }
+//僵屍位置
 std::vector<glm::vec2> App::GetZomdiPos() {
     std::vector<glm::vec2> result;
     for(auto zombi : m_zombiManager -> GetZombies()) {
@@ -210,19 +227,41 @@ std::vector<glm::vec2> App::GetZomdiPos() {
     }
     return result;
 }
-void App::ResetSetCarPos() {
+//車子位置
+void App::ResetSetCarPos(int level) {
+    std::cout << level << std::endl;
     for(auto car : m_Cars) {
-        m_Root.RemoveChild(car);
+        if(car!=nullptr)m_Root.RemoveChild(car);
     }
+    std::vector<int> road;
+    if(level==1)road={2};
+    else if(level==2)road={1,2,3};
+    else road={0,1,2,3,4};
     m_Cars.clear();
-    float starty = -235.0f;
+    m_Cars.resize(5,nullptr);
+    
+    // 根據第一個道路的索引計算起始位置
+    float baseY = -235.0f;
+    float spacing = 100.0f;
+    
     for(int i=0;i<5;i++) {
-        m_Cars.push_back(std::make_shared<Car>(glm::vec2(-450, starty),Car::CarState::Idle));
-        starty += 100.0f;
-        m_Root.AddChild(m_Cars.back());
+        for(auto& r : road) {
+            if(i==r) {
+                auto car=std::make_shared<Car>(glm::vec2(-450, baseY),Car::CarState::Idle);
+                m_Cars[i]=car;
+                m_Root.AddChild(car);
+                break;
+            }
+        }
+        baseY += spacing;
     }
-
+    std::cout << "m_Cars size: " << m_Cars.size() << std::endl;
+    for(auto& c : m_Cars) {
+            if(c==nullptr)std::cout << "nullptr" << std::endl;
+            if(c!=nullptr)std::cout << c->GetPosition().x << " " << c->GetPosition().y << std::endl;
+    }
 }
+//車子動作
 void App::CarMoveCheck() {
     std::vector<glm::vec2> carpos ;
     for(auto& car : m_Cars) {
@@ -248,4 +287,29 @@ void App::CarMoveCheck() {
             }
         }
     }
+}
+//重置植物方場地
+void App::ResetPlant(int level) {
+    ResetSetCarPos(level);
+    for(auto& plant : m_Plants) {
+        for(auto& p : plant) {
+            if(p != nullptr) {
+                m_Root.RemoveChild(p);
+            }
+        }
+    }
+    m_Plants.clear();
+    // 重新初始化 m_Plants
+    m_Plants = std::vector<std::vector<std::shared_ptr<Plant>>>(5, std::vector<std::shared_ptr<Plant>>(9, nullptr));
+    
+    for(auto& bullet : m_Bullets) {
+        m_Root.RemoveChild(bullet);
+    }
+    m_Bullets.clear();
+    if(m_holdingPlant != nullptr) {
+        m_Root.RemoveChild(m_holdingPlant);
+        m_holdingPlant = nullptr;
+    }
+    Sunamount=0;
+    m_SunNB->Change(Sunamount);
 }
