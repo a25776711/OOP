@@ -23,7 +23,7 @@ public:
         for (int i = 0; i < 20; i++) {
             m_ash.push_back(RESOURCE_DIR"/zombi/die/ash/ash_" + std::to_string(i) + ".png");
         }
-
+        SetZIndex(100);
     };
 
     enum class zombistate {
@@ -34,6 +34,8 @@ public:
         stand,
         die
     };
+
+    virtual void  SetImage(zombistate state) = 0;
 
 
     virtual void Gotice(bool ice) = 0;
@@ -117,11 +119,12 @@ public:
             case zombistate::eat:
                 return;
             default:
-                std::cout << "warmstate" << std::endl;
                 break;
 
         }
         z_speed = 0;
+        SetImage(m_state);
+        SetLooping(true);
     }
 
     void RestartWalk() {
@@ -169,6 +172,13 @@ public:
         }
     }
 
+    void HitCheck(std::shared_ptr<Plant> plant) {
+        auto pos = plant -> GetPosition();
+        if(pos.x>m_Transform.translation.x&&pos.x-m_Transform.translation.x<20&&abs(pos.y-m_Transform.translation.y)<30
+            && (m_state != zombistate::eat  || m_state != zombistate::coldeat )) {
+            StartEat();
+        }
+    };
 
 
 
@@ -181,11 +191,11 @@ protected:
     std::vector<std::string> m_die;
     std::vector<std::string> m_ash;
 
-    glm::vec2 roll1={450.0,170.0};
-    glm::vec2 roll2 ={450.0,90.0};
-    glm::vec2 roll3 = {450.0,10.0};
+    glm::vec2 roll1={450.0,190};
+    glm::vec2 roll2 ={450.0,90};
+    glm::vec2 roll3 = {450.0,10};
     glm::vec2 roll4 = {450.0,-80};
-    glm::vec2 roll5 = {450.0,-170};
+    glm::vec2 roll5 = {450.0,-195};
 };
 
 #endif //ZOMBI_HPP

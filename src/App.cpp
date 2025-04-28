@@ -94,9 +94,17 @@ void App::Update() {
         m_zombiManager -> CheckWall();
 
 
-        m_KDown = isKPressed;
+        for (auto zombi : m_zombiManager -> GetZombies()) {
+            for (auto plants : m_Plants) {
+                for (auto plant : plants) {
+                    if (plant) zombi -> HitCheck(plant);
+                }
+            }
+        }
 
+        m_KDown = isKPressed;
         m_zombiManager -> move();
+
     }
 
 
