@@ -117,9 +117,6 @@ void App::Update() {
             }
         }
 
-        m_KDown = isKPressed;
-        m_zombiManager -> move(m_Cars);
-
         for (auto z : m_zombiManager -> GetZombies()) {
             for (auto plants : m_Plants) {
                 for (auto plant : plants) {
@@ -129,6 +126,8 @@ void App::Update() {
                 }
             }
         }
+        m_KDown = isKPressed;
+        m_zombiManager -> move(m_Cars);
     }
 
 

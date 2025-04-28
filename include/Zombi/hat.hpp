@@ -38,7 +38,6 @@ public:
         }
 
         SetImage(m_state);
-
     };
 
     void Gotice(bool ice) override {

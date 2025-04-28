@@ -31,6 +31,8 @@ public:
             m_iceeat.push_back(RESOURCE_DIR"/zombi/normal/eat_1/eat_1_" + std::to_string(i) + ".png");
         }
         SetImage(m_state);
+        SetLooping(true);
+
 
     };
 
@@ -48,7 +50,7 @@ public:
         SetLooping(true);
     }
 
-    void SetImage(zombistate state) {
+    void SetImage(zombistate state) override {
 
         switch (state) {
             case zombistate::walk:
