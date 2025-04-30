@@ -162,8 +162,7 @@ public:
             default:
                 std::cout << "warmstate" << std::endl;
                 break;
-        }
-        std::cout << "walk" << std::endl;
+        };
         z_speed = 1;
         SetImage(m_state);
         SetLooping(true);
@@ -195,7 +194,7 @@ public:
             if (z_HP <= 0){Die();}
         }
     }
-    void HitCheck(std::shared_ptr<Plant> plant);
+    void HitCheck(std::shared_ptr<Plant> plant) {    }
 
 protected:
     float z_speed;
