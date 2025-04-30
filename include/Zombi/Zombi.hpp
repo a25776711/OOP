@@ -194,7 +194,7 @@ public:
             if (z_HP <= 0){Die();}
         }
     }
-    void HitCheck(std::shared_ptr<Plant> plant) {    }
+    void HitCheck(std::shared_ptr<Plant> plant);
 
 protected:
     float z_speed;
