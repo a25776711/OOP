@@ -229,7 +229,6 @@ std::vector<glm::vec2> App::GetZomdiPos() {
 }
 //車子位置
 void App::ResetSetCarPos(int level) {
-    std::cout << level << std::endl;
     for(auto car : m_Cars) {
         if(car!=nullptr)m_Root.RemoveChild(car);
     }
