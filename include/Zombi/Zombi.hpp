@@ -183,6 +183,7 @@ public:
             if (z_HP <= 0){Die();}
         }
     }
+
     void HitCheck(std::shared_ptr<Plant> plant);
 
 protected:
@@ -193,6 +194,7 @@ protected:
 
     std::vector<std::string> m_die;
     std::vector<std::string> m_ash;
+
 
     glm::vec2 roll1={450.0,190.0};
     glm::vec2 roll2 ={450.0,100.0};
