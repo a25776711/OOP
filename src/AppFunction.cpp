@@ -229,7 +229,6 @@ std::vector<glm::vec2> App::GetZomdiPos() {
 }
 //車子位置
 void App::ResetSetCarPos(int level) {
-    std::cout << level << std::endl;
     for(auto car : m_Cars) {
         if(car!=nullptr)m_Root.RemoveChild(car);
     }
@@ -254,11 +253,6 @@ void App::ResetSetCarPos(int level) {
             }
         }
         baseY += spacing;
-    }
-    std::cout << "m_Cars size: " << m_Cars.size() << std::endl;
-    for(auto& c : m_Cars) {
-            if(c==nullptr)std::cout << "nullptr" << std::endl;
-            if(c!=nullptr)std::cout << c->GetPosition().x << " " << c->GetPosition().y << std::endl;
     }
 }
 //車子動作

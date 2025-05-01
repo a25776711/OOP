@@ -21,7 +21,6 @@ void App::Start() {
     m_Plants=std::vector<std::vector<std::shared_ptr<Plant>>>(5, std::vector<std::shared_ptr<Plant>>(9, nullptr));
     SetBlockPos(); //set card and block
     m_CurrentState = State::UPDATE;
-
 }
 
 void App::Update() {
@@ -50,7 +49,7 @@ void App::Update() {
         glm::vec2 pos=Util::Input::GetCursorPosition();
         pos.y=-pos.y;
         if(m_PRM->GetLevel()!=0){
-            if(CheckSun(pos)){m_Root.RemoveChild(CheckSun(pos));}
+            if(m_holdingPlant!=nullptr&&CheckSun(pos)){m_Root.RemoveChild(CheckSun(pos));}
             if(m_holdingPlant==nullptr){TakePlant(pos,m_PRM->GetLevel()+1);}
             if(m_holdingPlant!=nullptr){PutPlant(pos,m_PRM->GetLevel());}
         }
@@ -121,7 +120,7 @@ void App::Update() {
             for (auto plants : m_Plants) {
                 for (auto plant : plants) {
                     if (plant) {
-                        z -> CheckHit(plant);
+                        z -> HitCheck(plant);
                     }
                 }
             }

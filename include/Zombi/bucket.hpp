@@ -29,7 +29,6 @@ public:
             m_iceeat.push_back(RESOURCE_DIR"/zombi/bucket/eat_1/eat_1_" + std::to_string(i) + ".png");
         }
         SetImage(m_state);
-        SetLooping(true);
     };
 
     void Gotice(bool ice) override {
