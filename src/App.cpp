@@ -92,8 +92,9 @@ void App::Update() {
         }
 
         if (zombicount == 480) {
-            if (m_CurrentZombiIndex < m_zombiManager->GetZombies().size()) {
-                m_zombiManager->Startwalk(m_CurrentZombiIndex++);
+            int x = rand() % m_PRM -> GetLevel();
+            if (m_CurrentZombiIndex + x < m_zombiManager->GetZombies().size()) {
+                for (int i=0;i<x; i++){m_zombiManager->Startwalk(m_CurrentZombiIndex++);}
             }
             zombicount = 0;
         }
