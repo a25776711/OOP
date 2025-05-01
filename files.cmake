@@ -35,7 +35,7 @@ set(SRC_FILES
 
 set(INCLUDE_FILES
     App.hpp
-    Zombi/zombi.hpp
+    Zombi/Zombi.hpp
     Zombi/normal.hpp
     Zombi/armor.hpp
     Zombi/bucket.hpp
