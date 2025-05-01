@@ -18,7 +18,7 @@ public:
         hat::SetHP(10);
         hat::SetSpeed(1);
         hat::Setattack(10);
-        this -> m_die = m_die;
+    
 
         m_Walk.reserve(21);
         for (int i=0;i<21;i++) {
