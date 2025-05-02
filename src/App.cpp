@@ -35,6 +35,8 @@ void App::Update() {
         }
         if (m_PRM ->GetLevel()==0) {
             if (m_PRM -> CheckHit(pos)) {
+                CameraUpdate(0);
+                CameraUpdate(2);
                 m_PRM ->NextLevel();
                 m_Root.AddChildren(m_PRM->GetChildren());
                 m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
@@ -46,6 +48,8 @@ void App::Update() {
     if (m_EnterDown) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
             m_PRM ->NextLevel();
+            CameraUpdate(0);
+            CameraUpdate(2);
             m_CurrentZombiIndex = 0;
             zombicount = 0; 
             for (auto zombi : m_zombiManager -> GetZombies()) {
@@ -117,6 +121,7 @@ void App::Update() {
     }
     m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
     PlantUpdate();
+    CameraUpdate();
 
     
 

@@ -154,10 +154,13 @@ public:
 
     void Draw();
 
+    const std::string& GetName() const { return m_Name; }
+    void SetName(const std::string& name) { m_Name = name; }
+
 protected:
     std::shared_ptr<Core::Drawable> m_Drawable = nullptr;
     std::vector<std::shared_ptr<GameObject>> m_Children;
-
+    std::string m_Name="GameObject";
     float m_ZIndex = 0;
     bool m_Visible = true;
     glm::vec2 m_Pivot = {0, 0};

@@ -20,7 +20,6 @@ public:
     void NextLevel();
     [[nodiscard]] std::vector<std::shared_ptr<Util::GameObject>> GetChildren() const {
         std::vector<std::shared_ptr<Util::GameObject>> result;
-        m_Background ->SetPivot({0,0,});
         result.push_back(m_Background);
         result.push_back(m_Adventure);
         for (auto card : m_Cards) {
@@ -28,8 +27,6 @@ public:
         }
         return result;
     }
-
-
 
     void SetCardPos();
     int GetLevel() {return m_level;}
@@ -51,7 +48,6 @@ public:
         return (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
     }
 
-
     protected:
         glm::vec2 m_hitX;
         glm::vec2 m_hitY;
@@ -66,8 +62,6 @@ public:
         std::shared_ptr<adventure> m_Adventure;
         int m_level = 0;
 
-
 };
-
 
 #endif //UPDATEBACKGROUND_HPP

@@ -35,7 +35,7 @@ class Plant: public Util::GameObject{
         auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
         temp->SetLooping(looping);
     }
-    void SetHP(int hp=5) {
+    void SetHP(int hp=300) {
         m_hp=hp;
     }
     int GetHP(){return m_hp;}

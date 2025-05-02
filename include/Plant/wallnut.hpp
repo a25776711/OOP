@@ -8,7 +8,7 @@
 class Wallnut : public Plant {
     public:
     explicit  Wallnut():Plant(m_Loader.wallnutIMG,70) {
-        SetHP(72);
+        SetHP(3600);
         SetCost(50);
         SetTakeCD(1800);
         SetType(T_WallNut);

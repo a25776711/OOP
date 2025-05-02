@@ -13,9 +13,6 @@
 
 // IWYU pragma: export
 
-// 前向宣告
-class GameManager;
-
 class App {
 public:
     enum class State {
@@ -48,15 +45,21 @@ public:
     };
     void MakeSun(bool flower,glm::vec2 pos={0,0});
     std::shared_ptr<Sun> CheckSunCollect(glm::vec2 click);
+
     void MoveSun();
     void SetBlockPos();
     void ResetSetCarPos(int level);
     void ResetPlant(int level);
     void CarMoveCheck();
 
+
+
     void PlantUpdate();
     void StartGameSet();
     void FpsShow();
+    void CameraUpdate(int type=-1);
+    void CameraMove(glm::vec2 pos,bool rightnow);
+
     //點擊四個點確認
     bool CheckClick(std::vector<float> block,glm::vec2 click);
 
@@ -79,7 +82,6 @@ private:
     Phase m_Phase = Phase::tital;
     Util::Renderer m_Root;
     std::shared_ptr<UpdateBackground> m_PRM;
-    std::shared_ptr<GameManager> m_GameManager;
 
     int m_CurrentZombiIndex = 0;
     int zombicount = 0;
@@ -88,12 +90,17 @@ private:
     int Sunamount=0;
     int SunClock=0;
     
+    
     std::vector<std::shared_ptr<Sun>> m_Suns;
     std::vector<std::vector<std::shared_ptr<Plant>>> m_Plants;
     std::shared_ptr<SunNB> m_SunNB=std::make_shared<SunNB>();
     std::vector<std::shared_ptr<Bullet>> m_Bullets;
     std::vector<std::shared_ptr<Car>> m_Cars;
 
+    glm::vec2 m_housePos={120,0};
+    glm::vec2 m_roadPos={-120,0};
+    bool move_house=false;
+    bool move_road=false;
     bool m_EnterDown = false;
     bool m_KDown = false; // 初始設為 false
     bool m_showCollisionBoxes = true;

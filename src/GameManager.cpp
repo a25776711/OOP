@@ -41,3 +41,57 @@ void App::FpsShow(){
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
+
+bool Is_Cant_move(std::vector<std::shared_ptr<zombi>> zombies,glm::vec2 pos){
+    for(auto& zombi:zombies){
+        if(zombi->m_Transform.translation.x==pos.x&&zombi->m_Transform.translation.y==pos.y){
+            return true;
+        }
+    }
+    return false;
+}
+
+void App::CameraMove(glm::vec2 pos,bool rightnow){
+    if(rightnow){
+        auto temp=m_Root.GetChildren();
+        float distance=m_housePos.x-pos.x;
+        LOG_INFO("distance: {}",distance);
+        for(auto& child:temp){
+            child->m_Transform.translation.x+=distance;
+        }
+    }
+    else{
+        auto temp=m_Root.GetChildren();
+        for(auto& child:temp){
+                if(move_road){
+                child->m_Transform.translation.x-=2;
+                if(child->GetName()=="background" && child->m_Transform.translation.x <= m_roadPos.x){
+                    move_road = false;
+                    move_house = true;}
+                }
+            else if(move_house){
+                child->m_Transform.translation.x+=2;
+                if(child->GetName()=="background" && child->m_Transform.translation.x >= m_housePos.x){
+                    move_house = false;
+                    }
+                }
+            
+        }
+    }
+}
+void App::CameraUpdate(int type){
+    if(type==0){
+        CameraMove(m_PRM->GetChildren()[0]->m_Transform.translation,true);
+    }
+    else if(type==1){
+        move_house=true;
+        CameraMove(glm::vec2(2,0),false);
+    }
+    else if(type==2){
+        move_road=true;
+        CameraMove(glm::vec2(2,0),false);
+    }
+    else{
+        CameraMove(glm::vec2(0,0),false);
+    }
+}

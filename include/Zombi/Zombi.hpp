@@ -1,3 +1,6 @@
+//
+// Created by bingho on 2025/5/1.
+//
 
 #ifndef ZOMBI_HPP
 #define ZOMBI_HPP
@@ -98,7 +101,7 @@ public:
         z_speed = 0;
         m_Drawable = std::make_shared<Util::Animation>(m_ash, true, 100, true, 100);
     }
-    
+
     void StartEat() {
         switch (m_state) {
             case zombistate::coldwalk:
@@ -194,12 +197,11 @@ protected:
     std::vector<std::string> m_die;
     std::vector<std::string> m_ash;
 
-    glm::vec2 roll1={450.0,190.0};
-    glm::vec2 roll2 ={450.0,100.0};
-    glm::vec2 roll3 = {450.0,10.0};
-    glm::vec2 roll4 = {450.0,-80};
-    glm::vec2 roll5 = {450.0,-200};
+    glm::vec2 roll1={550.0,190.0};
+    glm::vec2 roll2 ={550.0,100.0};
+    glm::vec2 roll3 = {550.0,10.0};
+    glm::vec2 roll4 = {550.0,-80};
+    glm::vec2 roll5 = {550.0,-200};
 };
 
 #endif //ZOMBI_HPP
-
