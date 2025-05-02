@@ -1,5 +1,5 @@
 //
-// Created by bingho on 2025/3/11.
+// Created by bingho on 2025/5/1.
 //
 
 #ifndef ZOMBI_HPP
@@ -101,7 +101,7 @@ public:
         z_speed = 0;
         m_Drawable = std::make_shared<Util::Animation>(m_ash, true, 100, true, 100);
     }
-    
+
     void StartEat() {
         switch (m_state) {
             case zombistate::coldwalk:

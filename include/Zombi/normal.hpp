@@ -4,7 +4,7 @@
 
 #ifndef NORMAL_HPP
 #define NORMAL_HPP
-#include "Zombi/zombi.hpp"
+#include "Zombi/Zombi.hpp"
 
 class normal : public zombi {
 public:

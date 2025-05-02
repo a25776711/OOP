@@ -9,32 +9,12 @@
 
 void App::Start() {
     LOG_TRACE("Start");
-
-    // 初始化 PlantLoader
-    PlantLoader::GetInstance();
-
-    m_PRM = std::make_shared<UpdateBackground>();
-    m_zombiManager = std::make_shared<ZombiManager>();
-    m_Root.AddChildren(m_PRM->GetChildren());
-    m_SunNB->SetZIndex(20);
-    m_Root.AddChild(m_SunNB);
-    m_Plants=std::vector<std::vector<std::shared_ptr<Plant>>>(5, std::vector<std::shared_ptr<Plant>>(9, nullptr));
-    SetBlockPos(); //set card and block
+    StartGameSet();
     m_CurrentState = State::UPDATE;
 }
 
 void App::Update() {
-    ImGui_ImplSDL2_NewFrame();
-    ImGui_ImplOpenGL3_NewFrame();
-    ImGui::NewFrame();
-
-    
-    ImGui::Begin("FPS", nullptr, ImGuiWindowFlags_NoMove| ImGuiWindowFlags_NoBackground);
-    ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
-    ImGui::End();
-
-    ImGui::Render();
-    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    FpsShow();
 
     if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
@@ -49,7 +29,7 @@ void App::Update() {
         glm::vec2 pos=Util::Input::GetCursorPosition();
         pos.y=-pos.y;
         if(m_PRM->GetLevel()!=0){
-            if(m_holdingPlant!=nullptr&&CheckSun(pos)){m_Root.RemoveChild(CheckSun(pos));}
+            if(m_holdingPlant==nullptr&&CheckSunCollect(pos)){m_Root.RemoveChild(CheckSunCollect(pos));}
             if(m_holdingPlant==nullptr){TakePlant(pos,m_PRM->GetLevel()+1);}
             if(m_holdingPlant!=nullptr){PutPlant(pos,m_PRM->GetLevel());}
         }
@@ -92,8 +72,9 @@ void App::Update() {
         }
 
         if (zombicount == 480) {
-            if (m_CurrentZombiIndex < m_zombiManager->GetZombies().size()) {
-                m_zombiManager->Startwalk(m_CurrentZombiIndex++);
+            int x = rand() % m_PRM -> GetLevel();
+            if (m_CurrentZombiIndex + x < m_zombiManager->GetZombies().size()) {
+                for (int i=0;i<x; i++){m_zombiManager->Startwalk(m_CurrentZombiIndex++);}
             }
             zombicount = 0;
         }
@@ -134,24 +115,10 @@ void App::Update() {
     if (Util::Input::IsKeyDown(Util::Keycode::MOUSE_RB)) {
         m_zombiManager ->Getice(true);
     }
-
-
     m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
-    MoveSun();
-    CheckPlant();
-    
-    CarMoveCheck();
-    auto hitzombi=CheckBullet();
-    if(m_PRM->GetLevel()>0)SunClock++;
-    // if(SunClock>480&&m_PRM->GetLevel()>0) {
-    //     SunClock=0;
-    //     MakeSun(false,{0,0});
-    // }
+    PlantUpdate();
 
-    if(m_holdingPlant!=nullptr){
-        glm::vec2 pos=Util::Input::GetCursorPosition();
-        m_holdingPlant->m_Transform.translation={pos.x,-pos.y};
-    }
+    
 
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
     Util::Input::IfExit()) {

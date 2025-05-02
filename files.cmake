@@ -1,6 +1,7 @@
 set(SRC_FILES
     App.cpp
     AppFunction.cpp
+    GameManager.cpp
     Zombi/zombi.cpp
     Zombi/normal.cpp
     Zombi/armor.cpp
@@ -35,7 +36,7 @@ set(SRC_FILES
 
 set(INCLUDE_FILES
     App.hpp
-    Zombi/zombi.hpp
+    Zombi/Zombi.hpp
     Zombi/normal.hpp
     Zombi/armor.hpp
     Zombi/bucket.hpp
