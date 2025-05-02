@@ -53,30 +53,32 @@ bool Is_Cant_move(std::vector<std::shared_ptr<zombi>> zombies,glm::vec2 pos){
 
 void App::CameraMove(glm::vec2 pos,bool rightnow){
     if(rightnow){
-        auto temp=m_Root.GetChildren();
-        float distance=m_housePos.x-pos.x;
+        float distance=120-pos.x;
         LOG_INFO("distance: {}",distance);
-        for(auto& child:temp){
-            child->m_Transform.translation.x+=distance;
-        }
+        m_Root.Update(glm::vec2(-distance,0));
     }
     else{
-        auto temp=m_Root.GetChildren();
-        for(auto& child:temp){
-                if(move_road){
-                child->m_Transform.translation.x-=2;
-                if(child->GetName()=="background" && child->m_Transform.translation.x <= m_roadPos.x){
-                    move_road = false;
-                    move_house = true;}
-                }
-            else if(move_house){
-                child->m_Transform.translation.x+=2;
-                if(child->GetName()=="background" && child->m_Transform.translation.x >= m_housePos.x){
-                    move_house = false;
-                    }
-                }
-            
+        if(move_road){
+            m_Root.Update(glm::vec2(1,0));
+            road_count++;
+            if(road_count==120){
+                move_road=false;
+                road_count=0;
+                move_house=true;
+            }
         }
+        else if(move_house){
+            m_Root.Update(glm::vec2(-1,0));
+            house_count++;
+            if(house_count==120){
+                move_house=false;
+                house_count=0;
+            }
+        }
+    }
+    auto temp=m_Root.GetChildren();
+    for(auto& child:temp){
+        LOG_INFO("child: {}",child->GetTransform().scale);
     }
 }
 void App::CameraUpdate(int type){
@@ -85,11 +87,10 @@ void App::CameraUpdate(int type){
     }
     else if(type==1){
         move_house=true;
-        CameraMove(glm::vec2(2,0),false);
+        CameraMove(glm::vec2(0,0),false);
     }
     else if(type==2){
         move_road=true;
-        CameraMove(glm::vec2(2,0),false);
     }
     else{
         CameraMove(glm::vec2(0,0),false);

@@ -5,19 +5,18 @@
 #ifndef BACKGROUND_HPP
 #define BACKGROUND_HPP
 
-#include "Util/GameObject.hpp"
+#include "GameObject.hpp"
 #include "Util/Image.hpp"
 #include <string>
 
 
 
-class BackgroundImage : public Util::GameObject {
+class BackgroundImage : public GameObject {
 
 public:
 
 
 	BackgroundImage():GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/bg0.png"), -10) {
-		m_Name="background";
 		m_Transform.scale=glm::vec2(1.2f,1.2f);
 	};
 	void SetScale(float scale){

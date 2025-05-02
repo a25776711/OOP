@@ -7,7 +7,7 @@
 
 #include "Util/Transform.hpp"
 
-namespace Util {
+
 /**
  * @class GameObject
  * @brief A class representing a game object.
@@ -80,7 +80,7 @@ public:
      *
      * @return The transform of the game object.
      */
-    Transform GetTransform() const { return m_Transform; }
+    Util::Transform GetTransform() const { return m_Transform; }
 
     /**
      * @brief Get the size of its drawable component.
@@ -154,12 +154,16 @@ public:
 
     void Draw();
 
+    const std::string& GetName() const { return m_Name; }
+    void SetName(const std::string& name) { m_Name = name; }
+
 protected:
     std::shared_ptr<Core::Drawable> m_Drawable = nullptr;
     std::vector<std::shared_ptr<GameObject>> m_Children;
+    std::string m_Name;
     float m_ZIndex = 0;
     bool m_Visible = true;
     glm::vec2 m_Pivot = {0, 0};
 };
-} // namespace Util
+ // namespace Util
 #endif

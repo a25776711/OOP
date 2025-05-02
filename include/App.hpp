@@ -2,7 +2,7 @@
 #define APP_HPP
 
 #include "pch.hpp"
-#include "Util/Renderer.hpp"
+#include "Renderer.hpp"
 #include "Zombi/ZombiManager.hpp"
 #include "Plant/plant.hpp"
 #include "Background/UpdateBackground.hpp"
@@ -80,7 +80,8 @@ private:
     std::shared_ptr<Plant> m_holdingPlant=nullptr;
     State m_CurrentState = State::START;
     Phase m_Phase = Phase::tital;
-    Util::Renderer m_Root;
+    Renderer m_Root;
+    glm::vec2 m_CenterPoint={0,0};
     std::shared_ptr<UpdateBackground> m_PRM;
 
     int m_CurrentZombiIndex = 0;
@@ -89,6 +90,8 @@ private:
 
     int Sunamount=0;
     int SunClock=0;
+    int road_count=0;
+    int house_count=0;
     
     
     std::vector<std::shared_ptr<Sun>> m_Suns;
@@ -97,8 +100,6 @@ private:
     std::vector<std::shared_ptr<Bullet>> m_Bullets;
     std::vector<std::shared_ptr<Car>> m_Cars;
 
-    glm::vec2 m_housePos={120,0};
-    glm::vec2 m_roadPos={-120,0};
     bool move_house=false;
     bool move_road=false;
     bool m_EnterDown = false;

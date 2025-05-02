@@ -5,12 +5,12 @@
 #ifndef BUTTOM_HPP
 #define BUTTOM_HPP
 
-#include "Util/GameObject.hpp"
+#include "GameObject.hpp"
 #include "Util/Image.hpp"
 #include <string>
 
 
-class adventure : public Util::GameObject{
+class adventure : public GameObject{
     public:
         explicit  adventure():GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/Adventure_1.png"), -10){
 

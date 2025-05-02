@@ -1,11 +1,11 @@
 #ifndef SUNNB_HPP
 #define SUNNB_HPP
 
-#include "Util/GameObject.hpp"
+#include "GameObject.hpp"
 #include "Util/Text.hpp"
 #include <glm/gtx/string_cast.hpp> // for glm::to_string
 
-class SunNB : public Util::GameObject {
+class SunNB : public GameObject {
 public:
     SunNB() : GameObject(
         std::make_unique<Util::Text>(

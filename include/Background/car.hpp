@@ -4,19 +4,18 @@
 
 #ifndef CAR_HPP
 #define CAR_HPP
-#include "Util/GameObject.hpp"
+#include "GameObject.hpp"
 #include "Util/Image.hpp"
 
-class Car:public Util::GameObject {
+class Car:public GameObject {
     public:
     enum class CarState {
         Idle,
         Move
     };
-    Car(glm::vec2 pos,CarState state):Util::GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/car.png"),30) {
+    Car(glm::vec2 pos,CarState state):GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/car.png"),30) {
         m_Transform.translation = pos;
         m_State = state;
-        SetZIndex(5);
     }
     void Move() {
         m_Transform.translation.x += 4.0f;

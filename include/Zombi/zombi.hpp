@@ -4,7 +4,7 @@
 
 #ifndef ZOMBI_HPP
 #define ZOMBI_HPP
-#include "Util/GameObject.hpp"
+#include "GameObject.hpp"
 #include "Util/Animation.hpp"
 #include "Background/Car.hpp"
 #include <random>
@@ -15,7 +15,7 @@
 // 前向聲明
 class Plant;
 
-class zombi :public Util::GameObject {
+class zombi :public GameObject {
 public:
     zombi() {
         m_state = zombistate::stand;

@@ -4,7 +4,7 @@
 
 #ifndef PLANT_HPP
 #define PLANT_HPP
-#include "Util/GameObject.hpp"
+#include "GameObject.hpp"
 #include "Util/Animation.hpp"
 #include "Plant/PlantLoader.hpp"
 #include "Bullet/bullet.hpp"
@@ -12,7 +12,7 @@
 #include <cstdlib>
 #include <iostream>
 
-class Plant: public Util::GameObject{
+class Plant: public GameObject{
     public:
     enum PlantType {
       T_SunFlower,

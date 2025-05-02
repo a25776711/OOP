@@ -121,7 +121,7 @@ void App::Update() {
     }
     m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
     PlantUpdate();
-    CameraUpdate();
+    CameraUpdate(-1);
 
     
 
@@ -129,7 +129,7 @@ void App::Update() {
     Util::Input::IfExit()) {
         m_CurrentState = State::END;
     }
-    m_Root.Update();
+    m_Root.Update(glm::vec2(0,0));
 }
 
 

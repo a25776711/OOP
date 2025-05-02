@@ -1,7 +1,7 @@
 #ifndef CARD_HPP
 #define CARD_HPP
 
-#include "Util/GameObject.hpp"
+#include "GameObject.hpp"
 #include "Util/Image.hpp"
 #include "Plant/sunflower.hpp"
 #include "Plant/mine.hpp"
@@ -14,7 +14,7 @@
 #include <string>
 #include <memory>
 
-class Card : public Util::GameObject {
+class Card : public GameObject {
 public:
       Card(const std::string& imagePath,int index) {
             auto image = std::make_shared<Util::Image>(imagePath);

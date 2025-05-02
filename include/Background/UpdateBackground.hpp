@@ -9,7 +9,7 @@
 
 #include "Adventure.hpp"
 #include "Background/background.hpp"
-#include "Util/GameObject.hpp"
+#include "GameObject.hpp"
 #include "CardManager.hpp"
 #include "Background/car.hpp"
 
@@ -18,8 +18,8 @@ public:
     UpdateBackground ();
 
     void NextLevel();
-    [[nodiscard]] std::vector<std::shared_ptr<Util::GameObject>> GetChildren() const {
-        std::vector<std::shared_ptr<Util::GameObject>> result;
+    [[nodiscard]] std::vector<std::shared_ptr<GameObject>> GetChildren() const {
+        std::vector<std::shared_ptr<GameObject>> result;
         result.push_back(m_Background);
         result.push_back(m_Adventure);
         for (auto card : m_Cards) {
