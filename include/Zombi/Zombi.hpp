@@ -1,3 +1,6 @@
+//
+// Created by bingho on 2025/5/1.
+//
 
 #ifndef ZOMBI_HPP
 #define ZOMBI_HPP
@@ -42,7 +45,6 @@ public:
 
     virtual void Gotice(bool ice) = 0;
     void move(std::vector<std::shared_ptr<Car>> cars) ;
-    virtual void Eating() = 0;
     zombistate GetState() {return m_state;}
 
     void SetSpeed(float speed) {z_speed = speed;}
@@ -98,7 +100,7 @@ public:
         z_speed = 0;
         m_Drawable = std::make_shared<Util::Animation>(m_ash, true, 100, true, 100);
     }
-    
+
     void StartEat() {
         switch (m_state) {
             case zombistate::coldwalk:
@@ -185,6 +187,7 @@ public:
     }
     void HitCheck(std::shared_ptr<Plant> plant);
 
+
 protected:
     float z_speed;
     float z_HP;
@@ -202,4 +205,3 @@ protected:
 };
 
 #endif //ZOMBI_HPP
-

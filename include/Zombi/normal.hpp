@@ -11,7 +11,7 @@ public:
     normal() :zombi(){
         normal::SetHP(10);
         normal::SetSpeed(1);
-        normal::Setattack(10);
+        normal::Setattack(1);
 
 
         m_Walk.reserve(46);
@@ -82,11 +82,7 @@ public:
 
 
 
-    void Eating() override {
-        m_state = zombistate::eat;
-        SetImage(zombistate::eat);
-        z_speed = 0;
-    }
+
 
 
 private:
