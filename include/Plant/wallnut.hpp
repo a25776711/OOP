@@ -17,4 +17,11 @@ class Wallnut : public Plant {
     private:
 
 };
+class play_wallnut:public Plant{
+    public:
+    play_wallnut():Plant(m_Loader.wallnutIMG,70){
+        SetHP(72);
+        SetCost(50);
+    }
+};
 #endif //WALLNUT_HPP

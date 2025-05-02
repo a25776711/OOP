@@ -3,13 +3,22 @@
 //
 #include "App.hpp"
 
+void App::MakeSun(bool flower,glm::vec2 pos)  {
+        auto temp=std::make_shared<Sun>(flower,pos);
+        temp->SetZIndex(100);
+        m_Suns.emplace_back(temp);
+        m_Root.AddChild(m_Suns.back());
+        temp->Play();
+}
+
 //太陽收集
-std::shared_ptr<Sun> App::CheckSun(glm::vec2 click) {
+std::shared_ptr<Sun> App::CheckSunCollect(glm::vec2 click) {
     for(auto& sun:m_Suns) {
         glm::vec2 pos = sun->GetPosition();
-        //LOG_INFO("CheckSun:pos:(x:{},y:{})", pos.x, pos.y);
-        sun->CollectAndMove(click);
-        if(sun->GetMoveState()==MoveOver)return sun;
+        if(glm::distance(pos,click)<(20*sqrt(2))) {
+            sun->CollectAndMove(click);
+            if(sun->GetMoveState()==MoveOver)return sun;
+        }
     }
     return nullptr;
 }
@@ -39,23 +48,30 @@ void App::TakePlant(glm::vec2 click,int level) {
         if(CheckClick(card->GetFourPoints(), click)&&m_holdingPlant==nullptr&&Sunamount>=card->MakePlant()->GetCost()) {
             m_holdingPlant=card->MakePlant();
             m_Root.AddChild(m_holdingPlant);
+            LOG_INFO("Plant selected: {}, Cost: {}, Current Sun: {}", 
+                m_holdingPlant->GetType(), 
+                m_holdingPlant->GetCost(), 
+                Sunamount);
         }
     }
 }
 //放置植物判斷
 void App::PutPlant(glm::vec2 m_click,int level){
+        LOG_INFO("Level:{}",level);
         switch (level) {
             case 1:
                 for (int j=0;j<block[std::to_string(2)].size();j++) {
                     auto check=block[std::to_string(2)][j];
+                    LOG_INFO("Checking block[2][{}],fourside({},{},{},{}),pos:({},{})", j,check[0],check[1],check[2],check[3],check[4],check[5]);
                     if(CheckClick(check,m_click)&&m_Plants[2][j]==nullptr){
+                        LOG_INFO("Found valid position in level 1 at block[2][{}]", j);
                         Sunamount-=m_holdingPlant->GetCost();
                         m_SunNB->Change(Sunamount);
                         m_Plants[2][j]=m_holdingPlant;
                         m_holdingPlant->Play();
                         m_holdingPlant->SetPosition({check[4],check[5]});
                         m_holdingPlant=nullptr;
-                        LOG_INFO("PutPlant on {},{}",check[4],check[5]);
+                        LOG_INFO("Plant placed successfully at {},{}",check[4],check[5]);
                     }
                 }
             break;
@@ -80,6 +96,7 @@ void App::PutPlant(glm::vec2 m_click,int level){
                     for (int j=0;j<block[std::to_string(i)].size();j++) {
                         auto check=block[std::to_string(i)][j];
                         if(CheckClick(check,m_click)&&m_Plants[i][j]==nullptr) {
+                            std::cout<<"test"<<std::endl;
                             Sunamount-=m_holdingPlant->GetCost();
                             m_SunNB->Change(Sunamount);
                             m_Plants[i][j]=m_holdingPlant;
@@ -306,4 +323,8 @@ void App::ResetPlant(int level) {
     }
     Sunamount=0;
     m_SunNB->Change(Sunamount);
+    for(auto& sun : m_Suns) {
+        m_Root.RemoveChild(sun);
+    }
+    m_Suns.clear();
 }

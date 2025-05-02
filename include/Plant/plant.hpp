@@ -20,7 +20,8 @@ class Plant: public Util::GameObject{
         T_Shooter,
         T_Mine,
         T_Bomb,
-        T_Chomper
+        T_Chomper,
+        T_Play_Wallnut
     };
     explicit Plant(std::vector<std::string>& Path,int interval){
         SetZIndex(5);
