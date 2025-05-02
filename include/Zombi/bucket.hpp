@@ -10,7 +10,7 @@ public:
     bucket() :zombi(){
         bucket::SetHP(10);
         bucket::SetSpeed(1);
-        bucket::Setattack(10);
+        bucket::Setattack(1);
 
         m_Walk.reserve(46);
         for (int i=0;i<46;i++) {
@@ -79,10 +79,6 @@ public:
 
 
 
-    void Eating() override {
-        m_state = zombistate::eat;
-        SetImage(zombistate::eat);
-    }
 
 private:
     std::vector<std::string> m_Images;

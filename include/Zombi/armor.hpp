@@ -10,7 +10,7 @@ public:
     armor() :zombi(){
         SetHP(10);
         SetSpeed(1);
-        Setattack(10);
+        Setattack(1);
 
         m_die.clear();
         m_die.reserve(14);
@@ -84,10 +84,7 @@ public:
 
 
 
-    void Eating() override {
-        m_state = zombistate::eat;
-        SetImage(zombistate::eat);
-    }
+
 
 
 

@@ -17,7 +17,7 @@ public:
     hat() :zombi(){
         hat::SetHP(10);
         hat::SetSpeed(1);
-        hat::Setattack(10);
+        hat::Setattack(1);
     
 
         m_Walk.reserve(21);
@@ -86,10 +86,7 @@ public:
     }
 
 
-    void Eating() override {
-        m_state = zombistate::eat;
-        SetImage(zombistate::eat);
-    }
+
 
 private:
     std::vector<std::string> m_Images;
