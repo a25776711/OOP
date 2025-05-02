@@ -36,7 +36,8 @@ public:
         eat,
         coldeat,
         stand,
-        die
+        die,
+        ash
     };
 
     virtual void  SetImage(zombistate state) = 0;
@@ -96,7 +97,7 @@ public:
     }
 
     void Ash() {
-        m_state = zombistate::die;
+        m_state = zombistate::ash;
         z_speed = 0;
         m_Drawable = std::make_shared<Util::Animation>(m_ash, true, 100, true, 100);
     }
@@ -122,6 +123,8 @@ public:
             case zombistate::die:
                 break;
             case zombistate::stand:
+                break;
+            case zombistate::ash:
                 break;
             default:
                 break;
@@ -167,7 +170,7 @@ public:
             std::cerr << "[ERROR] m_Drawable is not an Animation." << std::endl;
             return false;
         }
-        return (temp->GetCurrentFrameIndex() == temp->GetFrameCount() - 1 && m_state == zombistate::die);
+        return (temp->GetCurrentFrameIndex() == temp->GetFrameCount() - 1 && (m_state == zombistate::die || m_state == zombistate::ash));
 
     }
     void GetHeart(bool ash,bool ice,int attack) {
@@ -183,7 +186,6 @@ public:
             if (z_HP <= 0){Die();}
         }
     }
-
     void HitCheck(std::shared_ptr<Plant> plant);
 
 protected:
@@ -194,7 +196,6 @@ protected:
 
     std::vector<std::string> m_die;
     std::vector<std::string> m_ash;
-
 
     glm::vec2 roll1={450.0,190.0};
     glm::vec2 roll2 ={450.0,100.0};
