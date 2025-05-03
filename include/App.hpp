@@ -37,6 +37,12 @@ public:
         type_Chomper,
         type_Cherry
     };
+    enum class CameraState {
+        idle,
+        grass,
+        move_road,
+        move_house
+    };
     enum class Phase {
             tital,
             oneroad,
@@ -57,14 +63,14 @@ public:
     void PlantUpdate();
     void StartGameSet();
     void FpsShow();
-    void CameraUpdate(int type=-1);
-    void CameraMove(glm::vec2 pos,bool rightnow);
+    void CameraMove();
+    void CameraMoveHidden(int hidden);
+    void ResizeWindow(int width, int height);
 
     //點擊四個點確認
     bool CheckClick(std::vector<float> block,glm::vec2 click);
 
 
-    std::shared_ptr<zombi> CheckZombi();
     void TakePlant(glm::vec2 click,int level);
     void CheckPlant();
     void PutPlant(glm::vec2 click,int level);
@@ -80,6 +86,7 @@ private:
     std::shared_ptr<Plant> m_holdingPlant=nullptr;
     State m_CurrentState = State::START;
     Phase m_Phase = Phase::tital;
+    CameraState m_CameraState = CameraState::idle;
     Renderer m_Root;
     glm::vec2 m_CenterPoint={0,0};
     std::shared_ptr<UpdateBackground> m_PRM;
@@ -104,7 +111,7 @@ private:
     bool move_road=false;
     bool m_EnterDown = false;
     bool m_KDown = false; // 初始設為 false
-    bool m_showCollisionBoxes = true;
+    bool m_CameraStart=true;
 };
 
 #endif

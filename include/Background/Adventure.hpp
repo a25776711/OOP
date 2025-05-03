@@ -12,10 +12,9 @@
 
 class adventure : public GameObject{
     public:
-        explicit  adventure():GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/Adventure_1.png"), -10){
+        explicit  adventure():GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/Adventure_1.png"), -5){
 
         }
-
 
         void ChangeImage() {
             auto temp = std::dynamic_pointer_cast<Util::Image>(m_Drawable);

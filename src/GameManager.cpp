@@ -1,7 +1,7 @@
 #include "App.hpp"
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
-
+#include "Core/Context.hpp"
 void App::PlantUpdate() {
     MoveSun();
     CheckPlant();
@@ -42,57 +42,78 @@ void App::FpsShow(){
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-bool Is_Cant_move(std::vector<std::shared_ptr<zombi>> zombies,glm::vec2 pos){
-    for(auto& zombi:zombies){
-        if(zombi->m_Transform.translation.x==pos.x&&zombi->m_Transform.translation.y==pos.y){
-            return true;
+void App::CameraMoveHidden(int hidden){
+    if(hidden==0){
+        auto background_hidden=m_PRM->GetChildren();
+        for(size_t i=1;i<background_hidden.size();i++){
+            background_hidden[i]->SetVisible(false);
         }
-    }
-    return false;
-}
-
-void App::CameraMove(glm::vec2 pos,bool rightnow){
-    if(rightnow){
-        float distance=120-pos.x;
-        LOG_INFO("distance: {}",distance);
-        m_Root.Update(glm::vec2(-distance,0));
-    }
-    else{
-        if(move_road){
-            m_Root.Update(glm::vec2(1,0));
-            road_count++;
-            if(road_count==120){
-                move_road=false;
-                road_count=0;
-                move_house=true;
+        for(auto& car:m_Cars){
+            if(car!=nullptr){
+                car->SetVisible(false);
             }
         }
-        else if(move_house){
-            m_Root.Update(glm::vec2(-1,0));
-            house_count++;
-            if(house_count==120){
-                move_house=false;
+    }
+    else if(hidden==1){
+        auto background_hidden=m_PRM->GetChildren();
+        for(size_t i=1;i<background_hidden.size();i++){
+            background_hidden[i]->SetVisible(true);
+        }
+        for(auto& car:m_Cars){
+            if(car!=nullptr){
+                car->SetVisible(true);
+            }
+        }
+    }
+}
+
+void App::CameraMove(){
+        if (m_CameraState == CameraState::grass) {
+            if(m_CameraStart){
+                m_CameraStart=false;
+            }
+            CameraMoveHidden(0);
+            m_CameraState = CameraState::move_road;
+        }
+    else{
+        glm::vec2 moveAmount = {0,0};
+        if(m_CameraState == CameraState::move_road){
+            if(road_count<120){
+                moveAmount = {1,0};
+                road_count++;   
+            }
+            else if(road_count<200){
+                road_count++;   
+            }
+            else{
+                m_CameraState = CameraState::move_house;
+                road_count=0;
+            }
+        }
+        else if(m_CameraState == CameraState::move_house){
+            if(house_count<120){
+                moveAmount = {-1,0};
+                house_count++;
+            }
+            else{
+                CameraMoveHidden(1);
+                m_CameraState = CameraState::idle;
                 house_count=0;
             }
         }
-    }
-    auto temp=m_Root.GetChildren();
-    for(auto& child:temp){
-        LOG_INFO("child: {}",child->GetTransform().scale);
+        m_Root.Update(moveAmount);
     }
 }
-void App::CameraUpdate(int type){
-    if(type==0){
-        CameraMove(m_PRM->GetChildren()[0]->m_Transform.translation,true);
-    }
-    else if(type==1){
-        move_house=true;
-        CameraMove(glm::vec2(0,0),false);
-    }
-    else if(type==2){
-        move_road=true;
-    }
-    else{
-        CameraMove(glm::vec2(0,0),false);
-    }
+void App::ResizeWindow(int width, int height) {
+    auto context = Core::Context::GetInstance();
+    context->SetWindowWidth(width);
+    context->SetWindowHeight(height);
+    SDL_SetWindowSize(context->GetWindow(), width, height);
+    
+    // 更新渲染範圍，但保持投影矩陣不變
+    glViewport(0, 0, width, height);
+    
+    // 強制重新計算投影矩陣
+    PTSD_Config::WINDOW_WIDTH = width;
+    PTSD_Config::WINDOW_HEIGHT = height;
 }

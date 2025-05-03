@@ -5,7 +5,10 @@
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
 #include "Util/Logger.hpp"
+#include "Core/Context.hpp"
 #include <iostream>
+
+using namespace Core;
 
 void App::Start() {
     LOG_TRACE("Start");
@@ -14,7 +17,7 @@ void App::Start() {
 }
 
 void App::Update() {
-    FpsShow();
+    //FpsShow();
 
     if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
@@ -25,6 +28,9 @@ void App::Update() {
         Sunamount+=100;
         m_SunNB->Change(Sunamount);
     }
+
+    // 處理視窗大小調整
+
     if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
         pos.y=-pos.y;
@@ -35,21 +41,22 @@ void App::Update() {
         }
         if (m_PRM ->GetLevel()==0) {
             if (m_PRM -> CheckHit(pos)) {
-                CameraUpdate(0);
-                CameraUpdate(2);
                 m_PRM ->NextLevel();
                 m_Root.AddChildren(m_PRM->GetChildren());
                 m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
                 ResetPlant(m_PRM -> GetLevel());
+                m_CameraState = CameraState::grass;
+                ResizeWindow(1100, 720);
             }
         }
 
     }
     if (m_EnterDown) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
+            if(m_PRM->GetLevel()==0){
+                ResizeWindow(1280, 720);
+            }
             m_PRM ->NextLevel();
-            CameraUpdate(0);
-            CameraUpdate(2);
             m_CurrentZombiIndex = 0;
             zombicount = 0; 
             for (auto zombi : m_zombiManager -> GetZombies()) {
@@ -59,6 +66,7 @@ void App::Update() {
             m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
             if (m_PRM -> GetLevel() ==11){ m_CurrentState = State::END;}
             ResetPlant(m_PRM -> GetLevel());
+            m_CameraState = CameraState::grass;
         }
     }
 
@@ -120,8 +128,8 @@ void App::Update() {
         m_zombiManager ->Getice(true);
     }
     m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
-    PlantUpdate();
-    CameraUpdate(-1);
+    if(m_CameraState == CameraState::idle)PlantUpdate();
+    
 
     
 
@@ -129,10 +137,12 @@ void App::Update() {
     Util::Input::IfExit()) {
         m_CurrentState = State::END;
     }
-    m_Root.Update(glm::vec2(0,0));
+    CameraMove();
 }
 
 
 void App::End(){ // NOLINT(this method will mutate members in the future)
     LOG_TRACE("End");
 }
+
+

@@ -197,11 +197,11 @@ protected:
     std::vector<std::string> m_die;
     std::vector<std::string> m_ash;
 
-    glm::vec2 roll1={550.0,190.0};
-    glm::vec2 roll2 ={550.0,100.0};
-    glm::vec2 roll3 = {550.0,10.0};
-    glm::vec2 roll4 = {550.0,-80};
-    glm::vec2 roll5 = {550.0,-200};
+    glm::vec2 roll1={600.0,190.0};
+    glm::vec2 roll2 ={600.0,100.0};
+    glm::vec2 roll3 = {600.0,10.0};
+    glm::vec2 roll4 = {600.0,-80};
+    glm::vec2 roll5 = {600.0,-200};
 };
 
 #endif //ZOMBI_HPP

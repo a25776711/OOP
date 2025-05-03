@@ -58,8 +58,6 @@ void Renderer::Update(const glm::vec2& offset) {
     while (!renderQueue.empty()) {
         auto curr = renderQueue.top();
         renderQueue.pop();
-        
-        // 使用臨時變換進行渲染
         curr.m_GameObject->m_Transform.translation -= offset;
         curr.m_GameObject->Draw();
     }

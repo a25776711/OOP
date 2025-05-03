@@ -49,7 +49,7 @@ void App::TakePlant(glm::vec2 click,int level) {
             m_holdingPlant=card->MakePlant();
             m_Root.AddChild(m_holdingPlant);
             LOG_INFO("Plant selected: {}, Cost: {}, Current Sun: {}", 
-                m_holdingPlant->GetType(), 
+                m_holdingPlant->GetType(),
                 m_holdingPlant->GetCost(), 
                 Sunamount);
         }
@@ -214,10 +214,10 @@ std::vector<std::shared_ptr<zombi>> App::CheckBullet() {
 }
 //設定卡片及場地碰撞格
 void App::SetBlockPos() {
-    float spacingx = 80.8f;
-    float startX = -445;
-    float startY = -260;
-    float spacingy = 100;
+    float spacingx = 95;
+    float startX = -520;
+    float startY = -340;
+    float spacingy = 128;
     for(int i=0;i<5;i++) {
         for (int j=0;j<9;j++) {
             glm::vec2 pos={startX +spacingx * j,startY +spacingy *i};
@@ -259,17 +259,17 @@ void App::ResetSetCarPos(int level) {
     // 根據第一個道路的索引計算起始位置
     float baseY = -235.0f;
     float spacing = 100.0f;
+    std::vector<int> five_road={-235,-135,-35,65,165};
     
     for(int i=0;i<5;i++) {
         for(auto& r : road) {
             if(i==r) {
-                auto car=std::make_shared<Car>(glm::vec2(-450, baseY),Car::CarState::Idle);
+                auto car=std::make_shared<Car>(glm::vec2(-515, five_road[i]),Car::CarState::Idle);
                 m_Cars[i]=car;
                 m_Root.AddChild(car);
                 break;
             }
         }
-        baseY += spacing;
     }
 }
 //車子動作

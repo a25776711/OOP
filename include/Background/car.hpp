@@ -6,6 +6,7 @@
 #define CAR_HPP
 #include "GameObject.hpp"
 #include "Util/Image.hpp"
+#include <string>
 
 class Car:public GameObject {
     public:
@@ -13,7 +14,7 @@ class Car:public GameObject {
         Idle,
         Move
     };
-    Car(glm::vec2 pos,CarState state):GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/car.png"),30) {
+    explicit Car(glm::vec2 pos,CarState state):GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/car.png"),-5) {
         m_Transform.translation = pos;
         m_State = state;
     }
@@ -22,7 +23,7 @@ class Car:public GameObject {
     }
     bool IsTouch(glm::vec2 pos,int index) {
         std::vector<int> rolly = {190,100,10,-80,-200};
-        if(pos.y == rolly[index]&&pos.x <= -430) {  
+        if(pos.y == rolly[index]&&pos.x <= -430) {
             return true;
         }
         return false;
@@ -40,7 +41,7 @@ class Car:public GameObject {
         return m_Transform.translation;
     }
     private:
-        CarState m_State;
+    CarState m_State;
 };
 
 
