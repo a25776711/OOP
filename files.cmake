@@ -40,6 +40,7 @@ set(INCLUDE_FILES
     App.hpp
     Renderer.hpp
     GameObject.hpp
+    Context.hpp
     Zombi/Zombi.hpp
     Zombi/normal.hpp
     Zombi/armor.hpp

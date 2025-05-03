@@ -32,7 +32,7 @@ public:
     void SetWindowWidth(unsigned int width) { m_WindowWidth = width; }
     void SetWindowHeight(unsigned int height) { m_WindowHeight = height; }
     void SetWindowIcon(const std::string &path);
-
+    SDL_Window* GetWindow() const { return m_Window; }
     void Setup();
     void Update();
 
@@ -50,5 +50,4 @@ private:
     Util::ms_t m_BeforeUpdateTime = Util::Time::GetElapsedTimeMs();
 };
 } // namespace Core
-
 #endif

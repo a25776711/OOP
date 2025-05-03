@@ -1,7 +1,7 @@
 #include "App.hpp"
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
-#include "Core/Context.hpp"
+#include "Context.hpp"
 void App::PlantUpdate() {
     MoveSun();
     CheckPlant();
