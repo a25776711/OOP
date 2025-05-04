@@ -7,6 +7,7 @@ set(SRC_FILES
     Zombi/zombi.cpp
     Zombi/normal.cpp
     Zombi/armor.cpp
+    
     Zombi/bucket.cpp
     Zombi/hat.cpp
     Zombi/zombi.cpp

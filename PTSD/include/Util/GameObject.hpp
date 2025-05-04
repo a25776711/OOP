@@ -157,6 +157,7 @@ public:
 protected:
     std::shared_ptr<Core::Drawable> m_Drawable = nullptr;
     std::vector<std::shared_ptr<GameObject>> m_Children;
+
     float m_ZIndex = 0;
     bool m_Visible = true;
     glm::vec2 m_Pivot = {0, 0};

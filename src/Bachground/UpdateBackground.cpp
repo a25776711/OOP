@@ -22,7 +22,7 @@ void UpdateBackground::NextLevel() {
 
     if (m_level != 0)
         m_Adventure->m_Transform.scale = {0.9, 0.9};
-    m_Adventure->m_Transform.translation={-300, 315};
+    m_Adventure->m_Transform.translation={-275, 315};
 
     m_Cards = m_CardManager->SetCards(m_level);
     SetCardPos();
@@ -30,7 +30,7 @@ void UpdateBackground::NextLevel() {
 
 void UpdateBackground::SetCardPos() {
     float spacing = 65;
-    float startX = -470;
+    float startX = -445;
     float y = 315;
 
     for (size_t i = 0; i < m_Cards.size(); ++i) {

@@ -72,7 +72,7 @@ void App::CameraMove(){
             if(m_CameraStart){
                 m_CameraStart=false;
             }
-            CameraMoveHidden(0);
+            //CameraMoveHidden(0);
             m_CameraState = CameraState::move_road;
         }
     else{
@@ -104,6 +104,8 @@ void App::CameraMove(){
         m_Root.Update(moveAmount);
     }
 }
+
+//開始後的視窗大小變換
 void App::ResizeWindow(int width, int height) {
     auto context = Core::Context::GetInstance();
     context->SetWindowWidth(width);

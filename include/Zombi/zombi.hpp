@@ -182,7 +182,7 @@ public:
             if (ice) {
                 this -> Gotice(true);
             }
-            if (z_HP <= 0){Die();}
+            if (z_HP <= 0)Die();
         }
     }
     void HitCheck(std::shared_ptr<Plant> plant);

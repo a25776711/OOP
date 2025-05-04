@@ -46,13 +46,6 @@ public:
     void RemoveChild(std::shared_ptr<GameObject> child);
 
     /**
-     * @brief Get all children managed by this Renderer.
-     *
-     * @return A vector containing all children.
-     */
-    const std::vector<std::shared_ptr<GameObject>> &GetChildren() const { return m_Children; }
-
-    /**
      * @brief Draw children according to their z-index.
      *
      * @note The user is not recommended to modify this function.

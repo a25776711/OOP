@@ -29,8 +29,6 @@ void App::Update() {
         m_SunNB->Change(Sunamount);
     }
 
-    // 處理視窗大小調整
-
     if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
         glm::vec2 pos=Util::Input::GetCursorPosition();
         pos.y=-pos.y;
@@ -70,7 +68,7 @@ void App::Update() {
         }
     }
 
-    if (m_PRM ->GetLevel() != 0) {
+    if (m_PRM ->GetLevel() != 0&&m_CameraState==CameraState::idle) {
         bool isKPressed = Util::Input::IsKeyPressed(Util::Keycode::K);
 
         if (!m_KDown && isKPressed) {

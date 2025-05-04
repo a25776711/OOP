@@ -7,7 +7,7 @@ bool Fastshooter::AttackCheck(std::vector<glm::vec2> pos) {
     for(auto &p:pos){
         if(
         p.x>m_Transform.translation.x&&p.x-m_Transform.translation.x<800&&
-        abs(p.y-m_Transform.translation.y)<30)return true;
+        abs(p.y-m_Transform.translation.y)<38)return true;
     }
     return false;
 }
