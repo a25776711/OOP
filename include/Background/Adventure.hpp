@@ -8,12 +8,13 @@
 #include "GameObject.hpp"
 #include "Util/Image.hpp"
 #include <string>
+#include "Plant/plant.hpp"
 
 
 class adventure : public GameObject{
     public:
         explicit  adventure():GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/Adventure_1.png"), -5){
-
+            
         }
         void ChangeImage() {
             auto temp = std::dynamic_pointer_cast<Util::Image>(m_Drawable);
@@ -29,9 +30,56 @@ class adventure : public GameObject{
             }
         }
     private:
-
-
-
+};
+class ShovelBlock : public GameObject{
+    public:
+        explicit  ShovelBlock():GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/ShovelBlock.png"), -4){
+            SetVisible(false);
+            m_Transform.scale={1.3f,1.3f};
+        }
+        void NextLevel(int level){
+            if (level<=4) 
+                SetVisible(false);
+            else
+                SetVisible(true);
+        }
+    private:
+};
+class Shovel : public Plant{
+    public:
+        explicit Shovel():Plant(m_Loader.shovelIMG){
+            isTaken = false;
+            SetType(T_Shovel);
+            SetZIndex(-3);
+            SetVisible(false);
+            auto pos=GetPosition();
+            SetFourPoints({pos.x-40,pos.y-20,pos.x+40,pos.y+20});
+        }
+        void ChangeImage(){
+            if(isTaken)
+                m_Drawable = std::make_shared<Util::Animation>(m_Loader.shovelIMG_1, false, 100, true, 100);
+            else
+                m_Drawable = std::make_shared<Util::Animation>(m_Loader.shovelIMG, false, 100, true, 100);
+        }
+        
+        void TakeShovel(){
+            isTaken = true;
+            ChangeImage();
+        }
+        void UseShovel(){
+            isTaken = false;
+            m_Transform.translation = {300, 280};
+            ChangeImage();
+        }
+        void NextLevel(int level){
+            if (level<=4) 
+                SetVisible(false);
+            else
+                SetVisible(true);
+        }
+    private:
+        bool isTaken;
+        
 };
 
 #endif //BUTTOM_HPP

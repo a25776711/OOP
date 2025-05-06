@@ -21,7 +21,7 @@ public:
         allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card6.png",6)); // iceshooter
         allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card7.png",7)); // chomper
         allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card8.png",8)); // fastshooter
- 
+        allCards.push_back(std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card4.png",9)); // play_wallnut
     }
 
     std::vector<std::shared_ptr<Card>> SetCards(int level) {

@@ -34,8 +34,9 @@ void App::Update() {
         pos.y=-pos.y;
         if(m_PRM->GetLevel()!=0){
             if(m_holdingPlant==nullptr&&CheckSunCollect(pos)){m_Root.RemoveChild(CheckSunCollect(pos));}
-            if(m_holdingPlant==nullptr){TakePlant(pos,m_PRM->GetLevel()+1);}
             if(m_holdingPlant!=nullptr){PutPlant(pos,m_PRM->GetLevel());}
+            if(m_holdingPlant==nullptr){TakePlant(pos,m_PRM->GetLevel()+1);}
+            
         }
         if (m_PRM ->GetLevel()==0) {
             if (m_PRM -> CheckHit(pos)) {
@@ -47,14 +48,14 @@ void App::Update() {
                 ResizeWindow(1100, 720);
             }
         }
-
     }
-    if (m_EnterDown) {
+    if (m_EnterDown&&m_CameraState==CameraState::idle) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
             if(m_PRM->GetLevel()==0){
                 ResizeWindow(1280, 720);
             }
             m_PRM ->NextLevel();
+            std::cout<<"next to level:"<<m_PRM->GetLevel()<<std::endl;
             m_CurrentZombiIndex = 0;
             zombicount = 0; 
             for (auto zombi : m_zombiManager -> GetZombies()) {

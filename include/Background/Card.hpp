@@ -21,7 +21,7 @@ public:
             SetDrawable(image);
             this->index = index;
       }
-      std::shared_ptr<Plant> MakePlant() {
+      std::shared_ptr<Plant> MakePlant(int level) {
             std::vector<std::shared_ptr<Plant>>m_GPlants={
                   std::make_shared<Peashooter>(),
                       std::make_shared<SunFlower>(),
@@ -30,9 +30,13 @@ public:
                       std::make_shared<Mine>(),
                       std::make_shared<Iceshooter>(),
                       std::make_shared<Chomper>(),
-                      std::make_shared<Fastshooter>()
+                      std::make_shared<Fastshooter>(),
+                      std::make_shared<Play_wallnut>()
                   };
             if(index>8||index<1)return nullptr;
+            if(level==5&&index==4){
+                  return m_GPlants[8];
+            }
             m_GPlants[index-1]->SetZIndex(50);
             return m_GPlants[index-1];
       }

@@ -25,12 +25,15 @@ public:
         for (auto card : m_Cards) {
             result.push_back(card);
         }
+        result.push_back(m_Shovel);
+        result.push_back(m_ShovelBlock);
         return result;
     }
 
     void SetCardPos();
     int GetLevel() {return m_level;}
     std::vector<std::shared_ptr<Card>> GetCards() {return m_Cards;}
+    std::shared_ptr<Shovel> GetShovel() {return m_Shovel;}
     bool CheckHit(const glm::vec2& point) {
         // 計算點與每個邊的叉積
         bool result = false;
@@ -55,11 +58,13 @@ public:
         glm::vec2 p2{367, -65};
         glm::vec2 p3{360, -130};
         glm::vec2 p4{110, -101};
-
+        std::vector<int> m_ShovelPos;
         std::vector<std::shared_ptr<Card>> m_Cards;
         std::shared_ptr<CardManager> m_CardManager;
         std::shared_ptr<BackgroundImage> m_Background;
         std::shared_ptr<adventure> m_Adventure;
+        std::shared_ptr<ShovelBlock> m_ShovelBlock;
+        std::shared_ptr<Shovel> m_Shovel;
         int m_level = 0;
 
 };

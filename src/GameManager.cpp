@@ -56,7 +56,7 @@ void App::CameraMoveHidden(int hidden){
     }
     else if(hidden==1){
         auto background_hidden=m_PRM->GetChildren();
-        for(size_t i=1;i<background_hidden.size();i++){
+        for(size_t i=1;i<background_hidden.size()-2;i++){
             background_hidden[i]->SetVisible(true);
         }
         for(auto& car:m_Cars){

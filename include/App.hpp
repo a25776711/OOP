@@ -107,6 +107,8 @@ private:
     std::vector<std::shared_ptr<Bullet>> m_Bullets;
     std::vector<std::shared_ptr<Car>> m_Cars;
 
+    std::vector<std::shared_ptr<Plant>> m_Play_Wallnut;
+
     bool move_house=false;
     bool move_road=false;
     bool m_EnterDown = false;

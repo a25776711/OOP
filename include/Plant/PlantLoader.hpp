@@ -34,6 +34,9 @@ class PlantLoader{
   std::vector<std::string> chomperIMG_2;
   std::vector<std::string> cherryIMG;
   std::vector<std::string> cherryIMG_Boom;
+  std::vector<std::string> shovelIMG;
+  std::vector<std::string> shovelIMG_1;
+
 
   void loadPlantImages(){
     std::string path=RESOURCE_DIR"/plant/";
@@ -68,6 +71,8 @@ class PlantLoader{
     for(int i = 0; i < 14; i++)
       cherryIMG.emplace_back(path+"cherrybomb/cherrybomb_" + std::to_string(i) + ".png");
     cherryIMG_Boom.emplace_back(path+"explosion.png");
+    shovelIMG.emplace_back(RESOURCE_DIR"/Background/Shovel.png");
+    shovelIMG_1.emplace_back(RESOURCE_DIR"/Background/Shovel_take.png");
   }
 
   private:

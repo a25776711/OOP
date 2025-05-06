@@ -17,12 +17,13 @@ class Wallnut : public Plant {
     private:
 
 };
-class play_wallnut:public Plant{
+class Play_wallnut:public Plant{
     public:
-    play_wallnut():Plant(m_Loader.wallnutIMG,70){
+    Play_wallnut():Plant(m_Loader.wallnutIMG,70){
         SetHP(72);
         SetCost(50);
         SetType(T_Play_Wallnut);
+        
         m_rotationSpeed = 5.0f;  // 旋轉速度
         m_moveSpeed = 2.0f;      // 移動速度
         m_isMoving = false;      // 是否正在移動
