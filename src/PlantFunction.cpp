@@ -275,8 +275,8 @@ void App::ResetSetCarPos(int level) {
     m_Cars.resize(5,nullptr);
     
     // 根據第一個道路的索引計算起始位置
-    float baseY = -305.0f;
-    float spacing = 120.0f;
+    float baseY = -300.0f;
+    float spacing = 125.0f;
     
     for(int i=0;i<5;i++) {
         for(auto& r : road) {
