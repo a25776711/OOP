@@ -4,7 +4,7 @@
 
 #ifndef ZOMBI_HPP
 #define ZOMBI_HPP
-#include "Util/GameObject.hpp"
+#include "GameObject.hpp"
 #include "Util/Animation.hpp"
 #include "Background/Car.hpp"
 #include <random>
@@ -15,7 +15,7 @@
 // 前向聲明
 class Plant;
 
-class zombi :public Util::GameObject {
+class zombi :public GameObject {
 public:
     zombi() {
         m_state = zombistate::stand;
@@ -182,7 +182,7 @@ public:
             if (ice) {
                 this -> Gotice(true);
             }
-            if (z_HP <= 0){Die();}
+            if (z_HP <= 0)Die();
         }
     }
     void HitCheck(std::shared_ptr<Plant> plant);
@@ -197,19 +197,12 @@ protected:
     std::vector<std::string> m_die;
     std::vector<std::string> m_ash;
 
-<<<<<<< Updated upstream
-    glm::vec2 roll1={450.0,190.0};
-    glm::vec2 roll2 ={450.0,100.0};
-    glm::vec2 roll3 = {450.0,10.0};
-    glm::vec2 roll4 = {450.0,-80};
-    glm::vec2 roll5 = {450.0,-200};
-=======
+
     glm::vec2 roll1={600.0,200.0};
     glm::vec2 roll2 ={600.0,110.0};
     glm::vec2 roll3 = {600.0,10.0};
     glm::vec2 roll4 = {600.0,-90};
     glm::vec2 roll5 = {600.0,-210};
->>>>>>> Stashed changes
 };
 
 #endif //ZOMBI_HPP

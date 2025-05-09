@@ -6,6 +6,8 @@
 #define PLANTLOADER_HPP
 #include <string>
 #include <vector>
+#include <memory>
+#include <unordered_map>
 
 class PlantLoader{
   public:
@@ -17,6 +19,15 @@ class PlantLoader{
   PlantLoader() {
     loadPlantImages();
   }
+
+  // 預加載所有圖片資源
+  void PreloadAllImages() {
+    if (!m_IsPreloaded) {
+      loadPlantImages();
+      m_IsPreloaded = true;
+    }
+  }
+
   std::vector<std::string> sunflowerIMG;
   std::vector<std::string> sunflowerIMG_1;
   std::vector<std::string> sunIMG;
@@ -34,9 +45,29 @@ class PlantLoader{
   std::vector<std::string> chomperIMG_2;
   std::vector<std::string> cherryIMG;
   std::vector<std::string> cherryIMG_Boom;
+  std::vector<std::string> shovelIMG;
+  std::vector<std::string> shovelIMG_1;
+
+  private:
+  bool m_IsPreloaded = false;
 
   void loadPlantImages(){
     std::string path=RESOURCE_DIR"/plant/";
+    // 使用預分配的容量來減少重新分配
+    sunflowerIMG.reserve(24);
+    sunflowerIMG_1.reserve(24);
+    sunIMG.reserve(12);
+    mineIMG.reserve(8);
+    peashooterIMG.reserve(24);
+    fastshooterIMG.reserve(15);
+    wallnutIMG.reserve(32);
+    wallnutIMG_1.reserve(11);
+    wallnutIMG_2.reserve(32);
+    icepeashooterIMG.reserve(15);
+    chomperIMG.reserve(13);
+    chomperIMG_1.reserve(9);
+    chomperIMG_2.reserve(6);
+    cherryIMG.reserve(14);
     for(int i = 0; i < 24; i++)
       sunflowerIMG.emplace_back(path+"sunflower/sunflower_" + std::to_string(i) + ".png");
     for(int i = 0; i < 24; i++)
@@ -68,9 +99,10 @@ class PlantLoader{
     for(int i = 0; i < 14; i++)
       cherryIMG.emplace_back(path+"cherrybomb/cherrybomb_" + std::to_string(i) + ".png");
     cherryIMG_Boom.emplace_back(path+"explosion.png");
+    shovelIMG.emplace_back(RESOURCE_DIR"/Background/Shovel.png");
+    shovelIMG_1.emplace_back(RESOURCE_DIR"/Background/Shovel_take.png");
   }
 
-  private:
   PlantLoader(const PlantLoader&) = delete;
   PlantLoader& operator=(const PlantLoader&) = delete;
 };

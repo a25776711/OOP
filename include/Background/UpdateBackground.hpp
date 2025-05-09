@@ -9,31 +9,30 @@
 
 #include "Adventure.hpp"
 #include "Background/background.hpp"
-#include "Util/GameObject.hpp"
+#include "GameObject.hpp"
 #include "CardManager.hpp"
-#include "Background/car.hpp"
 
 class UpdateBackground {
 public:
     UpdateBackground ();
 
     void NextLevel();
-    [[nodiscard]] std::vector<std::shared_ptr<Util::GameObject>> GetChildren() const {
-        std::vector<std::shared_ptr<Util::GameObject>> result;
-        m_Background ->SetPivot({0,0,});
+    [[nodiscard]] std::vector<std::shared_ptr<GameObject>> GetChildren() const {
+        std::vector<std::shared_ptr<GameObject>> result;
         result.push_back(m_Background);
         result.push_back(m_Adventure);
         for (auto card : m_Cards) {
             result.push_back(card);
         }
+        result.push_back(m_Shovel);
+        result.push_back(m_ShovelBlock);
         return result;
     }
-
-
 
     void SetCardPos();
     int GetLevel() {return m_level;}
     std::vector<std::shared_ptr<Card>> GetCards() {return m_Cards;}
+    std::shared_ptr<Shovel> GetShovel() {return m_Shovel;}
     bool CheckHit(const glm::vec2& point) {
         // 計算點與每個邊的叉積
         bool result = false;
@@ -51,7 +50,6 @@ public:
         return (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
     }
 
-
     protected:
         glm::vec2 m_hitX;
         glm::vec2 m_hitY;
@@ -59,15 +57,15 @@ public:
         glm::vec2 p2{367, -65};
         glm::vec2 p3{360, -130};
         glm::vec2 p4{110, -101};
-
+        std::vector<int> m_ShovelPos;
         std::vector<std::shared_ptr<Card>> m_Cards;
         std::shared_ptr<CardManager> m_CardManager;
         std::shared_ptr<BackgroundImage> m_Background;
         std::shared_ptr<adventure> m_Adventure;
+        std::shared_ptr<ShovelBlock> m_ShovelBlock;
+        std::shared_ptr<Shovel> m_Shovel;
         int m_level = 0;
 
-
 };
-
 
 #endif //UPDATEBACKGROUND_HPP

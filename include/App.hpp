@@ -2,7 +2,7 @@
 #define APP_HPP
 
 #include "pch.hpp"
-#include "Util/Renderer.hpp"
+#include "Renderer.hpp"
 #include "Zombi/ZombiManager.hpp"
 #include "Plant/plant.hpp"
 #include "Background/UpdateBackground.hpp"
@@ -12,9 +12,6 @@
 #include "Plant/PlantLoader.hpp"
 
 // IWYU pragma: export
-
-// 前向宣告
-class GameManager;
 
 class App {
 public:
@@ -30,15 +27,11 @@ public:
     void Update();
 
     void End(); // NOLINT(readability-convert-member-functions-to-static)
-    enum PlantType {
-        type_SunFlower,
-        type_Pea,
-        type_Wallnut,
-        type_Mine,
-        type_IcePea,
-        type_FastPea,
-        type_Chomper,
-        type_Cherry
+    enum class CameraState {
+        idle,
+        grass,
+        move_road,
+        move_house
     };
     enum class Phase {
             tital,
@@ -48,20 +41,26 @@ public:
     };
     void MakeSun(bool flower,glm::vec2 pos={0,0});
     std::shared_ptr<Sun> CheckSunCollect(glm::vec2 click);
+
     void MoveSun();
     void SetBlockPos();
     void ResetSetCarPos(int level);
     void ResetPlant(int level);
     void CarMoveCheck();
 
+
+
     void PlantUpdate();
     void StartGameSet();
     void FpsShow();
+    void CameraMove();
+    void CameraMoveHidden(int hidden);
+    void ResizeWindow(int width, int height);
+
     //點擊四個點確認
     bool CheckClick(std::vector<float> block,glm::vec2 click);
 
 
-    std::shared_ptr<zombi> CheckZombi();
     void TakePlant(glm::vec2 click,int level);
     void CheckPlant();
     void PutPlant(glm::vec2 click,int level);
@@ -77,9 +76,10 @@ private:
     std::shared_ptr<Plant> m_holdingPlant=nullptr;
     State m_CurrentState = State::START;
     Phase m_Phase = Phase::tital;
-    Util::Renderer m_Root;
+    CameraState m_CameraState = CameraState::idle;
+    Renderer m_Root;
+    glm::vec2 m_CenterPoint={0,0};
     std::shared_ptr<UpdateBackground> m_PRM;
-    std::shared_ptr<GameManager> m_GameManager;
 
     int m_CurrentZombiIndex = 0;
     int zombicount = 0;
@@ -87,6 +87,9 @@ private:
 
     int Sunamount=0;
     int SunClock=0;
+    int road_count=0;
+    int house_count=0;
+    
     
     std::vector<std::shared_ptr<Sun>> m_Suns;
     std::vector<std::vector<std::shared_ptr<Plant>>> m_Plants;
@@ -94,9 +97,13 @@ private:
     std::vector<std::shared_ptr<Bullet>> m_Bullets;
     std::vector<std::shared_ptr<Car>> m_Cars;
 
+    std::vector<std::shared_ptr<Plant>> m_Play_Wallnut;
+
+    bool move_house=false;
+    bool move_road=false;
     bool m_EnterDown = false;
     bool m_KDown = false; // 初始設為 false
-    bool m_showCollisionBoxes = true;
+    bool m_CameraStart=true;
 };
 
 #endif

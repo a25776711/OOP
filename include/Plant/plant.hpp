@@ -4,7 +4,7 @@
 
 #ifndef PLANT_HPP
 #define PLANT_HPP
-#include "Util/GameObject.hpp"
+#include "GameObject.hpp"
 #include "Util/Animation.hpp"
 #include "Plant/PlantLoader.hpp"
 #include "Bullet/bullet.hpp"
@@ -12,20 +12,22 @@
 #include <cstdlib>
 #include <iostream>
 
-class Plant: public Util::GameObject{
+class Plant: public GameObject{
     public:
     enum PlantType {
+         T_Shooter,
       T_SunFlower,
-        T_WallNut,
-        T_Shooter,
-        T_Mine,
         T_Bomb,
+        T_WallNut,
+        T_Mine,
         T_Chomper,
-        T_Play_Wallnut
+        T_Play_Wallnut,
+        T_Shovel
     };
-    explicit Plant(std::vector<std::string>& Path,int interval){
+    explicit Plant(std::vector<std::string>& Path,int interval=100){
         SetZIndex(5);
         m_Drawable = std::make_shared<Util::Animation>(Path, false, interval, true, 0);
+        m_Transform.scale={1.2f,1.2f};
     }
     [[nodiscard]] bool GetVisibility() const { return m_Visible;}
     [[nodiscard]] const glm::vec2& GetPosition() const { return m_Transform.translation; }
@@ -35,13 +37,12 @@ class Plant: public Util::GameObject{
         auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
         temp->SetLooping(looping);
     }
-    void SetHP(int hp=5) {
+    void SetHP(int hp=300) {
         m_hp=hp;
     }
     int GetHP(){return m_hp;}
     void SetATK(int atk) { m_ATK = atk;}
     int GetATK(){return m_ATK;}
-    void PLAY(bool play);
     virtual void Hurt() {
         m_hp--;
     }
@@ -49,12 +50,19 @@ class Plant: public Util::GameObject{
     int GetCost(){return m_cost;}
     void SetType(PlantType type){m_Type=type;}
     PlantType GetType(){return m_Type;}
-    void Play(){
+    void Play(bool play){
         auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
-        temp->Play();
+        if(play){
+            temp->Play();
+        }
+        else{
+            temp->Pause();
+        }
     }
     void SetTakeCD(int cd){m_takeCD=cd;}
     int GetTakeCD(){return m_takeCD;}
+    void SetFourPoints(std::vector<float> points){four_points=points;}
+    std::vector<float> GetFourPoints(){return four_points;}
     virtual std::shared_ptr<Bullet> Attack(std::vector<glm::vec2> pos){return nullptr;};
     virtual void Boomer(){};
     virtual bool CoolDown(){return false;};
@@ -74,7 +82,7 @@ class Plant: public Util::GameObject{
     protected:
     PlantLoader m_Loader;
     private:
-
+    std::vector<float> four_points;
     PlantType m_Type;
     int m_hp;
     int m_ATK=0;

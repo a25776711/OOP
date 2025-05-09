@@ -4,7 +4,7 @@
 
 #ifndef BULLET_HPP
 #define BULLET_HPP
-#include "Util/GameObject.hpp"
+#include "GameObject.hpp"
 #include "Util/Image.hpp"
 
 enum bullet_type {
@@ -12,7 +12,7 @@ enum bullet_type {
     Ice
 };
 
-class Bullet:public Util::GameObject {
+class Bullet:public GameObject {
     public:
     explicit Bullet(std::string path,bullet_type type,glm::vec2 startPos,int damage = 1):GameObject(std::make_unique<Util::Image>(path), 10) {
         m_ImagePath = path;

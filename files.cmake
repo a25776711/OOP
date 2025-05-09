@@ -2,9 +2,12 @@ set(SRC_FILES
     App.cpp
     AppFunction.cpp
     GameManager.cpp
+    Renderer.cpp
+    GameObject.cpp
     Zombi/zombi.cpp
     Zombi/normal.cpp
     Zombi/armor.cpp
+    
     Zombi/bucket.cpp
     Zombi/hat.cpp
     Zombi/zombi.cpp
@@ -36,6 +39,9 @@ set(SRC_FILES
 
 set(INCLUDE_FILES
     App.hpp
+    Renderer.hpp
+    GameObject.hpp
+    Context.hpp
     Zombi/Zombi.hpp
     Zombi/normal.hpp
     Zombi/armor.hpp

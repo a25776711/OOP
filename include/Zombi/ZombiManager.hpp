@@ -158,10 +158,10 @@ void Getice(bool ice) {
   }
 }
 
-std::vector<std::shared_ptr<Util::GameObject>> GetZombiesAsGameObjects(std::vector<std::shared_ptr<zombi>> m_zombies) {
-  std::vector<std::shared_ptr<Util::GameObject>> result;
+std::vector<std::shared_ptr<GameObject>> GetZombiesAsGameObjects(std::vector<std::shared_ptr<zombi>> m_zombies) {
+  std::vector<std::shared_ptr<GameObject>> result;
   for (const auto& z : m_zombies) {
-    result.push_back(std::static_pointer_cast<Util::GameObject>(z));
+    result.push_back(std::static_pointer_cast<GameObject>(z));
   }
   return result;
 }
