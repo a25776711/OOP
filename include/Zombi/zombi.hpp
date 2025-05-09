@@ -203,7 +203,6 @@ protected:
     glm::vec2 roll3 = {600.0,10.0};
     glm::vec2 roll4 = {600.0,-90};
     glm::vec2 roll5 = {600.0,-210};
-
 };
 
 #endif //ZOMBI_HPP

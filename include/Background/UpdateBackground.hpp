@@ -62,8 +62,8 @@ public:
         std::shared_ptr<CardManager> m_CardManager;
         std::shared_ptr<BackgroundImage> m_Background;
         std::shared_ptr<adventure> m_Adventure;
-        std::shared_ptr<ShovelBlock> m_ShovelBlock;
-        std::shared_ptr<Shovel> m_Shovel;
+        std::shared_ptr<ShovelBlock> m_ShovelBlock=nullptr;
+        std::shared_ptr<Shovel> m_Shovel=nullptr;
         int m_level = 0;
 
 };

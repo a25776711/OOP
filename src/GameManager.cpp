@@ -69,13 +69,13 @@ void App::CameraMoveHidden(int hidden){
 }
 
 void App::CameraMove(){
-        if (m_CameraState == CameraState::grass) {
-            if(m_CameraStart){
-                m_CameraStart=false;
-            }
-            //CameraMoveHidden(0);
-            m_CameraState = CameraState::move_road;
+    if (m_CameraState == CameraState::grass) {
+        if(m_CameraStart){
+            m_CameraStart=false;
         }
+            //CameraMoveHidden(0);
+        m_CameraState = CameraState::move_road;
+    }
     else{
         glm::vec2 moveAmount = {0,0};
         if(m_CameraState == CameraState::move_road){
@@ -102,21 +102,10 @@ void App::CameraMove(){
                 house_count=0;
             }
         }
+        if(m_PRM->GetLevel()!=0){
+            auto temp=m_PRM->GetChildren();
+            m_Cars[2]->Test(temp[0]->GetTransform().translation);
+        }
         m_Root.Update(moveAmount);
     }
-}
-
-//開始後的視窗大小變換
-void App::ResizeWindow(int width, int height) {
-    auto context = Core::Context::GetInstance();
-    context->SetWindowWidth(width);
-    context->SetWindowHeight(height);
-    SDL_SetWindowSize(context->GetWindow(), width, height);
-    
-    // 更新渲染範圍，但保持投影矩陣不變
-    glViewport(0, 0, width, height);
-    
-    // 強制重新計算投影矩陣
-    PTSD_Config::WINDOW_WIDTH = width;
-    PTSD_Config::WINDOW_HEIGHT = height;
 }

@@ -2,8 +2,8 @@
 // Created by bingho on 2025/3/20.
 //
 
-#ifndef BUTTOM_HPP
-#define BUTTOM_HPP
+#ifndef ADVENTURE_HPP
+#define ADVENTURE_HPP
 
 #include "GameObject.hpp"
 #include "Util/Image.hpp"
@@ -52,8 +52,8 @@ class Shovel : public Plant{
             SetType(T_Shovel);
             SetZIndex(-3);
             SetVisible(false);
-            auto pos=GetPosition();
-            SetFourPoints({pos.x-40,pos.y-20,pos.x+40,pos.y+20});
+            m_Transform.translation = {300, 280};
+
         }
         void ChangeImage(){
             if(isTaken)
@@ -66,10 +66,15 @@ class Shovel : public Plant{
             isTaken = true;
             ChangeImage();
         }
+        void SetPoints(){
+            auto pos=GetPosition();
+            SetFourPoints({pos.x-40,pos.y-20,pos.x+40,pos.y+20});
+        }
         void UseShovel(){
             isTaken = false;
-            m_Transform.translation = {300, 280};
+            m_Transform.translation = {410, 280};
             ChangeImage();
+            SetPoints();
         }
         void NextLevel(int level){
             if (level<=4) 
@@ -82,4 +87,4 @@ class Shovel : public Plant{
         
 };
 
-#endif //BUTTOM_HPP
+#endif //ADVENTURE_HPP

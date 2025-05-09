@@ -12,8 +12,7 @@ UpdateBackground::UpdateBackground() {
     m_Adventure->m_Transform.translation={300,-100};
     m_ShovelBlock = std::make_shared<ShovelBlock>();
     m_Shovel = std::make_shared<Shovel>();
-    m_Shovel->SetPosition({300, 280});
-    m_Shovel->SetFourPoints({260, 260,340, 300});
+    m_Shovel->SetFourPoints({370,260,450,300});
     m_ShovelBlock->m_Transform.translation = {300, 280};
     m_Adventure -> m_Transform.scale ={0.8,0.8};
 }
@@ -26,18 +25,28 @@ void UpdateBackground::NextLevel() {
     m_Shovel->NextLevel(m_level);
     m_ShovelBlock->NextLevel(m_level);
 
-
-    if (m_level != 0)
+    if (m_level != 0){
         m_Adventure->m_Transform.scale = {0.9, 0.9};
-    m_Adventure->m_Transform.translation={-275, 315};
-
+    }
+    if(m_level==1){
+        m_Adventure->m_Transform.translation={-310, 315};
+    }
+    else{
+        m_Adventure->m_Transform.translation={-200, 315};
+    }
     m_Cards = m_CardManager->SetCards(m_level);
     SetCardPos();
 }
 
 void UpdateBackground::SetCardPos() {
     float spacing = 65;
-    float startX = -445;
+    float startX;
+    if(m_level==1){
+        startX = -430;
+    }
+    else{
+        startX = -375;
+    }
     float y = 315;
 
     for (size_t i = 0; i < m_Cards.size(); ++i) {

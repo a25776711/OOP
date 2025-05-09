@@ -43,17 +43,14 @@ void App::Update() {
                 m_PRM ->NextLevel();
                 m_Root.AddChildren(m_PRM->GetChildren());
                 m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
+                m_Root.Update(glm::vec2(-55,0));
                 ResetPlant(m_PRM -> GetLevel());
                 //m_CameraState = CameraState::grass;
-                ResizeWindow(1100, 720);
             }
         }
     }
     if (m_EnterDown&&m_CameraState==CameraState::idle) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
-            if(m_PRM->GetLevel()==0){
-                ResizeWindow(1280, 720);
-            }
             m_PRM ->NextLevel();
             std::cout<<"next to level:"<<m_PRM->GetLevel()<<std::endl;
             m_CurrentZombiIndex = 0;
@@ -65,6 +62,7 @@ void App::Update() {
             m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
             if (m_PRM -> GetLevel() ==11){ m_CurrentState = State::END;}
             ResetPlant(m_PRM -> GetLevel());
+
             //m_CameraState = CameraState::grass;
         }
     }

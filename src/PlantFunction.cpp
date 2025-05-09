@@ -54,10 +54,12 @@ void App::TakePlant(glm::vec2 click,int level) {
                 Sunamount);
         }
     }
-    auto shovel=m_PRM->GetShovel();
-    if(m_PRM->GetLevel()>4&&CheckClick(shovel->GetFourPoints(), click)&&m_holdingPlant==nullptr) {
-        m_holdingPlant=shovel;
-        shovel->TakeShovel();
+    if(m_PRM->GetLevel()>4){
+        auto shovel=m_PRM->GetShovel();
+        if(CheckClick(shovel->GetFourPoints(), click)&&m_holdingPlant==nullptr) {
+            m_holdingPlant=shovel;
+            shovel->TakeShovel();
+        }
     }
 }
 //放置植物判斷
@@ -281,7 +283,7 @@ void App::ResetSetCarPos(int level) {
     for(int i=0;i<5;i++) {
         for(auto& r : road) {
             if(i==r) {
-                auto car=std::make_shared<Car>(glm::vec2(-550, baseY + i * spacing),Car::CarState::Idle);
+                auto car=std::make_shared<Car>(glm::vec2(-423, baseY + i * spacing),Car::CarState::Idle);
                 m_Cars[i]=car;
                 m_Root.AddChild(car);
                 break;

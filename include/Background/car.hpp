@@ -7,6 +7,7 @@
 #include "GameObject.hpp"
 #include "Util/Image.hpp"
 #include <string>
+#include <iostream>
 
 class Car:public GameObject {
     public:
@@ -39,6 +40,9 @@ class Car:public GameObject {
     }
     glm::vec2 GetPosition() {
         return m_Transform.translation;
+    }
+    void Test(glm::vec2 pos) {
+        std::cout << "position: " << pos.x-m_Transform.translation.x << std::endl;
     }
     private:
     CarState m_State;

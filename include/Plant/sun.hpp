@@ -38,7 +38,7 @@ class Sun : public Plant {
     bool m_click=false;
     glm::vec2 m_drop;
     bool m_flower;
-    glm::vec2 m_des={-515,325};
+    glm::vec2 m_des={-440,325};
     glm::vec2 p1={m_Transform.translation.x+20,m_Transform.translation.y+20};
     glm::vec2 p2={m_Transform.translation.x-20,m_Transform.translation.y+20};
     glm::vec2 p3={m_Transform.translation.x-20,m_Transform.translation.y-20};
