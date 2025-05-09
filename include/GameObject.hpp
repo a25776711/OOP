@@ -81,6 +81,7 @@ public:
      * @return The transform of the game object.
      */
     Util::Transform GetTransform() const { return m_Transform; }
+    
 
     /**
      * @brief Get the size of its drawable component.

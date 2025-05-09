@@ -27,7 +27,6 @@ class Plant: public GameObject{
     explicit Plant(std::vector<std::string>& Path,int interval=100){
         SetZIndex(5);
         m_Drawable = std::make_shared<Util::Animation>(Path, false, interval, true, 0);
-        m_Transform.scale={1.2f,1.2f};
     }
     [[nodiscard]] bool GetVisibility() const { return m_Visible;}
     [[nodiscard]] const glm::vec2& GetPosition() const { return m_Transform.translation; }

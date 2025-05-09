@@ -24,7 +24,7 @@ class Play_wallnut:public Plant{
         SetCost(50);
         SetType(T_Play_Wallnut);
         
-        m_rotationSpeed = 3.0f;  // 旋轉速度
+        m_rotationSpeed = 0.5f;  // 旋轉速度
         m_moveSpeed = 5.0f;      // 移動速度
     }
 
