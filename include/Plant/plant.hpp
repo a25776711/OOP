@@ -15,11 +15,11 @@
 class Plant: public GameObject{
     public:
     enum PlantType {
+         T_Shooter,
       T_SunFlower,
-        T_WallNut,
-        T_Shooter,
-        T_Mine,
         T_Bomb,
+        T_WallNut,
+        T_Mine,
         T_Chomper,
         T_Play_Wallnut,
         T_Shovel
@@ -43,7 +43,6 @@ class Plant: public GameObject{
     int GetHP(){return m_hp;}
     void SetATK(int atk) { m_ATK = atk;}
     int GetATK(){return m_ATK;}
-    void PLAY(bool play);
     virtual void Hurt() {
         m_hp--;
     }

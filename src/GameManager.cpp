@@ -19,8 +19,9 @@ void App::PlantUpdate() {
     }
 }
 void App::StartGameSet(){
-    SetBlockPos();
     PlantLoader::GetInstance();
+    
+    SetBlockPos();
     m_SunNB->SetZIndex(20);
     m_Root.AddChild(m_SunNB);
     m_Plants=std::vector<std::vector<std::shared_ptr<Plant>>>(5, std::vector<std::shared_ptr<Plant>>(9, nullptr));

@@ -35,7 +35,7 @@ void App::Update() {
         if(m_PRM->GetLevel()!=0){
             if(m_holdingPlant==nullptr&&CheckSunCollect(pos)){m_Root.RemoveChild(CheckSunCollect(pos));}
             if(m_holdingPlant!=nullptr){PutPlant(pos,m_PRM->GetLevel());}
-            if(m_holdingPlant==nullptr){TakePlant(pos,m_PRM->GetLevel()+1);}
+            if(m_holdingPlant==nullptr){TakePlant(pos,m_PRM->GetLevel());}
             
         }
         if (m_PRM ->GetLevel()==0) {

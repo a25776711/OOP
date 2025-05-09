@@ -59,7 +59,7 @@ void Sun::Move() {
 
             // 根據緩動插值計算新的座標
             m_Transform.translation = glm::mix(pos, m_des, easing); // 使用glm::mix插值
-            if(glm::length(m_des-m_Transform.translation)<0.3f)m_state=MoveOver;
+            if(glm::length(m_des-m_Transform.translation)<0.8f)m_state=MoveOver;
         }
         p1 = {m_Transform.translation.x + 20, m_Transform.translation.y + 20};
         p2 = {m_Transform.translation.x - 20, m_Transform.translation.y + 20};
@@ -91,7 +91,7 @@ void Sun::Move() {
 
         // 根據緩動插值計算新的座標
         m_Transform.translation = glm::mix(pos, m_des, easing); // 使用glm::mix插值
-        if(glm::length(m_des-m_Transform.translation)<0.3f)m_state=MoveOver;
+        if(glm::length(m_des-m_Transform.translation)<0.8f)m_state=MoveOver;
     }
     p1 = {m_Transform.translation.x + 20, m_Transform.translation.y + 20};
     p2 = {m_Transform.translation.x - 20, m_Transform.translation.y + 20};

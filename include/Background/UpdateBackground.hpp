@@ -11,7 +11,6 @@
 #include "Background/background.hpp"
 #include "GameObject.hpp"
 #include "CardManager.hpp"
-#include "Background/car.hpp"
 
 class UpdateBackground {
 public:

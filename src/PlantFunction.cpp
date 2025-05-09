@@ -67,16 +67,15 @@ void App::PutPlant(glm::vec2 m_click,int level){
             case 1:
                 for (int j=0;j<block[std::to_string(2)].size();j++) {
                     auto check=block[std::to_string(2)][j];
-                    LOG_INFO("Checking block[2][{}],fourside({},{},{},{}),pos:({},{})", j,check[0],check[1],check[2],check[3],check[4],check[5]);
                     if(CheckClick(check,m_click)&&m_Plants[2][j]==nullptr){
-                        LOG_INFO("Found valid position in level 1 at block[2][{}]", j);
                         Sunamount-=m_holdingPlant->GetCost();
                         m_SunNB->Change(Sunamount);
                         m_Plants[2][j]=m_holdingPlant;
                         m_holdingPlant->Play(true);
                         m_holdingPlant->SetPosition({check[4],check[5]});
+                        LOG_INFO("PutPlant {} on {},{}",m_holdingPlant->GetType(),check[4],check[5]);
                         m_holdingPlant=nullptr;
-                        LOG_INFO("Plant placed successfully at {},{}",check[4],check[5]);
+                        
                     }
                 }
             break;
@@ -90,8 +89,8 @@ void App::PutPlant(glm::vec2 m_click,int level){
                             m_Plants[i][j]=m_holdingPlant;
                             m_holdingPlant->Play(true);
                             m_holdingPlant->SetPosition({check[4],check[5]});
+                            LOG_INFO("PutPlant {} on {},{}",m_holdingPlant->GetType(),check[4],check[5]);
                             m_holdingPlant=nullptr;
-                            LOG_INFO("PutPlant on {},{}",check[4],check[5]);
                         }
                     }
                 }
@@ -106,9 +105,8 @@ void App::PutPlant(glm::vec2 m_click,int level){
                             m_Plants[i][j]=m_holdingPlant;
                             m_holdingPlant->Play(true);
                             m_holdingPlant->SetPosition({check[4],check[5]});
+                            LOG_INFO("PutPlant {} on {},{}",m_holdingPlant->GetType(),check[4],check[5]);
                             m_holdingPlant=nullptr;
-
-                            LOG_INFO("PutPlant on {},{}",check[4],check[5]);
                             return;
                         }
                         else if(m_holdingPlant->GetType()==Plant::T_Shovel) {
@@ -195,7 +193,10 @@ void App::CheckPlant() {
                 }
                 else if (check->GetType() == Plant::T_Play_Wallnut) {
                     auto m_play_wallnut=std::dynamic_pointer_cast<Play_wallnut>(check);
-                    m_play_wallnut->StartMoving();
+                    if(m_play_wallnut->Update()) {
+                        m_Root.RemoveChild(check);
+                        m_Plants[i][j].reset();
+                    }
                 }
             }
         }
@@ -231,8 +232,8 @@ std::vector<std::shared_ptr<zombi>> App::CheckBullet() {
 }
 //設定卡片及場地碰撞格
 void App::SetBlockPos() {
-    float spacingx = 92;
-    float startX = -520;
+    float spacingx = 98;
+    float startX = -540;
     float startY = -340;
     float spacingy = 125;
     for(int i=0;i<5;i++) {
@@ -281,7 +282,7 @@ void App::ResetSetCarPos(int level) {
     for(int i=0;i<5;i++) {
         for(auto& r : road) {
             if(i==r) {
-                auto car=std::make_shared<Car>(glm::vec2(-515, five_road[i]),Car::CarState::Idle);
+                auto car=std::make_shared<Car>(glm::vec2(-550, five_road[i]),Car::CarState::Idle);
                 m_Cars[i]=car;
                 m_Root.AddChild(car);
                 break;

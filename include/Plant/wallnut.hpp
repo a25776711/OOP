@@ -24,32 +24,26 @@ class Play_wallnut:public Plant{
         SetCost(50);
         SetType(T_Play_Wallnut);
         
-        m_rotationSpeed = 5.0f;  // 旋轉速度
-        m_moveSpeed = 2.0f;      // 移動速度
-        m_isMoving = false;      // 是否正在移動
+        m_rotationSpeed = 3.0f;  // 旋轉速度
+        m_moveSpeed = 5.0f;      // 移動速度
     }
 
-    void StartMoving() {
-        m_isMoving = true;
-    }
+    bool Update() {
+        // 更新位置
+        glm::vec2 currentPos = GetPosition();
+        currentPos.x += m_moveSpeed;
+        SetPosition(currentPos);
 
-    void Update() {
-        if (m_isMoving) {
-            // 更新位置
-            glm::vec2 currentPos = GetPosition();
-            currentPos.x += m_moveSpeed;
-            SetPosition(currentPos);
-
-            // 更新旋轉
-            float currentRotation = m_Transform.rotation;
-            currentRotation += m_rotationSpeed;
-            m_Transform.rotation = currentRotation;
-        }
+        // 更新旋轉
+        float currentRotation = m_Transform.rotation;
+        currentRotation += m_rotationSpeed;
+        m_Transform.rotation = currentRotation;
+        if(m_Transform.translation.x>600)return true;
+        return false;
     }
 
     private:
     float m_rotationSpeed;    // 旋轉速度
     float m_moveSpeed;        // 移動速度
-    bool m_isMoving;         // 移動狀態
 };
 #endif //WALLNUT_HPP

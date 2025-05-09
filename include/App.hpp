@@ -27,16 +27,6 @@ public:
     void Update();
 
     void End(); // NOLINT(readability-convert-member-functions-to-static)
-    enum PlantType {
-        type_SunFlower,
-        type_Pea,
-        type_Wallnut,
-        type_Mine,
-        type_IcePea,
-        type_FastPea,
-        type_Chomper,
-        type_Cherry
-    };
     enum class CameraState {
         idle,
         grass,
