@@ -16,12 +16,12 @@ void zombi::HitCheck(std::shared_ptr<Plant> plant) {
 }
 
 void zombi::move(std::vector<std::shared_ptr<Car>> cars)  {
-        std::vector<float> rolls={190.0,100.0,10.0,-80.0,-200.0};
+        std::vector<float> rolls = {220.0,110.0,10.0,-110.0,-250.0};
         m_Transform.translation.x = m_Transform.translation.x - z_speed;
         for (int i=0;i<rolls.size();i++) {
             if (m_Transform.translation.y==rolls[i]&&m_Transform.translation.x>=-450&&m_state!=zombistate::die) {
-                if (cars[4-i]!=nullptr&&cars[4-i]!=nullptr&&cars[4-i] -> GetPosition().x+20 > m_Transform.translation.x
-                &&cars[4-i] -> GetPosition().x-20 < m_Transform.translation.x) {
+                if (cars[4-i]!=nullptr && cars[4-i]!=nullptr && cars[4-i] -> GetPosition().x+20 > m_Transform.translation.x
+                && cars[4-i] -> GetPosition().x-20 < m_Transform.translation.x) {
                     Die();
                 }
             }

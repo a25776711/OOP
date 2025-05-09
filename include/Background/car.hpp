@@ -23,7 +23,7 @@ class Car:public GameObject {
         m_Transform.translation.x += 4.0f;
     }
     bool IsTouch(glm::vec2 pos,int index) {
-        std::vector<int> rolly = {190,100,10,-80,-200};
+        std::vector<float> rolly = {220.0,110.0,10.0,-110.0,-250.0};
         if(pos.y == rolly[index]&&pos.x <= -430) {
             return true;
         }
