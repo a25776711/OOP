@@ -51,8 +51,13 @@ void App::Update() {
     }
     if (m_EnterDown&&m_CameraState==CameraState::idle) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
+<<<<<<< Updated upstream
             if(m_PRM->GetLevel()==0){
                 ResizeWindow(1280, 720);
+=======
+            for (auto &z : m_PRM ->GetChildren()) {
+                m_Root.RemoveChild(z);
+>>>>>>> Stashed changes
             }
             m_PRM ->NextLevel();
             std::cout<<"next to level:"<<m_PRM->GetLevel()<<std::endl;
