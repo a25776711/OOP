@@ -197,11 +197,19 @@ protected:
     std::vector<std::string> m_die;
     std::vector<std::string> m_ash;
 
+<<<<<<< Updated upstream
     glm::vec2 roll1={450.0,190.0};
     glm::vec2 roll2 ={450.0,100.0};
     glm::vec2 roll3 = {450.0,10.0};
     glm::vec2 roll4 = {450.0,-80};
     glm::vec2 roll5 = {450.0,-200};
+=======
+    glm::vec2 roll1={600.0,200.0};
+    glm::vec2 roll2 ={600.0,110.0};
+    glm::vec2 roll3 = {600.0,10.0};
+    glm::vec2 roll4 = {600.0,-90};
+    glm::vec2 roll5 = {600.0,-210};
+>>>>>>> Stashed changes
 };
 
 #endif //ZOMBI_HPP
