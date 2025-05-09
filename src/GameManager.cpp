@@ -79,7 +79,7 @@ void App::CameraMove(){
     else{
         glm::vec2 moveAmount = {0,0};
         if(m_CameraState == CameraState::move_road){
-            if(road_count<120){
+            if(road_count<140){
                 moveAmount = {1,0};
                 road_count++;   
             }
@@ -92,7 +92,7 @@ void App::CameraMove(){
             }
         }
         else if(m_CameraState == CameraState::move_house){
-            if(house_count<120){
+            if(house_count<140){
                 moveAmount = {-1,0};
                 house_count++;
             }
