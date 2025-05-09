@@ -44,7 +44,7 @@ void App::Update() {
                 m_Root.AddChildren(m_PRM->GetChildren());
                 m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
                 ResetPlant(m_PRM -> GetLevel());
-                m_CameraState = CameraState::grass;
+                //m_CameraState = CameraState::grass;
                 ResizeWindow(1100, 720);
             }
         }
@@ -65,7 +65,7 @@ void App::Update() {
             m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
             if (m_PRM -> GetLevel() ==11){ m_CurrentState = State::END;}
             ResetPlant(m_PRM -> GetLevel());
-            m_CameraState = CameraState::grass;
+            //m_CameraState = CameraState::grass;
         }
     }
 

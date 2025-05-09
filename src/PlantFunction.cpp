@@ -275,14 +275,13 @@ void App::ResetSetCarPos(int level) {
     m_Cars.resize(5,nullptr);
     
     // 根據第一個道路的索引計算起始位置
-    float baseY = -235.0f;
-    float spacing = 100.0f;
-    std::vector<int> five_road={-235,-135,-35,65,165};
+    float baseY = -305.0f;
+    float spacing = 120.0f;
     
     for(int i=0;i<5;i++) {
         for(auto& r : road) {
             if(i==r) {
-                auto car=std::make_shared<Car>(glm::vec2(-550, five_road[i]),Car::CarState::Idle);
+                auto car=std::make_shared<Car>(glm::vec2(-550, baseY + i * spacing),Car::CarState::Idle);
                 m_Cars[i]=car;
                 m_Root.AddChild(car);
                 break;
