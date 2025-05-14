@@ -5,6 +5,7 @@
 #ifndef WALLNUT_HPP
 #define WALLNUT_HPP
 #include "plant.hpp"
+#include "Zombi/zombi.hpp"
 class Wallnut : public Plant {
     public:
     explicit  Wallnut():Plant(m_Loader.wallnutIMG,70) {
@@ -28,19 +29,7 @@ class Play_wallnut:public Plant{
         m_moveSpeed = 5.0f;      // 移動速度
     }
 
-    bool Update() {
-        // 更新位置
-        glm::vec2 currentPos = GetPosition();
-        currentPos.x += m_moveSpeed;
-        SetPosition(currentPos);
-
-        // 更新旋轉
-        float currentRotation = m_Transform.rotation;
-        currentRotation += m_rotationSpeed;
-        m_Transform.rotation = currentRotation;
-        if(m_Transform.translation.x>600)return true;
-        return false;
-    }
+    bool Update(std::vector<std::shared_ptr<zombi>> zom);
 
     private:
     float m_rotationSpeed;    // 旋轉速度

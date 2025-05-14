@@ -142,11 +142,18 @@ bool App::CheckClick(std::vector<float> block,glm::vec2 click) {
 void App::CheckPlant() {
     for(int i=0;i<m_Plants.size();i++) {
         for(int j=0;j<m_Plants[i].size();j++) {
+            if(m_Plants[i][j]!=nullptr) {
+                std::cout << "plant hp: " << m_Plants[i][j]->GetHP() << std::endl;
+            }
             if(m_Plants[i][j]!=nullptr&&m_Plants[i][j]->GetHP()<=0) {
                 m_Root.RemoveChild(m_Plants[i][j]);
                 m_Plants[i][j]=nullptr;
             }
             if(m_Plants[i][j]!=nullptr) {
+                if(m_Plants[i][j]->GetTakeCD()>0){
+                    m_Plants[i][j]->SetTakeCD(m_Plants[i][j]->GetTakeCD()-1);
+                    continue;
+                }
                 std::vector<glm::vec2> zpos;
                 auto check=m_Plants[i][j];
                 if (check->GetType() == Plant::T_Shooter) {
@@ -234,7 +241,7 @@ std::vector<std::shared_ptr<zombi>> App::CheckBullet() {
 }
 //設定卡片及場地碰撞格
 void App::SetBlockPos() {
-    float spacingx = 98;
+    float spacingx = 95;
     float startX = -540;
     float startY = -340;
     float spacingy = 125;
@@ -283,7 +290,7 @@ void App::ResetSetCarPos(int level) {
     for(int i=0;i<5;i++) {
         for(auto& r : road) {
             if(i==r) {
-                auto car=std::make_shared<Car>(glm::vec2(-423, baseY + i * spacing),Car::CarState::Idle);
+                auto car=std::make_shared<Car>(glm::vec2(-470, baseY + i * spacing),Car::CarState::Idle);
                 m_Cars[i]=car;
                 m_Root.AddChild(car);
                 break;

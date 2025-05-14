@@ -45,6 +45,9 @@ public:
             four_points={pos.x-30,pos.y-40,pos.x+30,pos.y+40};
       }
       std::vector<float>GetFourPoints() {return four_points;}
+      void ResetFourPoints() {
+            four_points={m_Transform.translation.x-30,m_Transform.translation.y-40,m_Transform.translation.x+30,m_Transform.translation.y+40};
+      }
       private:
       int index;
       std::vector<float> four_points;

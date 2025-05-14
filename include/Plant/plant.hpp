@@ -87,6 +87,7 @@ class Plant: public GameObject{
     int m_ATK=0;
     int m_cost;
     int m_takeCD;
+    int m_CD=0;
 
 };
 #endif //PLANT_HPP

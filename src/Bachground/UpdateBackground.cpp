@@ -29,7 +29,7 @@ void UpdateBackground::NextLevel() {
         m_Adventure->m_Transform.scale = {0.9, 0.9};
     }
     if(m_level==1){
-        m_Adventure->m_Transform.translation={-310, 315};
+        m_Adventure->m_Transform.translation={-270, 315};
     }
     else{
         m_Adventure->m_Transform.translation={-200, 315};
@@ -41,17 +41,17 @@ void UpdateBackground::NextLevel() {
 void UpdateBackground::SetCardPos() {
     float spacing = 65;
     float startX;
-    if(m_level==1){
-        startX = -430;
-    }
-    else{
-        startX = -375;
-    }
+    if(m_level==1)
+        startX = -440;
+    else
+        startX = -370;
     float y = 315;
 
-    for (size_t i = 0; i < m_Cards.size(); ++i) {
+    for (size_t i = 0; i < m_Cards.size(); ++i) 
         m_Cards[i]->SetPos({startX + spacing * i, y});
-
-    }
+}
+void UpdateBackground::ResetCardPos() {
+    for (size_t i = 0; i < m_Cards.size(); ++i) 
+        m_Cards[i]->ResetFourPoints();
 }
 

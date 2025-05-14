@@ -41,11 +41,15 @@ void App::Update() {
         if (m_PRM ->GetLevel()==0) {
             if (m_PRM -> CheckHit(pos)) {
                 m_PRM ->NextLevel();
+                for (auto &z : m_PRM ->GetChildren()) {
+                    m_Root.RemoveChild(z);
+                }
                 m_Root.AddChildren(m_PRM->GetChildren());
                 m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
-                m_Root.Update(glm::vec2(-55,0));
+                m_Root.Update(glm::vec2(-70,0));
                 ResetPlant(m_PRM -> GetLevel());
-                m_CameraState = CameraState::grass;
+                m_PRM ->ResetCardPos();
+                //m_CameraState = CameraState::grass;
             }
         }
     }
@@ -67,7 +71,7 @@ void App::Update() {
             if (m_PRM -> GetLevel() ==11){ m_CurrentState = State::END;}
             ResetPlant(m_PRM -> GetLevel());
 
-            m_CameraState = CameraState::grass;
+            //m_CameraState = CameraState::grass;
         }
     }
 

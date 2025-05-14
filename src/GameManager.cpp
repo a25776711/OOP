@@ -80,10 +80,10 @@ void App::CameraMove(){
         glm::vec2 moveAmount = {0,0};
         if(m_CameraState == CameraState::move_road){
             if(road_count<140){
-                moveAmount = {1,0};
+                moveAmount = {2,0};
                 road_count++;   
             }
-            else if(road_count<200){
+            else if(road_count<220){
                 road_count++;   
             }
             else{
@@ -93,7 +93,7 @@ void App::CameraMove(){
         }
         else if(m_CameraState == CameraState::move_house){
             if(house_count<140){
-                moveAmount = {-1,0};
+                moveAmount = {-2,0};
                 house_count++;
             }
             else{
@@ -101,10 +101,6 @@ void App::CameraMove(){
                 m_CameraState = CameraState::idle;
                 house_count=0;
             }
-        }
-        if(m_PRM->GetLevel()!=0){
-            auto temp=m_PRM->GetChildren();
-            m_Cars[2]->Test(temp[0]->GetTransform().translation);
         }
         m_Root.Update(moveAmount);
     }
