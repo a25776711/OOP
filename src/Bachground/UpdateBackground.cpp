@@ -36,10 +36,13 @@ void UpdateBackground::NextLevel() {
     }
     m_Cards = m_CardManager->SetCards(m_level);
     SetCardPos();
+    for(auto& card : m_Cards) {
+        card->Reset();
+    }
 }
 
 void UpdateBackground::SetCardPos() {
-    float spacing = 65;
+    float spacing = 57;
     float startX;
     if(m_level==1)
         startX = -440;

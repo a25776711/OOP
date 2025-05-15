@@ -53,7 +53,7 @@ public:
     void PlantUpdate();
     void StartGameSet();
     void FpsShow();
-    void CameraMove();
+    void GameObjectUpdate();
     void CameraMoveHidden(int hidden);
     void ResizeWindow(int width, int height);
 
@@ -98,6 +98,8 @@ private:
     std::vector<std::shared_ptr<Car>> m_Cars;
 
     std::vector<std::shared_ptr<Plant>> m_Play_Wallnut;
+
+    std::shared_ptr<Plant> m_loadtemp=std::make_shared<Peashooter>();
 
     bool move_house=false;
     bool move_road=false;

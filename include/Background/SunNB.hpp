@@ -12,7 +12,7 @@ public:
             RESOURCE_DIR "/Background/Font/Inkfree.ttf", 20,
             "0", Util::Color::FromName(Util::Colors::BLACK)),
         100) {
-        m_Transform.translation = { -480, 280 };
+        m_Transform.translation = { -500, 280 };
     }
 
     void Change(int sunnb) {

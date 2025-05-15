@@ -49,7 +49,7 @@ void App::Update() {
                 m_Root.Update(glm::vec2(-70,0));
                 ResetPlant(m_PRM -> GetLevel());
                 m_PRM ->ResetCardPos();
-                m_CameraState = CameraState::grass;
+                //m_CameraState = CameraState::move_road;
             }
         }
     }
@@ -71,7 +71,7 @@ void App::Update() {
             if (m_PRM -> GetLevel() ==11){ m_CurrentState = State::END;}
             ResetPlant(m_PRM -> GetLevel());
 
-            m_CameraState = CameraState::grass;
+            //m_CameraState = CameraState::move_road;
         }
     }
 
@@ -142,7 +142,7 @@ void App::Update() {
     Util::Input::IfExit()) {
         m_CurrentState = State::END;
     }
-    CameraMove();
+    GameObjectUpdate();
 }
 
 

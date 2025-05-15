@@ -31,6 +31,7 @@ public:
 
     void SetCardPos();
     void ResetCardPos();
+
     int GetLevel() {return m_level;}
     std::vector<std::shared_ptr<Card>> GetCards() {return m_Cards;}
     std::shared_ptr<Shovel> GetShovel() {return m_Shovel;}

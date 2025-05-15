@@ -13,6 +13,7 @@ class Cherrybomb:public Plant {
     }
     bool Attack(std::vector<std::shared_ptr<zombi>> &zombis){
         if(!showboom&&IfAnimationEnds()){
+            std::cout<<"boom"<<std::endl;
             m_Drawable=std::make_shared<Util::Animation>(m_Loader.cherryIMG_Boom,false,2000,false,100);
             for(auto &zombi:zombis){
                 if(abs(zombi->GetPosition().x-GetPosition().x)<140&&abs(zombi->GetPosition().y-GetPosition().y)<150){

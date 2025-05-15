@@ -32,9 +32,28 @@ bool Play_wallnut::Update(std::vector<std::shared_ptr<zombi>> zom) {
             
             // 如果距離小於50,視為碰撞
             if(distance < 50) {
-                //zombie->GetHeart(GetATK());
-                return true; // 碰撞後消失
+                zombie->GetHeart(false,false,4);
+                if(m_moveState==T_WallnutMove::Straight) {
+                    m_moveState = rand()%2==0?T_WallnutMove::Up:T_WallnutMove::Down;
+
+                }else if(m_moveState==T_WallnutMove::Up) {
+                    m_moveState = T_WallnutMove::Down;
+                }else if(m_moveState==T_WallnutMove::Down) {
+                    m_moveState = T_WallnutMove::Up;
+                }
             }
+        }
+    }
+
+    if(m_moveState==T_WallnutMove::Up) {
+        m_Transform.translation.y += m_moveSpeed;
+        if(m_Transform.translation.y > 272) {
+            m_moveState = T_WallnutMove::Down;
+        }
+    }else if(m_moveState==T_WallnutMove::Down) {
+        m_Transform.translation.y -= m_moveSpeed;
+        if(m_Transform.translation.y < -320) {
+            m_moveState = T_WallnutMove::Up;
         }
     }
 

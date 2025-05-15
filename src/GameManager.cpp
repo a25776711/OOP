@@ -17,6 +17,11 @@ void App::PlantUpdate() {
         glm::vec2 pos=Util::Input::GetCursorPosition();
         m_holdingPlant->m_Transform.translation={pos.x,-pos.y};
     }
+    // 更新所有卡片的冷卻
+    auto cards = m_PRM->GetCards();
+    for(auto& card : cards) {
+        card->Update();
+    }
 }
 void App::StartGameSet(){
     PlantLoader::GetInstance();
@@ -67,41 +72,62 @@ void App::CameraMoveHidden(int hidden){
         }
     }
 }
+//重置植物方場地
+void App::ResetPlant(int level) {
+    ResetSetCarPos(level);
+    for(auto& plant : m_Plants) {
+        for(auto& p : plant) {
+            if(p != nullptr) {
+                m_Root.RemoveChild(p);
+            }
+        }
+    }
+    m_Plants.clear();
+    // 重新初始化 m_Plants
+    m_Plants = std::vector<std::vector<std::shared_ptr<Plant>>>(5, std::vector<std::shared_ptr<Plant>>(9, nullptr));
+    
+    for(auto& bullet : m_Bullets) {
+        m_Root.RemoveChild(bullet);
+    }
+    m_Bullets.clear();
+    if(m_holdingPlant != nullptr) {
+        m_Root.RemoveChild(m_holdingPlant);
+        m_holdingPlant = nullptr;
+    }
+    Sunamount=0;
+    m_SunNB->Change(Sunamount);
+    for(auto& sun : m_Suns) {
+        m_Root.RemoveChild(sun);
+    }
+    m_Suns.clear();
+}
 
-void App::CameraMove(){
-    if (m_CameraState == CameraState::grass) {
-        if(m_CameraStart){
-            m_CameraStart=false;
+void App::GameObjectUpdate(){
+    glm::vec2 moveAmount = {0,0};
+    if(m_CameraState == CameraState::move_road){
+        if(road_count<140){
+            moveAmount = {2,0};
+            road_count++;   
         }
-            //CameraMoveHidden(0);
-        m_CameraState = CameraState::move_road;
+        else if(road_count<220){
+            road_count++;   
+        }
+        else{
+            m_CameraState = CameraState::move_house;
+            road_count=0;
+        }
     }
-    else{
-        glm::vec2 moveAmount = {0,0};
-        if(m_CameraState == CameraState::move_road){
-            if(road_count<140){
-                moveAmount = {2,0};
-                road_count++;   
-            }
-            else if(road_count<220){
-                road_count++;   
-            }
-            else{
-                m_CameraState = CameraState::move_house;
-                road_count=0;
-            }
+    else if(m_CameraState == CameraState::move_house){
+        if(house_count<140){
+            moveAmount = {-2,0};
+            house_count++;
         }
-        else if(m_CameraState == CameraState::move_house){
-            if(house_count<140){
-                moveAmount = {-2,0};
-                house_count++;
-            }
-            else{
-                CameraMoveHidden(1);
-                m_CameraState = CameraState::idle;
-                house_count=0;
-            }
+        else{
+            CameraMoveHidden(1);
+            m_CameraState = CameraState::idle;
+            house_count=0;
         }
-        m_Root.Update(moveAmount);
     }
+    m_Root.Update(moveAmount);
+    
 }
