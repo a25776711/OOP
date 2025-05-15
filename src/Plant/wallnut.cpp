@@ -32,7 +32,7 @@ bool Play_wallnut::Update(std::vector<std::shared_ptr<zombi>> zom) {
             
             // 如果距離小於50,視為碰撞
             if(distance < 50) {
-                zombie->GetHeart(GetATK());
+                //zombie->GetHeart(GetATK());
                 return true; // 碰撞後消失
             }
         }

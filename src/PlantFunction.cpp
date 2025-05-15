@@ -202,10 +202,10 @@ void App::CheckPlant() {
                 }
                 else if (check->GetType() == Plant::T_Play_Wallnut) {
                     auto m_play_wallnut=std::dynamic_pointer_cast<Play_wallnut>(check);
-                    if(m_play_wallnut->Update()) {
-                        m_Root.RemoveChild(check);
-                        m_Plants[i][j].reset();
-                    }
+                    // if(m_play_wallnut->Update()) {
+                    //     m_Root.RemoveChild(check);
+                    //     m_Plants[i][j].reset();
+                    // }
                 }
             }
         }
