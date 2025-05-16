@@ -43,7 +43,9 @@ class Plant: public GameObject{
     void SetATK(int atk) { m_ATK = atk;}
     int GetATK(){return m_ATK;}
     virtual void Hurt() {
+        if (m_hp <= 0) {return;}
         m_hp--;
+
     }
     void SetCost(int cost){m_cost=cost;}
     int GetCost(){return m_cost;}
