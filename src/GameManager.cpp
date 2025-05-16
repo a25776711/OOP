@@ -105,6 +105,7 @@ void App::ResetPlant(int level) {
 void App::GameObjectUpdate(){
     glm::vec2 moveAmount = {0,0};
     if(m_CameraState == CameraState::move_road){
+        CameraMoveHidden(0);
         if(road_count<180){
             moveAmount = {2,0};
             road_count++;   

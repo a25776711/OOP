@@ -39,6 +39,7 @@ class PlantLoader{
   std::vector<std::string> wallnutIMG;
   std::vector<std::string> wallnutIMG_1;
   std::vector<std::string> wallnutIMG_2;
+  std::vector<std::string> wallnutIMG_Boom;
   std::vector<std::string> icepeashooterIMG;
   std::vector<std::string> chomperIMG;
   std::vector<std::string> chomperIMG_1;
@@ -88,6 +89,7 @@ class PlantLoader{
       wallnutIMG_1.emplace_back(path+"wallnut_1/wallnut_1_" + std::to_string(i) + ".png");
     for(int i = 0; i < 32; i++)
       wallnutIMG_2.emplace_back(path+"wallnut_2/wallnut_2_" + std::to_string(i) + ".png");
+    wallnutIMG_Boom.emplace_back(path+"wallnut_B.png");
     for(int i = 0; i < 15; i++)
       icepeashooterIMG.emplace_back(path+"iceshooter/iceshooter_" + std::to_string(i) + ".png");
     for(int i = 0; i < 13; i++)

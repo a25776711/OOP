@@ -105,7 +105,7 @@ void App::PutPlant(glm::vec2 m_click,int level){
                                     card->Create();
                                 }
                             }
-                            m_holdingPlant=nullptr;
+                            m_holdingPlant.reset();
                             return;
                         }
                     }
@@ -135,7 +135,7 @@ void App::PutPlant(glm::vec2 m_click,int level){
                                     card->Create();
                                 }
                             }
-                            m_holdingPlant=nullptr;
+                            m_holdingPlant.reset();
                             return;
                         }
                         else if(m_holdingPlant->GetType()==Plant::T_Shovel) {
@@ -145,10 +145,10 @@ void App::PutPlant(glm::vec2 m_click,int level){
                                 std::cout<<"use shovel"<<std::endl;
                                 if(m_Plants[i][j]!=nullptr) {
                                     m_Root.RemoveChild(m_Plants[i][j]);
-                                    m_Plants[i][j]=nullptr;
+                                    m_Plants[i][j].reset();
                                 }
                                 std::cout<<"use shovel"<<std::endl;
-                                m_holdingPlant=nullptr;
+                                m_holdingPlant.reset();
                                 shovel->UseShovel();
                                 return;
                             }
@@ -201,6 +201,7 @@ void App::CheckPlant() {
                     }
                 }
                 else if (check->GetType() == Plant::T_Bomb) {
+                    std::cout<<"bomb"<<std::endl;
                     auto m_bomb=std::dynamic_pointer_cast<Cherrybomb>(check);
                     if(m_bomb->Attack(m_zombiManager->GetZombies())){
                         std::cout<<"bomb"<<std::endl;

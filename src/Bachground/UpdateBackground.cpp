@@ -31,6 +31,7 @@ void UpdateBackground::NextLevel() {
     }
     m_Adventure->m_Transform.translation=m_level==1?glm::vec2{-300, 315}:glm::vec2{-200, 315};
     if(m_level==5)m_T_road->SetVisible(true);
+    else m_T_road->SetVisible(false);
     m_Cards = m_CardManager->SetCards(m_level);
     SetCardPos();
     for(auto& card : m_Cards) {
@@ -45,10 +46,9 @@ void UpdateBackground::SetCardPos() {
         startX = -470;
     else
         startX = -370;
-    float y = 315;
 
     for (size_t i = 0; i < m_Cards.size(); ++i) 
-        m_Cards[i]->SetPos({startX + spacing * i, y});
+        m_Cards[i]->SetPos({startX + spacing * i, 315});
 }
 void UpdateBackground::ResetCardPos() {
     for (size_t i = 0; i < m_Cards.size(); ++i) 

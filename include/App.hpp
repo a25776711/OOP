@@ -66,7 +66,6 @@ public:
     std::vector<std::shared_ptr<zombi>> CheckBullet();
     std::vector<glm::vec2> GetZomdiPos();
 
-    friend class GameManager;
 
 private:
     //void ValidTask();

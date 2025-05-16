@@ -37,7 +37,6 @@ public:
                         auto plant = GetNewPlant(9);
                         if(plant) {
                               plant->SetZIndex(20);
-                              m_isCreate = false;
                               return plant;
                         }
                   }

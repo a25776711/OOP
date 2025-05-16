@@ -91,7 +91,7 @@ class T_road : public GameObject{
     public:
         explicit T_road():GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/t_road.png"), -4){
             SetVisible(false);
-            m_Transform.translation={-450,-15};
+            m_Transform.translation={-500,-15};
         }
         
 };
