@@ -55,7 +55,6 @@ public:
     void FpsShow();
     void GameObjectUpdate();
     void CameraMoveHidden(int hidden);
-    void ResizeWindow(int width, int height);
 
     //點擊四個點確認
     bool CheckClick(std::vector<float> block,glm::vec2 click);

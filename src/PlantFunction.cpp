@@ -85,8 +85,7 @@ void App::PutPlant(glm::vec2 m_click,int level){
                             }
                         }
                         m_holdingPlant=nullptr;
-                        
-                        
+                        return;
                     }
                 }
             break;
@@ -107,6 +106,7 @@ void App::PutPlant(glm::vec2 m_click,int level){
                                 }
                             }
                             m_holdingPlant=nullptr;
+                            return;
                         }
                     }
                 }
@@ -117,6 +117,7 @@ void App::PutPlant(glm::vec2 m_click,int level){
                         auto check=block[std::to_string(i)][j];
                         if(CheckClick(check,m_click)&&m_Plants[i][j]==nullptr&&m_holdingPlant->GetType()!=Plant::T_Shovel) {
                             if(m_holdingPlant->GetType()==Plant::T_Play_Wallnut) {
+                                m_Play_Wallnut.push_back(m_holdingPlant);
                                 auto m_play_wallnut=std::dynamic_pointer_cast<Play_wallnut>(m_holdingPlant);
                                 m_holdingPlant->SetPosition({check[4],check[5]});
                                 m_holdingPlant->Play(true);
@@ -154,8 +155,11 @@ void App::PutPlant(glm::vec2 m_click,int level){
                         }
                     }
                 }
+
             break;
         }
+        m_Root.RemoveChild(m_holdingPlant);
+        m_holdingPlant=nullptr;
 }
 
 
@@ -166,6 +170,7 @@ bool App::CheckClick(std::vector<float> block,glm::vec2 click) {
 }
 //植物動作血量確認
 void App::CheckPlant() {
+    if(m_PRM->GetLevel()!=5){
     for(int i=0;i<m_Plants.size();i++) {
         for(int j=0;j<m_Plants[i].size();j++) {
             if(m_Plants[i][j]!=nullptr&&m_Plants[i][j]->GetHP()<=0) {
@@ -231,6 +236,23 @@ void App::CheckPlant() {
             }
         }
     }
+    }else{
+        m_Play_Wallnut.erase(
+            std::remove_if(m_Play_Wallnut.begin(), m_Play_Wallnut.end(),
+                [&](auto& wallnut) {
+                    if (!wallnut) return true;
+                    auto m_wallnut = std::dynamic_pointer_cast<Play_wallnut>(wallnut);
+                    if (m_wallnut->Update(m_zombiManager->GetZombies())) {
+                        m_Root.RemoveChild(wallnut);
+                        wallnut.reset();
+                        return true;
+                    }
+                    return false;
+                }
+            ),
+            m_Play_Wallnut.end()
+        );
+    }
 }
 //子彈動作
 std::vector<std::shared_ptr<zombi>> App::CheckBullet() {
@@ -263,7 +285,7 @@ std::vector<std::shared_ptr<zombi>> App::CheckBullet() {
 //設定卡片及場地碰撞格
 void App::SetBlockPos() {
     float spacingx = 97;
-    float startX = -468;
+    float startX = -428;
     float startY = -340;
     float spacingy = 125;
     for(int i=0;i<5;i++) {
@@ -311,7 +333,7 @@ void App::ResetSetCarPos(int level) {
     for(int i=0;i<5;i++) {
         for(auto& r : road) {
             if(i==r) {
-                auto car=std::make_shared<Car>(glm::vec2(-470, baseY + i * spacing),Car::CarState::Idle);
+                auto car=std::make_shared<Car>(glm::vec2(-450, baseY + i * spacing),Car::CarState::Idle);
                 m_Cars[i]=car;
                 m_Root.AddChild(car);
                 break;

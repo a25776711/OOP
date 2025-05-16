@@ -31,8 +31,8 @@ class Play_wallnut:public Plant{
         SetCost(50);
         SetType(T_Play_Wallnut);
         m_moveState = T_WallnutMove::Straight;
-        m_rotationSpeed = 0.5f;  // 旋轉速度
-        m_moveSpeed = 3.0f;      // 移動速度
+        m_rotationSpeed = -0.5f;  // 旋轉速度
+        m_moveSpeed = 2.5f;      // 移動速度
     }
 
     bool Update(std::vector<std::shared_ptr<zombi>> zom);

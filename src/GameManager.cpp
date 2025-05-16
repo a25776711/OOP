@@ -105,11 +105,11 @@ void App::ResetPlant(int level) {
 void App::GameObjectUpdate(){
     glm::vec2 moveAmount = {0,0};
     if(m_CameraState == CameraState::move_road){
-        if(road_count<140){
+        if(road_count<180){
             moveAmount = {2,0};
             road_count++;   
         }
-        else if(road_count<220){
+        else if(road_count<260){
             road_count++;   
         }
         else{
@@ -118,7 +118,7 @@ void App::GameObjectUpdate(){
         }
     }
     else if(m_CameraState == CameraState::move_house){
-        if(house_count<140){
+        if(house_count<180){
             moveAmount = {-2,0};
             house_count++;
         }

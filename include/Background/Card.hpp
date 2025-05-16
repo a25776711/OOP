@@ -32,22 +32,19 @@ public:
       std::shared_ptr<Plant> MakePlant(int level) {
             if(!m_isCreate) return nullptr;
             
-            if(level==5 && index==4){
-                  auto plant = GetNewPlant(9);
-                  if(plant) {
-                        plant->SetZIndex(20);
-                        m_isCreate = false;
-                        return plant;
+            if(level==5){
+                  if(index==4){
+                        auto plant = GetNewPlant(9);
+                        if(plant) {
+                              plant->SetZIndex(20);
+                              m_isCreate = false;
+                              return plant;
+                        }
                   }
                   return nullptr;
             }
             m_createPlant=GetNewPlant(index);
-            if(m_createPlant) {
-                m_createPlant->SetZIndex(20);
-
-                m_isCreate = false;
-                return m_createPlant;
-            }
+            return m_createPlant;
             
             return nullptr;
       }
@@ -57,7 +54,12 @@ public:
       }
       void Reset(){m_createPlant=GetNewPlant(index);m_cooldown=m_createPlant->GetTakeCD();m_isCreate=true;}
       Plant::PlantType GetType(){return m_createPlant->GetType();}
-      void Create(){m_isCreate=false;}
+      void Create(){
+            if(m_createPlant) {
+                m_createPlant->SetZIndex(20);
+                m_isCreate = false;
+            }
+      }
       bool IfCreate() {return m_isCreate;}
       int GetCost(){return m_createPlant->GetCost();}
       std::vector<float>GetFourPoints() {return four_points;}
@@ -93,17 +95,6 @@ public:
                   default:return nullptr;
             }
       }
-      std::vector<std::shared_ptr<Plant>>m_GPlants={
-            std::make_shared<Peashooter>(),
-                std::make_shared<SunFlower>(),
-                std::make_shared<Cherrybomb>(),
-                std::make_shared<Wallnut>(),
-                std::make_shared<Mine>(),
-                std::make_shared<Iceshooter>(),
-                std::make_shared<Chomper>(),
-                std::make_shared<Fastshooter>(),
-                std::make_shared<Play_wallnut>()
-            };
 };
 
 #endif // CARD_HPP

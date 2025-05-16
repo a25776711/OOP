@@ -15,6 +15,7 @@ UpdateBackground::UpdateBackground() {
     m_Shovel->SetFourPoints({370,260,450,300});
     m_ShovelBlock->m_Transform.translation = {300, 280};
     m_Adventure -> m_Transform.scale ={0.8,0.8};
+    m_T_road = std::make_shared<T_road>();
 }
 
 void UpdateBackground::NextLevel() {
@@ -28,12 +29,8 @@ void UpdateBackground::NextLevel() {
     if (m_level != 0){
         m_Adventure->m_Transform.scale = {0.9, 0.9};
     }
-    if(m_level==1){
-        m_Adventure->m_Transform.translation={-270, 315};
-    }
-    else{
-        m_Adventure->m_Transform.translation={-200, 315};
-    }
+    m_Adventure->m_Transform.translation=m_level==1?glm::vec2{-300, 315}:glm::vec2{-200, 315};
+    if(m_level==5)m_T_road->SetVisible(true);
     m_Cards = m_CardManager->SetCards(m_level);
     SetCardPos();
     for(auto& card : m_Cards) {
@@ -45,7 +42,7 @@ void UpdateBackground::SetCardPos() {
     float spacing = 57;
     float startX;
     if(m_level==1)
-        startX = -440;
+        startX = -470;
     else
         startX = -370;
     float y = 315;

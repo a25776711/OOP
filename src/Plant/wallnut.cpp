@@ -18,7 +18,6 @@ void Wallnut::Hurt() {
 bool Play_wallnut::Update(std::vector<std::shared_ptr<zombi>> zom) {
     // 更新旋轉角度
     m_Transform.rotation += m_rotationSpeed;
-    
     // 向右移動
     m_Transform.translation.x += m_moveSpeed;
 

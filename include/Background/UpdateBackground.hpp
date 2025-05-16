@@ -26,6 +26,7 @@ public:
         }
         result.push_back(m_Shovel);
         result.push_back(m_ShovelBlock);
+        result.push_back(m_T_road);
         return result;
     }
 
@@ -66,6 +67,7 @@ public:
         std::shared_ptr<adventure> m_Adventure;
         std::shared_ptr<ShovelBlock> m_ShovelBlock=nullptr;
         std::shared_ptr<Shovel> m_Shovel=nullptr;
+        std::shared_ptr<T_road> m_T_road=nullptr;
         int m_level = 0;
 
 };

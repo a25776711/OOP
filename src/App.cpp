@@ -46,7 +46,7 @@ void App::Update() {
                 }
                 m_Root.AddChildren(m_PRM->GetChildren());
                 m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
-                m_Root.Update(glm::vec2(-70,0));
+                m_Root.Update(glm::vec2(-100,0));
                 ResetPlant(m_PRM -> GetLevel());
                 m_PRM ->ResetCardPos();
                 //m_CameraState = CameraState::move_road;
@@ -69,6 +69,8 @@ void App::Update() {
             m_Root.AddChildren(m_PRM-> GetChildren());
             m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
             if (m_PRM -> GetLevel() ==11){ m_CurrentState = State::END;}
+            if(m_PRM->GetLevel()==1)m_Root.Update(glm::vec2(-100,0));
+
             ResetPlant(m_PRM -> GetLevel());
 
             //m_CameraState = CameraState::move_road;
