@@ -41,11 +41,6 @@ class Car:public GameObject {
     glm::vec2 GetPosition() {
         return m_Transform.translation;
     }
-    void Test(glm::vec2 pos) {
-        std::cout << "car position: " << m_Transform.translation.x << std::endl;
-        std::cout << "background position: " << pos.x << std::endl;
-        std::cout << "distance: " << pos.x-m_Transform.translation.x << std::endl;
-    }
     private:
     CarState m_State;
 };

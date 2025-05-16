@@ -5,15 +5,7 @@
 #include "Plant/plant.hpp"
 
 void zombi::HitCheck(std::shared_ptr<Plant> plant) {
-<<<<<<< Updated upstream
-    if (m_state != zombistate::ash && m_state != zombistate::die) {
-        auto pos = plant->GetPosition();
-        if((m_Transform.translation.x - pos.x <= 30) &&
-           (abs(m_Transform.translation.y - pos.y) <= 40) &&
-           (m_state != zombistate::eat && m_state != zombistate::coldeat)) {
-            StartEat();
-           }
-=======
+
     if (m_state == zombistate::ash || m_state == zombistate::die) return;
 
     if (plant->GetHP() <= 0) {
@@ -38,7 +30,6 @@ void zombi::HitCheck(std::shared_ptr<Plant> plant) {
         if (plant->GetHP() <= 0) {
             StartWalk();
         }
->>>>>>> Stashed changes
     }
 }
 

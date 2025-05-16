@@ -16,7 +16,7 @@ class Plant: public GameObject{
     public:
     enum PlantType {
          T_Shooter,
-      T_SunFlower,
+        T_SunFlower,
         T_Bomb,
         T_WallNut,
         T_Mine,

@@ -53,9 +53,8 @@ public:
     void PlantUpdate();
     void StartGameSet();
     void FpsShow();
-    void CameraMove();
+    void GameObjectUpdate();
     void CameraMoveHidden(int hidden);
-    void ResizeWindow(int width, int height);
 
     //點擊四個點確認
     bool CheckClick(std::vector<float> block,glm::vec2 click);
@@ -98,6 +97,8 @@ private:
     std::vector<std::shared_ptr<Car>> m_Cars;
 
     std::vector<std::shared_ptr<Plant>> m_Play_Wallnut;
+
+    std::shared_ptr<Plant> m_loadtemp=std::make_shared<Peashooter>();
 
     bool move_house=false;
     bool move_road=false;

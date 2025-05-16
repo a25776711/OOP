@@ -25,12 +25,14 @@ public:
 
     std::vector<std::shared_ptr<Card>> SetCards(int level) {
         std::vector<std::shared_ptr<Card>> result;
+        if(level>=5){
+            level--;
+        }
 
         for (int i = 0; i < level && i < allCards.size(); ++i) {
             allCards[i]-> SetVisible(true);
-            allCards[i]-> m_Transform.scale ={0.45,0.45};
+            allCards[i]-> m_Transform.scale ={0.4,0.4};
 
-            // std::cout << "true"<<i << std::endl;
             result.push_back(allCards[i]);
         }
 
