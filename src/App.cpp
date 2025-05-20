@@ -19,11 +19,11 @@ void App::Start() {
 void App::Update() {
     //FpsShow();
 
-    // if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
-    //     glm::vec2 pos=Util::Input::GetCursorPosition();
-    //     pos.y=-pos.y;
-    //     std::cout <<"("<< pos.x <<","<<pos.y<<")"<< std::endl;
-    // }
+    if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
+        glm::vec2 pos=Util::Input::GetCursorPosition();
+        pos.y=-pos.y;
+        std::cout <<"("<< pos.x <<","<<pos.y<<")"<< std::endl;
+    }
     if(Util::Input::IsKeyDown(Util::Keycode::J)) {
         Sunamount+=100;
         m_SunNB->Change(Sunamount);

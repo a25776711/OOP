@@ -4,6 +4,8 @@
 #include "Background/UpdateBackground.hpp"
 #include "Util/Logger.hpp"
 #include <iostream>
+#include <algorithm>
+
 UpdateBackground::UpdateBackground() {
     m_level = 0;
     m_CardManager = std::make_shared<CardManager>();
@@ -30,13 +32,20 @@ void UpdateBackground::NextLevel() {
         m_Adventure->m_Transform.scale = {0.9, 0.9};
     }
     m_Adventure->m_Transform.translation=m_level==1?glm::vec2{-300, 315}:glm::vec2{-200, 315};
-    if(m_level==5)m_T_road->SetVisible(true);
-    else m_T_road->SetVisible(false);
+    
     m_Cards = m_CardManager->SetCards(m_level);
-    SetCardPos();
+    if(m_level!=5)SetCardPos();
     for(auto& card : m_Cards) {
         card->Reset();
     }
+    m_T_road->SetVisible(m_level==5);
+    for(auto& card : m_Cards) {
+        card->SetVisible(m_level!=5);
+    }
+    m_Adventure->SetVisible(m_level!=5);
+    m_Shovel->SetVisible(m_level>4);
+    m_ShovelBlock->SetVisible(m_level>4);
+
 }
 
 void UpdateBackground::SetCardPos() {
@@ -54,4 +63,51 @@ void UpdateBackground::ResetCardPos() {
     for (size_t i = 0; i < m_Cards.size(); ++i) 
         m_Cards[i]->ResetFourPoints();
 }
-
+std::shared_ptr<Card> UpdateBackground::PlayCard() {
+    std::shared_ptr<Card> card_play=nullptr;
+    if(m_play_clock==0) {
+        card_play=rand()%4!=0?std::make_shared<Card>(RESOURCE_DIR "/Background/Card/wallnut_0cost.png",9):std::make_shared<Card>(RESOURCE_DIR "/Background/Card/wallnut_0cost_b.png",10);
+        card_play->m_Transform.scale ={0.6,0.6};
+        card_play->SetPos({-500,320});
+        m_Cards_play.push_back(card_play);
+        m_play_clock=300;
+    }
+    m_play_clock--;
+    return card_play;
+}
+void UpdateBackground::UpdatePlayCard() {
+    float moveSpeed = 1.0f;  // 移動速度
+    float minDistance = 60.0f;  // 最小間距
+    
+    // 從左到右排序卡牌
+    std::sort(m_Cards_play.begin(), m_Cards_play.end(), 
+        [](const auto& a, const auto& b) {
+            return a->m_Transform.translation.x < b->m_Transform.translation.x;
+        });
+    // 更新每張卡牌的位置
+    for(size_t i = 0; i < m_Cards_play.size(); i++) {
+        auto& checkcard = m_Cards_play[i];
+        // 檢查是否碰到前面的卡牌或到達右邊界
+        bool canMove = true;
+        for(size_t j = i+1; j < m_Cards_play.size(); j++) {
+            auto& x = m_Cards_play[j]->m_Transform.translation.x;
+            if(x>checkcard->m_Transform.translation.x && x - checkcard->m_Transform.translation.x < minDistance) {
+                canMove = false;        
+                break;
+            }
+        }
+        
+        // 如果可以移動且未到達右邊界，則向前移動
+        if(canMove && checkcard->m_Transform.translation.x < 140) {
+            checkcard->m_Transform.translation.x += moveSpeed;
+            checkcard->ResetFourPoints();
+            // 確保不會超出右邊界
+            if(checkcard->m_Transform.translation.x > 140) {
+                checkcard->m_Transform.translation.x = 140;
+            }
+        }
+    }
+}
+void UpdateBackground::RemovePlayCard(std::shared_ptr<Card> card) {
+    m_Cards_play.erase(std::remove(m_Cards_play.begin(), m_Cards_play.end(), card), m_Cards_play.end());
+}

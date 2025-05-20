@@ -22,6 +22,7 @@ class Plant: public GameObject{
         T_Mine,
         T_Chomper,
         T_Play_Wallnut,
+        T_Play_Wallnut_Boom,
         T_Shovel
     };
     explicit Plant(std::vector<std::string>& Path,int interval=100){

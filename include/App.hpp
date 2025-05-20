@@ -76,7 +76,6 @@ private:
     Phase m_Phase = Phase::tital;
     CameraState m_CameraState = CameraState::idle;
     Renderer m_Root;
-    glm::vec2 m_CenterPoint={0,0};
     std::shared_ptr<UpdateBackground> m_PRM;
 
     int m_CurrentZombiIndex = 0;
@@ -98,6 +97,7 @@ private:
     std::vector<std::shared_ptr<Plant>> m_Play_Wallnut;
 
     std::shared_ptr<Plant> m_loadtemp=std::make_shared<Peashooter>();
+    std::shared_ptr<Card> m_PlayCard=nullptr;
 
     bool move_house=false;
     bool move_road=false;
