@@ -116,15 +116,8 @@ void App::Update() {
             }
         }
 
-        for (auto z : m_zombiManager -> GetZombies()) {
-            for (auto plants : m_Plants) {
-                for (auto plant : plants) {
-                    if (plant) {
-                        z -> HitCheck(plant);
-                        if (plant ->GetHP() <=0) {m_Root.RemoveChild(plant);}
-                    }
-                }
-            }
+        for (auto zombi : m_zombiManager -> GetZombies()) {
+            zombi -> HitCheck(m_Plants);
         }
         m_KDown = isKPressed;
         m_zombiManager -> move(m_Cars);

@@ -4,32 +4,38 @@
 #include "Zombi/zombi.hpp"
 #include "Plant/plant.hpp"
 
-void zombi::HitCheck(std::shared_ptr<Plant> plant) {
+void zombi::HitCheck(std::vector<std::vector<std::shared_ptr<Plant>>> Plants) {
+    bool plantAhead = false;
 
-    if (m_state == zombistate::ash || m_state == zombistate::die) return;
+    for (const auto &row : Plants) {
+        for (const auto &plant : row) {
+            if (!plant) continue;
 
-    if (plant->GetHP() <= 0) {
-        // 如果植物已死但僵屍還在吃，強制轉回走路狀態
-        if (m_state == zombistate::eat || m_state == zombistate::coldeat) {
-            StartWalk();
+            auto pos = plant->GetPosition();
+
+            // 只判斷是否在同一橫排
+            if (abs(m_Transform.translation.y - pos.y) > 40)
+                continue;
+
+            // 如果 x 軸上差距在攻擊範圍內，前面有植物
+            if (m_Transform.translation.x - pos.x <= 30) {
+                plantAhead = true;
+
+                if (m_state != zombistate::eat && m_state != zombistate::coldeat) {
+                    StartEat();
+                }
+                else {
+                    plant -> Hurt();
+                }
+
+                return; // 找到就直接結束
+            }
         }
-        return; // 不再對已死植物做任何行動
     }
 
-    auto pos = plant->GetPosition();
-    bool inRangeX = (m_Transform.translation.x - pos.x <= 30);
-    bool inRangeY = (abs(m_Transform.translation.y - pos.y) <= 50);
-
-    if (inRangeX && inRangeY) {
-        plant->Hurt();
-
-        if (m_state != zombistate::eat && m_state != zombistate::coldeat) {
-            StartEat();
-        }
-
-        if (plant->GetHP() <= 0) {
-            StartWalk();
-        }
+    // 如果整個前方都沒植物 → 繼續走
+    if (!plantAhead && (m_state == zombistate::eat || m_state == zombistate::coldeat)) {
+        StartWalk();
     }
 }
 
