@@ -6,6 +6,7 @@
 #include "Zombi/ZombiManager.hpp"
 #include "Plant/plant.hpp"
 #include "Background/UpdateBackground.hpp"
+#include "Background/ready.hpp"
 #include "Background/Adventure.hpp"
 #include "Util/Logger.hpp"
 #include "Background/SunNB.hpp"
@@ -70,7 +71,7 @@ public:
 private:
     //void ValidTask();
     std::map<std::string,std::vector<std::vector<float>>> block;
-    
+
     std::shared_ptr<Plant> m_holdingPlant=nullptr;
     State m_CurrentState = State::START;
     Phase m_Phase = Phase::tital;
@@ -86,8 +87,9 @@ private:
     int SunClock=0;
     int road_count=0;
     int house_count=0;
-    
-    
+    bool Checkready = false;
+
+    std::shared_ptr<Ready> m_ready = nullptr;
     std::vector<std::shared_ptr<Sun>> m_Suns;
     std::vector<std::vector<std::shared_ptr<Plant>>> m_Plants;
     std::shared_ptr<SunNB> m_SunNB=std::make_shared<SunNB>();
