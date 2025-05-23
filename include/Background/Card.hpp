@@ -29,24 +29,11 @@ public:
             m_isCreate = true;
       }
 
-      std::shared_ptr<Plant> MakePlant(int level) {
+      std::shared_ptr<Plant> MakePlant() {
             if(!m_isCreate) return nullptr;
-            
-            if(level==5){
-                  if(index==4){
-                        auto plant = GetNewPlant(9);
-                        if(plant) {
-                              plant->SetZIndex(20);
-                              m_isCreate = false;
-                              return plant;
-                        }
-                  }
-                  return nullptr;
-            }
             m_createPlant=GetNewPlant(index);
+            m_createPlant->SetZIndex(20);
             return m_createPlant;
-            
-            return nullptr;
       }
       void SetPos(glm::vec2 pos) {
             m_Transform.translation=pos;
@@ -57,11 +44,16 @@ public:
       void Create(){
             if(m_createPlant) {
                 m_createPlant->SetZIndex(20);
+                if(m_createPlant->GetTakeCD()==0)return;
                 m_isCreate = false;
+                auto temp=std::make_shared<Util::Image>(RESOURCE_DIR "/Background/Card/card"+std::to_string(index)+".png");
+                
             }
       }
       bool IfCreate() {return m_isCreate;}
-      int GetCost(){return m_createPlant->GetCost();}
+      int GetCost(int level){
+            if(level==5&&index==4)return 0;
+            return m_createPlant->GetCost();}
       std::vector<float>GetFourPoints() {return four_points;}
       void ResetFourPoints() {
             four_points={m_Transform.translation.x-25,m_Transform.translation.y-35,m_Transform.translation.x+25,m_Transform.translation.y+35};
@@ -92,6 +84,7 @@ public:
                   case 7:return std::make_shared<Chomper>();
                   case 8:return std::make_shared<Fastshooter>();
                   case 9:return std::make_shared<Play_wallnut>();
+                  case 10:return std::make_shared<Play_wallnut_boom>();
                   default:return nullptr;
             }
       }

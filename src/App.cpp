@@ -19,11 +19,11 @@ void App::Start() {
 void App::Update() {
     //FpsShow();
 
-    // if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
-    //     glm::vec2 pos=Util::Input::GetCursorPosition();
-    //     pos.y=-pos.y;
-    //     std::cout <<"("<< pos.x <<","<<pos.y<<")"<< std::endl;
-    // }
+    if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
+        glm::vec2 pos=Util::Input::GetCursorPosition();
+        pos.y=-pos.y;
+        std::cout <<"("<< pos.x <<","<<pos.y<<")"<< std::endl;
+    }
     if(Util::Input::IsKeyDown(Util::Keycode::J)) {
         Sunamount+=100;
         m_SunNB->Change(Sunamount);
@@ -116,15 +116,8 @@ void App::Update() {
             }
         }
 
-        for (auto z : m_zombiManager -> GetZombies()) {
-            for (auto plants : m_Plants) {
-                for (auto plant : plants) {
-                    if (plant) {
-                        z -> HitCheck(plant);
-                        if (plant ->GetHP() <=0) {m_Root.RemoveChild(plant);}
-                    }
-                }
-            }
+        for (auto zombi : m_zombiManager -> GetZombies()) {
+            zombi -> HitCheck(m_Plants);
         }
         m_KDown = isKPressed;
         m_zombiManager -> move(m_Cars);

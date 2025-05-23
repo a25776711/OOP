@@ -89,9 +89,10 @@ class Shovel : public Plant{
 
 class T_road : public GameObject{
     public:
-        explicit T_road():GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/t_road.png"), -4){
+        explicit T_road():GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/t_road.png"), -2){
             SetVisible(false);
-            m_Transform.translation={-450,-15};
+            m_Transform.translation={-270,320};
+            m_Transform.scale={1.3f,1.3f};
         }
         
 };

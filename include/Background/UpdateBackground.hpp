@@ -21,7 +21,12 @@ public:
         std::vector<std::shared_ptr<GameObject>> result;
         result.push_back(m_Background);
         result.push_back(m_Adventure);
-        for (auto card : m_Cards) {
+        if(m_level!=5){
+            for (auto card : m_Cards) {
+                result.push_back(card);
+            }
+        }
+        for(auto& card : m_Cards_play){
             result.push_back(card);
         }
         result.push_back(m_Shovel);
@@ -32,9 +37,12 @@ public:
 
     void SetCardPos();
     void ResetCardPos();
-
+    std::shared_ptr<Card> PlayCard();
+    void UpdatePlayCard();
+    void RemovePlayCard(std::shared_ptr<Card> card);
     int GetLevel() {return m_level;}
     std::vector<std::shared_ptr<Card>> GetCards() {return m_Cards;}
+    std::vector<std::shared_ptr<Card>> GetPlayCard() {return m_Cards_play;}
     std::shared_ptr<Shovel> GetShovel() {return m_Shovel;}
     bool CheckHit(const glm::vec2& point) {
         // 計算點與每個邊的叉積
@@ -62,6 +70,7 @@ public:
         glm::vec2 p4{110, -101};
         std::vector<int> m_ShovelPos;
         std::vector<std::shared_ptr<Card>> m_Cards;
+        std::vector<std::shared_ptr<Card>> m_Cards_play;
         std::shared_ptr<CardManager> m_CardManager;
         std::shared_ptr<BackgroundImage> m_Background;
         std::shared_ptr<adventure> m_Adventure;
@@ -69,6 +78,7 @@ public:
         std::shared_ptr<Shovel> m_Shovel=nullptr;
         std::shared_ptr<T_road> m_T_road=nullptr;
         int m_level = 0;
+        int m_play_clock = 0;
 
 };
 

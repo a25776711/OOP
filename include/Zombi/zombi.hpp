@@ -185,7 +185,7 @@ public:
             if (z_HP <= 0)Die();
         }
     }
-    void HitCheck(std::shared_ptr<Plant> plant);
+    void HitCheck(std::vector<std::vector<std::shared_ptr<Plant>>>);
 
 
 protected:

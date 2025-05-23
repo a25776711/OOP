@@ -43,13 +43,13 @@ void App::MoveSun() {
 
 //點擊卡片判斷
 void App::TakePlant(glm::vec2 click,int level) {
+    if(m_PRM->GetLevel()!=5){
     auto cards=m_PRM->GetCards();
     for(auto& card:cards) {
         if(card->IfCreate()&&
            CheckClick(card->GetFourPoints(),click)&&
-           Sunamount>=card->GetCost()) {
-            
-            auto plant = card->MakePlant(level);
+           Sunamount>=card->GetCost(m_PRM->GetLevel())) {
+            auto plant = card->MakePlant();
             if(plant) {  // 確保植物創建成功
                 m_holdingPlant = plant;
                 m_Root.AddChild(m_holdingPlant);
@@ -62,6 +62,16 @@ void App::TakePlant(glm::vec2 click,int level) {
         if(CheckClick(shovel->GetFourPoints(), click)&&m_holdingPlant==nullptr) {
             m_holdingPlant=shovel;
             shovel->TakeShovel();
+        }
+    }
+    }else{
+        auto cards=m_PRM->GetPlayCard();
+        for(auto& card:cards){
+            if(CheckClick(card->GetFourPoints(),click)){
+                m_holdingPlant=card->MakePlant();
+                m_PlayCard=card;
+                m_Root.AddChild(m_holdingPlant);
+            }
         }
     }
 }
@@ -105,7 +115,7 @@ void App::PutPlant(glm::vec2 m_click,int level){
                                     card->Create();
                                 }
                             }
-                            m_holdingPlant=nullptr;
+                            m_holdingPlant.reset();
                             return;
                         }
                     }
@@ -116,12 +126,15 @@ void App::PutPlant(glm::vec2 m_click,int level){
                     for (int j=0;j<block[std::to_string(i)].size();j++) {
                         auto check=block[std::to_string(i)][j];
                         if(CheckClick(check,m_click)&&m_Plants[i][j]==nullptr&&m_holdingPlant->GetType()!=Plant::T_Shovel) {
-                            if(m_holdingPlant->GetType()==Plant::T_Play_Wallnut) {
+                            if(m_holdingPlant->GetType()==Plant::T_Play_Wallnut||m_holdingPlant->GetType()==Plant::T_Play_Wallnut_Boom) {
                                 m_Play_Wallnut.push_back(m_holdingPlant);
                                 auto m_play_wallnut=std::dynamic_pointer_cast<Play_wallnut>(m_holdingPlant);
                                 m_holdingPlant->SetPosition({check[4],check[5]});
                                 m_holdingPlant->Play(true);
                                 m_holdingPlant=nullptr;
+                                m_PRM->RemovePlayCard(m_PlayCard);
+                                m_Root.RemoveChild(m_PlayCard);
+                                m_PlayCard.reset();
                                 return;
                             }
                             Sunamount-=m_holdingPlant->GetCost();
@@ -135,7 +148,7 @@ void App::PutPlant(glm::vec2 m_click,int level){
                                     card->Create();
                                 }
                             }
-                            m_holdingPlant=nullptr;
+                            m_holdingPlant.reset();
                             return;
                         }
                         else if(m_holdingPlant->GetType()==Plant::T_Shovel) {
@@ -145,10 +158,10 @@ void App::PutPlant(glm::vec2 m_click,int level){
                                 std::cout<<"use shovel"<<std::endl;
                                 if(m_Plants[i][j]!=nullptr) {
                                     m_Root.RemoveChild(m_Plants[i][j]);
-                                    m_Plants[i][j]=nullptr;
+                                    m_Plants[i][j].reset();
                                 }
                                 std::cout<<"use shovel"<<std::endl;
-                                m_holdingPlant=nullptr;
+                                m_holdingPlant.reset();
                                 shovel->UseShovel();
                                 return;
                             }
@@ -201,6 +214,7 @@ void App::CheckPlant() {
                     }
                 }
                 else if (check->GetType() == Plant::T_Bomb) {
+                    std::cout<<"bomb"<<std::endl;
                     auto m_bomb=std::dynamic_pointer_cast<Cherrybomb>(check);
                     if(m_bomb->Attack(m_zombiManager->GetZombies())){
                         std::cout<<"bomb"<<std::endl;
@@ -237,20 +251,30 @@ void App::CheckPlant() {
         }
     }
     }else{
+        std::cout<<"play wallnut"<<std::endl;
         m_Play_Wallnut.erase(
             std::remove_if(m_Play_Wallnut.begin(), m_Play_Wallnut.end(),
                 [&](auto& wallnut) {
                     if (!wallnut) return true;
-                    auto m_wallnut = std::dynamic_pointer_cast<Play_wallnut>(wallnut);
-                    if (m_wallnut->Update(m_zombiManager->GetZombies())) {
-                        m_Root.RemoveChild(wallnut);
-                        wallnut.reset();
-                        return true;
+                    if(wallnut->GetType()==Plant::T_Play_Wallnut_Boom){
+                        auto m_wallnut = std::dynamic_pointer_cast<Play_wallnut_boom>(wallnut);
+                        if (m_wallnut->Update(m_zombiManager->GetZombies())) {
+                            m_Root.RemoveChild(wallnut);
+                            wallnut.reset();
+                            return true;
+                        }
+                    }
+                    else{
+                        auto m_wallnut = std::dynamic_pointer_cast<Play_wallnut>(wallnut);
+                        if (m_wallnut->Update(m_zombiManager->GetZombies())) {
+                            m_Root.RemoveChild(wallnut);
+                            wallnut.reset();
+                            return true;
+                        }
                     }
                     return false;
                 }
-            ),
-            m_Play_Wallnut.end()
+            ),m_Play_Wallnut.end()
         );
     }
 }

@@ -22,6 +22,11 @@ void App::PlantUpdate() {
     for(auto& card : cards) {
         card->Update();
     }
+    if(m_PRM->GetLevel()==5){
+        auto play_cards = m_PRM->PlayCard();
+        if(play_cards!=nullptr)m_Root.AddChild(play_cards);
+        m_PRM->UpdatePlayCard();
+    }
 }
 void App::StartGameSet(){
     PlantLoader::GetInstance();
@@ -75,13 +80,10 @@ void App::CameraMoveHidden(int hidden){
 //重置植物方場地
 void App::ResetPlant(int level) {
     ResetSetCarPos(level);
-    for(auto& plant : m_Plants) {
-        for(auto& p : plant) {
-            if(p != nullptr) {
+    for(auto& plant : m_Plants) 
+        for(auto& p : plant) 
+            if(p != nullptr) 
                 m_Root.RemoveChild(p);
-            }
-        }
-    }
     m_Plants.clear();
     // 重新初始化 m_Plants
     m_Plants = std::vector<std::vector<std::shared_ptr<Plant>>>(5, std::vector<std::shared_ptr<Plant>>(9, nullptr));
@@ -96,15 +98,18 @@ void App::ResetPlant(int level) {
     }
     Sunamount=0;
     m_SunNB->Change(Sunamount);
+    m_SunNB->SetVisible(bool(m_PRM->GetLevel()!=5));
     for(auto& sun : m_Suns) {
         m_Root.RemoveChild(sun);
     }
     m_Suns.clear();
+    
 }
 
 void App::GameObjectUpdate(){
     glm::vec2 moveAmount = {0,0};
     if(m_CameraState == CameraState::move_road){
+        CameraMoveHidden(0);
         if(road_count<180){
             moveAmount = {2,0};
             road_count++;   
