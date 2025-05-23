@@ -8,10 +8,34 @@ void zombi::HitCheck(std::shared_ptr<Plant> plant) {
 
     if (m_state == zombistate::ash || m_state == zombistate::die) return;
 
+<<<<<<< Updated upstream
     if (plant->GetHP() <= 0) {
         // 如果植物已死但僵屍還在吃，強制轉回走路狀態
         if (m_state == zombistate::eat || m_state == zombistate::coldeat) {
             StartWalk();
+=======
+            auto pos = plant->GetPosition();
+
+            // 只判斷是否在同一橫排
+            if (abs(m_Transform.translation.y - pos.y) > 40)
+                continue;
+
+            // 如果 x 軸上差距在攻擊範圍內，前面有植物
+            if (m_Transform.translation.x - pos.x <= 30) {
+                plantAhead = true;
+
+                if (m_state != zombistate::eat && m_state != zombistate::coldeat) {
+                    StartEat();
+                }
+                else {
+                    plant -> Hurt();
+
+                    
+                }
+
+                return; // 找到就直接結束
+            }
+>>>>>>> Stashed changes
         }
         return; // 不再對已死植物做任何行動
     }

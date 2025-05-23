@@ -59,7 +59,7 @@ public:
     void SetPiov(int level) {
         int x =0;
         if (level == 1){x=3;}
-        else if (level == 2){x = rand()%3 + 1;}
+        else if (level == 2){x = rand()%3 + 2;}
         else (x=rand()%5 + 1);
         switch (x) {
             case 1:

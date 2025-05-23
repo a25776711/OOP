@@ -20,90 +20,106 @@ public:
      SetZombies();
    };
 
-void SetZombies(){
-  m_zombies1.push_back(std::make_shared<armor>());
-  m_zombies1.push_back(std::make_shared<armor>());
+void SetZombies(){// 關卡 1：教學關，只有普通殭屍
+  m_zombies1 = {
+      std::make_shared<normal>(),
+      std::make_shared<normal>(),
+      std::make_shared<normal>(),
+      std::make_shared<normal>(),
+      std::make_shared<normal>()
+  };
 
-  m_zombies2.push_back(std::make_shared<hat>());
-  m_zombies2.push_back(std::make_shared<hat>());
+  // 關卡 2：普通 + 路障
+  m_zombies2 = {
+      std::make_shared<normal>(),
+      std::make_shared<hat>(),
+      std::make_shared<normal>(),
+      std::make_shared<hat>(),
+      std::make_shared<normal>(),
+      std::make_shared<normal>()
+  };
 
-  m_zombies3.push_back(std::make_shared<normal>());
-  m_zombies3.push_back(std::make_shared<normal>());
-  m_zombies3.push_back(std::make_shared<normal>());
+  // 關卡 3：增加數量
+  m_zombies3 = {
+      std::make_shared<normal>(),
+      std::make_shared<hat>(),
+      std::make_shared<normal>(),
+      std::make_shared<armor>(),
+      std::make_shared<hat>(),
+      std::make_shared<normal>(),
+      std::make_shared<normal>()
+  };
 
-  m_zombies4.push_back(std::make_shared<bucket>());
-  m_zombies4.push_back(std::make_shared<bucket>());
-  m_zombies4.push_back(std::make_shared<bucket>());
-  m_zombies4.push_back(std::make_shared<bucket>());
+  // 關卡 4：引入 bucket
+  m_zombies4 = {
+      std::make_shared<normal>(),
+      std::make_shared<bucket>(),
+      std::make_shared<hat>(),
+      std::make_shared<normal>(),
+      std::make_shared<armor>(),
+      std::make_shared<bucket>(),
+      std::make_shared<hat>(),
+      std::make_shared<normal>()
+  };
 
-  m_zombies5.push_back(std::make_shared<normal>());
-  m_zombies5.push_back(std::make_shared<armor>());
-  m_zombies5.push_back(std::make_shared<hat>());
-  m_zombies5.push_back(std::make_shared<bucket>());
-  m_zombies5.push_back(std::make_shared<normal>());
-  m_zombies5.push_back(std::make_shared<armor>());
-  m_zombies5.push_back(std::make_shared<hat>());
-  m_zombies5.push_back(std::make_shared<bucket>());
+  // 關卡 5：小測驗式混合型（類似 mini-game）
+  m_zombies5 = {
+      std::make_shared<normal>(),
+      std::make_shared<normal>(),
+      std::make_shared<hat>(),
+      std::make_shared<bucket>(),
+      std::make_shared<armor>(),
+      std::make_shared<bucket>(),
+      std::make_shared<hat>(),
+      std::make_shared<armor>(),
+      std::make_shared<normal>(),
+      std::make_shared<hat>()
+  };
 
-  m_zombies6.push_back(std::make_shared<normal>());
-  m_zombies6.push_back(std::make_shared<armor>());
-  m_zombies6.push_back(std::make_shared<hat>());
-  m_zombies6.push_back(std::make_shared<bucket>());
-  m_zombies6.push_back(std::make_shared<normal>());
-  m_zombies6.push_back(std::make_shared<armor>());
-  m_zombies6.push_back(std::make_shared<hat>());
-  m_zombies6.push_back(std::make_shared<bucket>());
-  m_zombies6.push_back(std::make_shared<normal>());
-  m_zombies6.push_back(std::make_shared<armor>());
-  m_zombies6.push_back(std::make_shared<hat>());
+  // 關卡 6：敵人更多
+  m_zombies6 = {
+      std::make_shared<normal>(), std::make_shared<normal>(), std::make_shared<hat>(),
+      std::make_shared<armor>(), std::make_shared<bucket>(), std::make_shared<bucket>(),
+      std::make_shared<hat>(), std::make_shared<armor>(), std::make_shared<normal>(),
+      std::make_shared<hat>(), std::make_shared<bucket>(), std::make_shared<armor>()
+  };
 
-  m_zombies7.push_back(std::make_shared<normal>());
-  m_zombies7.push_back(std::make_shared<hat>());
-  m_zombies7.push_back(std::make_shared<armor>());
-  m_zombies7.push_back(std::make_shared<bucket>());
-  m_zombies7.push_back(std::make_shared<normal>());
-  m_zombies7.push_back(std::make_shared<hat>());
-  m_zombies7.push_back(std::make_shared<armor>());
-  m_zombies7.push_back(std::make_shared<bucket>());
-  m_zombies7.push_back(std::make_shared<normal>());
-  m_zombies7.push_back(std::make_shared<hat>());
+  // 關卡 7：分層出現，增加壓力
+  m_zombies7 = {
+      std::make_shared<normal>(), std::make_shared<hat>(), std::make_shared<bucket>(),
+      std::make_shared<armor>(), std::make_shared<hat>(), std::make_shared<normal>(),
+      std::make_shared<bucket>(), std::make_shared<hat>(), std::make_shared<armor>(),
+      std::make_shared<bucket>(), std::make_shared<normal>(), std::make_shared<hat>()
+  };
 
-  m_zombies8.push_back(std::make_shared<armor>());
-  m_zombies8.push_back(std::make_shared<armor>());
-  m_zombies8.push_back(std::make_shared<hat>());
-  m_zombies8.push_back(std::make_shared<bucket>());
-  m_zombies8.push_back(std::make_shared<normal>());
-  m_zombies8.push_back(std::make_shared<normal>());
-  m_zombies8.push_back(std::make_shared<bucket>());
-  m_zombies8.push_back(std::make_shared<hat>());
-  m_zombies8.push_back(std::make_shared<armor>());
-  m_zombies8.push_back(std::make_shared<normal>());
+  // 關卡 8：高強度
+  m_zombies8 = {
+      std::make_shared<normal>(), std::make_shared<armor>(), std::make_shared<hat>(),
+      std::make_shared<bucket>(), std::make_shared<normal>(), std::make_shared<bucket>(),
+      std::make_shared<armor>(), std::make_shared<hat>(), std::make_shared<bucket>(),
+      std::make_shared<normal>(), std::make_shared<armor>(), std::make_shared<hat>(),
+      std::make_shared<normal>()
+  };
 
-  m_zombies9.push_back(std::make_shared<bucket>());
-  m_zombies9.push_back(std::make_shared<hat>());
-  m_zombies9.push_back(std::make_shared<armor>());
-  m_zombies9.push_back(std::make_shared<normal>());
-  m_zombies9.push_back(std::make_shared<normal>());
-  m_zombies9.push_back(std::make_shared<bucket>());
-  m_zombies9.push_back(std::make_shared<hat>());
-  m_zombies9.push_back(std::make_shared<armor>());
-  m_zombies9.push_back(std::make_shared<normal>());
-  m_zombies9.push_back(std::make_shared<bucket>());
-  m_zombies9.push_back(std::make_shared<hat>());
+  // 關卡 9：挑戰關
+  m_zombies9 = {
+      std::make_shared<bucket>(), std::make_shared<hat>(), std::make_shared<armor>(),
+      std::make_shared<normal>(), std::make_shared<bucket>(), std::make_shared<armor>(),
+      std::make_shared<hat>(), std::make_shared<normal>(), std::make_shared<bucket>(),
+      std::make_shared<hat>(), std::make_shared<armor>(), std::make_shared<normal>(),
+      std::make_shared<bucket>(), std::make_shared<hat>()
+  };
 
-  m_zombies10.push_back(std::make_shared<normal>());
-  m_zombies10.push_back(std::make_shared<hat>());
-  m_zombies10.push_back(std::make_shared<armor>());
-  m_zombies10.push_back(std::make_shared<bucket>());
-  m_zombies10.push_back(std::make_shared<normal>());
-  m_zombies10.push_back(std::make_shared<armor>());
-  m_zombies10.push_back(std::make_shared<hat>());
-  m_zombies10.push_back(std::make_shared<bucket>());
-  m_zombies10.push_back(std::make_shared<normal>());
-  m_zombies10.push_back(std::make_shared<bucket>());
-  m_zombies10.push_back(std::make_shared<hat>());
-  m_zombies10.push_back(std::make_shared<armor>());
-  m_zombies10.push_back(std::make_shared<normal>());
+  // 關卡 10：頭目前的混戰
+  m_zombies10 = {
+      std::make_shared<normal>(), std::make_shared<hat>(), std::make_shared<armor>(),
+      std::make_shared<bucket>(), std::make_shared<armor>(), std::make_shared<hat>(),
+      std::make_shared<bucket>(), std::make_shared<normal>(), std::make_shared<bucket>(),
+      std::make_shared<hat>(), std::make_shared<armor>(), std::make_shared<normal>(),
+      std::make_shared<bucket>(), std::make_shared<armor>(), std::make_shared<hat>(),
+      std::make_shared<normal>()
+};
+
 
 };
 
