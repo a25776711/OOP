@@ -22,7 +22,9 @@ UpdateBackground::UpdateBackground() {
 
 void UpdateBackground::NextLevel() {
     if (m_level == 11) return;
-
+    if(m_level==5){
+        m_Cards_play.clear();
+    }
     m_Background->NextLevel(++m_level); 
     m_Adventure->NextLevel(m_level);
     m_Shovel->NextLevel(m_level);

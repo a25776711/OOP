@@ -26,6 +26,9 @@ public:
                 result.push_back(card);
             }
         }
+        for(auto& card : m_Cards_play){
+            result.push_back(card);
+        }
         result.push_back(m_Shovel);
         result.push_back(m_ShovelBlock);
         result.push_back(m_T_road);

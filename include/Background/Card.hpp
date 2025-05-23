@@ -46,6 +46,8 @@ public:
                 m_createPlant->SetZIndex(20);
                 if(m_createPlant->GetTakeCD()==0)return;
                 m_isCreate = false;
+                auto temp=std::make_shared<Util::Image>(RESOURCE_DIR "/Background/Card/card"+std::to_string(index)+".png");
+                
             }
       }
       bool IfCreate() {return m_isCreate;}

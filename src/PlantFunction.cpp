@@ -256,14 +256,9 @@ void App::CheckPlant() {
             std::remove_if(m_Play_Wallnut.begin(), m_Play_Wallnut.end(),
                 [&](auto& wallnut) {
                     if (!wallnut) return true;
-                    std::cout<<"play wallnut"<<std::endl;
-
                     if(wallnut->GetType()==Plant::T_Play_Wallnut_Boom){
-                        std::cout<<"boom"<<std::endl;
                         auto m_wallnut = std::dynamic_pointer_cast<Play_wallnut_boom>(wallnut);
-                        std::cout<<"boom"<<std::endl;
                         if (m_wallnut->Update(m_zombiManager->GetZombies())) {
-                            std::cout<<"boom"<<std::endl;
                             m_Root.RemoveChild(wallnut);
                             wallnut.reset();
                             return true;
