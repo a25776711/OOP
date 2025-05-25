@@ -33,14 +33,20 @@ void App::Update() {
         glm::vec2 pos=Util::Input::GetCursorPosition();
         pos.y=-pos.y;
         if(m_PRM->GetLevel()!=0){
-            if(m_holdingPlant==nullptr&&CheckSunCollect(pos)){m_Root.RemoveChild(CheckSunCollect(pos));}
-            if(m_holdingPlant!=nullptr){PutPlant(pos,m_PRM->GetLevel());}
-            if(m_holdingPlant==nullptr){TakePlant(pos,m_PRM->GetLevel());}
             
+            if(m_CameraState==CameraState::idle){
+                if(m_holdingPlant==nullptr&&CheckSunCollect(pos)){m_Root.RemoveChild(CheckSunCollect(pos));}
+                if(m_holdingPlant!=nullptr){PutPlant(pos,m_PRM->GetLevel());}
+                if(m_holdingPlant==nullptr){TakePlant(pos,m_PRM->GetLevel());}
+            }
+            else if(m_CameraState==CameraState::choose_card){
+                TakePlant(pos,m_PRM->GetLevel());
+            }
         }
         if (m_PRM ->GetLevel()==0) {
             if (m_PRM -> CheckHit(pos)) {
                 m_PRM ->NextLevel();
+                
                 for (auto &z : m_PRM ->GetChildren()) {
                     m_Root.RemoveChild(z);
                 }
@@ -49,11 +55,11 @@ void App::Update() {
                 m_Root.Update(glm::vec2(-100,0));
                 ResetPlant(m_PRM -> GetLevel());
                 m_PRM ->ResetCardPos();
-                //m_CameraState = CameraState::move_road;
+                if(m_PRM->GetLevel()>7)m_CameraState = CameraState::move_road;
             }
         }
     }
-    if (m_EnterDown&&m_CameraState==CameraState::idle) {
+    if (m_EnterDown&&m_CameraState==CameraState::idle&&m_PRM->GetLevel()!=0) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
 
             for (auto &z : m_PRM ->GetChildren()) {
@@ -72,8 +78,8 @@ void App::Update() {
             if(m_PRM->GetLevel()==1)m_Root.Update(glm::vec2(-100,0));
 
             ResetPlant(m_PRM -> GetLevel());
+            if(m_PRM->GetLevel()>7)m_CameraState = CameraState::move_road;
 
-            //m_CameraState = CameraState::move_road;
         }
     }
 

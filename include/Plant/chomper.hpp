@@ -43,7 +43,7 @@ class Chomper:public Plant {
             for(auto &zombie:zombis){
                 if(zombie->GetState()!=zombi::zombistate::die&&
                 zombie->GetPosition().x-GetPosition().x<40&&
-                abs(zombie->GetPosition().y-GetPosition().y)<40){
+                abs(zombie->GetPosition().y-GetPosition().y)<50){
                     m_z=zombie;
                     m_state=ChomperState::Eat;
                     m_Drawable=std::make_shared<Util::Animation>(m_Loader.chomperIMG_1,true,100,false,0);

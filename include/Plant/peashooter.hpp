@@ -14,7 +14,7 @@ public:
         SetHP();
         SetCost(100);
         SetTakeCD(450);
-        SetType(T_Shooter);
+        SetType(Plant::T_Peashooter);
     }
     bool AttackCheck(std::vector<glm::vec2> pos);
     std::shared_ptr<Bullet> Attack(std::vector<glm::vec2> pos);

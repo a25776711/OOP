@@ -31,7 +31,10 @@ public:
         idle,
         grass,
         move_road,
-        move_house
+        move_house,
+        show_choose_card,
+        choose_card,
+        hide_choose_card
     };
     enum class Phase {
             tital,
@@ -58,7 +61,6 @@ public:
 
     //點擊四個點確認
     bool CheckClick(std::vector<float> block,glm::vec2 click);
-
 
     void TakePlant(glm::vec2 click,int level);
     void CheckPlant();
@@ -97,13 +99,13 @@ private:
     std::vector<std::shared_ptr<Plant>> m_Play_Wallnut;
 
     std::shared_ptr<Plant> m_loadtemp=std::make_shared<Peashooter>();
+
     std::shared_ptr<Card> m_PlayCard=nullptr;
 
     bool move_house=false;
     bool move_road=false;
     bool m_EnterDown = false;
     bool m_KDown = false; // 初始設為 false
-    bool m_CameraStart=true;
 };
 
 #endif

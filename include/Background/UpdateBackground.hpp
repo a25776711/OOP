@@ -31,16 +31,24 @@ public:
         }
         result.push_back(m_Shovel);
         result.push_back(m_ShovelBlock);
+        if(m_level>=6)result.push_back(m_ChooseCardList);
         result.push_back(m_T_road);
+        result.push_back(m_ChooseButton);
         return result;
     }
 
-    void SetCardPos();
+    void SetCardPos(bool is_chose);
     void ResetCardPos();
     std::shared_ptr<Card> PlayCard();
     void UpdatePlayCard();
+    std::vector<std::shared_ptr<GameObject>> GetChoseAsGameObject(bool is_chose);
+    void ResetCardandCardListPos();
     void RemovePlayCard(std::shared_ptr<Card> card);
+    void ShowChoseCardList(bool show);
+    std::shared_ptr<Card> ChooseCard(bool is_chose,std::shared_ptr<Card> card);
     int GetLevel() {return m_level;}
+    std::vector<std::shared_ptr<GameObject>> GetCards_chose();
+    std::shared_ptr<ChooseButton> GetChooseButton() {return m_ChooseButton;}
     std::vector<std::shared_ptr<Card>> GetCards() {return m_Cards;}
     std::vector<std::shared_ptr<Card>> GetPlayCard() {return m_Cards_play;}
     std::shared_ptr<Shovel> GetShovel() {return m_Shovel;}
@@ -69,17 +77,19 @@ public:
         glm::vec2 p3{360, -130};
         glm::vec2 p4{110, -101};
         std::vector<int> m_ShovelPos;
+        std::vector<std::shared_ptr<Card>> m_Cards_chose;
         std::vector<std::shared_ptr<Card>> m_Cards;
         std::vector<std::shared_ptr<Card>> m_Cards_play;
         std::shared_ptr<CardManager> m_CardManager;
         std::shared_ptr<BackgroundImage> m_Background;
         std::shared_ptr<adventure> m_Adventure;
+        std::shared_ptr<ChooseButton> m_ChooseButton=std::make_shared<ChooseButton>();
         std::shared_ptr<ShovelBlock> m_ShovelBlock=nullptr;
+        std::shared_ptr<ChooseCardList> m_ChooseCardList=std::make_shared<ChooseCardList>();
         std::shared_ptr<Shovel> m_Shovel=nullptr;
         std::shared_ptr<T_road> m_T_road=nullptr;
         int m_level = 0;
         int m_play_clock = 0;
-
 };
 
 #endif //UPDATEBACKGROUND_HPP
