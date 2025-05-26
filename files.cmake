@@ -71,6 +71,7 @@ set(INCLUDE_FILES
     Background/CardManager.hpp
     Background/SunNB.hpp
     Background/car.hpp
+        Background/ready.hpp
 
 )
 

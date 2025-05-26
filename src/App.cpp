@@ -54,6 +54,8 @@ void App::Update() {
                 m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
                 m_Root.Update(glm::vec2(-100,0));
                 ResetPlant(m_PRM -> GetLevel());
+                m_ready = std::make_shared<Ready>();
+                m_Root.AddChild(m_ready);
                 m_PRM ->ResetCardPos();
                 if(m_PRM->GetLevel()>7)m_CameraState = CameraState::move_road;
             }
@@ -68,22 +70,27 @@ void App::Update() {
             m_PRM ->NextLevel();
             std::cout<<"next to level:"<<m_PRM->GetLevel()<<std::endl;
             m_CurrentZombiIndex = 0;
-            zombicount = 0; 
+            zombicount = 0;
             for (auto zombi : m_zombiManager -> GetZombies()) {
                 m_Root.RemoveChild(zombi);
             }
             m_Root.AddChildren(m_PRM-> GetChildren());
+
             m_Root.AddChildren(m_zombiManager->GetZombiesAsGameObjects(m_zombiManager ->GetZombi(m_PRM -> GetLevel())));
             if (m_PRM -> GetLevel() ==11){ m_CurrentState = State::END;}
             if(m_PRM->GetLevel()==1)m_Root.Update(glm::vec2(-100,0));
-
+            m_ready = std::make_shared<Ready>();
+            m_Root.AddChild(m_ready);
             ResetPlant(m_PRM -> GetLevel());
             if(m_PRM->GetLevel()>7)m_CameraState = CameraState::move_road;
 
         }
     }
 
-    if (m_PRM ->GetLevel() != 0&&m_CameraState==CameraState::idle) {
+    if (m_PRM ->GetLevel() != 0 && m_CameraState==CameraState::idle) {
+
+        if (m_ready -> IfAnimationEnds()) {m_Root.RemoveChild(m_ready);Checkready = true;}
+
         bool isKPressed = Util::Input::IsKeyPressed(Util::Keycode::K);
 
         if (!m_KDown && isKPressed) {
@@ -136,9 +143,11 @@ void App::Update() {
     }
     m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
     if(m_CameraState == CameraState::idle)PlantUpdate();
-    
 
-    
+
+
+
+
 
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
     Util::Input::IfExit()) {
