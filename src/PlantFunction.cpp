@@ -43,7 +43,7 @@ void App::MoveSun() {
 
 //點擊卡片判斷
 void App::TakePlant(glm::vec2 click,int level) {
-    if(m_PRM->GetLevel()!=5){
+    if(m_PRM->GetLevel()!=5&&m_CameraState==CameraState::idle){
     auto cards=m_PRM->GetCards();
     for(auto& card:cards) {
         if(card->IfCreate()&&
@@ -64,7 +64,39 @@ void App::TakePlant(glm::vec2 click,int level) {
             shovel->TakeShovel();
         }
     }
-    }else{
+    }
+    else if(m_CameraState==CameraState::choose_card){
+        auto choose_button=m_PRM->GetChooseButton();
+        auto cards=m_PRM->GetCards();
+        auto cards_chose=m_PRM->GetCards_chose();
+        if(cards.size()!=6)
+            for(auto& card:cards_chose){
+                if(card->GetVisible()){
+                    auto temp=std::dynamic_pointer_cast<Card>(card);
+                    if(CheckClick(temp->GetFourPoints(),click)){
+                        m_Root.AddChild(m_PRM->ChooseCard(true,temp));
+                        if(cards.size()==5){
+                            choose_button->SetOver(true);
+                        }
+                        return;
+                    }
+                }
+            }
+        if(cards.size()!=0)
+            for(auto& card:cards){
+                if(CheckClick(card->GetFourPoints(),click)){
+                    m_Root.RemoveChild(m_PRM->ChooseCard(false,card));
+                    choose_button->SetOver(false);
+                    return;
+                }
+            }
+        if(cards.size()==6&&CheckClick(choose_button->GetFourPoints(),click)){
+            m_PRM->ShowChoseCardList(false);
+            m_CameraState=CameraState::hide_choose_card;
+            CameraMoveHidden(3);
+        }
+    }
+    else{
         auto cards=m_PRM->GetPlayCard();
         for(auto& card:cards){
             if(CheckClick(card->GetFourPoints(),click)){
@@ -152,15 +184,12 @@ void App::PutPlant(glm::vec2 m_click,int level){
                             return;
                         }
                         else if(m_holdingPlant->GetType()==Plant::T_Shovel) {
-                            std::cout<<"use shovel"<<std::endl;
                             auto shovel=std::dynamic_pointer_cast<Shovel>(m_holdingPlant);
                             if(CheckClick(check,m_click)) {
-                                std::cout<<"use shovel"<<std::endl;
                                 if(m_Plants[i][j]!=nullptr) {
                                     m_Root.RemoveChild(m_Plants[i][j]);
                                     m_Plants[i][j].reset();
                                 }
-                                std::cout<<"use shovel"<<std::endl;
                                 m_holdingPlant.reset();
                                 shovel->UseShovel();
                                 return;
@@ -193,7 +222,7 @@ void App::CheckPlant() {
             if(m_Plants[i][j]!=nullptr) {
                 std::vector<glm::vec2> zpos;
                 auto check=m_Plants[i][j];
-                if (check->GetType() == Plant::T_Shooter) {
+                if (check->GetType() == Plant::T_Peashooter||check->GetType() == Plant::T_IceShooter||check->GetType() == Plant::T_FastShooter) {
                     for(auto& z : m_zombiManager->GetZombies()) {
                         if(z->GetState() != zombi::zombistate::die&&z->GetState() != zombi::zombistate::stand) 
                             zpos.push_back(z->GetPosition());
@@ -214,10 +243,8 @@ void App::CheckPlant() {
                     }
                 }
                 else if (check->GetType() == Plant::T_Bomb) {
-                    std::cout<<"bomb"<<std::endl;
                     auto m_bomb=std::dynamic_pointer_cast<Cherrybomb>(check);
                     if(m_bomb->Attack(m_zombiManager->GetZombies())){
-                        std::cout<<"bomb"<<std::endl;
                         m_Root.RemoveChild(m_bomb);
                         m_Plants[i][j].reset();
                     }
@@ -251,7 +278,6 @@ void App::CheckPlant() {
         }
     }
     }else{
-        std::cout<<"play wallnut"<<std::endl;
         m_Play_Wallnut.erase(
             std::remove_if(m_Play_Wallnut.begin(), m_Play_Wallnut.end(),
                 [&](auto& wallnut) {

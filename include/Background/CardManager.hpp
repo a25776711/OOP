@@ -37,6 +37,7 @@ public:
         }
         return result;
     }
+    
     std::shared_ptr<Card> GetCard(int index) {
         switch(index){
             case 1:return std::make_shared<Card>(RESOURCE_DIR "/Background/Card/card1.png",1);

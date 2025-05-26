@@ -26,7 +26,7 @@ class adventure : public GameObject{
                 temp -> SetImage(RESOURCE_DIR"/Background/Adventure_1.png");
             }
             else {
-                temp -> SetImage(RESOURCE_DIR"/Background/list.png");
+                temp -> SetImage(RESOURCE_DIR"/Background/list2.png");
             }
         }
     private:
@@ -72,7 +72,7 @@ class Shovel : public Plant{
         }
         void UseShovel(){
             isTaken = false;
-            m_Transform.translation = {410, 280};
+            m_Transform.translation = {400, 280};
             ChangeImage();
             SetPoints();
         }
@@ -95,5 +95,41 @@ class T_road : public GameObject{
             m_Transform.scale={1.3f,1.3f};
         }
         
+};
+class ChooseCardList : public GameObject{
+    public:
+        explicit ChooseCardList():GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/chose.png"), 0){
+            SetVisible(false);
+        }
+        
+};
+class ChooseButton : public GameObject{
+    public:
+        explicit ChooseButton():GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/chosenotover.png"), 0){
+            SetVisible(false);
+            m_Transform.translation.y=-200;
+        }
+        void ChangeImage(){
+            if(isOver)
+                m_Drawable = std::make_shared<Util::Image>(RESOURCE_DIR"/Background/choseover.png");
+            else
+                m_Drawable = std::make_shared<Util::Image>(RESOURCE_DIR"/Background/chosenotover.png");
+        }
+        void SetOver(bool over){
+            if(over!=isOver){
+                isOver = over;
+                ChangeImage();
+            }
+        }
+        void SetPoints(){
+            auto pos=m_Transform.translation;
+            four_points={pos.x-80,pos.y-40,pos.x+80,pos.y+40};
+        }
+        std::vector<float> GetFourPoints(){
+            return four_points;
+        }
+    private:
+        std::vector<float> four_points;
+        bool isOver;
 };
 #endif //ADVENTURE_HPP

@@ -21,12 +21,14 @@ public:
             SetDrawable(image);
             this->index = index;
             m_Transform.scale = {0.45,0.45};
-            
+            SetZIndex(10);
             m_createPlant = GetNewPlant(index);
             if(m_createPlant) {
                 m_cooldown = m_createPlant->GetTakeCD();
             }
             m_isCreate = true;
+            m_image=RESOURCE_DIR "/Background/Card/card"+std::to_string(index)+".png";
+            m_image_CD=RESOURCE_DIR "/Background/Card/card"+std::to_string(index)+"_CD.png";
       }
 
       std::shared_ptr<Plant> MakePlant() {
@@ -39,18 +41,25 @@ public:
             m_Transform.translation=pos;
             four_points={pos.x-30,pos.y-40,pos.x+30,pos.y+40};
       }
-      void Reset(){m_createPlant=GetNewPlant(index);m_cooldown=m_createPlant->GetTakeCD();m_isCreate=true;}
+      void Reset(){
+            auto temp=std::dynamic_pointer_cast<Util::Image>(m_Drawable);
+            temp->SetImage(RESOURCE_DIR "/Background/Card/card"+std::to_string(index)+".png");
+            m_createPlant=GetNewPlant(index);
+            m_cooldown=m_createPlant->GetTakeCD();
+            m_isCreate=true;
+      }
       Plant::PlantType GetType(){return m_createPlant->GetType();}
       void Create(){
             if(m_createPlant) {
                 m_createPlant->SetZIndex(20);
                 if(m_createPlant->GetTakeCD()==0)return;
                 m_isCreate = false;
-                auto temp=std::make_shared<Util::Image>(RESOURCE_DIR "/Background/Card/card"+std::to_string(index)+".png");
-                
+                auto temp=std::dynamic_pointer_cast<Util::Image>(m_Drawable);
+                temp->SetImage(m_image_CD);
             }
       }
       bool IfCreate() {return m_isCreate;}
+      int GetIndex(){return index;}
       int GetCost(int level){
             if(level==5&&index==4)return 0;
             return m_createPlant->GetCost();}
@@ -64,13 +73,16 @@ public:
             if(m_cooldown<=0){
                   m_cooldown=m_createPlant->GetTakeCD();
                   m_isCreate=true;
+                  auto temp=std::dynamic_pointer_cast<Util::Image>(m_Drawable);
+                  temp->SetImage(m_image);
             }
       }
       private:
       int index;
       int m_cooldown;
       bool m_isCreate=true;
-
+      std::string m_image;
+      std::string m_image_CD;
       std::vector<float> four_points;
       std::shared_ptr<Plant> m_createPlant;
       std::shared_ptr<Plant> GetNewPlant(int index){

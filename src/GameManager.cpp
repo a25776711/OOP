@@ -8,8 +8,8 @@ void App::PlantUpdate() {
     
     CarMoveCheck();
     auto hitzombi=CheckBullet();
-    if(m_PRM->GetLevel()>0)SunClock++;
-    if(SunClock>480&&m_PRM->GetLevel()>0) {
+    if(m_PRM->GetLevel()>0&&m_PRM->GetLevel()!=5)SunClock++;
+    if(SunClock>480&&m_PRM->GetLevel()>0&&m_PRM->GetLevel()!=5) {
         SunClock=0;
         MakeSun(false);
     }
@@ -55,25 +55,54 @@ void App::FpsShow(){
 
 void App::CameraMoveHidden(int hidden){
     if(hidden==0){
+        m_SunNB->SetVisible(false);
         auto background_hidden=m_PRM->GetChildren();
-        for(size_t i=1;i<background_hidden.size();i++){
-            background_hidden[i]->SetVisible(false);
-        }
+        if(m_PRM->GetLevel()!=5)
+            for(size_t i=1;i<background_hidden.size();i++)
+                background_hidden[i]->SetVisible(false);
+        else
+            for(size_t i=2;i<background_hidden.size();i++)
+                background_hidden[i]->SetVisible(false);
+        
         for(auto& car:m_Cars){
             if(car!=nullptr){
                 car->SetVisible(false);
             }
         }
+        for(auto& card:m_PRM->GetCards())
+            card->SetVisible(false);
+        for(auto& card:m_PRM->GetCards_chose())
+            card->SetVisible(false);
     }
     else if(hidden==1){
+        m_SunNB->SetVisible(true);
         auto background_hidden=m_PRM->GetChildren();
-        for(size_t i=1;i<background_hidden.size()-2;i++){
-            background_hidden[i]->SetVisible(true);
+        if(m_PRM->GetLevel()!=5){
+            for(size_t i=1;i<background_hidden.size()-3;i++)
+                background_hidden[i]->SetVisible(true);
+        }
+        else{
+            for(size_t i=2;i<background_hidden.size();i++)
+                background_hidden[i]->SetVisible(true);
         }
         for(auto& car:m_Cars){
             if(car!=nullptr){
                 car->SetVisible(true);
             }
+        }
+        for(auto& card:m_PRM->GetCards())
+            card->SetVisible(true);
+    }
+    else if(hidden==2){
+        auto choose_as_game_object=m_PRM->GetChoseAsGameObject(true);
+        for(auto& game_object : choose_as_game_object){
+            game_object->SetVisible(true);
+        }
+    }
+    else if(hidden==3){
+        auto choose_as_game_object=m_PRM->GetChoseAsGameObject(false);
+        for(auto& game_object : choose_as_game_object){
+            game_object->SetVisible(false);
         }
     }
 }
@@ -103,32 +132,54 @@ void App::ResetPlant(int level) {
         m_Root.RemoveChild(sun);
     }
     m_Suns.clear();
-    
+    if(m_PRM->GetLevel()==6){
+        for(auto& nut:m_Play_Wallnut){
+            m_Root.RemoveChild(nut);
+        }
+        m_Play_Wallnut.clear();
+    }
 }
 
 void App::GameObjectUpdate(){
     glm::vec2 moveAmount = {0,0};
     if(m_CameraState == CameraState::move_road){
         CameraMoveHidden(0);
-        if(road_count<180){
-            moveAmount = {2,0};
-            road_count++;   
+        if(road_count<90){
+            moveAmount = {4,0};
+            road_count++;
+            if(road_count==90&&m_PRM->GetLevel()>7){
+                m_CameraState = CameraState::show_choose_card;
+                CameraMoveHidden(2);
+            }
         }
-        else if(road_count<260){
-            road_count++;   
+        else if(m_CameraState!=CameraState::show_choose_card&&road_count<150){
+            road_count++;
         }
         else{
             m_CameraState = CameraState::move_house;
             road_count=0;
         }
     }
+    else if(m_CameraState==CameraState::show_choose_card){
+        m_PRM->ShowChoseCardList(true);
+        m_Root.AddChildren(m_PRM->GetCards_chose());
+        m_PRM->ResetCardandCardListPos();
+        m_CameraState=CameraState::choose_card;
+    }
+    else if(m_CameraState==CameraState::hide_choose_card){
+        m_PRM->ShowChoseCardList(false);
+        m_CameraState = CameraState::move_house;
+        road_count=0;
+        std::cout<<"hide_choose_card"<<std::endl;
+    }
     else if(m_CameraState == CameraState::move_house){
-        if(house_count<180){
-            moveAmount = {-2,0};
+        if(house_count<90){
+            moveAmount = {-4,0};
             house_count++;
         }
         else{
             CameraMoveHidden(1);
+            m_PRM->ResetCardandCardListPos();
             m_CameraState = CameraState::idle;
             house_count=0;
         }
