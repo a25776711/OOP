@@ -2,14 +2,18 @@
 #include "Util/Input.hpp"
 #include "Util/Keycode.hpp"
 #include "Context.hpp"
+//植物&卡牌&太陽更新
 void App::PlantUpdate() {
+    m_zombis=m_zombiManager->GetZombies();
+    m_zombiPos=GetZomdiPos();
+
     MoveSun();
-    CheckPlant();
+    CheckPlant(m_zombis,m_zombiPos);
     
     CarMoveCheck();
-    auto hitzombi=CheckBullet();
+    CheckBullet();
     if(m_PRM->GetLevel()>0&&m_PRM->GetLevel()!=5)SunClock++;
-    if(SunClock>480&&m_PRM->GetLevel()>0&&m_PRM->GetLevel()!=5) {
+    if(SunClock>400&&m_PRM->GetLevel()>0&&m_PRM->GetLevel()!=5) {
         SunClock=0;
         MakeSun(false);
     }
@@ -28,6 +32,7 @@ void App::PlantUpdate() {
         m_PRM->UpdatePlayCard();
     }
 }
+//遊戲初始化
 void App::StartGameSet(){
     PlantLoader::GetInstance();
     
@@ -38,6 +43,8 @@ void App::StartGameSet(){
     m_PRM = std::make_shared<UpdateBackground>();
     m_zombiManager = std::make_shared<ZombiManager>();
     m_Root.AddChildren(m_PRM->GetChildren());
+    m_zombis=m_zombiManager->GetZombies();
+    m_zombiPos=GetZomdiPos();
 }
 void App::FpsShow(){
     ImGui_ImplSDL2_NewFrame();
@@ -139,7 +146,7 @@ void App::ResetPlant(int level) {
         m_Play_Wallnut.clear();
     }
 }
-
+//位移及相機狀態切換
 void App::GameObjectUpdate(){
     glm::vec2 moveAmount = {0,0};
     if(m_CameraState == CameraState::move_road){

@@ -9,18 +9,18 @@
 class Cherrybomb:public Plant {
     public:
     explicit  Cherrybomb():Plant(m_Loader.cherryIMG,70) {
-        SetATK(90);
-        SetHP(100);
+        SetATK(9999);
+        SetHP(10000);
         SetCost(150);
         SetType(T_Bomb);
-        SetTakeCD(3000);
+        SetTakeCD(2000);
     }
     bool Attack(std::vector<std::shared_ptr<zombi>> &zombis){
         if(!showboom&&IfAnimationEnds()){
             std::cout<<"boom"<<std::endl;
             m_Drawable=std::make_shared<Util::Animation>(m_Loader.cherryIMG_Boom,false,2000,false,100);
             for(auto &zombi:zombis){
-                if(abs(zombi->GetPosition().x-GetPosition().x)<140&&abs(zombi->GetPosition().y-GetPosition().y)<150){
+                if(abs(zombi->GetPosition().x-GetPosition().x)<140&&abs(zombi->GetPosition().y-GetPosition().y)<180){
                     zombi->GetHeart(true,false,GetATK());
                 }
             }

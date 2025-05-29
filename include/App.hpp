@@ -64,9 +64,9 @@ public:
     bool CheckClick(std::vector<float> block,glm::vec2 click);
 
     void TakePlant(glm::vec2 click,int level);
-    void CheckPlant();
+    void CheckPlant(std::vector<std::shared_ptr<zombi>> m_zombis,std::vector<glm::vec2> m_zombiPos);
     void PutPlant(glm::vec2 click,int level);
-    std::vector<std::shared_ptr<zombi>> CheckBullet();
+    void CheckBullet();
     std::vector<glm::vec2> GetZomdiPos();
 
 
@@ -82,8 +82,11 @@ private:
     std::shared_ptr<UpdateBackground> m_PRM;
 
     int m_CurrentZombiIndex = 0;
+
     int zombicount = 0;
     std::shared_ptr<ZombiManager> m_zombiManager;
+    std::vector<std::shared_ptr<zombi>> m_zombis;
+    std::vector<glm::vec2> m_zombiPos;
 
     int Sunamount=0;
     int SunClock=0;
@@ -100,13 +103,13 @@ private:
 
     std::vector<std::shared_ptr<Plant>> m_Play_Wallnut;
 
-    std::shared_ptr<Plant> m_loadtemp=std::make_shared<Peashooter>();
 
     std::shared_ptr<Card> m_PlayCard=nullptr;
 
     bool move_house=false;
     bool move_road=false;
     bool m_EnterDown = false;
+    bool m_C_Down = false;
     bool m_KDown = false; // 初始設為 false
 };
 

@@ -19,7 +19,7 @@ public:
         SetTakeCD(450);
     }
     bool CoolDown()override {
-        if(m_Cooldown>=800){m_Cooldown=0;return true;}
+        if(m_Cooldown>=750){m_Cooldown=0;return true;}
         m_Cooldown++;return false;
     }
 
