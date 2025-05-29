@@ -78,11 +78,11 @@ void App::CameraMoveHidden(int hidden){
         m_SunNB->SetVisible(true);
         auto background_hidden=m_PRM->GetChildren();
         if(m_PRM->GetLevel()!=5){
-            for(size_t i=1;i<background_hidden.size()-3;i++)
+            for(size_t i=1;i<background_hidden.size()-4;i++)
                 background_hidden[i]->SetVisible(true);
         }
         else{
-            for(size_t i=2;i<background_hidden.size();i++)
+            for(size_t i=2;i<background_hidden.size()-1;i++)
                 background_hidden[i]->SetVisible(true);
         }
         for(auto& car:m_Cars){
@@ -178,6 +178,10 @@ void App::GameObjectUpdate(){
             house_count++;
         }
         else{
+            m_ready = std::make_shared<Ready>();
+            m_Root.AddChild(m_ready);
+            m_ready->SetVisible(true);
+            m_ready->Play();
             CameraMoveHidden(1);
             m_PRM->ResetCardandCardListPos();
             m_CameraState = CameraState::idle;
