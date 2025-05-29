@@ -17,7 +17,8 @@ class Ready : public GameObject {
             m_Image.push_back(RESOURCE_DIR"/Background/nothing.png");
             SetZIndex(100);
             SetVisible(true);
-            m_Drawable = std::make_shared<Util::Animation>(m_Image, true, 500, true, 0);
+            SetVisible(false);
+            m_Drawable = std::make_shared<Util::Animation>(m_Image, false, 500, false, 0);
         };
 
         bool IfAnimationEnds() const {
@@ -33,6 +34,11 @@ class Ready : public GameObject {
             }
             return (temp->GetCurrentFrameIndex() == temp->GetFrameCount() - 1 );
 
+        }
+        void Play () {
+            auto temp = std::dynamic_pointer_cast<Util::Animation>(m_Drawable);
+            if (temp->GetState()==Util::Animation::State::PLAY)return;
+            temp->Play();
         }
 
     private:

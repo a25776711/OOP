@@ -56,10 +56,7 @@ void UpdateBackground::NextLevel() {
 void UpdateBackground::SetCardPos(bool is_chose) {
     float spacing = 57;
     float startX;
-    if(m_level==1)
-        startX = -465;
-    else
-        startX = -365;
+    startX = -365;
     if(!is_chose){
         for (size_t i = 0; i < m_Cards.size(); ++i){
             if(m_Cards[i]!=nullptr){
