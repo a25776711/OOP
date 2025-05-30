@@ -6,7 +6,8 @@
 
 void zombi::HitCheck(std::vector<std::vector<std::shared_ptr<Plant>>> Plants) {
     bool plantAhead = false;
-    if(m_state == zombistate::die)return;
+    if (m_state == zombistate::die || m_state == zombistate::ash) {return;}
+
     for (const auto &row : Plants) {
         for (const auto &plant : row) {
             if (!plant) continue;
