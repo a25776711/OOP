@@ -59,6 +59,16 @@ void App::Update() {
             }
         }
     }
+    if(m_C_Down && m_CameraState==CameraState::idle && m_PRM->GetLevel()!=0&&m_PRM->GetLevel()!=5){
+        if(!Util::Input::IsKeyPressed(Util::Keycode::C)){
+            auto cards=m_PRM->GetCards();
+            for(auto& card:cards){
+                if(!card->IfCreate()){
+                    card->Reset();
+                }
+            }
+        }
+    }
     if (m_EnterDown&&m_CameraState==CameraState::idle&&m_PRM->GetLevel()!=0) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
 
@@ -139,6 +149,7 @@ void App::Update() {
         m_zombiManager ->Getice(true);
     }
     m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
+    m_C_Down = Util::Input::IsKeyPressed(Util::Keycode::C);
     if(m_CameraState == CameraState::idle)PlantUpdate();
 
 
