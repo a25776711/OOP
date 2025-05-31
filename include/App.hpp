@@ -7,6 +7,7 @@
 #include "Plant/plant.hpp"
 #include "Background/UpdateBackground.hpp"
 #include "Background/ready.hpp"
+#include "Background/End.hpp"
 #include "Background/Adventure.hpp"
 #include "Util/Logger.hpp"
 #include "Background/SunNB.hpp"
@@ -94,6 +95,7 @@ private:
     int house_count=0;
     bool Checkready = false;
 
+    std::shared_ptr<end> m_End = std::make_shared<end>();
     std::shared_ptr<Ready> m_ready = nullptr;
 
 

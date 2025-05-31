@@ -155,7 +155,11 @@ void App::Update() {
 
 
 
-
+    for (auto zombi : m_zombiManager -> GetZombies()) {
+        if (zombi -> GetPosition().x < -450) {
+            m_CurrentState = State::END;
+        }
+    }
 
     if (Util::Input::IsKeyUp(Util::Keycode::ESCAPE) ||
     Util::Input::IfExit()) {
@@ -166,6 +170,10 @@ void App::Update() {
 
 
 void App::End(){ // NOLINT(this method will mutate members in the future)
+    for (auto a :m_Root.GetChildren()) {
+        m_Root.RemoveChild(a);
+    }
+    m_Root.AddChild(m_End);
     LOG_TRACE("End");
 }
 
