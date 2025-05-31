@@ -2,7 +2,7 @@
 // Created by a2577 on 25-4-6.
 //
 #include "App.hpp"
-
+//太陽生成
 void App::MakeSun(bool flower,glm::vec2 pos)  {
         auto temp=std::make_shared<Sun>(flower,pos);
         temp->SetZIndex(100);
@@ -15,14 +15,14 @@ void App::MakeSun(bool flower,glm::vec2 pos)  {
 std::shared_ptr<Sun> App::CheckSunCollect(glm::vec2 click) {
     for(auto& sun:m_Suns) {
         glm::vec2 pos = sun->GetPosition();
-        if(glm::distance(pos,click)<(20*sqrt(2))) {
+        if(glm::distance(pos,click)<(25*sqrt(2))) {
             sun->CollectAndMove(click);
             if(sun->GetMoveState()==MoveOver)return sun;
         }
     }
     return nullptr;
 }
-//太陽動作
+//太陽移動
 void App::MoveSun() {
     m_Suns.erase(
         std::remove_if(m_Suns.begin(), m_Suns.end(), 
@@ -200,8 +200,16 @@ void App::PutPlant(glm::vec2 m_click,int level){
 
             break;
         }
-        m_Root.RemoveChild(m_holdingPlant);
-        m_holdingPlant=nullptr;
+        if(m_holdingPlant!=nullptr){
+            if(m_holdingPlant->GetType()==Plant::T_Shovel){
+                auto shovel=std::dynamic_pointer_cast<Shovel>(m_holdingPlant);
+                shovel->UseShovel();
+                m_holdingPlant.reset();
+                return;
+            }
+            m_Root.RemoveChild(m_holdingPlant);
+            m_holdingPlant.reset();
+        }
 }
 
 
@@ -210,24 +218,21 @@ bool App::CheckClick(std::vector<float> block,glm::vec2 click) {
     //小x,小y,大x,大y
     return (click.x>block[0])&&(click.y>block[1])&&(click.x<block[2])&&(click.y<block[3]);
 }
-//植物動作血量確認
-void App::CheckPlant() {
+//植物動作更新&血量確認
+void App::CheckPlant(std::vector<std::shared_ptr<zombi>> m_zombis,std::vector<glm::vec2> m_zombiPos) {
+    //一般關卡植物動作更新&血量確認
     if(m_PRM->GetLevel()!=5){
     for(int i=0;i<m_Plants.size();i++) {
         for(int j=0;j<m_Plants[i].size();j++) {
             if(m_Plants[i][j]!=nullptr&&m_Plants[i][j]->GetHP()<=0) {
                 m_Root.RemoveChild(m_Plants[i][j]);
-                m_Plants[i][j]=nullptr;
+                m_Plants[i][j].reset();
             }
-            if(m_Plants[i][j]!=nullptr) {
-                std::vector<glm::vec2> zpos;
+            if(m_Plants[i][j]!=nullptr){
                 auto check=m_Plants[i][j];
                 if (check->GetType() == Plant::T_Peashooter||check->GetType() == Plant::T_IceShooter||check->GetType() == Plant::T_FastShooter) {
-                    for(auto& z : m_zombiManager->GetZombies()) {
-                        if(z->GetState() != zombi::zombistate::die&&z->GetState() != zombi::zombistate::stand) 
-                            zpos.push_back(z->GetPosition());
-                    }
-                    auto bullet=check->Attack(zpos);
+                    
+                    auto bullet=check->Attack(m_zombiPos);
                     if(bullet!=nullptr) {
                         bullet->SetZIndex(21);
                         m_Bullets.push_back(bullet);
@@ -237,14 +242,14 @@ void App::CheckPlant() {
                 else if (check->GetType() == Plant::T_Mine) {
 
                     auto m_mine=std::dynamic_pointer_cast<Mine>(check);
-                    if(m_mine->Attack(m_zombiManager->GetZombies())){
+                    if(m_mine->Attack(m_zombis)){
                         m_Root.RemoveChild(m_mine);
                         m_Plants[i][j].reset();
                     }
                 }
                 else if (check->GetType() == Plant::T_Bomb) {
                     auto m_bomb=std::dynamic_pointer_cast<Cherrybomb>(check);
-                    if(m_bomb->Attack(m_zombiManager->GetZombies())){
+                    if(m_bomb->Attack(m_zombis)){
                         m_Root.RemoveChild(m_bomb);
                         m_Plants[i][j].reset();
                     }
@@ -252,7 +257,7 @@ void App::CheckPlant() {
                 else if (check->GetType() == Plant::T_Chomper) {
                     if(check!=nullptr){
                         auto m_chomper=std::dynamic_pointer_cast<Chomper>(check);
-                        std::shared_ptr<zombi> z=m_chomper->Attack(m_zombiManager->GetZombies());
+                        std::shared_ptr<zombi> z=m_chomper->Attack(m_zombis);
                         if(z!=nullptr){
                             m_Root.RemoveChild(z);
                             z->GetHeart(false,false,100);
@@ -269,7 +274,7 @@ void App::CheckPlant() {
                 }
                 else if (check->GetType() == Plant::T_Play_Wallnut) {
                     auto m_play_wallnut=std::dynamic_pointer_cast<Play_wallnut>(check);
-                    if(m_play_wallnut->Update(m_zombiManager->GetZombies())) {
+                    if(m_play_wallnut->Update(m_zombis)) {
                         m_Root.RemoveChild(check);
                         m_Plants[i][j].reset();
                     }
@@ -277,7 +282,9 @@ void App::CheckPlant() {
             }
         }
     }
-    }else{
+    }
+    //娛樂關保齡球更新
+    else{
         m_Play_Wallnut.erase(
             std::remove_if(m_Play_Wallnut.begin(), m_Play_Wallnut.end(),
                 [&](auto& wallnut) {
@@ -305,9 +312,7 @@ void App::CheckPlant() {
     }
 }
 //子彈動作
-std::vector<std::shared_ptr<zombi>> App::CheckBullet() {
-    std::vector<std::shared_ptr<zombi>> zom=m_zombiManager->GetZombies();
-    std::vector<std::shared_ptr<zombi>> result;
+void App::CheckBullet() {
     m_Bullets.erase(
         std::remove_if(m_Bullets.begin(), m_Bullets.end(),
             [&](auto& check) {
@@ -316,11 +321,10 @@ std::vector<std::shared_ptr<zombi>> App::CheckBullet() {
                     m_Root.RemoveChild(check);
                     return true;
                 }
-                for(auto& z : zom) {
+                for(auto& z : m_zombis) {
                     if(z->GetState() != zombi::zombistate::stand&&z->GetState() != zombi::zombistate::die&& check->HitCheck(z->GetTransform().translation)) {
                         z->GetHeart(false, check->GetType() == Ice, check->GetDamage());
                         m_Root.RemoveChild(check);
-                        result.push_back(z);
                         return true;
                     }
                 }
@@ -329,8 +333,6 @@ std::vector<std::shared_ptr<zombi>> App::CheckBullet() {
         ),
         m_Bullets.end()
     );
-    
-    return result;
 }
 //設定卡片及場地碰撞格
 void App::SetBlockPos() {
@@ -359,12 +361,13 @@ void App::SetBlockPos() {
 //僵屍位置
 std::vector<glm::vec2> App::GetZomdiPos() {
     std::vector<glm::vec2> result;
-    for(auto zombi : m_zombiManager -> GetZombies()) {
-        result.push_back(zombi -> GetPosition());
+    for(auto& z : m_zombis) {
+        if(z->GetState() != zombi::zombistate::die&&z->GetState() != zombi::zombistate::stand) 
+            result.push_back(z->GetPosition());
     }
     return result;
 }
-//車子位置
+//車子位置初始化
 void App::ResetSetCarPos(int level) {
     for(auto car : m_Cars) {
         if(car!=nullptr)m_Root.RemoveChild(car);
@@ -391,9 +394,9 @@ void App::ResetSetCarPos(int level) {
         }
     }
 }
-//車子動作
+//車子動作確認
 void App::CarMoveCheck() {
-    std::vector<glm::vec2> carpos ;
+    std::vector<glm::vec2> carpos;
     for(auto& car : m_Cars) {
         if(car!=nullptr) {
             carpos.push_back(car->GetPosition());
@@ -401,13 +404,13 @@ void App::CarMoveCheck() {
             carpos.push_back({-999,0});
         }
     }
-    for(auto& z : GetZomdiPos()) {
+    for(auto& z : m_zombiPos) {
         for(int i=0;i<5;i++) {
             if(carpos[4-i]!=glm::vec2(-999,0)&&m_Cars[4-i]->IsTouch(z,i)) {
                 int targetIndex = 4-i;
                 if(targetIndex >= 0 && targetIndex < m_Cars.size() && m_Cars[targetIndex] != nullptr) {
                     m_Cars[targetIndex]->SetState(Car::CarState::Move);
-                    m_Cars[targetIndex]->Move();
+                    
                     m_Cars[targetIndex]->SetZIndex(10);
                     if(m_Cars[targetIndex]->GetPosition().x > 650) {
                         m_Root.RemoveChild(m_Cars[targetIndex]);
@@ -416,6 +419,9 @@ void App::CarMoveCheck() {
                 }
             }
         }
+    }
+    for(auto& car : m_Cars) {
+        if(car!=nullptr&&car->GetState()==Car::CarState::Move)car->Move();
     }
 }
 

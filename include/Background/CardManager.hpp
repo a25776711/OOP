@@ -32,7 +32,7 @@ public:
         for (int i = 0; i < level && i < allCards.size(); ++i) {
             allCards[i]-> SetVisible(true);
             allCards[i]-> m_Transform.scale ={0.4,0.4};
-
+            allCards[i]->Reset();
             result.push_back(allCards[i]);
         }
         return result;

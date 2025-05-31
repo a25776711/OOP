@@ -7,6 +7,7 @@
 void zombi::HitCheck(std::vector<std::vector<std::shared_ptr<Plant>>> Plants) {
     bool plantAhead = false;
     if (m_state == zombistate::die || m_state == zombistate::ash) {return;}
+
     for (const auto &row : Plants) {
         for (const auto &plant : row) {
             if (!plant) continue;
@@ -14,14 +15,14 @@ void zombi::HitCheck(std::vector<std::vector<std::shared_ptr<Plant>>> Plants) {
             auto pos = plant->GetPosition();
 
             // 只判斷是否在同一橫排
-            if (abs(m_Transform.translation.y - pos.y) >= 40)
+            if (abs(m_Transform.translation.y - pos.y) > 45)
                 continue;
 
             // 如果 x 軸上差距在攻擊範圍內，前面有植物
-            if (m_Transform.translation.x - pos.x <= 30) {
+            if (m_Transform.translation.x - pos.x <= 40 && m_Transform.translation.x - pos.x >= -5 && m_state != zombistate::die) {
                 plantAhead = true;
 
-                if (m_state != zombistate::eat && m_state != zombistate::coldeat) {
+                if (m_state != zombistate::eat && m_state != zombistate::coldeat ) {
                     StartEat();
                 }
                 else {
