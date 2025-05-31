@@ -14,7 +14,7 @@ void zombi::HitCheck(std::vector<std::vector<std::shared_ptr<Plant>>> Plants) {
             auto pos = plant->GetPosition();
 
             // 只判斷是否在同一橫排
-            if (abs(m_Transform.translation.y - pos.y) > 40)
+            if (abs(m_Transform.translation.y - pos.y) >= 40)
                 continue;
 
             // 如果 x 軸上差距在攻擊範圍內，前面有植物

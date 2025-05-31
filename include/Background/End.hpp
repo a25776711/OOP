@@ -1,0 +1,14 @@
+//
+// Created by bingho on 2025/5/31.
+//
+
+#ifndef END_HPP
+#define END_HPP
+#include "GameObject.hpp"
+#include "Util/Image.hpp"
+#include <string>
+class end : public GameObject {
+    public:
+        end():GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/losegame.png"), -10) {}
+};
+#endif //END_HPP
