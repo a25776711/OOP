@@ -13,7 +13,7 @@ void App::PlantUpdate() {
     CarMoveCheck();
     CheckBullet();
     if(m_PRM->GetLevel()>0&&m_PRM->GetLevel()!=5)SunClock++;
-    if(SunClock>400&&m_PRM->GetLevel()>0&&m_PRM->GetLevel()!=5) {
+    if(SunClock>350&&m_PRM->GetLevel()>0&&m_PRM->GetLevel()!=5) {
         SunClock=0;
         MakeSun(false);
     }
@@ -26,7 +26,7 @@ void App::PlantUpdate() {
     for(auto& card : cards) {
         card->Update();
     }
-    if(m_PRM->GetLevel()==5){
+    if(m_PRM->GetLevel()==5&&m_ready==nullptr){
         auto play_cards = m_PRM->PlayCard();
         if(play_cards!=nullptr)m_Root.AddChild(play_cards);
         m_PRM->UpdatePlayCard();
@@ -82,14 +82,18 @@ void App::CameraMoveHidden(int hidden){
             card->SetVisible(false);
     }
     else if(hidden==1){
-        m_SunNB->SetVisible(true);
+        m_SunNB->SetVisible(m_PRM->GetLevel()!=5);
         auto background_hidden=m_PRM->GetChildren();
-        if(m_PRM->GetLevel()!=5){
-            for(size_t i=1;i<background_hidden.size()-4;i++)
+        if(m_PRM->GetLevel()<5){
+            for(size_t i=1;i<background_hidden.size()-5;i++)
+                background_hidden[i]->SetVisible(true);
+        }
+        else if(m_PRM->GetLevel()==5){
+            for(size_t i=2;i<background_hidden.size()-2;i++)
                 background_hidden[i]->SetVisible(true);
         }
         else{
-            for(size_t i=2;i<background_hidden.size()-1;i++)
+            for(size_t i=1;i<background_hidden.size()-3;i++)
                 background_hidden[i]->SetVisible(true);
         }
         for(auto& car:m_Cars){
@@ -133,6 +137,7 @@ void App::ResetPlant(int level) {
         m_holdingPlant = nullptr;
     }
     Sunamount=0;
+    SunClock=0;
     m_SunNB->Change(Sunamount);
     m_SunNB->SetVisible(bool(m_PRM->GetLevel()!=5));
     for(auto& sun : m_Suns) {

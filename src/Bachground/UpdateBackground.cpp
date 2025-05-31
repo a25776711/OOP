@@ -28,8 +28,8 @@ void UpdateBackground::NextLevel() {
     }
     m_Background->NextLevel(++m_level);
     m_Adventure->NextLevel(m_level);
-    m_Shovel->NextLevel(m_level);
-    m_ShovelBlock->NextLevel(m_level);
+    if(m_level>5)m_Shovel->NextLevel(m_level);
+    if(m_level>5)m_ShovelBlock->NextLevel(m_level);
     m_ChooseButton->SetOver(false);
 
     if (m_level != 0){

@@ -95,6 +95,8 @@ private:
     bool Checkready = false;
 
     std::shared_ptr<Ready> m_ready = nullptr;
+
+
     std::vector<std::shared_ptr<Sun>> m_Suns;
     std::vector<std::vector<std::shared_ptr<Plant>>> m_Plants;
     std::shared_ptr<SunNB> m_SunNB=std::make_shared<SunNB>();
