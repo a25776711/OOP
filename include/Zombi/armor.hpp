@@ -75,7 +75,7 @@ public:
                 break;
             default: std::cout << "==" << std::endl; break;
         }
-        m_Drawable = std::make_shared<Util::Animation>(m_Images, false, 100, false, 100);
+        m_Drawable = std::make_shared<Util::Animation>(m_Images, false, 100, false, 0);
     }
 
     std::vector<std::string> GetImages() {

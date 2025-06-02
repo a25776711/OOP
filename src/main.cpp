@@ -18,6 +18,9 @@ int main(int, char**) {
                 app.Update();
                 break;
 
+            case App::State::Next:
+                app.Next();
+                break;
             case App::State::END:
                 app.End();
                 context->SetExit(true);
