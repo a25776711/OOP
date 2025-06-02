@@ -35,7 +35,13 @@ void App::PlantUpdate() {
 //遊戲初始化
 void App::StartGameSet(){
     PlantLoader::GetInstance();
-    
+
+    int m_CurrentZombiIndex = 0;
+    int zombicount = 0;
+    int Sunamount=0;
+    int SunClock=0;
+    int road_count=0;
+    int house_count=0;
     SetBlockPos();
     m_SunNB->SetZIndex(20);
     m_Root.AddChild(m_SunNB);

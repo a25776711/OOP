@@ -172,10 +172,12 @@ void App::Next() {
     for (auto a :m_Root.GetChildren()) {
         m_Root.RemoveChild(a);
     }
-    std::cout<<"Please select a gameobject:"<<std::endl;
     m_Root.AddChild(m_End);
     m_Root.Update();
 
+    if (Util::Input::IsKeyPressed(Util::Keycode::Q)) {
+        m_CurrentState = State::START;
+    }
 }
 
 void App::End(){ // NOLINT(this method will mutate members in the future)
