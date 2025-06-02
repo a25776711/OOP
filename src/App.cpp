@@ -157,7 +157,7 @@ void App::Update() {
 
     for (auto zombi : m_zombiManager -> GetZombies()) {
         if (zombi -> GetPosition().x < -450) {
-            m_CurrentState = State::END;
+            m_CurrentState = State::Next;
         }
     }
 
@@ -168,12 +168,18 @@ void App::Update() {
     GameObjectUpdate();
 }
 
-
-void App::End(){ // NOLINT(this method will mutate members in the future)
+void App::Next() {
     for (auto a :m_Root.GetChildren()) {
         m_Root.RemoveChild(a);
     }
+    std::cout<<"Please select a gameobject:"<<std::endl;
     m_Root.AddChild(m_End);
+    m_Root.Update();
+
+}
+
+void App::End(){ // NOLINT(this method will mutate members in the future)
+
     LOG_TRACE("End");
 }
 

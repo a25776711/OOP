@@ -92,13 +92,13 @@ public:
     void Die() {
         m_state = zombistate::die;
         z_speed = 0;
-        m_Drawable = std::make_shared<Util::Animation>(m_die, true, 100, true, 100);
+        m_Drawable = std::make_shared<Util::Animation>(m_die, true, 100, true, 0);
     }
 
     void Ash() {
         m_state = zombistate::ash;
         z_speed = 0;
-        m_Drawable = std::make_shared<Util::Animation>(m_ash, true, 100, true, 100);
+        m_Drawable = std::make_shared<Util::Animation>(m_ash, true, 100, true, 0);
     }
 
     void StartEat() {

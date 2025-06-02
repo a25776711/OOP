@@ -20,6 +20,7 @@ public:
     enum class State {
         START,
         UPDATE,
+        Next,
         END,
     };
     State GetCurrentState() const { return m_CurrentState; }
@@ -27,6 +28,8 @@ public:
     void Start();
 
     void Update();
+
+    void Next();
 
     void End(); // NOLINT(readability-convert-member-functions-to-static)
     enum class CameraState {
