@@ -9,6 +9,11 @@
 #include <string>
 class end : public GameObject {
     public:
-        end():GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/losegame.png"), -10) {}
+        end():GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/losegame.png"), -10) {
+            m_Transform.scale = glm::vec2(0.1f, 0.1f);
+        }
+        void Big() {
+            m_Transform.scale = glm::vec2(m_Transform.scale.x+ 0.1f, m_Transform.scale.y+0.1f);
+        }
 };
 #endif //END_HPP
