@@ -68,7 +68,7 @@ void App::Update() {
                 }
             }
         }
-
+    }
     if (m_EnterDown&&m_CameraState==CameraState::idle&&m_PRM->GetLevel()!=0&&m_ready==nullptr) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)&&m_ready==nullptr){
             m_NextText ->SetVisible(false);

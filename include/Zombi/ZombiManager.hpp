@@ -205,7 +205,7 @@ void Die(bool ash) {
         else zombi -> Die();
     }
   }
-};
+}
 
 bool IfAnimationEnds() {
   for (auto zombi : m_result) {
@@ -214,7 +214,7 @@ bool IfAnimationEnds() {
     }
     else return false;
   }
-};
+}
 bool AllDieCheck() {
   bool check = true;
   for (auto zombi : m_result) {
