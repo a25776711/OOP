@@ -17,13 +17,6 @@ void App::Start() {
 }
 
 void App::Update() {
-    //FpsShow();
-
-    // if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
-    //     glm::vec2 pos=Util::Input::GetCursorPosition();
-    //     pos.y=-pos.y;
-    //     std::cout <<"("<< pos.x <<","<<pos.y<<")"<< std::endl;
-    // }
     if(Util::Input::IsKeyDown(Util::Keycode::J)) {
         Sunamount+=100;
         m_SunNB->Change(Sunamount);
@@ -59,7 +52,7 @@ void App::Update() {
             }
         }
     }
-    if(m_C_Down && m_CameraState==CameraState::idle && m_PRM->GetLevel()!=0&&m_PRM->GetLevel()!=5){
+    if(m_C_Down && m_CameraState==CameraState::idle && m_PRM->GetLevel()!=0&&m_PRM->GetLevel()!=5) {
         if(!Util::Input::IsKeyPressed(Util::Keycode::C)){
             auto cards=m_PRM->GetCards();
             for(auto& card:cards){
@@ -68,7 +61,7 @@ void App::Update() {
                 }
             }
         }
-
+    }
     if (m_EnterDown&&m_CameraState==CameraState::idle&&m_PRM->GetLevel()!=0&&m_ready==nullptr) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)&&m_ready==nullptr){
             m_NextText ->SetVisible(false);
@@ -136,6 +129,8 @@ void App::Update() {
             zombi -> HitCheck(m_Plants);
         }
         if (m_zombiManager ->AllDieCheck()) {
+            // std::cout<<"text"<<std::endl;
+            m_Root .AddChild(m_NextText);
             m_NextText -> SetVisible(true);
         }
         m_KDown = isKPressed;
@@ -185,6 +180,6 @@ void App::Next() {
 void App::End(){ // NOLINT(this method will mutate members in the future)
 
     LOG_TRACE("End");
-}
+};
 
 
