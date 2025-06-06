@@ -154,9 +154,6 @@ void App::Update() {
     for (auto zombi : m_zombiManager -> GetZombies()) {
         if (zombi -> GetPosition().x < -450) {
             m_CurrentState = State::Next;
-            for (auto a :m_Root.GetChildren()) {
-                m_Root.RemoveChild(a);
-            }
             break;
         }
     }
@@ -176,6 +173,9 @@ void App::Next() {
     if (Util::Input::IsKeyPressed(Util::Keycode::Q)) {
         m_Root.RemoveChild(m_End);
         m_CurrentState = State::START;
+        for (auto a :m_Root.GetChildren()) {
+            m_Root.RemoveChild(a);
+        }
     }
 }
 
