@@ -138,10 +138,6 @@ void App::Update() {
     }
 
 
-
-    if (Util::Input::IsKeyDown(Util::Keycode::MOUSE_RB)) {
-        m_zombiManager ->Getice(true);
-    }
     m_EnterDown = Util::Input::IsKeyPressed(Util::Keycode::RETURN);
     m_C_Down = Util::Input::IsKeyPressed(Util::Keycode::C);
     if(m_CameraState == CameraState::idle)PlantUpdate();

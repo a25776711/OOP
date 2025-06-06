@@ -194,7 +194,7 @@ protected:
     float z_speed;
     float z_HP;
     float z_attack;
-    float SpeedTemp =z_speed;
+    float SpeedTemp;
     zombistate m_state;
 
     std::vector<std::string> m_die;

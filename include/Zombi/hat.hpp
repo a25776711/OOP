@@ -18,7 +18,7 @@ public:
         hat::SetHP(10);
         hat::SetSpeed(0.5);
         hat::Setattack(1);
-    
+        SpeedTemp = z_speed;
 
         m_Walk.reserve(21);
         for (int i=0;i<21;i++) {
@@ -41,17 +41,20 @@ public:
     };
 
     void Gotice(bool ice) override {
-        switch (m_state) {
-            case zombistate::walk:
-                m_state = zombistate::coldwalk; break;
-            case zombistate::eat:
-                m_state = zombistate::coldeat; break;
-            default:
-                break;
+        if (m_state == zombistate::coldeat || m_state == zombistate::coldwalk) {return;}
+        else {
+            switch (m_state) {
+                case zombistate::walk:
+                    m_state = zombistate::coldwalk; break;
+                case zombistate::eat:
+                    m_state = zombistate::coldeat; break;
+                default:
+                    break;
+            }
+            SetImage(m_state);
+            z_speed /= 2;
+            SetLooping(true);
         }
-        SetImage(m_state);
-        z_speed /= 2;
-        SetLooping(true);
     }
 
     void SetImage(zombistate state) override{
