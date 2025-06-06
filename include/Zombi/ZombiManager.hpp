@@ -224,6 +224,7 @@ bool AllDieCheck() {
   }
   return check;
 }
+
 private:
   std::vector<std::shared_ptr<zombi>> m_result;
   std::vector<std::shared_ptr<zombi>> m_zombies1;

@@ -27,7 +27,7 @@ public:
         for (int i = 0; i < 20; i++) {
             m_ash.push_back(RESOURCE_DIR"/zombi/die/ash/ash_" + std::to_string(i) + ".png");
         }
-        SetZIndex(100);
+        SetZIndex(10);
     };
 
     enum class zombistate {
@@ -137,11 +137,11 @@ public:
         switch (m_state) {
             case zombistate::coldeat:
                 m_state = zombistate::coldwalk;
-                z_speed = 1;
+                z_speed = SpeedTemp;
                 break;
             case zombistate::eat:
                 m_state = zombistate::walk;
-                z_speed = 1;
+                z_speed = SpeedTemp;
                 break;
             case zombistate::stand:
                 m_state = zombistate::walk;
@@ -194,6 +194,7 @@ protected:
     float z_speed;
     float z_HP;
     float z_attack;
+    float SpeedTemp =z_speed;
     zombistate m_state;
 
     std::vector<std::string> m_die;

@@ -22,10 +22,11 @@ public:
 };
 
 class NextText : public GameObject {
+public:
     NextText() : GameObject(std::make_unique<Util::Text>(
             RESOURCE_DIR "/Background/Font/Inkfree.ttf", 50,
-            "按Enter前往下一關", Util::Color::FromName(Util::Colors::BLACK)),
-        99) {
+            "All Zombi are Die~ \n Press Enter To Next Level", Util::Color::FromName(Util::Colors::BLACK)),
+        50) {
         m_Transform.translation = { 0, 0 };
         SetVisible(false);
     };

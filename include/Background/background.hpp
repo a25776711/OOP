@@ -18,6 +18,7 @@ public:
 
 	BackgroundImage():GameObject(std::make_unique<Util::Image>(RESOURCE_DIR"/Background/bg0.png"), -10) {
 		m_Transform.scale=glm::vec2(1.2f,1.2f);
+		SetZIndex(-10);
 	};
 	void SetScale(float scale){
 		m_Transform.scale=glm::vec2(scale,scale);
