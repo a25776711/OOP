@@ -12,7 +12,7 @@ public:
         normal::SetHP(8);
         normal::SetSpeed(0.5);
         normal::Setattack(1);
-
+        SpeedTemp = z_speed;
 
         m_Walk.reserve(46);
         for (int i=0;i<46;i++) {
@@ -36,17 +36,20 @@ public:
     };
 
     void Gotice(bool ice) override {
-        switch (m_state) {
-            case zombistate::walk:
-                m_state = zombistate::coldwalk; break;
-            case zombistate::eat:
-                m_state = zombistate::coldeat; break;
-            default:
-                break;
+        if (m_state == zombistate::coldeat || m_state == zombistate::coldwalk) {return;}
+        else {
+            switch (m_state) {
+                case zombistate::walk:
+                    m_state = zombistate::coldwalk; break;
+                case zombistate::eat:
+                    m_state = zombistate::coldeat; break;
+                default:
+                    break;
+            }
+            SetImage(m_state);
+            z_speed /= 2;
+            SetLooping(true);
         }
-        z_speed = z_speed / 2;
-        SetImage(m_state);
-        SetLooping(true);
     }
 
     void SetImage(zombistate state) override {
