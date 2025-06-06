@@ -68,16 +68,10 @@ void App::Update() {
                 }
             }
         }
-    }
-<<<<<<< Updated upstream
-    if (m_EnterDown&&m_CameraState==CameraState::idle&&m_PRM->GetLevel()!=0) {
-        if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
 
-=======
     if (m_EnterDown&&m_CameraState==CameraState::idle&&m_PRM->GetLevel()!=0&&m_ready==nullptr) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)&&m_ready==nullptr){
             m_NextText ->SetVisible(false);
->>>>>>> Stashed changes
             for (auto &z : m_PRM ->GetChildren()) {
                 m_Root.RemoveChild(z);
             }
@@ -102,7 +96,7 @@ void App::Update() {
 
     if (m_PRM ->GetLevel() != 0 && m_CameraState==CameraState::idle) {
 
-        if (m_ready -> IfAnimationEnds()) {m_Root.RemoveChild(m_ready);Checkready = true;}
+        if (m_ready != nullptr && m_ready -> IfAnimationEnds()) {m_Root.RemoveChild(m_ready);Checkready = true;m_ready = nullptr;}
 
         bool isKPressed = Util::Input::IsKeyPressed(Util::Keycode::K);
 
@@ -177,7 +171,7 @@ void App::Update() {
 void App::Next() {
 
     m_Root.AddChild(m_End);
-    m_Root.Update();
+    GameObjectUpdate();
     m_End ->Big();
     if (Util::Input::IsKeyPressed(Util::Keycode::Q)) {
         m_Root.RemoveChild(m_End);

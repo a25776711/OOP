@@ -31,8 +31,8 @@ public:
         }
         result.push_back(m_Shovel);
         result.push_back(m_ShovelBlock);
-        if(m_level>=6)result.push_back(m_ChooseCardList);
         result.push_back(m_T_road);
+        result.push_back(m_ChooseCardList);
         result.push_back(m_ChooseButton);
         return result;
     }

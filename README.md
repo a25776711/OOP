@@ -1,24 +1,39 @@
-# PTSD Template
+# 2025 OOPL Final Report
 
-This is a [PTSD](https://github.com/ntut-open-source-club/practical-tools-for-simple-design) framework template for students taking OOPL2024s.
+## 組別資訊
 
-## Quick Start
+組別：43
+組員：伍紹文。何秉翰
+復刻遊戲：植物大戰殭屍
 
-1. Use this template to create a new repository
-   ![github screenshot](https://github.com/ntut-rick/ptsd-template/assets/126899559/ef62242f-03ed-481d-b858-12b730c09beb)
+## 專案簡介
+植物大戰殭屍
+### 遊戲簡介
+### 組別分工
 
-2. Clone your repository
+## 遊戲介紹
 
-   ```bash
-   git clone YOUR_GIT_URL --recursive
-   ```
+### 遊戲規則
+### 遊戲畫面
 
-3. Build your project
+## 程式設計
 
-  > [!WARNING]
-  > Please build your project in `Debug` because our `Release` path is broken D:
-   
-   ```sh
-   cmake -DCMAKE_BUILD_TYPE=Debug -B build # -G Ninja
-   ```
-   better read [PTSD README](https://github.com/ntut-open-source-club/practical-tools-for-simple-design)
+### 程式架構
+### 程式技術
+
+## 結語
+
+### 問題與解決方法
+### 自評
+
+| 項次 | 項目                   | 完成 |
+|------|------------------------|-------|
+| 1    | 這是範例 |  V  |
+| 2    | 完成專案權限改為 public |    |
+| 3    | 具有 debug mode 的功能  |    |
+| 4    | 解決專案上所有 Memory Leak 的問題  |    |
+| 5    | 報告中沒有任何錯字，以及沒有任何一項遺漏  |    |
+| 6    | 報告至少保持基本的美感，人類可讀  |    |
+
+### 心得
+### 貢獻比例

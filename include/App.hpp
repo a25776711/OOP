@@ -101,6 +101,8 @@ private:
 
     std::shared_ptr<end> m_End = std::make_shared<end>();
     std::shared_ptr<Ready> m_ready = nullptr;
+
+
     std::vector<std::shared_ptr<Sun>> m_Suns;
     std::vector<std::vector<std::shared_ptr<Plant>>> m_Plants;
     std::shared_ptr<SunNB> m_SunNB=std::make_shared<SunNB>();
