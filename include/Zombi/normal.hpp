@@ -9,7 +9,7 @@
 class normal : public zombi {
 public:
     normal() :zombi(){
-        normal::SetHP(10);
+        normal::SetHP(8);
         normal::SetSpeed(0.5);
         normal::Setattack(1);
 

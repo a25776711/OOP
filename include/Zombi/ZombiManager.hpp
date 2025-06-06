@@ -215,6 +215,15 @@ bool IfAnimationEnds() {
     else return false;
   }
 };
+bool AllDieCheck() {
+  bool check = true;
+  for (auto zombi : m_result) {
+    if (zombi->GetState()!=zombi::zombistate::die&&zombi->GetState()!=zombi::zombistate::ash) {
+      check = false;
+    }
+  }
+  return check;
+}
 private:
   std::vector<std::shared_ptr<zombi>> m_result;
   std::vector<std::shared_ptr<zombi>> m_zombies1;

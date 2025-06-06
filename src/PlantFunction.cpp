@@ -245,6 +245,7 @@ void App::CheckPlant(std::vector<std::shared_ptr<zombi>> m_zombis,std::vector<gl
                     if(m_mine->Attack(m_zombis)){
                         m_Root.RemoveChild(m_mine);
                         m_Plants[i][j].reset();
+
                     }
                 }
                 else if (check->GetType() == Plant::T_Bomb) {
@@ -252,6 +253,7 @@ void App::CheckPlant(std::vector<std::shared_ptr<zombi>> m_zombis,std::vector<gl
                     if(m_bomb->Attack(m_zombis)){
                         m_Root.RemoveChild(m_bomb);
                         m_Plants[i][j].reset();
+
                     }
                 }
                 else if (check->GetType() == Plant::T_Chomper) {
@@ -261,6 +263,7 @@ void App::CheckPlant(std::vector<std::shared_ptr<zombi>> m_zombis,std::vector<gl
                         if(z!=nullptr){
                             m_Root.RemoveChild(z);
                             z->GetHeart(false,false,100);
+
                         }
                     }
                 }
@@ -325,6 +328,7 @@ void App::CheckBullet() {
                     if(z->GetState() != zombi::zombistate::stand&&z->GetState() != zombi::zombistate::die&& check->HitCheck(z->GetTransform().translation)) {
                         z->GetHeart(false, check->GetType() == Ice, check->GetDamage());
                         m_Root.RemoveChild(check);
+                        if (m_zombiManager->AllDieCheck()){}
                         return true;
                     }
                 }
