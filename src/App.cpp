@@ -101,23 +101,19 @@ void App::Update() {
         bool isKPressed = Util::Input::IsKeyPressed(Util::Keycode::K);
 
         if (!m_KDown && isKPressed) {
-            // 按下K當下觸發一次
-            // for(auto& z : m_zombiManager -> GetZombies()) {
-            //     std::cout << z->GetPosition().x<<" "<<z->GetPosition().y << std::endl;
-            // }
             if (m_CurrentZombiIndex < m_zombiManager->GetZombies().size()) {
                 m_zombiManager->Startwalk(m_CurrentZombiIndex++);
             }
         }
-
-        if (zombicount == 480) {
-            int x = rand() % m_PRM -> GetLevel();
-            if (m_CurrentZombiIndex + x < m_zombiManager->GetZombies().size()) {
+        // std::cout<< m_zombiManager-> GetZombies().size() <<std::endl;
+        if (zombicount == 720) {
+            int x = rand() % m_PRM -> GetLevel() + 1;
+            if (m_CurrentZombiIndex + x < m_zombiManager-> GetZombies().size()) {
                 for (int i=0;i<x; i++){m_zombiManager->Startwalk(m_CurrentZombiIndex++);}
             }
             zombicount = 0;
         }
-        else zombicount++;
+        zombicount++;
         m_KDown = isKPressed; // 更新鍵盤狀態
 
         bool isDPressed = Util::Input::IsKeyPressed(Util::Keycode::D);

@@ -25,8 +25,7 @@ void SetZombies(){// 關卡 1：教學關，只有普通殭屍
       std::make_shared<normal>(),
       std::make_shared<normal>(),
       std::make_shared<normal>(),
-      std::make_shared<normal>(),
-      std::make_shared<normal>()
+
   };
 
   // 關卡 2：普通 + 路障

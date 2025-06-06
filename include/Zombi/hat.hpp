@@ -16,7 +16,7 @@ class hat : public zombi {
 public:
     hat() :zombi(){
         hat::SetHP(10);
-        hat::SetSpeed(1);
+        hat::SetSpeed(0.8);
         hat::Setattack(1);
     
 
