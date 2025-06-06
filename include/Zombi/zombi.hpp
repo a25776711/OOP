@@ -128,7 +128,7 @@ public:
             default:
                 break;
         }
-        z_speed = 0;
+
         SetImage(m_state);
         SetLooping(true);
     }
@@ -137,9 +137,11 @@ public:
         switch (m_state) {
             case zombistate::coldeat:
                 m_state = zombistate::coldwalk;
+                z_speed = 1;
                 break;
             case zombistate::eat:
                 m_state = zombistate::walk;
+                z_speed = 1;
                 break;
             case zombistate::stand:
                 m_state = zombistate::walk;
@@ -154,7 +156,7 @@ public:
                 std::cout << "warmstate" << std::endl;
                 break;
         };
-        z_speed = 1;
+
         SetImage(m_state);
         SetLooping(true);
     }
