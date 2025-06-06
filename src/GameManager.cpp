@@ -39,6 +39,8 @@ void App::StartGameSet(){
     int m_CurrentZombiIndex = 0;
     int zombicount = 0;
     int Sunamount=0;
+    m_SunNB->Change(Sunamount);
+    m_SunNB->SetVisible(false);
     int SunClock=0;
     int road_count=0;
     int house_count=0;

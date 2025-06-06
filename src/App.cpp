@@ -171,7 +171,7 @@ void App::Update() {
 void App::Next() {
 
     m_Root.AddChild(m_End);
-    m_Root.Update();
+    GameObjectUpdate();
     m_End ->Big();
     if (Util::Input::IsKeyPressed(Util::Keycode::Q)) {
         m_Root.RemoveChild(m_End);
