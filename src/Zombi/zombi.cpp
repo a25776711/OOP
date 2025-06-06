@@ -26,20 +26,22 @@ void zombi::HitCheck(std::vector<std::vector<std::shared_ptr<Plant>>> Plants) {
                 if(plant->GetType() == Plant::T_Mine){
                     m_mine = std::dynamic_pointer_cast<Mine>(plant);
                 }
-                plantAhead = true;
                 if(m_mine!=nullptr){
                     if(!m_mine->GetActive()){
                         if (m_state != zombistate::eat && m_state != zombistate::coldeat ) {
+                            plantAhead = true;
                             StartEat();
                         }
                     }
                 }
                 else if(m_mine==nullptr){
                     if (m_state != zombistate::eat && m_state != zombistate::coldeat ) {
+                        plantAhead = true;
                             StartEat();
                         }
                 }
                 else {
+                    plantAhead = true;
                     plant -> Hurt();
                 }
 
