@@ -21,4 +21,13 @@ public:
     }
 };
 
+class NextText : public GameObject {
+    NextText() : GameObject(std::make_unique<Util::Text>(
+            RESOURCE_DIR "/Background/Font/Inkfree.ttf", 50,
+            "按Enter前往下一關", Util::Color::FromName(Util::Colors::BLACK)),
+        99) {
+        m_Transform.translation = { 0, 0 };
+        SetVisible(false);
+    };
+};
 #endif // SUNNB_HPP

@@ -78,6 +78,7 @@ private:
     //void ValidTask();
     std::map<std::string,std::vector<std::vector<float>>> block;
 
+    std::shared_ptr<NextText> m_NextText = std::make_shared<NextText>();
     std::shared_ptr<Plant> m_holdingPlant=nullptr;
     State m_CurrentState = State::START;
     Phase m_Phase = Phase::tital;

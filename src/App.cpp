@@ -19,11 +19,11 @@ void App::Start() {
 void App::Update() {
     //FpsShow();
 
-    if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
-        glm::vec2 pos=Util::Input::GetCursorPosition();
-        pos.y=-pos.y;
-        std::cout <<"("<< pos.x <<","<<pos.y<<")"<< std::endl;
-    }
+    // if(Util::Input::IsKeyDown(Util::Keycode::MOUSE_LB)) {
+    //     glm::vec2 pos=Util::Input::GetCursorPosition();
+    //     pos.y=-pos.y;
+    //     std::cout <<"("<< pos.x <<","<<pos.y<<")"<< std::endl;
+    // }
     if(Util::Input::IsKeyDown(Util::Keycode::J)) {
         Sunamount+=100;
         m_SunNB->Change(Sunamount);
@@ -69,9 +69,15 @@ void App::Update() {
             }
         }
     }
+<<<<<<< Updated upstream
     if (m_EnterDown&&m_CameraState==CameraState::idle&&m_PRM->GetLevel()!=0) {
         if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)){
 
+=======
+    if (m_EnterDown&&m_CameraState==CameraState::idle&&m_PRM->GetLevel()!=0&&m_ready==nullptr) {
+        if (!Util::Input::IsKeyPressed(Util::Keycode::RETURN)&&m_ready==nullptr){
+            m_NextText ->SetVisible(false);
+>>>>>>> Stashed changes
             for (auto &z : m_PRM ->GetChildren()) {
                 m_Root.RemoveChild(z);
             }
@@ -134,6 +140,9 @@ void App::Update() {
 
         for (auto zombi : m_zombiManager -> GetZombies()) {
             zombi -> HitCheck(m_Plants);
+        }
+        if (m_zombiManager ->AllDieCheck()) {
+            m_NextText -> SetVisible(true);
         }
         m_KDown = isKPressed;
         m_zombiManager -> move(m_Cars);
