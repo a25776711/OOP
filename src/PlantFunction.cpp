@@ -325,7 +325,7 @@ void App::CheckBullet() {
                     return true;
                 }
                 for(auto& z : m_zombis) {
-                    if(z->GetState() != zombi::zombistate::stand&&z->GetState() != zombi::zombistate::die&& check->HitCheck(z->GetTransform().translation)) {
+                    if(z->GetState() != zombi::zombistate::stand&&z->GetState() != zombi::zombistate::die&&z->GetState() != zombi::zombistate::ash&& check->HitCheck(z->GetTransform().translation)) {
                         z->GetHeart(false, check->GetType() == Ice, check->GetDamage());
                         m_Root.RemoveChild(check);
                         if (m_zombiManager->AllDieCheck()){}

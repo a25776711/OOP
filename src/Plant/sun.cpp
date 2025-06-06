@@ -6,7 +6,7 @@
 #include "Util/Logger.hpp"
 
 Sun::Sun(bool flower,glm::vec2 pos):Plant(m_Loader.sunIMG,60) {
-    SetZIndex(20);
+    SetZIndex(9);
     m_flower=flower;
     if(!flower){
         m_Transform.scale={0.8,0.8};

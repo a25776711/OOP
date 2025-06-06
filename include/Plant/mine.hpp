@@ -22,6 +22,8 @@ class Mine : public Plant {
 
         m_Cooldown++;return false;
     }
+
+    bool GetActive(){return m_isActive;}
     bool Attack(std::vector<std::shared_ptr<zombi>> &zombis){
         if(CoolDown()&&!m_isActive){
             for(auto &zombie:zombis){

@@ -3,6 +3,7 @@
 //
 #include "Zombi/zombi.hpp"
 #include "Plant/plant.hpp"
+#include "Plant/mine.hpp"
 
 void zombi::HitCheck(std::vector<std::vector<std::shared_ptr<Plant>>> Plants) {
     bool plantAhead = false;
@@ -19,11 +20,24 @@ void zombi::HitCheck(std::vector<std::vector<std::shared_ptr<Plant>>> Plants) {
                 continue;
 
             // 如果 x 軸上差距在攻擊範圍內，前面有植物
+            
             if (m_Transform.translation.x - pos.x <= 40 && m_Transform.translation.x - pos.x >= -5 && m_state != zombistate::die) {
+                std::shared_ptr<Mine> m_mine=nullptr;
+                if(plant->GetType() == Plant::T_Mine){
+                    m_mine = std::dynamic_pointer_cast<Mine>(plant);
+                }
                 plantAhead = true;
-
-                if (m_state != zombistate::eat && m_state != zombistate::coldeat ) {
-                    StartEat();
+                if(m_mine!=nullptr){
+                    if(!m_mine->GetActive()){
+                        if (m_state != zombistate::eat && m_state != zombistate::coldeat ) {
+                            StartEat();
+                        }
+                    }
+                }
+                else if(m_mine==nullptr){
+                    if (m_state != zombistate::eat && m_state != zombistate::coldeat ) {
+                            StartEat();
+                        }
                 }
                 else {
                     plant -> Hurt();
