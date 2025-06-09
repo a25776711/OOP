@@ -36,6 +36,7 @@ C : 重置所有植物冷卻
 
 ## 程式設計
 ### 程式架構
+![image](https://github.com/user-attachments/assets/a0be95a8-6039-407b-a690-e3364bde27f0)
 
 ### 程式技術
 
