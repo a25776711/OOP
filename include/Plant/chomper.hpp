@@ -43,6 +43,7 @@ class Chomper:public Plant {
             for(auto &zombie:zombis){
                 if(zombie->GetState()!=zombi::zombistate::die&&
                 zombie->GetPosition().x-GetPosition().x<160&&
+                zombie->GetPosition().x>GetPosition().x&&
                 abs(zombie->GetPosition().y-GetPosition().y)<50){
                     m_z=zombie;
                     m_state=ChomperState::Eat;

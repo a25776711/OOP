@@ -4,6 +4,7 @@
 #include "Zombi/zombi.hpp"
 #include "Plant/plant.hpp"
 #include "Plant/mine.hpp"
+#include "Plant/wallnut.hpp"
 
 void zombi::HitCheck(std::vector<std::vector<std::shared_ptr<Plant>>> Plants) {
     bool plantAhead = false;
@@ -34,15 +35,19 @@ void zombi::HitCheck(std::vector<std::vector<std::shared_ptr<Plant>>> Plants) {
                         }
                     }
                 }
-                else if(m_mine==nullptr){
-                    if (m_state != zombistate::eat && m_state != zombistate::coldeat ) {
-                        plantAhead = true;
-                            StartEat();
-                        }
+                else if(m_mine==nullptr&&m_state!=zombistate::eat&&m_state!=zombistate::coldeat){
+                    plantAhead = true;
+                    StartEat();
                 }
                 else {
                     plantAhead = true;
-                    plant -> Hurt();
+                    if(plant->GetType() == Plant::T_WallNut){
+                        auto m_wallnut = std::dynamic_pointer_cast<Wallnut>(plant);
+                        m_wallnut->Hurt();
+                    }
+                    else{
+                        plant -> Hurt();
+                    }
                 }
 
                 return; // 找到就直接結束

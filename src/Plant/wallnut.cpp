@@ -6,12 +6,13 @@
 void Wallnut::Hurt() {
     int hp=GetHP()-1;
     SetHP(hp);
-    if(hp<2400&&1200>=hp) {
+    if(hp<2400&&1200>=hp&&m_break_count==0) {
         m_Drawable=std::make_shared<Util::Animation>(m_Loader.wallnutIMG_1,true,70,true,0);
-    }else if(hp<1200) {
+        m_break_count++;
+    }else if(hp<1200&&m_break_count==1) {
         m_Drawable=std::make_shared<Util::Animation>(m_Loader.wallnutIMG_2,true,70,true,0);
+        m_break_count++;
     }
-
 }
 
 

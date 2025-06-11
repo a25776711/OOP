@@ -14,10 +14,11 @@ class Wallnut : public Plant {
         SetCost(50);
         SetTakeCD(1800);
         SetType(T_WallNut);
-       
+        m_break_count=0;
     }
     void Hurt() override;
     private:
+    int m_break_count;
 
 };
 enum T_WallnutType{
