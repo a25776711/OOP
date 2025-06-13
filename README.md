@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/96165082-e7c3-42be-b156-595fc50741b9)# 2025 OOPL Final Report
+# 2025 OOPL Final Report
 
 ## 組別資訊
 
@@ -36,7 +36,11 @@ K : 一隻僵屍前進
 C : 重置所有植物冷卻
 ### 遊戲畫面
 ![image](https://github.com/user-attachments/assets/c114e3fa-1ec2-4d47-a616-f750f0f0247a)
-
+![image](https://github.com/user-attachments/assets/3c337e48-3500-4505-8533-5502669fac87)
+![image](https://github.com/user-attachments/assets/170d7a91-93a8-418a-a028-f53e26ade8f1)
+![image](https://github.com/user-attachments/assets/4b1dd32f-f784-4385-a9b2-02e5e3475b93)
+![image](https://github.com/user-attachments/assets/3c565441-524c-45d8-9677-5adec678d921)
+![image](https://github.com/user-attachments/assets/a49f7e93-ad0c-4d43-879f-e8b57a088266)
 
 ## 程式設計
 
