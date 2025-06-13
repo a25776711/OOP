@@ -8,6 +8,7 @@
 #include "Util/Animation.hpp"
 #include "Plant/PlantLoader.hpp"
 #include "Bullet/bullet.hpp"
+#include "Zombi/zombi.hpp"
 #include <ctime>
 #include <cstdlib>
 #include <iostream>
@@ -67,7 +68,7 @@ class Plant: public GameObject{
     int GetTakeCD(){return m_takeCD;}
     void SetFourPoints(std::vector<float> points){four_points=points;}
     std::vector<float> GetFourPoints(){return four_points;}
-    virtual std::shared_ptr<Bullet> Attack(std::vector<glm::vec2> pos){return nullptr;};
+    virtual std::shared_ptr<Bullet> Attack(std::vector<std::shared_ptr<zombi>>){return nullptr;};
     virtual void Boomer(){};
     virtual bool CoolDown(){return false;};
     bool IfAnimationEnds() const {

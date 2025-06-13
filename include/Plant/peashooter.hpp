@@ -6,6 +6,7 @@
 #define PEASHOOTER_HPP
 #include "plant.hpp"
 #include "Bullet/normalbullet.hpp"
+#include "Zombi/zombi.hpp"
 
 class Peashooter : public Plant {
 public:
@@ -16,8 +17,8 @@ public:
         SetTakeCD(450);
         SetType(Plant::T_Peashooter);
     }
-    bool AttackCheck(std::vector<glm::vec2> pos);
-    std::shared_ptr<Bullet> Attack(std::vector<glm::vec2> pos);
+    bool AttackCheck(std::vector<std::shared_ptr<zombi>> zom);
+    std::shared_ptr<Bullet> Attack(std::vector<std::shared_ptr<zombi>> zom);
 protected:
     int m_cooldown=90;
 };

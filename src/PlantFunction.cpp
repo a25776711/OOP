@@ -231,8 +231,7 @@ void App::CheckPlant(std::vector<std::shared_ptr<zombi>> m_zombis,std::vector<gl
             if(m_Plants[i][j]!=nullptr){
                 auto check=m_Plants[i][j];
                 if (check->GetType() == Plant::T_Peashooter||check->GetType() == Plant::T_IceShooter||check->GetType() == Plant::T_FastShooter) {
-                    
-                    auto bullet=check->Attack(m_zombiPos);
+                    auto bullet=check->Attack(m_zombis);
                     if(bullet!=nullptr) {
                         bullet->SetZIndex(21);
                         m_Bullets.push_back(bullet);

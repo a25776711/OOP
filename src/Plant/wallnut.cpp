@@ -24,7 +24,7 @@ bool Play_wallnut::Update(std::vector<std::shared_ptr<zombi>> zom) {
 
     // 檢查是否碰撞到殭屍
     for(const auto& zombie : zom) {
-        if(zombie->GetState()!=zombi::zombistate::die) {
+        if(zombie->GetState()!=zombi::zombistate::die&&zombie->GetState()!=zombi::zombistate::ash) {
             // 計算與殭屍的距離
             float dx = zombie->GetPosition().x - m_Transform.translation.x;
             float dy = zombie->GetPosition().y - m_Transform.translation.y;
@@ -73,7 +73,7 @@ bool Play_wallnut_boom::Update(std::vector<std::shared_ptr<zombi>> zom) {
         // 向右移動
         m_Transform.translation.x += m_moveSpeed;
         for(const auto& zombie : zom) {
-            if(zombie->GetState()!=zombi::zombistate::die) {
+            if(zombie->GetState()!=zombi::zombistate::die&&zombie->GetState()!=zombi::zombistate::ash) {
                 // 計算與殭屍的距離
                 float dx = zombie->GetPosition().x - m_Transform.translation.x;
                 float dy = zombie->GetPosition().y - m_Transform.translation.y;

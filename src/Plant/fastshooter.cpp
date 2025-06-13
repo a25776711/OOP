@@ -3,16 +3,20 @@
 //
 #include "Plant/fastshooter.hpp"
 
-bool Fastshooter::AttackCheck(std::vector<glm::vec2> pos) {
-    for(auto &p:pos){
+bool Fastshooter::AttackCheck(std::vector<std::shared_ptr<zombi>> zom) {
+    for(auto &z:zom){
+        auto p=z->GetPosition();
         if(
+        z->GetState()!=zombi::zombistate::die&&
+        z->GetState()!=zombi::zombistate::ash&&
+        z->GetState()!=zombi::zombistate::stand&&
         p.x>m_Transform.translation.x&&p.x-m_Transform.translation.x<800&&
         abs(p.y-m_Transform.translation.y)<50)return true;
     }
     return false;
 }
-std::shared_ptr<Bullet> Fastshooter::Attack(std::vector<glm::vec2> pos) {
-    if(!AttackCheck(pos))return nullptr;
+std::shared_ptr<Bullet> Fastshooter::Attack(std::vector<std::shared_ptr<zombi>> zom) {
+    if(!AttackCheck(zom))return nullptr;
     if(m_cooldown1>=90&&bcount==0) {
         
         glm::vec2 temp={m_Transform.translation.x,m_Transform.translation.y+20};
