@@ -34,6 +34,8 @@ S : 所有僵屍被炸死
 J : 增加太陽數量  
 K : 一隻僵屍前進  
 C : 重置所有植物冷卻
+Enter : 開始後即可跳關
+Q ： 失敗後按下即可回到遊戲開始畫面
 ### 遊戲畫面
 ![image](https://github.com/user-attachments/assets/c114e3fa-1ec2-4d47-a616-f750f0f0247a)
 ![image](https://github.com/user-attachments/assets/3c337e48-3500-4505-8533-5502669fac87)
