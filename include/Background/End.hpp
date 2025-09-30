@@ -14,8 +14,8 @@ class end : public GameObject {
             SetZIndex(100);
         }
         void Big() {
-            if (m_Transform.scale == glm::vec2(1.0f, 1.0f)) {return;}
-            m_Transform.scale = glm::vec2(m_Transform.scale.x+ 0.1f, m_Transform.scale.y+0.1f);
+            if (m_Transform.scale.x>=1.0 && m_Transform.scale.y>=1.0) {return;}
+            m_Transform.scale = glm::vec2(m_Transform.scale.x+ 0.05f, m_Transform.scale.y+0.05f);
         }
 };
 #endif //END_HPP
